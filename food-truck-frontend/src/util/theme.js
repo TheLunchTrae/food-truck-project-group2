@@ -2,22 +2,10 @@ import React from 'react';
 import {createMuiTheme, ThemeProvider, StylesProvider, jssPreset, withStyles} from '@material-ui/core/styles';
 import {create} from 'jss';
 import rtl from 'jss-rtl';
-import {colors} from '../component/layout/colors'
 
 const jss = create({plugins: [...jssPreset().plugins, rtl()]});
 
 const themeOptions = {
-    palette: {
-        primary: {
-            main: colors.red
-        },
-        secondary: {
-            main: colors.blue
-        },
-        background: {
-            default: colors.backgroundGray
-        }
-    },
     typography: {
         fontFamily: 'Noto Sans, sans-serif',
         fontStyle: 'normal',

@@ -5,7 +5,6 @@ import { buildStore } from '../util/redux';
 import Head from 'next/head';
 import { CssBaseline } from '@material-ui/core';
 import { FoodTruckThemeProvider } from '../util/theme';
-import { StandardLayout } from '../component/layout/standard-layout';
 
 let initialState = {};
 let store = buildStore(initialState);
@@ -30,9 +29,7 @@ const FoodTruckApp = ({ Component, pageProps }) => {
                 {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
                 <CssBaseline />
 
-                <StandardLayout
-                    content={ <Component {...pageProps} /> }
-                />
+                <Component {...pageProps} />
             </FoodTruckThemeProvider>
         </Provider>
     )
