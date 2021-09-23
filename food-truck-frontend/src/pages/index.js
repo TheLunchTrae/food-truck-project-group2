@@ -1,5 +1,13 @@
 import React from 'react';
 import Link from '@material-ui/core/Link';
+require('dotenv').config();
+import {BrowserRouter, Switch, Route, Router} from "react-router-dom";
+import Signup from "./Signup";
+import Login from "./Login";
+import Search from "./Search"
+import Notifications from "./Notifications";
+import Dashboard from "./Dashboard";
+import About from "./About"
 
 require('dotenv').config();
 
@@ -24,3 +32,4 @@ function HomePage() {
 }
 
 export default HomePage
+
