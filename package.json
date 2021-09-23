@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "1. **Food-truck-api: Backend Setup**",
   "main": "node index.js",
-  "type": "module"
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
