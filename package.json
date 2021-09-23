@@ -4,12 +4,7 @@
   "description": "1. **Food-truck-api: Backend Setup**",
   "main": "node index.js",
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve -s build",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
