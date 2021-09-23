@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '@material-ui/core/Link';
-
 require('dotenv').config();
+import Route from "./Route";
 
 function HomePage() {
     return (
@@ -22,5 +22,4 @@ function HomePage() {
         </div>
     )
 }
-
 export default HomePage
