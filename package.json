@@ -1,0 +1,22 @@
+{
+  "name": "global-yarn",
+  "version": "1.0.0",
+  "description": "1. **Food-truck-api: Backend Setup**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/fall-2021-group-2/food-truck-finder-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/fall-2021-group-2/food-truck-finder-2/issues"
+  },
+  "homepage": "https://gitlab.com/fall-2021-group-2/food-truck-finder-2#readme",
+  "devDependencies": {
+    "package.json": "^2.0.1"
+  }
+}
