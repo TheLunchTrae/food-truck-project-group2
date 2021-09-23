@@ -16,7 +16,7 @@ export default function RouterConfig() {
                 <Route path="/signup" component={Signup}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/search" component={Search}/>
-                <Route path="/notificaiton" component={Notification}/>
+                <Route path="/notifications" component={Notifications}/>
                 <Route path="/dashboard" component={Dashboard}/>
                 <Route path="/about" component={About}/>
             </Switch>

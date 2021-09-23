@@ -22,7 +22,7 @@ function HomePage() {
             <br/>
             <a href = "\search">Search</a>
             <br/>
-            <a href = "\notificaiton">Notifications</a>
+            <a href = "\notifications">Notifications</a>
             <br/>
             <a href = "\dashboard">Dashboard</a>
             <br/>
@@ -33,3 +33,19 @@ function HomePage() {
 
 export default HomePage
 
+
+
+/*import React, { Component } from 'react';
+import MyDocument from "./_document"
+import ReactDOM from 'react-dom';
+import RouterConfig from "./Route";
+
+
+ReactDOM.render(
+    <div>
+        <a href = "/">Home</a>
+        <RouterConfig/>
+    </div>,
+
+    document.getElementById('root')
+);*/
