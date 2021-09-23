@@ -4,5 +4,5 @@ heroku:
  - master
  script:
  - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/food-truck-finder-2-prod.git
- - git commit heroku -m "init"
+ - git commit heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/food-truck-finder-2-prod.git -m "init"
  - git push -f heroku HEAD:master
