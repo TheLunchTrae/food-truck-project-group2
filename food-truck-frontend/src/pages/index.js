@@ -6,7 +6,7 @@ require('dotenv').config();
 function HomePage() {
     return (
         <div>
-            This is the home page!
+            This is the homepage to Group-2s Fronted! :)
         </div>
     )
 }
