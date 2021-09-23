@@ -3,5 +3,5 @@ heroku:
  only:
  - master
  script:
- - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/food-truck-finder-2.git
- - git push -f heroku main
+ - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/food-truck-finder-2-prod.git
+ - git push -f heroku master
