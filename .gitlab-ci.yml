@@ -1,7 +1,5 @@
-heroku:
- stage: deploy
- only:
- - master
- script:
- - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/food-truck-finder-2-prod.git
- - git push -f heroku HEAD:master
+deploy:
+  stage: deploy
+  script:
+  - gem install dpl
+  - dpl --provider=heroku --app=food-truck-finder-2-prod --api-key=$HEROKU_API_KEY
