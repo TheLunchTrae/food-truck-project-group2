@@ -23,6 +23,11 @@ public class UserEndpoint {
         return user.orElse(null);
     }
 
+    @GetMapping("/example")
+    public String example() {
+        return "This is the new page for the Java endpoint for Milestone 1!";
+    }
+
     @PostMapping("/user")
     public User saveUser(@RequestBody User user) {
         return userService.saveUser(user);
