@@ -1,1 +1,1 @@
-web: node food-truck-frontend/src/pages/index.js
+web: yarn dev --cwd ./food-truck-frontend
