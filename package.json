@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "1. **Food-truck-api: Backend Setup**",
   "main": "node index.js",
+  "engines": {
+    "yarn": "1.1"
+  },
   "scripts": {
     "start": "node index.js"
   },
