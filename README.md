@@ -46,4 +46,4 @@
 		- Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 		- Check yarn version: yarn –version
 		- Finally: yarn dev
-	- Navigate to http://localhost:3000 - you should see the food truck application
+	- Navigate to http://localhost:3000 - you should see the food truck APPLICATION
