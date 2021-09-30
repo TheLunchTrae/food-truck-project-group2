@@ -3,6 +3,7 @@
 #  script:
 #  - gem install dpl
 #  - dpl --provider=heroku --app=food-truck-finder-2-prod #--api-key=6be52674-0cd9-4295-88ca-0a8b9868f3c2
+image: docker:latest #getting a linux vm, installing latest docker command, what kind of os should the app be run on
 services:
   - docker:dind
 
