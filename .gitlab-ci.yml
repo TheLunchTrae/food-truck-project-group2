@@ -17,8 +17,8 @@ stages:
 deploy-api:
   stage: build
   script:
-    - docker build -f docker/food-truck-api.Dockerfile --iidfile imageid.txt -t registry.heroku.com/apps/food-truck2-app ./food-truck-api
-    - docker login -u sam_hobbs1@baylor.edu -p 6be52674-0cd9-4295-88ca-0a8b9868f3c2 registry.heroku.com
+    - docker build -f docker/food-truck-api.Dockerfile --iidfile imageid.txt -t https://dashboard.heroku.com/apps/food-truck-finder-2-prod ./food-truck-api
+    - docker login -u sam_hobbs1@baylor.edu -p 6be52674-0cd9-4295-88ca-0a8b9868f3c2 https://dashboard.heroku.com
     - docker tag $(cat imageid.txt) registry.heroku.com/food-truck2-app/web
     - docker push registry.heroku.com/food-truck2-app/web
     - apk add --no-cache curl #install curl command to command line
@@ -28,8 +28,8 @@ deploy-api:
 deploy-frontend:
   stage: build
   script:
-  - docker build -f docker/food-truck-frontend.Dockerfile --iidfile imageid.txt -t registry.heroku.com/apps/food-truck-frontend2 ./food-truck-frontend
-  - docker login -u sam_hobbs1@baylor.edu -p 6be52674-0cd9-4295-88ca-0a8b9868f3c2 registry.heroku.com
+  - docker build -f docker/food-truck-frontend.Dockerfile --iidfile imageid.txt -t https://dashboard.heroku.com/apps/food-truck-finder-2-prod ./food-truck-frontend
+  - docker login -u sam_hobbs1@baylor.edu -p 6be52674-0cd9-4295-88ca-0a8b9868f3c2 https://dashboard.heroku.com
   - docker tag $(cat imageid.txt) registry.heroku.com/food-truck-frontend2/web
   - docker push registry.heroku.com/food-truck-frontend2/web
   - apk add --no-cache curl
