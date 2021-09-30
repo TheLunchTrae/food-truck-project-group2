@@ -1,1 +1,1 @@
-web: yarn dev --cwd ./food-truck-frontend
+web: yarn start dev --cwd ./food-truck-frontend
