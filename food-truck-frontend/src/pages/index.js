@@ -37,7 +37,6 @@ function HomePage() {
 export default HomePage
 */
 
-
 import React, { Component } from 'react';
 //import MyDocument from "./_document"
 import ReactDOM from 'react-dom';
