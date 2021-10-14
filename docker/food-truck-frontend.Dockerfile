@@ -12,4 +12,4 @@ COPY --from=build /build .
 RUN chmod +x ./frontend-entrypoint
 
 # Running the app
-ENTRYPOINT ./frontend-entrypoint
+ENTRYPOINT ./frontend-entrypoint 
