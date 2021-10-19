@@ -3,7 +3,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import { theme } from '../util/theme';
 
-export default class MyDocument extends Document {
+class MyDocument extends Document {
     render() {
         return (
             <Html lang="en">
@@ -23,6 +23,8 @@ export default class MyDocument extends Document {
         );
     }
 }
+
+export default MyDocument;
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with server-side generation (SSG).
@@ -66,3 +68,4 @@ MyDocument.getInitialProps = async (ctx) => {
         styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
     };
 };
+
