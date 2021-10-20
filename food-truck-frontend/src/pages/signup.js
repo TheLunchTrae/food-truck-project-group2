@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-class Search extends Component {
+class Signup extends Component {
     constructor(props) {
+        super();
     }
     handleChangeStatus(event) {
     }
@@ -14,9 +15,9 @@ class Search extends Component {
     render() {
         return (
             <div>
-                This is the search page! :)
+                This is the signup page! :)
             </div>
         );
     }
 }
-export default Search;
+export default Signup;

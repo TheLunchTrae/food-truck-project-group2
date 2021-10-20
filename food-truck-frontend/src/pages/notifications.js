@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-class About extends Component {
+class Notifications extends Component {
     constructor(props) {
+        super();
     }
     handleChangeStatus(event) {
     }
@@ -14,9 +15,9 @@ class About extends Component {
     render() {
         return (
             <div>
-                This is the about page! :)
+                This is the notifications page! :)
             </div>
         );
     }
 }
-export default About;
+export default Notifications;

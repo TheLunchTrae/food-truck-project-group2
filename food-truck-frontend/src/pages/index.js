@@ -1,4 +1,4 @@
-/*
+
 //import React from 'react';
 //import Link from '@material-ui/core/Link';
 require('dotenv').config();
@@ -35,8 +35,8 @@ function HomePage() {
 }
 
 export default HomePage
-*/
 
+/*
 import React, { Component } from 'react';
 //import MyDocument from "./_document"
 import ReactDOM from 'react-dom';
@@ -49,3 +49,4 @@ ReactDOM.render(
     </div>,
     document.getElementById('root')
 );
+*/

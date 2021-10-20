@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-class Dashboard extends Component {
+class About extends Component {
     constructor(props) {
+        super();
     }
     handleChangeStatus(event) {
     }
@@ -14,9 +15,9 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                This is the dashboard page! :)
+                This is the about page! :)
             </div>
         );
     }
 }
-export default Dashboard;
+export default About;
