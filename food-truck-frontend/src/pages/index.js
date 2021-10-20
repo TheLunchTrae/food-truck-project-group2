@@ -11,12 +11,11 @@ import Notifications from "./Notifications";
 import Dashboard from "./Dashboard";
 import About from "./About"
 */
-require('dotenv').config();
 
 function HomePage() {
     return (
         <div>
-            This is the homepage to Group-2s Fronted! :)
+            This is the homepage to Group 2's front end! :)
             <br/>
             <a href = "\signup">Sign Up</a>
             <br/>
