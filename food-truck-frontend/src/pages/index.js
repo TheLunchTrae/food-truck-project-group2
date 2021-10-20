@@ -11,7 +11,6 @@ import Notifications from "./Notifications";
 import Dashboard from "./Dashboard";
 import About from "./About"
 
-
 require('dotenv').config();
 
 function HomePage() {
