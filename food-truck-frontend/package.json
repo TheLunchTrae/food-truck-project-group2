@@ -1,8 +1,8 @@
 {
   "scripts": {
     "dev": "next dev",
-    "build": "yarn build",
-    "start": "yarn dev",
+    "build": "next build",
+    "start": "next start",
     "docker-start": "next start -p 80",
     "test": "jest"
   },
