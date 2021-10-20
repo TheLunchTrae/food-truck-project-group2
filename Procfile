@@ -1,1 +1,1 @@
-web: npm start
+web: node ./food-truck-frontend/src/pages/index.js
