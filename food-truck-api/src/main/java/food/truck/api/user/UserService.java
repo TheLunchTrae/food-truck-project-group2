@@ -17,8 +17,9 @@ public class UserService {
     }
 
     @PostMapping("/signup")
-    public void saveUser(@RequestBody User user) {
+    public User saveUser(@RequestBody User user) {
         //return userRepository.save(user);
+        return user;
     }
 
 }

@@ -24,7 +24,7 @@ class Signup extends Component {
             userType: "Customer"
         };
 
-        axios.post("localhost:8090/signup", userDto).then(res => {
+        axios.post("localhost:8080/signup", userDto).then(res => {
             console.log("User added")
             this.setState({
                 email: '',
