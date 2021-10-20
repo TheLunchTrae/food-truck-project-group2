@@ -4,8 +4,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
 @Service
+@RestController
 public class UserService {
 
     private UserRepository userRepository;
@@ -14,7 +16,9 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    @PostMapping("/signup")
+    public void saveUser(@RequestBody User user) {
+        //return userRepository.save(user);
     }
+
 }

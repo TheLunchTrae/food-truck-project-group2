@@ -19,11 +19,12 @@ class Signup extends Component {
     handleSubmit(event) {
         alert("Email: " + this.state.email + "\nPassword: " + this.state.password);
         const userDto = {
-            email: this.state.email,
-            password: this.state.password
+            emailAddress: this.state.email,
+            password: this.state.password,
+            userType: "Customer"
         };
 
-        axios.post("https://food-truck-finder-2-prod.herokuapp.com/", userDto).then(res => {
+        axios.post("localhost:8090/signup", userDto).then(res => {
             console.log("User added")
             this.setState({
                 email: '',
