@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Signup extends Component {
     constructor(props) {
@@ -17,6 +18,20 @@ class Signup extends Component {
     }
     handleSubmit(event) {
         alert("Email: " + this.state.email + "\nPassword: " + this.state.password);
+        const userDto = {
+            email: this.state.email,
+            password: this.state.password
+        };
+
+        axios.post("https://food-truck-finder-2-prod.herokuapp.com/", userDto).then(res => {
+            console.log("User added")
+            this.setState({
+                email: '',
+                password: ''
+            });
+        })
+
+        event.preventDefault()
     }
     render() {
         return (
