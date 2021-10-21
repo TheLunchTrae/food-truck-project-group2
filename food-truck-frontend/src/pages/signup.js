@@ -24,7 +24,9 @@ class Signup extends Component {
             userType: "Customer"
         };
 
-        axios.post("localhost:8080/signup", userDto).then(res => {
+        const instance = axios.create({baseURL: process.env.FOOD_TRUCK_API_URL})
+
+        instance.post('/signup', userDto).then(res => {
             console.log("User added")
             this.setState({
                 email: '',
