@@ -18,7 +18,8 @@ public class UserService {
 
     @PostMapping("/signup")
     public User saveUser(@RequestBody User user) {
-        return userRepository.save(user);
+        return user;
+        //return userRepository.save(user);
     }
 
 }

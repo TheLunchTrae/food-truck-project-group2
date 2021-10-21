@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {wait} from "@testing-library/dom";
 
 class Signup extends Component {
     constructor(props) {
@@ -25,21 +26,28 @@ class Signup extends Component {
         };
 
         //Creates an axios instance at the backend address
-        const instance = axios.create({baseURL: process.env.FOOD_TRUCK_API_URL})
+        const instance = axios.create({baseURL: process.env.FOOD_TRUCK_API_URL});
         /*Posts to the address. This format solves for an error when the backend port is
         different from the frontend*/
-        instance.post('/signup', userDto).then(res => {
-            console.log("User added");
-            this.setState({
-                email: userDto.emailAddress,
-                password: userDto.password
-            })
-        });
+        function success(result) {
+            alert("Success" + result.data.message);
+        }
+
+        function error(error){
+            alert("Error");
+        }
+
+        async function postUser() {
+            return instance.post("/signup", userDto)
+        }
+
+        postUser().then(success);
+
 
         alert("Successful Login Creation!")
 
         event.preventDefault()
-        window.location.href = "/login";
+        //window.location.href = "/login";
     }
 
     render() {
