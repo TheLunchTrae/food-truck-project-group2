@@ -36,13 +36,13 @@ class Signup extends Component {
         })
 
         event.preventDefault()
+
+        window.location.href = "/login";
     }
     render() {
         return (
-            <div align="middle">
+            <div>
                 <h1>Sign Up</h1>
-                <meta httpEquiv="refresh"
-                        content="5; url = /login" />
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>
