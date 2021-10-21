@@ -26,14 +26,14 @@ class Signup extends Component {
 
         const instance = axios.create({baseURL: process.env.FOOD_TRUCK_API_URL})
 
-        instance.post('/signup', userDto).then(res => {
+        const data = instance.post('/signup', userDto).then(function res() {
             console.log("User added")
             this.setState({
-                email: userDto.emailAddress,
-                password: userDto.password
+                email: res.data.emailAddress,
+                password: res.data.password
             });
             alert("Email state: " + this.email + "\nPassword state: " + this.password);
-        })
+        });
 
         event.preventDefault()
     }
