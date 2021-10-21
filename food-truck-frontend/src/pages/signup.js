@@ -17,7 +17,7 @@ class Signup extends Component {
         });
     }
     handleSubmit(event) {
-        alert("Email: " + this.state.email + "\nPassword: " + this.state.password);
+        //alert("Email: " + this.state.email + "\nPassword: " + this.state.password);
         const userDto = {
             emailAddress: this.state.email,
             password: this.state.password,
@@ -26,14 +26,16 @@ class Signup extends Component {
 
         const instance = axios.create({baseURL: process.env.FOOD_TRUCK_API_URL})
 
-        const data = instance.post('/signup', userDto).then(function res() {
-            console.log("User added")
+        instance.post('/signup', userDto).then(res => {
+            console.log("User added");
             this.setState({
-                email: res.data.emailAddress,
-                password: res.data.password
-            });
-            alert("Email state: " + this.email + "\nPassword state: " + this.password);
+                email: userDto.emailAddress,
+                password: userDto.password
+            })
+            alert(userDto.emailAddress + "\n" + userDto.password);
         });
+
+        alert(userDto.emailAddress + "\n" + userDto.password);
 
         event.preventDefault()
     }
@@ -41,8 +43,6 @@ class Signup extends Component {
         return (
             <div align="middle">
                 <h1>Sign Up</h1>
-                <meta httpEquiv="refresh"
-                        content="5; url = /login" />
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>
