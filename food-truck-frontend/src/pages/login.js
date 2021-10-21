@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Login extends Component {
     constructor(props) {
@@ -35,6 +36,8 @@ class Login extends Component {
         })
 
         event.preventDefault()
+
+        window.location.href = "/search";
     }
     render() {
         return (
