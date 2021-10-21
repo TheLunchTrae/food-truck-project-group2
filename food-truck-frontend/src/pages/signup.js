@@ -18,14 +18,17 @@ class Signup extends Component {
     }
     handleSubmit(event) {
         //alert("Email: " + this.state.email + "\nPassword: " + this.state.password);
+        //Object that will be passed containing the users information
         const userDto = {
             emailAddress: this.state.email,
             password: this.state.password,
             userType: "Customer"
         };
 
+        //Creates an axios instance at the backend address
         const instance = axios.create({baseURL: process.env.FOOD_TRUCK_API_URL})
-
+        /*Posts to the address. This format solves for an error when the backend port is
+        different from the frontend*/
         instance.post('/signup', userDto).then(res => {
             console.log("User added");
             this.setState({
@@ -38,9 +41,9 @@ class Signup extends Component {
         alert(userDto.emailAddress + "\n" + userDto.password);
 
         event.preventDefault()
-
         window.location.href = "/login";
     }
+
     render() {
         return (
             <div align="middle">
