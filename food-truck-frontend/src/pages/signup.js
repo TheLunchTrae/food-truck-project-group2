@@ -36,8 +36,6 @@ class Signup extends Component {
             })
         });
 
-        alert(userDto.emailAddress + "\n" + userDto.password);
-
         event.preventDefault()
         window.location.href = "/login";
     }

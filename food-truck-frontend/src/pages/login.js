@@ -17,7 +17,6 @@ class Login extends Component {
         });
     }
     handleSubmit(event) {
-        alert("Email: " + this.state.email + "\nPassword: " + this.state.password);
         const userDto = {
             emailAddress: this.state.email,
             password: this.state.password,
@@ -32,11 +31,9 @@ class Login extends Component {
                 email: userDto.emailAddress,
                 password: userDto.password
             });
-            alert("Email state: " + this.email + "\nPassword state: " + this.password);
         })
 
         event.preventDefault()
-
         window.location.href = "/search";
     }
     render() {
