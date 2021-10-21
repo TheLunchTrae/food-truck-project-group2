@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import foodTruck from '../util/TaquisaWaco.jpg';
 
 class App extends Component {
 
@@ -19,6 +20,8 @@ class App extends Component {
                     <a href = "\dashboard">Dashboard</a>
                     <br/>
                     <a href = "\about">About</a>
+                    <br/>
+                    <img src={foodTruck} style={{width:2280 + 'px', height:1621 + 'px'}}/>
                 </nav>
             </div>
         );
