@@ -17,7 +17,6 @@ class Signup extends Component {
         });
     }
     handleSubmit(event) {
-        //alert("Email: " + this.state.email + "\nPassword: " + this.state.password);
         //Object that will be passed containing the users information
         const userDto = {
             emailAddress: this.state.email,
@@ -35,7 +34,6 @@ class Signup extends Component {
                 email: userDto.emailAddress,
                 password: userDto.password
             })
-            alert(userDto.emailAddress + "\n" + userDto.password);
         });
 
         alert(userDto.emailAddress + "\n" + userDto.password);

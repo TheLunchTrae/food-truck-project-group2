@@ -1,16 +1,4 @@
-
-//import React from 'react';
-//import Link from '@material-ui/core/Link';
 require('dotenv').config();
-/*
-import {BrowserRouter, Switch, Route, Router} from "react-router-dom";
-import Signup from "./Signup";
-import Login from "./Login";
-import Search from "./Search"
-import Notifications from "./Notifications";
-import Dashboard from "./Dashboard";
-import About from "./About"
-*/
 
 function HomePage() {
     return (
@@ -32,19 +20,4 @@ function HomePage() {
     )
 }
 
-export default HomePage
-
-/*
-import React, { Component } from 'react';
-//import MyDocument from "./_document"
-import ReactDOM from 'react-dom';
-import RouterConfig from "./Route";
-
-ReactDOM.render(
-    <div>
-        <a href = "/">Home</a>
-        <RouterConfig/>
-    </div>,
-    document.getElementById('root')
-);
-*/
+export default HomePage;
