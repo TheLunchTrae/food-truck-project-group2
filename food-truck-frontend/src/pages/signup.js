@@ -39,7 +39,7 @@ class Signup extends Component {
     }
     render() {
         return (
-            <div>
+            <div align="middle">
                 <h1>Sign Up</h1>
                 <meta httpEquiv="refresh"
                         content="5; url = /login" />
