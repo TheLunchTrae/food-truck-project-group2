@@ -33,6 +33,8 @@ class Login extends Component {
             });
         })
 
+        alert("Successful Login!")
+
         event.preventDefault()
         window.location.href = "/search";
     }
