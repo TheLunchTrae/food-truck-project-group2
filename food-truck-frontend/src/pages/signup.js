@@ -41,7 +41,7 @@ class Signup extends Component {
         return (
             <div align="middle">
                 <h1>Sign Up</h1>
-                <meta http-equiv="refresh"
+                <meta httpEquiv="refresh"
                         content="5; url = /login" />
                 <form onSubmit={this.handleSubmit}>
                     <div>
