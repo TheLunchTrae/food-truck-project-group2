@@ -36,6 +36,8 @@ class Signup extends Component {
             })
         });
 
+        alert("Successful Login Creation!")
+
         event.preventDefault()
         window.location.href = "/login";
     }
