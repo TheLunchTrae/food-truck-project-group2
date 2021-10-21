@@ -29,9 +29,10 @@ class Signup extends Component {
         instance.post('/signup', userDto).then(res => {
             console.log("User added")
             this.setState({
-                email: '',
-                password: ''
+                email: userDto.emailAddress,
+                password: userDto.password
             });
+            alert("Email state: " + this.email + "\nPassword state: " + this.password);
         })
 
         event.preventDefault()
