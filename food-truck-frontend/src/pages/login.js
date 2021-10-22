@@ -20,23 +20,17 @@ class Login extends Component {
         const userDto = {
             emailAddress: this.state.email,
             password: this.state.password,
-            userType: "Customer"
         };
 
         const instance = axios.create({baseURL: process.env.FOOD_TRUCK_API_URL})
-
-        instance.post('/login', userDto).then(res => {
-            console.log("User login")
-            this.setState({
-                email: userDto.emailAddress,
-                password: userDto.password
-            });
+        instance.get("/login").then((res) => {
+            console.log(res.data);
         })
-
+        
         alert("Successful Login!")
 
         event.preventDefault()
-        window.location.href = "/search";
+       // window.location.href = "/search";
     }
     render() {
         return (

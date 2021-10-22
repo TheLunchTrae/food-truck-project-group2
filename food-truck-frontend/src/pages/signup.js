@@ -26,23 +26,13 @@ class Signup extends Component {
         };
 
         //Creates an axios instance at the backend address
-        const instance = axios.create({baseURL: process.env.FOOD_TRUCK_API_URL});
-        /*Posts to the address. This format solves for an error when the backend port is
-        different from the frontend*/
-        function success(result) {
-            alert("Success" + result.data.message);
-        }
+        const instance = axios.create({ baseURL: process.env.FOOD_TRUCK_API_URL});
 
-        function error(error){
-            alert("Error");
-        }
-
-        async function postUser() {
-            return instance.post("/signup", userDto)
-        }
-
-        postUser().then(success);
-
+        //Posts user information to backend
+        instance.post("/signup", userDto).then((res) => {
+            console.log(res.data);
+        });
+    
 
         alert("Successful Login Creation!")
 

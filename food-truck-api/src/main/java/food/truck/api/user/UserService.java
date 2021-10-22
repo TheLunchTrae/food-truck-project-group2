@@ -16,6 +16,11 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
+    @GetMapping("/login")
+    public String loginUser(@RequestBody User user){
+        return "Test";
+    }
+
     @PostMapping("/signup")
     public User saveUser(@RequestBody User user) {
         return user;
