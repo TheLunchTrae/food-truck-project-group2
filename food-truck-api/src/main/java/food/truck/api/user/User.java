@@ -32,4 +32,8 @@ public class User {
 
     @Column(name = "USER_TYPE")
     String userType;
+
+    public String toString() {
+        return id.toString() + "," + emailAddress + "," + password + "," + userType;
+    }
 }
