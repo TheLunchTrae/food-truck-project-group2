@@ -16,9 +16,9 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
-    @GetMapping("/login")
-    public String loginUser(@RequestBody User user){
-        return "Test";
+    @PostMapping("/login")
+    public boolean loginUser(@RequestBody User user){
+        return true;
     }
 
     @PostMapping("/signup")

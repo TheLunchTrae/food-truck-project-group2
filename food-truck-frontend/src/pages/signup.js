@@ -30,7 +30,12 @@ class Signup extends Component {
 
         //Posts user information to backend
         instance.post("/signup", userDto).then((res) => {
-            console.log(res.data);
+            this.setState ({
+                email: '',
+                password: ''
+            })
+        }).catch((error) => {
+            console.error(error);
         });
     
 
