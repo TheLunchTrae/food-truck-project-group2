@@ -27,7 +27,7 @@ class Signup extends Component {
 
         //Creates an axios instance at the backend address
         const instance = axios.create({ 
-            baseURL: process.env.FOOD_TRUCK_API_URL,
+            baseURL: "http://localhost:8080",
             headers: {'Access-Control-Allow-Origin': '*'}
         });
 

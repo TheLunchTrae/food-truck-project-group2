@@ -34,6 +34,6 @@ public class User {
     String userType;
 
     public String toString() {
-        return id != null ? id.toString() : "" + "," + emailAddress + "," + password + "," + userType;
+        return emailAddress + "," + password + "," + userType;
     }
 }

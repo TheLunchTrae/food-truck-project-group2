@@ -1,8 +1,8 @@
 package food.truck.api.user;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Optional;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,15 +24,39 @@ public class UserService {
     }
 
     @PostMapping("/signup")
-    public User saveUser(@RequestBody User user) throws IOException {
-        FileWriter csvWriter = new FileWriter("./user.txt");
+    public boolean saveUser(@RequestBody User user) throws IOException {
+        // open csv file
+        FileWriter csvWriter = new FileWriter("./user.txt", true);
+        Scanner csvScanner = new Scanner(new File("./user.txt"));
 
-        csvWriter.append(user.toString());
+        // create a string to store the email from each line
+        String databaseEmail;
 
+        // the user email input
+        String userEmail = user.getEmailAddress();
+
+        // see if the email is in use
+        while (csvScanner.hasNextLine()) {
+            // get the line
+            databaseEmail = csvScanner.nextLine();
+
+            // get the email
+            databaseEmail = databaseEmail.substring(0, databaseEmail.indexOf(','));
+
+            // return false if the email is in use
+            if (databaseEmail.equals(userEmail))
+                return false;
+        }
+
+        // write the user
+        csvWriter.append(user.toString() + "\n");
+
+        // close the file
+        csvScanner.close();
         csvWriter.flush();
         csvWriter.close();
 
-        return user;
+        return true;
         //return userRepository.save(user);
     }
 

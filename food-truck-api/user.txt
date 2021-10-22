@@ -1,0 +1,3 @@
+goodEmail,testPassword,Customer
+testEmail,testPassword,Customer
+JoshuaEmail,testPassword,Customer
