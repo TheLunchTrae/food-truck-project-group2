@@ -1,6 +1,9 @@
 package food.truck.api.user;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -18,13 +21,30 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
+    // Hashes the input string and returns the hash
+    private String HashPassword(String password) throws NoSuchAlgorithmException {
+        // hash the password
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[]hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
+
+        //bytes to hex
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashInBytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
+    }
+
     @PostMapping("/login")
-    public boolean loginUser(@RequestBody User user) throws FileNotFoundException {
+    public boolean loginUser(@RequestBody User user) throws FileNotFoundException, NoSuchAlgorithmException {
         // open csv file
         Scanner csvScanner = new Scanner(new File("./user.txt"));
 
         // strings for the email and password from the database
         String databaseEmail, databasePassword;
+
+        // hash the password
+        user.setPassword(HashPassword(user.getPassword()));
 
         // string for the input user email and password
         String userEmail = user.getEmailAddress(), userPassword = user.getPassword();
@@ -51,7 +71,7 @@ public class UserService {
     }
 
     @PostMapping("/signup")
-    public boolean saveUser(@RequestBody User user) throws IOException {
+    public boolean saveUser(@RequestBody User user) throws IOException, NoSuchAlgorithmException {
         // open csv file
         FileWriter csvWriter = new FileWriter("./user.txt", true);
         Scanner csvScanner = new Scanner(new File("./user.txt"));
@@ -61,6 +81,9 @@ public class UserService {
 
         // the user email input
         String userEmail = user.getEmailAddress();
+
+        // hash the password
+        user.setPassword(HashPassword(user.getPassword()));
 
         // see if the email is in use
         while (csvScanner.hasNextLine()) {
