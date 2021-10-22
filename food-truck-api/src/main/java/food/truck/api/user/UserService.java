@@ -19,8 +19,35 @@ public class UserService {
     }
 
     @PostMapping("/login")
-    public boolean loginUser(@RequestBody User user){
-        return true;
+    public boolean loginUser(@RequestBody User user) throws FileNotFoundException {
+        // open csv file
+        Scanner csvScanner = new Scanner(new File("./user.txt"));
+
+        // strings for the email and password from the database
+        String databaseEmail, databasePassword;
+
+        // string for the input user email and password
+        String userEmail = user.getEmailAddress(), userPassword = user.getPassword();
+
+        // test each email and password
+        while (csvScanner.hasNextLine()) {
+            // get the line
+            databaseEmail = csvScanner.nextLine();
+
+            // get the password then email
+            databasePassword = databaseEmail.substring(databaseEmail.indexOf(",") + 1, databaseEmail.lastIndexOf(","));
+            databaseEmail = databaseEmail.substring(0, databaseEmail.indexOf(","));
+
+            // test if the email is the same then password
+            if (databaseEmail.equals(userEmail))
+                if (databasePassword.equals(userPassword))
+                    return true;
+        }
+
+        // close scanner
+        csvScanner.close();
+
+        return false;
     }
 
     @PostMapping("/signup")
