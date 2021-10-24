@@ -22,7 +22,7 @@ public class UserService {
     }
 
     // Hashes the input string and returns the hash
-    private String HashPassword(String password) throws NoSuchAlgorithmException {
+    private String hashPassword(String password) throws NoSuchAlgorithmException {
         // hash the password
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[]hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
@@ -44,7 +44,7 @@ public class UserService {
         String databaseEmail, databasePassword;
 
         // hash the password
-        user.setPassword(HashPassword(user.getPassword()));
+        user.setPassword(hashPassword(user.getPassword()));
 
         // string for the input user email and password
         String userEmail = user.getEmailAddress(), userPassword = user.getPassword();
@@ -83,7 +83,7 @@ public class UserService {
         String userEmail = user.getEmailAddress();
 
         // hash the password
-        user.setPassword(HashPassword(user.getPassword()));
+        user.setPassword(hashPassword(user.getPassword()));
 
         // see if the email is in use
         while (csvScanner.hasNextLine()) {
