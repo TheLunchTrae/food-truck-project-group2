@@ -21,6 +21,9 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
+    //TODO - implement; idk the params or return
+    public void modifyUser(){}
+
     // Hashes the input string and returns the hash
     private String hashPassword(String password) throws NoSuchAlgorithmException {
         // hash the password

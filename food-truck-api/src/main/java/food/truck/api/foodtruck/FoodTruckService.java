@@ -11,10 +11,13 @@ import java.util.Optional;
 @Service
 @RestController
 public class FoodTruckService {
+    //@Autowired
+    private FoodTruckRepository truckRepository;
 
-        private FoodTruckRepository truckRepository;
+    public void addFoodTruck(){}
+    public void modifyFoodTruck(){}
 
-        public Optional<FoodTruck> findUser(Long userId) {
+    public Optional<FoodTruck> findUser(Long userId) {
             return truckRepository.findById(userId);
         }
 
