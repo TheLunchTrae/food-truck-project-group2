@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Service
 @RestController
 public class UserService {
-
+    //@Autowired
     private UserRepository userRepository;
 
     public Optional<User> findUser(Long userId) {

@@ -10,8 +10,6 @@ import javax.persistence.*;
 public class FoodTruck {
     public static final String TABLE_NAME = "FOOD_TRUCKS";
 
-    private int truck_id;
-
     @Id
     @GeneratedValue(generator = TABLE_NAME + "_GENERATOR")
     @SequenceGenerator(
@@ -19,16 +17,24 @@ public class FoodTruck {
             sequenceName = TABLE_NAME + "_SEQUENCE"
     )
 
-    @Column(name = "USER_ID")
-    Long id;
+    @Column(name = "TRUCK_ID")
+    int truckId;
 
-    @Column(name = "EMAIL_ADDRESS")
-    String emailAddress;
+    //TODO - route won't be String in future, this is temporary
+    @Column(name = "ROUTE")
+    String route;
 
-    @Column(name = "PASSWORD")
-    String password;
+    @Column(name = "SCHEDULE")
+    String schedule;
 
-    @Column(name = "USER_TYPE")
-    String userType;
+    //TODO - menu probably won't be String in future
+    @Column(name = "MENU")
+    String menu;
+
+    @Column(name = "DETAILS")
+    String details;
+
+    @Column(name = "DESCRIPTION")
+    String description;
 
 }
