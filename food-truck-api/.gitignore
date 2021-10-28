@@ -3,4 +3,5 @@
 /out
 /build
 /target
-application.properties
+/source/main/resources/application.properties
+demo.iml
