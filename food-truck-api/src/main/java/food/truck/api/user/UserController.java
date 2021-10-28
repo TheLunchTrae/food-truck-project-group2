@@ -30,28 +30,21 @@ public class UserController {
         return user.orElse(null);
     }
     */
-    @GetMapping("/example")
-    public String example() {
-        return "This is the new page for the Java endpoint for Milestone 1!";
-    }
 
     //TODO - MUST HAVE CHECK FOR EXISTING USER
     @PostMapping("/signup")
-    public User postUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public User postUser(@RequestBody User user) throws NoSuchAlgorithmException {
+        // hash the password
+        user.setPassword(userService.hashPassword(user.getPassword()));
 
-        //return null;
-        /*
-        try {
-            return userService.saveUser(user);
-        } catch (IOException e) {
-            return null;
-        } catch (NoSuchAlgorithmException e) {}
-        */
+        return userService.saveUser(user);
     }
 
     @GetMapping("/login")
-    public String getUser(@RequestBody User user){
+    public String getUser(@RequestBody User user) throws NoSuchAlgorithmException {
+        // hash the password
+        user.setPassword(userService.hashPassword(user.getPassword()));
+
         if (userService.loginUser(user) != null){
             return "Login successful";
         } else {

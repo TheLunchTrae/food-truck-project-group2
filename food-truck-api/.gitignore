@@ -5,3 +5,4 @@
 /target
 /source/main/resources/application.properties
 demo.iml
+/application.properties
