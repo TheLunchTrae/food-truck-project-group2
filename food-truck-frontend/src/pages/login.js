@@ -22,7 +22,12 @@ class Login extends Component {
             password: this.state.password,
         };
 
-        const instance = axios.create({baseURL: process.env.FOOD_TRUCK_API_URL})
+        const instance = axios.create({
+            baseURL: process.env.FOOD_TRUCK_API_URL,
+            headers: {'Access-Control-Allow-Origin': 'http://localhost'}
+        })
+
+
         instance.get("/login").then((res) => {
             console.log(res.data);
         })
