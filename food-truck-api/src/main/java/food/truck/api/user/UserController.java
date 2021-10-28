@@ -34,6 +34,8 @@ public class UserController {
     public String example() {
         return "This is the new page for the Java endpoint for Milestone 1!";
     }
+
+    //TODO - MUST HAVE CHECK FOR EXISTING USER
     @PostMapping("/signup")
     public User postUser(@RequestBody User user) {
         return userService.saveUser(user);
@@ -47,4 +49,15 @@ public class UserController {
         } catch (NoSuchAlgorithmException e) {}
         */
     }
+
+    @GetMapping("/login")
+    public String getUser(@RequestBody User user){
+        if (userService.loginUser(user) != null){
+            return "Login successful";
+        } else {
+            return "Login failed";
+        }
+    }
+
+
 }

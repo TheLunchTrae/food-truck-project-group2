@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -42,7 +43,7 @@ public class UserService {
     }
 
     //@PostMapping("/login")
-    public boolean loginUser(@RequestBody User user) throws FileNotFoundException, NoSuchAlgorithmException {
+    public boolean loginUserOld(@RequestBody User user) throws FileNotFoundException, NoSuchAlgorithmException {
         // open csv file
         Scanner csvScanner = new Scanner(new File("./user.txt"));
 
@@ -74,6 +75,10 @@ public class UserService {
         csvScanner.close();
 
         return false;
+    }
+
+    public User loginUser(User user){
+        return userRepository.findByEmailAddressAndPassword(user.getEmailAddress(),user.getPassword());
     }
 
     public User saveUser(User user){
