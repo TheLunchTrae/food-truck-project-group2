@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @Service
-@RestController
 public class FoodTruckService {
     //@Autowired
     private FoodTruckRepository truckRepository;

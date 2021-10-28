@@ -41,7 +41,7 @@ class Signup extends Component {
             console.error(error);
         });
     
-
+        alert(process.env.FOOD_TRUCK_API_URL);
         alert("Successful Login Creation!")
 
         event.preventDefault()

@@ -12,10 +12,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 @Service
-@RestController
 public class UserService {
-    //@Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     public Optional<User> findUser(Long userId) {
         return userRepository.findById(userId);
@@ -38,7 +41,7 @@ public class UserService {
         return sb.toString();
     }
 
-    @PostMapping("/login")
+    //@PostMapping("/login")
     public boolean loginUser(@RequestBody User user) throws FileNotFoundException, NoSuchAlgorithmException {
         // open csv file
         Scanner csvScanner = new Scanner(new File("./user.txt"));
@@ -73,8 +76,12 @@ public class UserService {
         return false;
     }
 
-    @PostMapping("/signup")
-    public boolean saveUser(@RequestBody User user) throws IOException, NoSuchAlgorithmException {
+    public User saveUser(User user){
+        return userRepository.save(user);
+    }
+
+    //@PostMapping("/signup")
+    public boolean saveUserOld(@RequestBody User user) throws IOException, NoSuchAlgorithmException {
         // open csv file
         FileWriter csvWriter = new FileWriter("./user.txt", true);
         Scanner csvScanner = new Scanner(new File("./user.txt"));
@@ -109,6 +116,8 @@ public class UserService {
         csvWriter.flush();
         csvWriter.close();
 
+        /*This userRepository action on the DB is kinda working on its own*/
+        //userRepository.save(user);
         return true;
         //return userRepository.save(user);
     }
