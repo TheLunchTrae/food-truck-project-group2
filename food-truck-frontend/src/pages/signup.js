@@ -26,22 +26,14 @@ class Signup extends Component {
         };
 
         //Creates an axios instance at the backend address
-        const instance = axios.create({ 
-            baseURL: "http://localhost:8080",
-            headers: {'Access-Control-Allow-Origin': '*'}
-        });
+        const instance = axios.create({ baseURL: process.env.FOOD_TRUCK_API_URL});
 
         //Posts user information to backend
         instance.post("/signup", userDto).then((res) => {
-            this.setState ({
-                email: '',
-                password: ''
-            })
-        }).catch((error) => {
-            console.error(error);
+            console.log(res.data);
         });
     
-        alert(process.env.FOOD_TRUCK_API_URL);
+
         alert("Successful Login Creation!")
 
         event.preventDefault()

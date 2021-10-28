@@ -6,8 +6,12 @@ import Head from 'next/head';
 import { CssBaseline } from '@material-ui/core';
 import { FoodTruckThemeProvider } from '../util/theme';
 
+import './dashboard.scss'
+
 let initialState = {};
 let store = buildStore(initialState);
+
+
 
 const FoodTruckApp = ({ Component, pageProps }) => {
     React.useEffect(() => {

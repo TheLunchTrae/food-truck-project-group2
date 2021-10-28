@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import foodTruck from '../util/TaquisaWaco.jpg';
 
 class App extends Component {
 

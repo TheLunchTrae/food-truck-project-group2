@@ -23,10 +23,8 @@ class Login extends Component {
         };
 
         const instance = axios.create({baseURL: process.env.FOOD_TRUCK_API_URL})
-        instance.post("/login", userDto).then((res) => {
+        instance.get("/login").then((res) => {
             console.log(res.data);
-            console.log(res.status);
-            console.log(res.statusText);
         })
         
         alert("Successful Login!")
