@@ -2,16 +2,11 @@ package food.truck.api.user;
 
 import food.truck.api.other.Event;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.*;
-import food.truck.api.user.User;
-import food.truck.api.user.UserService;
-=======
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
->>>>>>> cafeb182555dbfb6f7766852b426468a622655cf
 import lombok.extern.log4j.Log4j2;
 
 import java.security.NoSuchAlgorithmException;
