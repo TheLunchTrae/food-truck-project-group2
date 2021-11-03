@@ -7,6 +7,8 @@ import Search from "./Search"
 import Notifications from "./Notifications";
 import Dashboard from "./Dashboard";
 import About from "./About"
+import Details from "./Details"
+import { Details } from '@material-ui/icons';
 
 
 export default function RouterConfig() {
@@ -21,6 +23,7 @@ export default function RouterConfig() {
                 <Route path="/notifications" component={Notifications}/>
                 <Route path="/dashboard" component={Dashboard}/>
                 <Route path="/about" component={About}/>
+                <Route path="/details" component={Details}/>
             </Switch>
         </BrowserRouter>
     );
