@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import food.truck.api.user.User;
 import food.truck.api.user.UserService;
 import lombok.extern.log4j.Log4j2;
-
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import org.springframework.http.ResponseEntity;
 
 @Log4j2
 @RestController
@@ -23,6 +23,7 @@ public class UserController {
         this.userService = userService;
     }
 
+
     /*
     @GetMapping("/user/{id}")
     public User findUserById(@PathVariable Long id) {
@@ -33,11 +34,14 @@ public class UserController {
 
     //TODO - MUST HAVE CHECK FOR EXISTING USER
     @PostMapping("/signup")
-    public User postUser(@RequestBody User user) throws NoSuchAlgorithmException {
+    public ResponseEntity<User> postUser(@RequestBody User user) throws NoSuchAlgorithmException {
         // hash the password
         user.setPassword(userService.hashPassword(user.getPassword()));
-
-        return userService.saveUser(user);
+        return ResponseEntity.ok()
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST")
+                .header("Content-Type", "application/json")
+                .body(userService.saveUser(user));
     }
 
     @GetMapping("/login")
