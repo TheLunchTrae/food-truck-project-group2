@@ -6,7 +6,7 @@ import { Public } from '@material-ui/icons';
 class Signup extends Component {
     constructor(props) {
         super();
-        this.state = {email: '', password: ''};
+        this.state = {username: '', email: '', password: ''};
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -25,12 +25,11 @@ class Signup extends Component {
             password: this.state.password,
             userType: "Customer"
         };
-
-        //Creates an axios instance at the backend address
-        const instance = axios.create({baseURL: "http://localhost:8080"});
-
-        //Posts user information to backend
-        instance.post("/signup", userDto);
+        
+        //Post to URL
+        axios.post("http://localhost:8080/signup", userDto).then(res => {
+            console.log(res.data.body);
+        });
     
 
         alert("Successful Login Creation!")
@@ -48,6 +47,10 @@ class Signup extends Component {
                             <div class = "signup" style = {{alignContent: 'center', float: 'left', borderRadius: '100px', background: '#FA8072', width: '25%', padding: '20px', display: 'inline-block', marginTop: '20px', marginLeft: '670px'}}>
                                 <form onSubmit={this.handleSubmit}>
                                     <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '4.5rem', textAlign: 'center', fontWeight: 'bold'}}>Sign Up</span>
+                                    <span class = "username" style = {{marginLeft: '27px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Username:</span>
+                                        <span id = "usernameInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
+                                            <input name="username" value={this.state.username} type="text" onChange={this.handleInputChange}/>
+                                        </span>
                                         <span class = "email" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Email:</span>
                                         <span id = "emailInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
                                             <input name="email" value={this.state.email} type="text" onChange={this.handleInputChange}/>
@@ -55,7 +58,7 @@ class Signup extends Component {
                                     <label>
                                         <span class = "password" style = {{marginLeft: '31px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Password:</span>
                                     </label>
-                                    <span id = "passwordInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
+                                    <span id = "passwordInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '11px'}}>
                                         <input name="password" value={this.state.password} type="text" onChange={this.handleInputChange}/>
                                     </span>
                                     <br></br>
