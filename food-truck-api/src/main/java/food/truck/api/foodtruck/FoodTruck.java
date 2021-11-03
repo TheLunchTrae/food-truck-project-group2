@@ -18,7 +18,13 @@ public class FoodTruck {
     )
 
     @Column(name = "TRUCK_ID")
-    int truckId;
+    Long truckId;
+
+    @Column(name = "TRUCK_NAME")
+    String name;
+
+    @Column(name = "OWNER_ID")
+    Long ownerId;
 
     //TODO - route won't be String in future, this is temporary
     @Column(name = "ROUTE")
@@ -31,10 +37,11 @@ public class FoodTruck {
     @Column(name = "MENU")
     String menu;
 
-    @Column(name = "DETAILS")
-    String details;
-
     @Column(name = "DESCRIPTION")
     String description;
+
+    public String toString(){
+        return name + "," + route + "," + schedule + "," + menu + "," + "," + description;
+    }
 
 }

@@ -1,16 +1,13 @@
 package food.truck.api.user;
 
-import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
+import food.truck.api.other.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 @Service
 public class UserService {
@@ -24,9 +21,6 @@ public class UserService {
     public Optional<User> findUser(Long userId) {
         return userRepository.findById(userId);
     }
-
-    //TODO - implement; idk the params or return
-    public void modifyUser(){}
 
     // Hashes the input string and returns the hash
     public String hashPassword(String password) throws NoSuchAlgorithmException {
@@ -47,6 +41,32 @@ public class UserService {
     }
 
     public User saveUser(User user){
-        return userRepository.save(user);
+        //Check if user exists in database; if so, don't create
+        if (userRepository.findByEmailAddress(user.getEmailAddress()) == null) {
+            return userRepository.save(user);
+        } else {
+            return null;
+        }
     }
+
+    public User modifyUser(Event event){
+        User user;
+        if ((user = userRepository.findByEmailAddress(event.getUsername())) != null) {
+            if (event.getEventName() == "NEW_UNAME"){
+                user.setEmailAddress(event.getVal());
+            } else if (event.getEventName() == "NEW_PASSWORD"){
+                try {
+                    user.setPassword(hashPassword(event.getVal()));
+                } catch (NoSuchAlgorithmException e) {}
+            } else {
+                return null;
+            }
+            //Save the modified user
+            userRepository.save(user);
+        } else {
+            return null;
+        }
+        return user;
+    }
+
 }
