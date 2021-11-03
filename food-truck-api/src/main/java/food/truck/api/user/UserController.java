@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping("/signup")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<User> postUser(@RequestBody User user) throws NoSuchAlgorithmException {
+    public User postUser(@RequestBody User user) throws NoSuchAlgorithmException {
         // hash the password
         user.setPassword(userService.hashPassword(user.getPassword()));
         //Check if successfully saved - will fail if username already exists in database
@@ -35,13 +35,12 @@ public class UserController {
 
         }
 
-        return ResponseEntity.ok()
-                .header("Access-Control-Allow-Methods", "POST")
-                .body(userService.saveUser(user));
+        return userService.saveUser(user);
 
     }
 
     @GetMapping("/login")
+    @CrossOrigin(origins = "http://localhost:3000")
     public String getUser(@RequestBody User user) throws NoSuchAlgorithmException {
         // hash the password
         user.setPassword(userService.hashPassword(user.getPassword()));
@@ -55,6 +54,7 @@ public class UserController {
 
     //URGENT TODO - figure out what exactly the backend should return
     @GetMapping("/dashboard/view")
+    @CrossOrigin(origins = "http://localhost:3000")
     public String getDashboardContents(@RequestBody User user){
         //TODO - test
         if (userService.loginUser(user) == null){

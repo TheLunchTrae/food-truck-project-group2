@@ -28,7 +28,8 @@ class Signup extends Component {
         
         //Post to URL
         axios.post("http://localhost:8080/signup", userDto).then(res => {
-            console.log(res.data.body);
+            console.log(res.data);
+            alert(res.data);
         });
     
 
