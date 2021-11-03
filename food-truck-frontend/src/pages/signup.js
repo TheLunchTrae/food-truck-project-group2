@@ -21,6 +21,7 @@ class Signup extends Component {
     handleSubmit(event) {
         //Object that will be passed containing the users information
         const userDto = {
+            userName: this.state.username,
             emailAddress: this.state.email,
             password: this.state.password,
             userType: "Customer"
@@ -29,7 +30,7 @@ class Signup extends Component {
         //Post to URL
         axios.post("http://localhost:8080/signup", userDto).then(res => {
             console.log(res.data);
-            alert(res.data);
+            alert(res.data.body['emailAddress']);
         });
     
 

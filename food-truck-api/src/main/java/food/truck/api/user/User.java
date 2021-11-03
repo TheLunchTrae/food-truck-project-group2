@@ -24,6 +24,9 @@ public class User {
     @Column(name = "USER_ID")
     Long id;
 
+    @Column(name = "USERNAME")
+    String userName;
+
     @Column(name = "EMAIL_ADDRESS")
     String emailAddress;
 
