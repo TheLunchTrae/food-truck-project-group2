@@ -63,7 +63,8 @@ public class UserController {
         User postUser = userService.loginUser(user);
 
         if (userService.loginUser(user) != null){
-            request.getSession().setAttribute("ID", postUser.getId());
+            Long uID = postUser.getId();
+            request.getSession().setAttribute("ID", uID);
             return ResponseEntity.ok()
                     .header("User-Type", postUser.getUserType())
                     .body(postUser);

@@ -21,7 +21,7 @@ public class FoodTruck {
     Long truckId;
 
     @Column(name = "TRUCK_NAME")
-    String name;
+    String truckName;
 
     @Column(name = "OWNER_ID")
     Long ownerId;
@@ -41,7 +41,7 @@ public class FoodTruck {
     String description;
 
     public String toString(){
-        return name + "," + route + "," + schedule + "," + menu + "," + "," + description;
+        return truckName + "," + route + "," + schedule + "," + menu + "," + "," + description;
     }
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface FoodTruckRepository extends JpaRepository<FoodTruck, Long> {
-    FoodTruck findByName(String name);
+    FoodTruck findByTruckName(String truckName);
     FoodTruck findByTruckId(Long id);
     List<FoodTruck> findAllByOwnerId(Long id);
 }
