@@ -59,7 +59,7 @@ class Dashboard extends Component {
                                 <span class = "userName" style = {{color: '#000000', display: 'block', fontSize: '2rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}><u>Subscriptions</u></span>
 
                                 <table class = "foodTrucks" style = {{marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}}>
-                                    <thead style = {{color: '#0F52BA', fontSize: '1.5rem'}}>
+                                    <thead style = {{color: '#0F52BA', fontSize: '1.5rem', margin: '25px 0px'}}>
                                         <tr>
                                             <th style = {{height: '50px', width: '200px'}}>
                                                 FOOD TRUCK

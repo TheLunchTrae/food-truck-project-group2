@@ -16,7 +16,9 @@ class App extends Component {
                     <br/>
                     <a href = "\notifications">Notifications</a>
                     <br/>
-                    <a href = "\dashboard">Dashboard</a>
+                    <a href = "\dashboard">Dashboard (Food Truck Owner)</a>
+                    <br/>
+                    <a href = "\details">Dashboard (Customer)</a>
                     <br/>
                     <a href = "\about">About</a>
                     <br/>
