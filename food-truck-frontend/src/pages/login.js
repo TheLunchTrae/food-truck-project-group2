@@ -27,6 +27,8 @@ class Login extends Component {
             if(res.data.id != null){
                 if(res.data.userType === "Customer"){
                     window.location.href = "/details?id=" + res.data.id;
+                } else {
+                    window.location.href = "/dashboard?id=" + res.data.id;
                 }
             }
             
