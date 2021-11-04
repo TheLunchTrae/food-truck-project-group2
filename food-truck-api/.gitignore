@@ -3,6 +3,6 @@
 /out
 /build
 /target
-/source/main/resources/application.properties
+/src/main/resources/application.properties
 demo.iml
 /application.properties
