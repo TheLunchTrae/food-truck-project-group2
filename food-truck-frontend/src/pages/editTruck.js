@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {wait} from "@testing-library/dom";
-import { Public } from '@material-ui/icons';
 
 class Signup extends Component {
     constructor(props) {
@@ -66,7 +64,7 @@ class Signup extends Component {
                 <body style = {{backgroundColor: '#FFDAB9'}}>
                     <div>
                         <div class="sections" >
-                            <div class = "createTruck" style = {{alignContent: 'center', borderRadius: '100px', background: '#FA8072', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
+                            <div class = "editTruck" style = {{alignContent: 'center', borderRadius: '100px', background: '#FA8072', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
                                 <form onSubmit={this.handleSubmit}>
                                     <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Edit Your Truck</span>
 

@@ -23,6 +23,8 @@ class App extends Component {
                     <a href = "\createTruck">Create Truck</a>
                     <br/>
                     <a href = "\editTruck">Edit Truck</a>
+                    <br/>
+                    <a href = "\editAccount">Edit Account</a>
                     <img src={foodTruck} style={{width:2280 + 'px', height:1621 + 'px'}}/>
                 </nav>
             </div>

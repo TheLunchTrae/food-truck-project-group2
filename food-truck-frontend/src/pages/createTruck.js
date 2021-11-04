@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {wait} from "@testing-library/dom";
-import { Public } from '@material-ui/icons';
 
 class Signup extends Component {
     constructor(props) {
