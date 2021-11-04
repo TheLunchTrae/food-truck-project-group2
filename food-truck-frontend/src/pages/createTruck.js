@@ -6,7 +6,7 @@ import { Public } from '@material-ui/icons';
 class Signup extends Component {
     constructor(props) {
         super();
-        this.state = { owner_id: -1, menu: '', description: '', details: '', route: '', schedule: '', truck_name: '' };
+        this.state = { ownerId: -1, menu: '', description: '', details: '', route: '', schedule: '', name: '' };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -27,8 +27,8 @@ class Signup extends Component {
             details: this.state.details,
             route: this.state.route,
             schedule: this.state.schedule,
-            truck_name: this.state.truck_name,
-            owner_id: this.state.owner_id
+            name: this.state.name,
+            ownerId: this.state.ownerId
         };
 
         //Post to URL
@@ -40,7 +40,7 @@ class Signup extends Component {
                 details: '',
                 route: '',
                 schedule: '',
-                truck_name: ''
+                name: ''
             });
         });
 
@@ -52,8 +52,8 @@ class Signup extends Component {
         console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
         const id = urlParams.get('id');
-        this.state.owner_id = id;
-        console.log(this.state.owner_id);
+        this.state.ownerId = id;
+        console.log(this.state.ownerId);
     }
     render() {
         return (
@@ -68,9 +68,9 @@ class Signup extends Component {
                                         <span id = "menuInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
                                             <input name="menu" placeholder="Enter the Menu" value={this.state.menu} type="text" onChange={this.handleInputChange}/>
                                         </span>
-                                        <span class = "truck_name" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
-                                        <span id = "truck_nameInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
-                                            <input name="truck_name" placeholder="Enter the Truck Name" value={this.state.truck_name} type="text" onChange={this.handleInputChange}/>
+                                        <span class = "name" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
+                                        <span id = "name" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
+                                            <input name="name" placeholder="Enter the Truck Name" value={this.state.name} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                         <span class = "description" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Description:</span>
                                         <span id = "descriptionInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
