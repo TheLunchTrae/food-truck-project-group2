@@ -8,6 +8,8 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = { name: '' };
+        
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
     handleChangeStatus(event) {
     }
