@@ -18,6 +18,8 @@ function HomePage() {
             <a href = "\details">Dashboard (Customer)</a>
             <br/>
             <a href = "\about">About</a>
+            <br/>
+            <a href = "\createTruck">Create Truck</a>
         </div>
     )
 }

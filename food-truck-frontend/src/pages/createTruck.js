@@ -6,7 +6,7 @@ import { Public } from '@material-ui/icons';
 class Signup extends Component {
     constructor(props) {
         super();
-        this.state = { OwnerId: '', Menu: '', Description: '', Details: '', Route: '', Schedule: '', TruckName: '' };
+        this.state = { ownerId: '', menu: '', description: '', details: '', route: '', schedule: '', truckName: '' };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -23,13 +23,13 @@ class Signup extends Component {
     handleSubmit(event) {
         //Object that will be passed containing the users information
         const truckDto = {
-            menu: this.state.Menu,
-            description: this.state.Description,
-            details: this.state.Details,
-            route: this.state.Route,
-            schedule: this.state.Schedule,
-            truckName: this.state.TruckName,
-            ownerId: this.state.OwnerId
+            menu: this.state.menu,
+            description: this.state.description,
+            details: this.state.details,
+            route: this.state.route,
+            schedule: this.state.schedule,
+            truckName: this.state.truckName,
+            ownerId: this.state.ownerId
         };
 
         //Post to URL
@@ -67,27 +67,27 @@ class Signup extends Component {
                                     <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '4.5rem', textAlign: 'center', fontWeight: 'bold'}}>Create A New Truck</span>
                                     <span class = "menu" style = {{marginLeft: '27px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Menu:</span>
                                         <span id = "menuInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
-                                            <input name="menu" placeholder="Enter the Menu" value={this.state.Menu} type="text" onChange={this.handleInputChange}/>
+                                            <input name="menu" placeholder="Enter the Menu" value={this.state.menu} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                         <span class = "truckName" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
                                         <span id = "truckNameInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
-                                            <input name="truckName" placeholder="Enter the Truck Name" value={this.state.TruckName} type="text" onChange={this.handleInputChange}/>
+                                            <input name="truckName" placeholder="Enter the Truck Name" value={this.state.truckName} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                         <span class = "description" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Description:</span>
                                         <span id = "descriptionInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
-                                            <input name="description" placeholder="Enter the Description" value={this.state.Description} type="text" onChange={this.handleInputChange}/>
+                                            <input name="description" placeholder="Enter the Description" value={this.state.description} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                         <span class = "details" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Details:</span>
                                         <span id = "detailsInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
-                                            <input name="details" placeholder="Enter the Details" value={this.state.Details} type="text" onChange={this.handleInputChange}/>
+                                            <input name="details" placeholder="Enter the Details" value={this.state.details} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                         <span class = "route" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Route:</span>
                                         <span id = "routeInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
-                                            <input name="route" placeholder="Enter the Route" value={this.state.Route} type="text" onChange={this.handleInputChange}/>
+                                            <input name="route" placeholder="Enter the Route" value={this.state.route} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                         <span class = "schedule" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Schedule:</span>
                                         <span id = "scheduleInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
-                                            <input name="schedule" placeholder="Enter the Schedule" value={this.state.Schedule} type="text" onChange={this.handleInputChange}/>
+                                            <input name="schedule" placeholder="Enter the Schedule" value={this.state.schedule} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                     <br></br>
                                     <span style={{marginLeft: '200px'}}>
