@@ -9,6 +9,7 @@ import Dashboard from "./Dashboard";
 import About from "./About"
 import Details from "./Details"
 import CreateTruck from "./CreateTruck"
+import EditTruck from "./EditTruck"
 import { Details } from '@material-ui/icons';
 
 
@@ -26,6 +27,7 @@ export default function RouterConfig() {
                 <Route path="/about" component={About}/>
                 <Route path="/details" component={Details}/>
                 <Route path="/createTruck" component={CreateTruck}/>
+                <Route path="/editTruck" component={EditTruck}/>
             </Switch>
         </BrowserRouter>
     );

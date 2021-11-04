@@ -21,6 +21,8 @@ class App extends Component {
                     <a href = "\about">About</a>
                     <br/>
                     <a href = "\createTruck">Create Truck</a>
+                    <br/>
+                    <a href = "\editTruck">Edit Truck</a>
                     <img src={foodTruck} style={{width:2280 + 'px', height:1621 + 'px'}}/>
                 </nav>
             </div>
