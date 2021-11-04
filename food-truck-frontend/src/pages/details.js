@@ -15,7 +15,7 @@ class Dashboard extends Component {
     handleSubmit(event) {
     }
     componentDidMount() {
-        // get gets the id from the url
+        // gets the id from the url and sets it to the state
         const queryString = window.location.search;
         console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
