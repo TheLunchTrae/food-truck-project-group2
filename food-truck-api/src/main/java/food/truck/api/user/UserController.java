@@ -62,8 +62,9 @@ public class UserController {
 
     @GetMapping("/details/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String getUserWithId(@PathVariable long id){
-        return userService.getUserWithId(id);
+    public ResponseEntity getUserWithId(@PathVariable long id){
+        return ResponseEntity.ok()
+                .body(userService.getUserWithId(id));
     }
 
     //URGENT TODO - figure out what exactly the backend should return

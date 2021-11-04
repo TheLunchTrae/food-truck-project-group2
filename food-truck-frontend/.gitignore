@@ -28,3 +28,4 @@ yarn-error.log*
 /out
 /build
 /target
+/src/main/resources/application.properties
