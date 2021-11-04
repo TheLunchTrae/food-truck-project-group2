@@ -43,16 +43,20 @@ public class UserController {
 
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String getUser(@RequestBody User user) throws NoSuchAlgorithmException {
+    public ResponseEntity getUser(@RequestBody User user) throws NoSuchAlgorithmException {
         // hash the password
         user.setPassword(userService.hashPassword(user.getPassword()));
+        User postUser = userService.loginUser(user);
 
         if (userService.loginUser(user) != null){
-            return "Login successful";
+            return ResponseEntity.ok()
+                    .header("User-Type", postUser.getUserType())
+                    .body(postUser);
         } else {
-            return "Login failed";
+            return ResponseEntity.ok()
+                    .body(null);
         }
     }
 

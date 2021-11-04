@@ -22,16 +22,15 @@ class Login extends Component {
             password: this.state.password,
         };
 
-        const instance = axios.create({
-            baseURL: process.env.FOOD_TRUCK_API_URL,
-        })
-
-
-        instance.get("/login").then((res) => {
+        axios.post("http://localhost:8080/login", userDto).then((res) => {
             console.log(res.data);
+            if(res.data.id != null){
+                if(res.data.userType === "Customer"){
+                    window.location.href = "/details?id=" + res.data.id;
+                }
+            }
+            
         })
-        
-        alert("Successful Login!")
 
         event.preventDefault()
        // window.location.href = "/search";
