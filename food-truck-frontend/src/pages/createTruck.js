@@ -6,7 +6,7 @@ import { Public } from '@material-ui/icons';
 class Signup extends Component {
     constructor(props) {
         super();
-        this.state = { ownerId: '', menu: '', description: '', details: '', route: '', schedule: '', truckName: '' };
+        this.state = { menu: '', description: '', details: '', route: '', schedule: '', truckName: '' };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -28,31 +28,31 @@ class Signup extends Component {
             route: this.state.route,
             schedule: this.state.schedule,
             truckName: this.state.truckName,
-            ownerId: this.state.ownerId
         };
 
         //Post to URL
         const val = axios.post("http://localhost:8080/addTruck", truckDto).then(res => {
             console.log(res);
-            this.setState({
-                Menu: '',
-                Description: '',
-                Details: '',
-                Route: '',
-                Schedule: '',
-                TruckName: ''
+            /*this.setState({
+                menu: '',
+                description: '',
+                details: '',
+                route: '',
+                schedule: '',
+                truckName: ''
             });
+            */
         });
 
         event.preventDefault()
     }
+    
     componentDidMount() {
         // gets the id from the url and sets it to the state
         const queryString = window.location.search;
         console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
         const id = urlParams.get('id');
-        this.state.OwnerId = id;
     }
     render() {
         return (

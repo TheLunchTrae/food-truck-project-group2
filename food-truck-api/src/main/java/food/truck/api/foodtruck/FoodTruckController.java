@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.HttpSession;
 
 @Log4j2
 @RestController
@@ -22,8 +23,9 @@ public class FoodTruckController {
     //URGENT TODO - figure out what exactly the backend should return
     @PostMapping("/addTruck")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck){
+    public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, HttpSession session){
         FoodTruck postFoodTruck;
+        foodTruck.setOwnerId((Long)session.getAttribute("ID"));
         //NOTE - MUST HAVE OWNER ID SET ON THE FRONT END!!!!!!
         if ((postFoodTruck = foodTruckService.addFoodTruck(foodTruck)) != null){
             return ResponseEntity.ok()

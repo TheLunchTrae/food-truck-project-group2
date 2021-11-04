@@ -11,6 +11,8 @@ import lombok.extern.log4j.Log4j2;
 import java.security.NoSuchAlgorithmException;
 import org.springframework.http.ResponseEntity;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Log4j2
 @RestController
 public class UserController {
@@ -45,12 +47,13 @@ public class UserController {
 
     @PostMapping("/login")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity getUser(@RequestBody User user) throws NoSuchAlgorithmException {
+    public ResponseEntity getUser(@RequestBody User user, HttpServletRequest request) throws NoSuchAlgorithmException {
         // hash the password
         user.setPassword(userService.hashPassword(user.getPassword()));
         User postUser = userService.loginUser(user);
 
         if (userService.loginUser(user) != null){
+            request.getSession().setAttribute("ID", postUser.getId());
             return ResponseEntity.ok()
                     .header("User-Type", postUser.getUserType())
                     .body(postUser);
