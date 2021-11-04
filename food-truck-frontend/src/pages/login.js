@@ -31,7 +31,7 @@ class Login extends Component {
             console.log(res.data);
         })
         
-        alert("Successful Login!")
+        //alert("Successful Login!")
 
         event.preventDefault()
        // window.location.href = "/search";
