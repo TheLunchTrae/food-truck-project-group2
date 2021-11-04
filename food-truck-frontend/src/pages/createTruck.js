@@ -18,7 +18,6 @@ class Signup extends Component {
         this.setState({
             [name]: value
         });
-        
     }
     handleSubmit(event) {
         //Object that will be passed containing the users information
@@ -41,8 +40,7 @@ class Signup extends Component {
                 Details: '',
                 Route: '',
                 Schedule: '',
-                TruckName: '',
-                OwnerId: ''
+                TruckName: ''
             });
         });
 
