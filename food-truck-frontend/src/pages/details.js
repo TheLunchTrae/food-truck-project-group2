@@ -65,10 +65,10 @@ class Dashboard extends Component {
                                                 FOOD TRUCK
                                             </th>
                                             <th style = {{height: '50px', width: '200px'}}>
-                                                TRUCK ID
+                                                RATING
                                             </th>
                                             <th style = {{height: '50px', width: '200px'}}>
-                                                RATING
+                                                HOURS
                                             </th>
                                         </tr>
                                     </thead>
@@ -76,18 +76,18 @@ class Dashboard extends Component {
                                     <tbody style = {{color: '#FFFFFF', fontSize: '1.2rem'}}>
                                         <tr>
                                             <td>SUBSCRIPTION1</td>
-                                            <td>000-000-000</td>
                                             <td>*****</td>
+                                            <td>OPEN</td>
                                         </tr>
                                         <tr>
                                             <td>SUBSCRIPTION2</td>
-                                            <td>000-000-000</td>
                                             <td>**</td>
+                                            <td>CLOSED</td>
                                         </tr>
                                         <tr>
                                             <td>SUBSCRIPTION3</td>
-                                            <td>000-000-000</td>
                                             <td>***</td>
+                                            <td>CLOSED DUE TO COVID</td>
                                         </tr>
                                     </tbody>
                                 </table>
