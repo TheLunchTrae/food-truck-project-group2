@@ -69,4 +69,12 @@ public class UserService {
         return user;
     }
 
+    public String getUserWithId(long id){
+        User user;
+        if ((user = userRepository.findById(id)) != null) {
+            return user.getUserName();
+        } else {
+            return "INVALID_USER_ID";
+        }
+    }
 }
