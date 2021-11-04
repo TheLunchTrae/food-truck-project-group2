@@ -1,4 +1,5 @@
 import { HighlightSharp } from '@material-ui/icons';
+import Axios from 'axios';
 import React, { Component } from 'react';
 import './_app.js'
 
@@ -20,9 +21,11 @@ class Dashboard extends Component {
         console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
         const id = urlParams.get('id');
-        console.log(id);
         if(id != null) {
-            this.setState({ name: "Name here" });
+            Axios.get("http://localhost:8080/details/" + id).then(res => {
+                console.log(res);
+                this.setState({ name: res.data });
+            })
         }
         else {
             this.setState({name: "USER_NAME"});
