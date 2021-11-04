@@ -11,8 +11,6 @@ function HomePage() {
             <br/>
             <a href = "\search">Search</a>
             <br/>
-            <a href = "\notifications">Notifications</a>
-            <br/>
             <a href = "\dashboard">Dashboard (Food Truck Owner)</a>
             <br/>
             <a href = "\details">Dashboard (Customer)</a>

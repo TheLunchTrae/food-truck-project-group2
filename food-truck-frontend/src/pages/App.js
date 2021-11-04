@@ -14,14 +14,13 @@ class App extends Component {
                     <br/>
                     <a href = "\search">Search</a>
                     <br/>
-                    <a href = "\notifications">Notifications</a>
-                    <br/>
                     <a href = "\dashboard">Dashboard (Food Truck Owner)</a>
                     <br/>
                     <a href = "\details">Dashboard (Customer)</a>
                     <br/>
                     <a href = "\about">About</a>
                     <br/>
+                    <a href = "\createTruck">Create Truck</a>
                     <img src={foodTruck} style={{width:2280 + 'px', height:1621 + 'px'}}/>
                 </nav>
             </div>
