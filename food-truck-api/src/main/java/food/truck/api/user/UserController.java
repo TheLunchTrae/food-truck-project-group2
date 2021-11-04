@@ -1,6 +1,12 @@
 package food.truck.api.user;
 
+import food.truck.api.foodtruck.FoodTruck;
+import food.truck.api.foodtruck.FoodTruckService;
+import food.truck.api.other.DashboardData;
 import food.truck.api.other.Event;
+import food.truck.api.rating.Rating;
+import food.truck.api.subscription.Subscription;
+import net.bytebuddy.dynamic.scaffold.MethodGraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j2;
 import java.security.NoSuchAlgorithmException;
+import java.util.LinkedList;
+
 import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,10 +25,12 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class UserController {
     private UserService userService;
+    private FoodTruckService foodTruckService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, FoodTruckService foodTruckService){
         this.userService = userService;
+        this.foodTruckService = foodTruckService;
     }
 
     @PostMapping("/signup")
@@ -63,39 +73,55 @@ public class UserController {
         }
     }
 
+    //TODO - change later - fine for now
     @GetMapping("/details/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity getUserWithId(@PathVariable long id){
+    public ResponseEntity getUserNameWithId(@PathVariable long id){
         return ResponseEntity.ok()
-                .body(userService.getUserWithId(id));
+                .body(userService.getUserNameWithId(id));
     }
 
     //URGENT TODO - figure out what exactly the backend should return
-    @GetMapping("/dashboard/view")
+    @GetMapping("/dashboard/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String getDashboardContents(@RequestBody User user){
-        //TODO - test
-        if (userService.loginUser(user) == null){
-            return "User is not logged in";
-        }
-        return null;
-    }
-
-    //URGENT TODO - figure out what exactly the backend should return
-    @PostMapping("/dashboard/modify")
-    public String modifyUser(@RequestBody Event event){
-        if (userService.modifyUser(event) != null) {
-            return "User modified";
-        } else {
-            return "User modification failed.";
-        }
+    public ResponseEntity getDashboardContents(@PathVariable long id){
+        User user = userService.getUserWithId(id);
+        DashboardData dashboardData = new DashboardData();
         /*
+        if ((user = userService.loginUser(user)) == null){
+            return ResponseEntity.ok()
+                .body("User is not logged in");
+        }
+         */
+        //TODO - these are temporary
+        dashboardData.setRatings(new LinkedList<Rating>());
+        dashboardData.setSubscriptions(new LinkedList<Subscription>());
+        dashboardData.setFoodTrucks(foodTruckService.getOwnerFoodTrucks(user));
+
         return ResponseEntity.ok()
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methods", "POST")
                 .header("Content-Type", "application/json")
-                .body(loginUser);
-        */
+                .body(dashboardData);
+    }
+
+    //URGENT TODO - figure out what exactly the backend should return
+    @PostMapping("/dashboard/modify")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity modifyUser(@RequestBody Event event){
+        User postUser;
+        if ((postUser = userService.modifyUser(event)) != null) {
+            return ResponseEntity.ok()
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "POST")
+                    .header("Content-Type", "application/json")
+                    .body(postUser);
+        } else {
+            return ResponseEntity.ok()
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "POST")
+                    .body("User modification failed");
+        }
     }
 
     //dash/board/addTruck is in FoodTruckController

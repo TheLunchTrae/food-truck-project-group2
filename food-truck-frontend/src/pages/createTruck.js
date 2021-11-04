@@ -6,7 +6,11 @@ import { Public } from '@material-ui/icons';
 class Signup extends Component {
     constructor(props) {
         super();
+<<<<<<< HEAD
         this.state = { menu: '', description: '', details: '', route: '', schedule: '', truckName: '' };
+=======
+        this.state = { ownerId: -1, menu: '', description: '', details: '', route: '', schedule: '', name: '' };
+>>>>>>> f176b36891da32748134b11223c9bb30cbf65431
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -27,19 +31,32 @@ class Signup extends Component {
             details: this.state.details,
             route: this.state.route,
             schedule: this.state.schedule,
+<<<<<<< HEAD
             truckName: this.state.truckName,
+=======
+            name: this.state.name,
+            ownerId: this.state.ownerId
+>>>>>>> f176b36891da32748134b11223c9bb30cbf65431
         };
 
         //Post to URL
         const val = axios.post("http://localhost:8080/addTruck", truckDto).then(res => {
             console.log(res);
+<<<<<<< HEAD
             /*this.setState({
+=======
+            this.setState({
+>>>>>>> f176b36891da32748134b11223c9bb30cbf65431
                 menu: '',
                 description: '',
                 details: '',
                 route: '',
                 schedule: '',
+<<<<<<< HEAD
                 truckName: ''
+=======
+                name: ''
+>>>>>>> f176b36891da32748134b11223c9bb30cbf65431
             });
             */
         });
@@ -53,6 +70,11 @@ class Signup extends Component {
         console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
         const id = urlParams.get('id');
+<<<<<<< HEAD
+=======
+        this.state.ownerId = id;
+        console.log(this.state.ownerId);
+>>>>>>> f176b36891da32748134b11223c9bb30cbf65431
     }
     render() {
         return (
@@ -67,9 +89,9 @@ class Signup extends Component {
                                         <span id = "menuInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
                                             <input name="menu" placeholder="Enter the Menu" value={this.state.menu} type="text" onChange={this.handleInputChange}/>
                                         </span>
-                                        <span class = "truckName" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
-                                        <span id = "truckNameInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
-                                            <input name="truckName" placeholder="Enter the Truck Name" value={this.state.truckName} type="text" onChange={this.handleInputChange}/>
+                                        <span class = "name" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
+                                        <span id = "name" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
+                                            <input name="name" placeholder="Enter the Truck Name" value={this.state.name} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                         <span class = "description" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Description:</span>
                                         <span id = "descriptionInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
