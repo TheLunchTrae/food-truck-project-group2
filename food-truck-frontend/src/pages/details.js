@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './_app.js'
 
 class Dashboard extends Component {
+
     constructor(props) {
         super(props);
         this.state = { id: '' };
@@ -20,7 +21,14 @@ class Dashboard extends Component {
         const urlParams = new URLSearchParams(queryString);
         const id = urlParams.get('id');
         console.log(id);
-        this.setState({ id: id });
+        if(id != null) {
+            this.setState({ id: id });
+        }
+        else {
+            this.setState({id: "USER_NAME"});
+        }
+
+
     }
     render() {
         return (
