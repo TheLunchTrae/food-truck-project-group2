@@ -2,7 +2,7 @@ require('dotenv').config();
 
 function HomePage() {
     return (
-        <div style = {{backgroundColor: '#90AACB', padding: '0', fontFamily: 'poppins'}}>
+        <div style = {{backgroundColor: '#90AACB', padding: '10px', fontFamily: 'poppins'}}>
             <div class="banner-area" style = {{ margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '100vh'}}>
 
               <div class="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
