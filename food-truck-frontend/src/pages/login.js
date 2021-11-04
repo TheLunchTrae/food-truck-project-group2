@@ -47,13 +47,13 @@ class Login extends Component {
                                     <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '4.5rem', textAlign: 'center', fontWeight: 'bold'}}>Login</span>
                                         <span class = "email" style = {{marginLeft: '80px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Email:</span>
                                         <span id = "emailInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
-                                            <input name="email" value={this.state.email} type="text" onChange={this.handleInputChange}/>
+                                            <input name="email" pattern=".*@.*\..*" title="Must be in valid email format" placeholder="Enter an Email" value={this.state.email} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                     <label>
                                         <span class = "password" style = {{marginLeft: '31px', display: 'inline-block', fontSize: '1.5rem', textAlign: 'left', fontWeight: 'bold', marginTop: '5px'}}>Password:</span>
                                     </label>
                                     <span id = "passwordInput" style={{fontSize: '1.5rem', textAlign: 'left', marginLeft: '10px'}}>
-                                        <input name="password" value={this.state.password} type="text" onChange={this.handleInputChange}/>
+                                    <input type="password" name="password" placeholder="Enter a password" value={this.state.password} onChange={this.handleInputChange}/>
                                     </span>
                                     <br></br>
                                     <span style={{marginLeft: '200px'}}>

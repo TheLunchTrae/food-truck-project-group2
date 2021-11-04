@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j2;
-
 import java.security.NoSuchAlgorithmException;
 import org.springframework.http.ResponseEntity;
 
@@ -24,18 +23,23 @@ public class UserController {
 
     @PostMapping("/signup")
     @CrossOrigin(origins = "http://localhost:3000")
-    public User postUser(@RequestBody User user) throws NoSuchAlgorithmException {
+    public ResponseEntity postUser(@RequestBody User user) throws NoSuchAlgorithmException {
         // hash the password
         user.setPassword(userService.hashPassword(user.getPassword()));
+        user.setEmailAddress(user.getEmailAddress().toLowerCase());
         //Check if successfully saved - will fail if username already exists in database
         User postUser = userService.saveUser(user);
 
         //TODO - fix check
         if (postUser == null){
-
+            return ResponseEntity.ok()
+                    .header("Email-Exists", "true")
+                    .header("UserName-Exists", "true")
+                    .body("Account Already Exists With This Email");
         }
-
-        return userService.saveUser(user);
+        return ResponseEntity.ok()
+                .header("Content-Type", "application/json")
+                .body(postUser);
 
     }
 
