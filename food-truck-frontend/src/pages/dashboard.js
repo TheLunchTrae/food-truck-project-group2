@@ -41,7 +41,7 @@ class Dashboard extends Component {
                     </div>
 
                     <div class = "sections">
-                        <div class = "userSection" style = {{float: 'left', borderRadius: '100px', background: '#FA8072', width: '25%', padding: '20px', display: 'inline-block'}}>
+                        <div class = "userSection" style = {{float: 'left', borderRadius: '100px', background: '#FA8072', width: '25%', padding: '20px', display: 'inline-block', border: '3px solid black'}}>
                             <div>
                                 <span style = {{height: '100px', width: '100px', background: '#bbbbbb', borderRadius: '50%', display: 'block', zIndex: '99', margin: '0 auto'}}></span>
                                 <span class = "userName" style = {{color: '#0F52BA', display: 'block', fontSize: '1.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}>{ this.state.name }</span>
@@ -54,7 +54,7 @@ class Dashboard extends Component {
                             </div>
                         </div>
 
-                        <div class = "tableSection" style = {{marginLeft: '55px', float: 'left', borderRadius: '100px', background: '#FA8072', width: '65%', padding: '15px', display: 'inline-block'}}>
+                        <div class = "tableSection" style = {{marginLeft: '55px', float: 'left', borderRadius: '100px', background: '#FA8072', width: '65%', padding: '15px', display: 'inline-block', border: '3px solid black'}}>
 
                             <span class = "userName" style = {{color: '#000000', display: 'block', fontSize: '2rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}><u>Your Trucks</u></span>
 

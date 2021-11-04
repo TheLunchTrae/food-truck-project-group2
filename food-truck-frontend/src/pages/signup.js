@@ -49,7 +49,7 @@ class Signup extends Component {
                 <body style = {{backgroundColor: '#FFDAB9'}}>
                     <div>
                         <div class="sections" >
-                            <div class = "signup" style = {{alignContent: 'center', borderRadius: '100px', background: '#FA8072', width: '30%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
+                            <div class = "signup" style = {{alignContent: 'center', borderRadius: '100px', background: '#FA8072', width: '30%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
                                 <form onSubmit={this.handleSubmit}>
 
                                     <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Sign Up</span>
