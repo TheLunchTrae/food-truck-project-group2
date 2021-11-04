@@ -1,9 +1,11 @@
 package food.truck.api.foodtruck;
 
+import food.truck.api.user.User;
 import food.truck.api.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,13 +22,6 @@ public class FoodTruckService {
     }
 
     public FoodTruck addFoodTruck(FoodTruck foodTruck){
-        //Get name of user who owns truck
-        /*
-        User user = userRepository.findByEmailAddress(ftc.getUsername());
-        FoodTruck foodTruck = ftc.getFoodTruck();
-        //Set truck's owner id
-        foodTruck.setOwnerId(user.getId());
-        */
         return truckRepository.save(foodTruck);
     }
 
@@ -51,6 +46,12 @@ public class FoodTruckService {
         }
 
         return truckRepository.save(foodTruck);
+    }
+
+    //NOTE - again id is needed
+    public List<FoodTruck> getOwnerFoodTrucks(User user){
+        Long ownerId = user.getId();
+        return truckRepository.findAllByOwnerId(ownerId);
     }
 
     public Optional<FoodTruck> findUser(Long userId) {

@@ -19,7 +19,6 @@ public class FoodTruckController {
         this.foodTruckService = foodTruckService;
     }
 
-    //URGENT TODO - figure out what exactly the backend should return
     @PostMapping("/addTruck")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck){

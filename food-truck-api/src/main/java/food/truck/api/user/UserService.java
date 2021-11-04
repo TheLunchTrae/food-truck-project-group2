@@ -51,25 +51,31 @@ public class UserService {
 
     public User modifyUser(Event event){
         User user;
-        if ((user = userRepository.findByEmailAddress(event.getUsername())) != null) {
-            if (event.getEventName() == "NEW_UNAME"){
+        if ((user = userRepository.findById(event.getUserId())) != null) {
+            if ("NEW_UNAME".equals(event.getEventName())){
                 user.setEmailAddress(event.getVal());
-            } else if (event.getEventName() == "NEW_PASSWORD"){
+            } else if ("NEW_PASSWORD".equals(event.getEventName())){
                 try {
                     user.setPassword(hashPassword(event.getVal()));
                 } catch (NoSuchAlgorithmException e) {}
             } else {
+                System.out.println("bad event name: "+event.getEventName());
                 return null;
             }
             //Save the modified user
             userRepository.save(user);
         } else {
+            System.out.println("finding user with id "+event.getUserId()+ " failed");
             return null;
         }
         return user;
     }
 
-    public String getUserWithId(long id){
+    public User getUserWithId(long id){
+        return userRepository.findById(id);
+    }
+
+    public String getUserNameWithId(long id){
         User user;
         if ((user = userRepository.findById(id)) != null) {
             return user.getUserName();

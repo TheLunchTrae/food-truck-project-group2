@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Event {
-    private String username;
+    private long userId;
     private String eventName;
     private String val;
 }
