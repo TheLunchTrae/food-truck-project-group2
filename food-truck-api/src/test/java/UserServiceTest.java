@@ -49,59 +49,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-//@SpringBootTest
-/*
-@ExtendWith(SpringExtension.class)
-//@ContextConfiguration(locations = {""})
-@WebAppConfiguration
-@AutoConfigureMockMvc
-*/
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebMvcTest(UserController.class)
+
 public class UserServiceTest {
-    private MockMvc mockMvc;
 
-    @Autowired
-    WebApplicationContext webApplicationContext;
-
-
-    @BeforeEach
-    public void setUp(){
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
-    @Test
-    public void signUpAccountCreationTest() throws Exception {
-        User user = new User();
-        user.setId(99L);
-        user.setEmailAddress("myAddr");
-        user.setPassword("myPs");
-        user.setUserType("Customer");
-        if (mockMvc == null){
-            throw new Exception("MockMvc is null");
-        }
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(user);
-        System.out.println(json);
-        /*
-                        .param("emailAddress",user.getEmailAddress())
-                .param("password",user.getPassword())
-                .param("userType","Customer"))
-        */
-        mockMvc.perform(post("/signup")
-                        .characterEncoding("utf-8")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.emailAddress").value("myAddr"))
-                .andExpect(jsonPath("$.password").value("myPs"))
-                .andReturn();
-    }
-    @Test
-    public void dashboardAccountEditingTest(){}
-
-    //TODO - fully test for subscriptions, ratings, food trucks, etc.
-    @Test
-    public void getUserDetails(){}
 }
 /*
 @RunWith(SpringJUnit4ClassRunner.class)
