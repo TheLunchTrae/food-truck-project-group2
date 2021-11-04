@@ -45,7 +45,7 @@ class Dashboard extends Component {
                                 <div>
                                     <span style = {{height: '100px', width: '100px', background: '#bbbbbb', borderRadius: '50%', display: 'block', zIndex: '99', margin: '0 auto'}}></span>
                                     <span class = "userName" style = {{color: '#0F52BA', display: 'block', fontSize: '1.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}>{this.state.id}</span>
-                                    <span class = "userType" style = {{color: '#002366', display: 'block', fontSize: '1.1rem', textAlign: 'center'}}>Food Truck Owner</span>  {/*THIS IS GOING TO BE THE TYPE OF USER THEY ARE LOGGED IN AS -->*/}
+                                    <span class = "userType" style = {{color: '#002366', display: 'block', fontSize: '1.1rem', textAlign: 'center'}}>Customer</span>  {/*THIS IS GOING TO BE THE TYPE OF USER THEY ARE LOGGED IN AS -->*/}
                                     <hr style = {{border: '1px solid black', width: '75%'}}></hr>
                                     <span class = "userType" style = {{color: '#0F52BA', display: 'block', fontSize: '1.1rem', textAlign: 'center', margin: '20px 0', fontWeight: 'bold'}}><u>Notifications</u></span>
                                     <span class = "userType" style = {{color: '#002366', display: 'block', fontSize: '1rem', textAlign: 'center', margin: '20px 0'}}>Notification1</span>
@@ -56,7 +56,7 @@ class Dashboard extends Component {
 
                             <div class = "tableSection" style = {{marginLeft: '55px', float: 'left', borderRadius: '100px', background: '#FA8072', width: '65%', padding: '15px', display: 'inline-block'}}>
 
-                                <span class = "userName" style = {{color: '#000000', display: 'block', fontSize: '2rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}><u>Your Trucks</u></span>
+                                <span class = "userName" style = {{color: '#000000', display: 'block', fontSize: '2rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}><u>Subscriptions</u></span>
 
                                 <table class = "foodTrucks" style = {{marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}}>
                                     <thead style = {{color: '#0F52BA', fontSize: '1.5rem'}}>
@@ -75,17 +75,17 @@ class Dashboard extends Component {
 
                                     <tbody style = {{color: '#FFFFFF', fontSize: '1.2rem'}}>
                                         <tr>
-                                            <td>TRUCK1</td>
+                                            <td>SUBSCRIPTION1</td>
                                             <td>000-000-000</td>
                                             <td>*****</td>
                                         </tr>
                                         <tr>
-                                            <td>TRUCK2</td>
+                                            <td>SUBSCRIPTION2</td>
                                             <td>000-000-000</td>
                                             <td>**</td>
                                         </tr>
                                         <tr>
-                                            <td>TRUCK3</td>
+                                            <td>SUBSCRIPTION3</td>
                                             <td>000-000-000</td>
                                             <td>***</td>
                                         </tr>
