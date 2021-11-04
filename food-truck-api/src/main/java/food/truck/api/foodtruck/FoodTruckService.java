@@ -32,6 +32,9 @@ public class FoodTruckService {
 
     public FoodTruck modifyFoodTruck(FoodTruck foodTruckDiff){
         FoodTruck foodTruck = truckRepository.findByTruckId(foodTruckDiff.getTruckId());
+        if (foodTruck == null){
+            return null;
+        }
 
         //Change based on whether there was any input
         if (foodTruckDiff.getRoute().length() > 0){
