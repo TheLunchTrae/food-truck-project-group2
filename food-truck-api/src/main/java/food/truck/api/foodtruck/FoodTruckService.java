@@ -54,6 +54,14 @@ public class FoodTruckService {
         return truckRepository.findAllByOwnerId(ownerId);
     }
 
+    public FoodTruck getFoodTruckWithId(long id){
+        return truckRepository.findByTruckId(id);
+    }
+
+    public String getFoodTruckNameWithId(long id){
+        return truckRepository.findByTruckId(id).getTruckName();
+    }
+
     public Optional<FoodTruck> findUser(Long userId) {
             return truckRepository.findById(userId);
         }
