@@ -21,10 +21,22 @@ class Dashboard extends Component {
         const urlParams = new URLSearchParams(queryString);
         const id = urlParams.get('id');
         if(id != null) {
-            Axios.get("http://localhost:8080/details/" + id).then(res => {
+            
+            Axios.get("http://localhost:8080/api/details/" + id).then(res => {
                 console.log(res);
                 this.setState({ name: res.data });
             })
+            
+            /*
+            Axios.get("http://localhost:8080/api/dashboard/" + id).then(res => {
+                console.log(res);
+                this.setState({
+                    subscriptions: res.data.subscriptions,
+                    ratings: res.data.ratings,
+                    foodTrucks: res.data.foodTrucks
+                });
+            })
+            */
         }
         else {
             this.setState({name: "USER_NAME"});
