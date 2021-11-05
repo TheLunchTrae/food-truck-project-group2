@@ -117,14 +117,14 @@ public class UserController {
         User postUser;
         if ((postUser = userService.modifyUser(event)) != null) {
             return ResponseEntity.ok()
-                    .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST")
+                    //.header("Access-Control-Allow-Origin", "*")
+                    //.header("Access-Control-Allow-Methods", "POST")
                     .header("Content-Type", "application/json")
                     .body(postUser);
         } else {
             return ResponseEntity.ok()
-                    .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST")
+                    //.header("Access-Control-Allow-Origin", "*")
+                    //.header("Access-Control-Allow-Methods", "POST")
                     .body("User modification failed");
         }
     }
