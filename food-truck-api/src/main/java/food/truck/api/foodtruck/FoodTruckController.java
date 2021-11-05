@@ -21,9 +21,9 @@ public class FoodTruckController {
 
     @PostMapping("/api/addTruck")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, HttpSession session){
+    public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, @CookieValue(value="userId", defaultValue="-1") Long userId){
         FoodTruck postFoodTruck;
-        foodTruck.setOwnerId((Long)session.getAttribute("userId"));
+        foodTruck.setOwnerId(userId);
         //NOTE - MUST HAVE OWNER ID SET ON THE FRONT END!!!!!!
         if ((postFoodTruck = foodTruckService.addFoodTruck(foodTruck)) != null){
             return ResponseEntity.ok()

@@ -7,6 +7,7 @@ class Login extends Component {
         this.state = {email: '', password: ''};
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
     handleInputChange(event) {
@@ -24,10 +25,10 @@ class Login extends Component {
         };
 
         axios.post("http://localhost:8080/api/login", userDto).then((res) => {
-            console.log(res.data);
+            console.log(res);
             if(res.data.id != null){
                 if(res.data.userType === "Customer"){
-                    window.location.href = "/details?id=" + res.data.id;
+                    //window.location.href = "/details?id=" + res.data.id;
                 } else {
                     window.location.href = "/dashboard?id=" + res.data.id;
                 }

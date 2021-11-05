@@ -19,7 +19,9 @@ import java.util.LinkedList;
 
 import org.springframework.http.ResponseEntity;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Log4j2
@@ -58,24 +60,23 @@ public class UserController {
 
     @PostMapping("/api/login")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity getUser(@RequestBody User user, HttpServletRequest request) throws NoSuchAlgorithmException {
+    public User getUser(@RequestBody User user, HttpServletResponse response) throws NoSuchAlgorithmException {
         // hash the password=
         User postUser;
         user.setPassword(userService.hashPassword(user.getPassword()));
-        request.getSession().invalidate();
 
         if ((postUser = userService.loginUser(user)) != null){
             Long userId = postUser.getId();
-            request.getSession().setAttribute("userId", userId);
+            /*
+            Cookie cookie = new Cookie("userId", userId.toString());
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
+            response.addCookie(cookie);*/
+            response.setHeader("Set-Cookie", "userId=" + userId.toString() + "; HttpOnly; Path=/; Max-Age=99999999;");
 
-            return ResponseEntity.ok()
-                    .header("Success", "1")
-                    .header("User-Type", user.getUserType())
-                    .body(postUser);
+            return postUser;
         } else {
-            return ResponseEntity.ok()
-                    .header("Success", "0")
-                    .body("Failed Login");
+            return null;
         }
     }
 
