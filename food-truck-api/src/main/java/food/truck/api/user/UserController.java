@@ -6,6 +6,7 @@ import food.truck.api.other.Event;
 import food.truck.api.rating.Rating;
 import food.truck.api.subscription.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,19 +60,22 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getUser(@RequestBody User user, HttpServletRequest request) throws NoSuchAlgorithmException {
         // hash the password=
+        User postUser;
         user.setPassword(userService.hashPassword(user.getPassword()));
-        User postUser = userService.loginUser(user);
         request.getSession().invalidate();
 
-        if (userService.loginUser(user) != null){
-            request.getSession().setAttribute("ID", user.getId());
+        if ((postUser = userService.loginUser(user)) != null){
+            Long userId = postUser.getId();
+            request.getSession().setAttribute("userId", userId);
 
             return ResponseEntity.ok()
-                    .header("User-Type", postUser.getUserType())
+                    .header("Success", "1")
+                    .header("User-Type", user.getUserType())
                     .body(postUser);
         } else {
             return ResponseEntity.ok()
-                    .body(null);
+                    .header("Success", "0")
+                    .body("Failed Login");
         }
     }
 
@@ -102,9 +106,6 @@ public class UserController {
         dashboardData.setFoodTrucks(foodTruckService.getOwnerFoodTrucks(user));
 
         return ResponseEntity.ok()
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "POST")
-                .header("Content-Type", "application/json")
                 .body(dashboardData);
     }
 

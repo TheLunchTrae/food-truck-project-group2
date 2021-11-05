@@ -21,15 +21,16 @@ public class FoodTruckController {
 
     @PostMapping("/api/addTruck")
     @CrossOrigin(origins = "http://localhost:3000")
-    @ResponseBody
-    public FoodTruck addFoodTruck(@RequestBody FoodTruck foodTruck, HttpSession session){
+    public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, HttpSession session){
         FoodTruck postFoodTruck;
-        foodTruck.setOwnerId((Long)session.getAttribute("ID"));
+        foodTruck.setOwnerId((Long)session.getAttribute("userId"));
         //NOTE - MUST HAVE OWNER ID SET ON THE FRONT END!!!!!!
         if ((postFoodTruck = foodTruckService.addFoodTruck(foodTruck)) != null){
-            return postFoodTruck;
+            return ResponseEntity.ok()
+                    .body(postFoodTruck);
         } else {
-            return null;
+            return ResponseEntity.ok()
+                    .body("Truck Already Exists");
         }
     }
 
