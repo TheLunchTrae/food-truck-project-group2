@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Log4j2
@@ -20,17 +21,15 @@ public class FoodTruckController {
 
     @PostMapping("/addTruck")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, HttpSession session){
+    @ResponseBody
+    public FoodTruck addFoodTruck(@RequestBody FoodTruck foodTruck, HttpSession session){
         FoodTruck postFoodTruck;
         foodTruck.setOwnerId((Long)session.getAttribute("ID"));
         //NOTE - MUST HAVE OWNER ID SET ON THE FRONT END!!!!!!
         if ((postFoodTruck = foodTruckService.addFoodTruck(foodTruck)) != null){
-            return ResponseEntity.ok()
-                    .header("Content-Type", "application/json")
-                    .body(postFoodTruck);
+            return postFoodTruck;
         } else {
-            return ResponseEntity.ok()
-                    .body("Food truck creation failed");
+            return null;
         }
     }
 

@@ -1,12 +1,10 @@
 package food.truck.api.user;
 
-import food.truck.api.foodtruck.FoodTruck;
 import food.truck.api.foodtruck.FoodTruckService;
 import food.truck.api.other.DashboardData;
 import food.truck.api.other.Event;
 import food.truck.api.rating.Rating;
 import food.truck.api.subscription.Subscription;
-import net.bytebuddy.dynamic.scaffold.MethodGraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j2;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Log4j2
 @RestController
@@ -55,16 +55,18 @@ public class UserController {
 
     }
 
+
     @PostMapping("/login")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getUser(@RequestBody User user, HttpServletRequest request) throws NoSuchAlgorithmException {
-        // hash the password
+        // hash the password=
         user.setPassword(userService.hashPassword(user.getPassword()));
         User postUser = userService.loginUser(user);
+        request.getSession().invalidate();
 
         if (userService.loginUser(user) != null){
-            Long uID = postUser.getId();
-            request.getSession().setAttribute("ID", uID);
+            request.getSession().setAttribute("ID", user.getId());
+
             return ResponseEntity.ok()
                     .header("User-Type", postUser.getUserType())
                     .body(postUser);
