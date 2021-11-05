@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Log4j2
@@ -18,23 +19,22 @@ public class FoodTruckController {
         this.foodTruckService = foodTruckService;
     }
 
-    @PostMapping("/addTruck")
+    @PostMapping("/api/addTruck")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, HttpSession session){
         FoodTruck postFoodTruck;
-        foodTruck.setOwnerId((Long)session.getAttribute("ID"));
+        foodTruck.setOwnerId((Long)session.getAttribute("userId"));
         //NOTE - MUST HAVE OWNER ID SET ON THE FRONT END!!!!!!
         if ((postFoodTruck = foodTruckService.addFoodTruck(foodTruck)) != null){
             return ResponseEntity.ok()
-                    .header("Content-Type", "application/json")
                     .body(postFoodTruck);
         } else {
             return ResponseEntity.ok()
-                    .body("Food truck creation failed");
+                    .body("Truck Already Exists");
         }
     }
 
-    @PostMapping("/modifyTruck")
+    @PostMapping("/api/modifyTruck")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyFoodTruck(@RequestBody FoodTruck foodTruckDiff){
         FoodTruck postFoodTruck;
@@ -49,7 +49,7 @@ public class FoodTruckController {
         }
     }
 
-    @GetMapping("/getTruckName/{id}")
+    @GetMapping("/api/getTruckName/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getFoodTruckNameWithId(@PathVariable long id){
         String foodTruckName;
@@ -63,7 +63,7 @@ public class FoodTruckController {
         }
     }
 
-    @GetMapping("/getTruck/{id}")
+    @GetMapping("/api/getTruck/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getFoodTruckWithId(@PathVariable long id){
         FoodTruck postFoodTruck;

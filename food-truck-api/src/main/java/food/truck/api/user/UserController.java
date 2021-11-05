@@ -1,13 +1,12 @@
 package food.truck.api.user;
 
-import food.truck.api.foodtruck.FoodTruck;
 import food.truck.api.foodtruck.FoodTruckService;
 import food.truck.api.other.DashboardData;
 import food.truck.api.other.Event;
 import food.truck.api.rating.Rating;
 import food.truck.api.subscription.Subscription;
-import net.bytebuddy.dynamic.scaffold.MethodGraph;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j2;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Log4j2
 @RestController
@@ -33,7 +34,7 @@ public class UserController {
         this.foodTruckService = foodTruckService;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/api/signup")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity postUser(@RequestBody User user) throws NoSuchAlgorithmException {
         // hash the password
@@ -55,35 +56,40 @@ public class UserController {
 
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getUser(@RequestBody User user, HttpServletRequest request) throws NoSuchAlgorithmException {
-        // hash the password
+        // hash the password=
+        User postUser;
         user.setPassword(userService.hashPassword(user.getPassword()));
-        User postUser = userService.loginUser(user);
+        request.getSession().invalidate();
 
-        if (userService.loginUser(user) != null){
-            Long uID = postUser.getId();
-            request.getSession().setAttribute("ID", uID);
+        if ((postUser = userService.loginUser(user)) != null){
+            Long userId = postUser.getId();
+            request.getSession().setAttribute("userId", userId);
+
             return ResponseEntity.ok()
-                    .header("User-Type", postUser.getUserType())
+                    .header("Success", "1")
+                    .header("User-Type", user.getUserType())
                     .body(postUser);
         } else {
             return ResponseEntity.ok()
-                    .body(null);
+                    .header("Success", "0")
+                    .body("Failed Login");
         }
     }
 
     //TODO - change later - fine for now
-    @GetMapping("/details/{id}")
+    @GetMapping("/api/details/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getUserNameWithId(@PathVariable long id){
         return ResponseEntity.ok()
                 .body(userService.getUserNameWithId(id));
+                //.body(userService.getUserWithId(id));
     }
 
     //URGENT TODO - figure out what exactly the backend should return
-    @GetMapping("/dashboard/{id}")
+    @GetMapping("/api/dashboard/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getDashboardContents(@PathVariable long id){
         User user = userService.getUserWithId(id);
@@ -100,27 +106,24 @@ public class UserController {
         dashboardData.setFoodTrucks(foodTruckService.getOwnerFoodTrucks(user));
 
         return ResponseEntity.ok()
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "POST")
-                .header("Content-Type", "application/json")
                 .body(dashboardData);
     }
 
     //URGENT TODO - figure out what exactly the backend should return
-    @PostMapping("/dashboard/modify")
+    @PostMapping("/api/dashboard/modify")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyUser(@RequestBody Event event){
         User postUser;
         if ((postUser = userService.modifyUser(event)) != null) {
             return ResponseEntity.ok()
-                    .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST")
+                    //.header("Access-Control-Allow-Origin", "*")
+                    //.header("Access-Control-Allow-Methods", "POST")
                     .header("Content-Type", "application/json")
                     .body(postUser);
         } else {
             return ResponseEntity.ok()
-                    .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST")
+                    //.header("Access-Control-Allow-Origin", "*")
+                    //.header("Access-Control-Allow-Methods", "POST")
                     .body("User modification failed");
         }
     }

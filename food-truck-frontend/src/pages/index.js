@@ -3,7 +3,7 @@ require('dotenv').config();
 function HomePage() {
     return (
         <div style = {{backgroundColor: '#90AACB', padding: '10px', fontFamily: 'poppins'}}>
-            <div class="banner-area" style = {{ margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '100vh'}}>
+            <div name="menuBar" class="banner-area" style = {{ margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '100vh'}}>
 
               <div class="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
                 <div class="navigation" style = {{height: '60px'}}>
