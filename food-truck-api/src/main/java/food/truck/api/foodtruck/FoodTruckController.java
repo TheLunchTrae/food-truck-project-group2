@@ -18,7 +18,7 @@ public class FoodTruckController {
         this.foodTruckService = foodTruckService;
     }
 
-    @PostMapping("/addTruck")
+    @PostMapping("/api/addTruck")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, HttpSession session){
         FoodTruck postFoodTruck;
@@ -34,7 +34,7 @@ public class FoodTruckController {
         }
     }
 
-    @PostMapping("/modifyTruck")
+    @PostMapping("/api/modifyTruck")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyFoodTruck(@RequestBody FoodTruck foodTruckDiff){
         FoodTruck postFoodTruck;
@@ -49,7 +49,7 @@ public class FoodTruckController {
         }
     }
 
-    @GetMapping("/getTruckName/{id}")
+    @GetMapping("/api/getTruckName/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getFoodTruckNameWithId(@PathVariable long id){
         String foodTruckName;
@@ -63,7 +63,7 @@ public class FoodTruckController {
         }
     }
 
-    @GetMapping("/getTruck/{id}")
+    @GetMapping("/api/getTruck/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getFoodTruckWithId(@PathVariable long id){
         FoodTruck postFoodTruck;

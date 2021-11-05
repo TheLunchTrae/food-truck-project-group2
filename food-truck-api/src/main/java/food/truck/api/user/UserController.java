@@ -33,7 +33,7 @@ public class UserController {
         this.foodTruckService = foodTruckService;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/api/signup")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity postUser(@RequestBody User user) throws NoSuchAlgorithmException {
         // hash the password
@@ -55,7 +55,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getUser(@RequestBody User user, HttpServletRequest request) throws NoSuchAlgorithmException {
         // hash the password
@@ -75,15 +75,16 @@ public class UserController {
     }
 
     //TODO - change later - fine for now
-    @GetMapping("/details/{id}")
+    @GetMapping("/api/details/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getUserNameWithId(@PathVariable long id){
         return ResponseEntity.ok()
                 .body(userService.getUserNameWithId(id));
+                //.body(userService.getUserWithId(id));
     }
 
     //URGENT TODO - figure out what exactly the backend should return
-    @GetMapping("/dashboard/{id}")
+    @GetMapping("/api/dashboard/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getDashboardContents(@PathVariable long id){
         User user = userService.getUserWithId(id);
@@ -107,7 +108,7 @@ public class UserController {
     }
 
     //URGENT TODO - figure out what exactly the backend should return
-    @PostMapping("/dashboard/modify")
+    @PostMapping("/api/dashboard/modify")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyUser(@RequestBody Event event){
         User postUser;

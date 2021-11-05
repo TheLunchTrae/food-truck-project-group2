@@ -22,7 +22,7 @@ class Login extends Component {
             password: this.state.password,
         };
 
-        axios.post("http://localhost:8080/login", userDto).then((res) => {
+        axios.post("http://localhost:8080/api/login", userDto).then((res) => {
             console.log(res.data);
             if(res.data.id != null){
                 if(res.data.userType === "Customer"){
