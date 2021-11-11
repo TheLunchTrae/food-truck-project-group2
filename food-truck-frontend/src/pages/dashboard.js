@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './_app.js'
 import Axios from 'axios';
+import { FormatAlignLeftRounded } from '@material-ui/icons';
 
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: '' };
+        this.state = { name: '', foodTruckData: [] };
         this.componentDidMount = this.componentDidMount.bind(this);
     }
     handleChangeStatus(event) {
@@ -15,32 +16,76 @@ class Dashboard extends Component {
     handleSubmit(event) {
     }
     componentDidMount() {
+
         // gets the id from the url and sets it to the state
         const queryString = window.location.search;
         console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
         const id = urlParams.get('id');
+        var ownerName;
         if(id != null) {
-            
+            //First get owner's name from details
             Axios.get("http://localhost:8080/api/details/" + id).then(res => {
                 console.log(res);
-                this.setState({ name: res.data });
+                //this.setState({ name: res.data });
+                ownerName = res.data;
             })
-            
-            /*
+            //Then get food truck data via dashbord data
             Axios.get("http://localhost:8080/api/dashboard/" + id).then(res => {
                 console.log(res);
-                this.setState({
-                    subscriptions: res.data.subscriptions,
-                    ratings: res.data.ratings,
-                    foodTrucks: res.data.foodTrucks
-                });
+
+                var dashboardData = res.data;
+                //alert(res.data.foodTrucks[0]["truckName"]);
+                var str = " ";
+                str += dashboardData["subscriptions"] + ' ';
+                str += dashboardData["ratings"] + ' ';
+                //ftd = dashboardData.foodTrucks;
+                var ftdata = dashboardData.foodTrucks;
+                for (var i = 0; i < ftdata.length; i++){
+                    str += ftdata[i]["truckId"] + ' ';
+                    str += ftdata[i]["truckName"] + ' ';
+                    str += ftdata[i]["ownerId"] + ' ';
+                    str += ftdata[i]["route"] + ' ';
+                    str += ftdata[i]["schedule"] + ' ';
+                    str += ftdata[i]["menu"] + ' ';
+                    str += ftdata[i]["description"] + ' ';
+                    str += ftdata[i]["ownerId"] + ' ';
+                }
+                //alert(str);
+
+                this.setState({name: ownerName, foodTruckData: ftdata});
             })
-            */
+            
         }
         else {
-            this.setState({name: "USER_NAME"});
+            this.setState({name: "USER_NAME", foodTruckData: []});
         }
+    }
+    renderNotifications(){}
+    renderSubsctions(){}    /*Should technically only be in details but oh well*/
+    //TODO - add some other stuff later
+    renderFoodTrucks(){
+        /*
+        if (foodTruckData == undefined){
+            return "FoodTruckData is undefined!!";
+        }
+        */
+        //Food truck name + link
+        //Food truck ID
+        //Rating
+        let htmldata = "";//"<tbody style = {{color: '#FFFFFF', fontSize: '1.2rem'}}>";
+        var ftdata = this.state.foodTruckData;
+        for (var i = 0; i < ftdata.length; i++){
+            var truckName = ftdata[i]["truckName"];
+            var truckId = ftdata[i]["truckId"];
+            var rating = "PLACEHOLDER_RATING";
+            htmldata += "<tr><td>"+truckName+"</td><td>"+truckId+"</td><td>"+rating+"</td></tr>";
+        }
+        //htmldata += "</tbody>";
+        return htmldata;
+    }
+    myURL(id){
+        return "\editTruck?id="+id
     }
     render() {
         return (
@@ -84,23 +129,16 @@ class Dashboard extends Component {
                                         </th>
                                     </tr>
                                 </thead>
-
                                 <tbody style = {{color: '#FFFFFF', fontSize: '1.2rem'}}>
-                                    <tr>
-                                        <td>TRUCK1</td>
-                                        <td>000-000-000</td>
-                                        <td>*****</td>
-                                    </tr>
-                                    <tr>
-                                        <td>TRUCK2</td>
-                                        <td>000-000-000</td>
-                                        <td>**</td>
-                                    </tr>
-                                    <tr>
-                                        <td>TRUCK3</td>
-                                        <td>000-000-000</td>
-                                        <td>***</td>
-                                    </tr>
+                                    {this.state.foodTruckData.map(ft => (
+                                        <tr>
+                                            <td>
+                                                <a href = {this.myURL(ft["truckId"])}>{ft["truckName"]}</a>                                                
+                                            </td>
+                                            <td>{ft["truckId"]}</td>
+                                            <td>PLACEHOLDER_RATING</td>                                        
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
