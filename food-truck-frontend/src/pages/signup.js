@@ -29,7 +29,7 @@ class Signup extends Component {
         };
 
         //Post to URL
-        axios.post("http://localhost:8080/api/signup", userDto).then(res => {
+        axios.post("http://localhost:8090/api/signup", userDto).then(res => {
             console.log(res);
             this.setState({
                 username:'',

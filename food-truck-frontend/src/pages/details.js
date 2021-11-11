@@ -24,7 +24,7 @@ class Dashboard extends Component {
         const urlParams = new URLSearchParams(queryString);
         const id = urlParams.get('id');
         if(id != null) {
-            Axios.get("http://localhost:8080/api/details/" + id).then(res => {
+            Axios.get("http://localhost:8090/api/details/" + id).then(res => {
                 console.log(res);
                 this.setState({ name: res.data });
             })

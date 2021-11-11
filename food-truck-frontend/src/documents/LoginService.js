@@ -7,7 +7,7 @@ class LoginService {
             password: password
         }
 
-        return Axios.post("http://localhost:8080/api/login", userDto) 
+        return Axios.post("http://localhost:8090/api/login", userDto) 
     }
 
     setToken(email, token) {

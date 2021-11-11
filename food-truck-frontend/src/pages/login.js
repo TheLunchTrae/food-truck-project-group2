@@ -19,6 +19,7 @@ class Login extends Component {
             [name]: value
         });
     }
+    
     handleSubmit(event) {
         LoginService.Login(this.state.email, this.state.password)
         .then(res => {

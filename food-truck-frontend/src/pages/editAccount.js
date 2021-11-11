@@ -25,7 +25,7 @@ class Signup extends Component {
         };
 
         //Post to URL
-        const val = axios.post("http://localhost:8080/api/dashboard/modify", userDto).then(res => {
+        const val = axios.post("http://localhost:8090/api/dashboard/modify", userDto).then(res => {
             console.log(res);
         });
 
