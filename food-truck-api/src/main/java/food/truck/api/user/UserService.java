@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
+import java.sql.Date;
 
 import food.truck.api.other.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +41,15 @@ public class UserService {
         return userRepository.findByEmailAddressAndPassword(user.getEmailAddress(),user.getPassword());
     }
 
+    public String generateUserToken(User user) throws NoSuchAlgorithmException {
+        return hashPassword(user.getId() + user.getSignupDate().toString() + user.getPassword());
+    }
+
     public User saveUser(User user){
         //Check if user exists in database; if so, don't create
-        if (userRepository.findByEmailAddress(user.getEmailAddress()) == null) {
+        if (userRepository.findByEmailAddress(user.getEmailAddress()) == null &&
+                userRepository.findByUserName(user.getUserName()) == null) {
+
             return userRepository.save(user);
         } else {
             return null;

@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+import java.sql.Date;
+
 @Data
 @Entity
 @Table(name = User.TABLE_NAME)
@@ -35,6 +37,12 @@ public class User {
 
     @Column(name = "USER_TYPE")
     String userType;
+
+    @Column(name = "SIGNUP_DATE")
+    Date signupDate;
+
+    @Column(name = "USER_TOKEN")
+    String userToken;
 
     public String toString() {
         return emailAddress + "," + password + "," + userType;
