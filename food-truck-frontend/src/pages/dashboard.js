@@ -25,13 +25,13 @@ class Dashboard extends Component {
         var ownerName;
         if(id != null) {
             //First get owner's name from details
-            Axios.get("http://localhost:8080/api/details/" + id).then(res => {
+            Axios.get("http://localhost:8090/api/details/" + id).then(res => {
                 console.log(res);
                 //this.setState({ name: res.data });
                 ownerName = res.data;
             })
             //Then get food truck data via dashbord data
-            Axios.get("http://localhost:8080/api/dashboard/" + id).then(res => {
+            Axios.get("http://localhost:8090/api/dashboard/" + id).then(res => {
                 console.log(res);
 
                 var dashboardData = res.data;
