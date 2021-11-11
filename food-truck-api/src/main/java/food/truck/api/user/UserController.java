@@ -5,6 +5,7 @@ import food.truck.api.other.DashboardData;
 import food.truck.api.other.Event;
 import food.truck.api.rating.Rating;
 import food.truck.api.subscription.Subscription;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import lombok.extern.log4j.Log4j2;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Date;
 
 import org.springframework.http.ResponseEntity;
 
@@ -38,45 +40,41 @@ public class UserController {
 
     @PostMapping("/api/signup")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity postUser(@RequestBody User user) throws NoSuchAlgorithmException {
+    public ResponseEntity signupUser(@RequestBody User user) throws NoSuchAlgorithmException {
         // hash the password
         user.setPassword(userService.hashPassword(user.getPassword()));
         user.setEmailAddress(user.getEmailAddress().toLowerCase());
-        //Check if successfully saved - will fail if username already exists in database
+        //Check if successfully saved - will fail if username or email already exists in database
         User postUser = userService.saveUser(user);
 
         //TODO - fix check
         if (postUser == null){
             return ResponseEntity.ok()
-                    .header("Email-Exists", "true")
-                    .header("UserName-Exists", "true")
-                    .body("Account Already Exists With This Email");
-        }
-        return ResponseEntity.ok()
-                .header("Content-Type", "application/json")
-                .body(postUser);
+                    .body("Account Already Exists With This Email or Username");
+        } else {
+            user.setSignupDate(new java.sql.Date(new java.util.Date().getTime()));
+            postUser.setUserToken(userService.generateUserToken(user));
 
+            return ResponseEntity.ok()
+                    .body("Successful Signup!");
+        }
     }
 
     @PostMapping("/api/login")
     @CrossOrigin(origins = "http://localhost:3000")
-    public User getUser(@RequestBody User user, HttpServletResponse response) throws NoSuchAlgorithmException {
+    public ResponseEntity loginUser(@RequestBody User user, HttpServletResponse response) throws NoSuchAlgorithmException {
         // hash the password=
         User postUser;
         user.setPassword(userService.hashPassword(user.getPassword()));
 
-        if ((postUser = userService.loginUser(user)) != null){
-            Long userId = postUser.getId();
-            /*
-            Cookie cookie = new Cookie("userId", userId.toString());
-            cookie.setHttpOnly(true);
-            cookie.setPath("/");
-            response.addCookie(cookie);*/
-            response.setHeader("Set-Cookie", "userId=" + userId.toString() + "; HttpOnly; Path=/; Max-Age=99999999;");
-
-            return postUser;
+        if ((postUser = userService.loginUser(user)) != null) {
+            return ResponseEntity.ok()
+                    .header("userToken", postUser.getUserToken())
+                    .header("Access-Control-Expose-Headers", "userToken")
+                    .body("Successful Login");
         } else {
-            return null;
+            return ResponseEntity.ok()
+                    .body("Failed Login");
         }
     }
 
