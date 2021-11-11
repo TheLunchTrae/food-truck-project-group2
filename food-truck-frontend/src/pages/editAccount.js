@@ -40,7 +40,7 @@ class Signup extends Component {
         console.log(id);
 
         // get the truck information from the database
-        const val = axios.get("http://localhost:8080/api/details/" + id).then(res => {
+        const val = axios.get("http://localhost:8090/api/details/" + id).then(res => {
             console.log(res);
             this.setState({
                 username: res.data
