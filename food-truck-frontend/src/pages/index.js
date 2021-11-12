@@ -7,14 +7,14 @@ function HomePage() {
 
               <div class="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
                 <div class="navigation" style = {{height: '60px'}}>
-                  <div class="logo" style = {{width: '20%', float: 'left', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
+                  <a href = "\" style = {{textDecoration: 'none', width: '20%', float: 'left', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
                     Food Truck Finder
-                  </div>
+                  </a>
                   <nav style = {{width: '75%', float: 'right', textAlign: 'right', padding: '30px 0 0', fontSize: '1rem'}}>
                     <a href = "\signup" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Sign Up</a>
                     <a href = "\login" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Log In</a>
                     <a href = "\search" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Search</a>
-                    <a href = "\dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Dashboard (Food Truck Owner)</a>
+                    <a href = "\dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Dashboard</a>
                     <a href = "\about" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>About</a>
                   </nav>
                 </div>
@@ -38,7 +38,7 @@ function HomePage() {
                 <br></br>
                 <br></br>
                 <br></br>
-                <div>REMOVE ONCE SESSIONS IMPLEMENTED, WE NEED TO PUT IN INDIVIDUAL PEOPLE</div>
+                <div style = {{color: '#FF0000', fontSize: '30px'}}>REMOVE ONCE SESSIONS IMPLEMENTED, WE NEED TO PUT IN INDIVIDUAL PEOPLE</div>
               <a href = "\details" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Dashboard (Customer)</a>
               <a href = "\editAccount" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Edit Account</a>
               <a href = "\editTruck" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Edit Truck</a>
