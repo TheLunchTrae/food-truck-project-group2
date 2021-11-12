@@ -61,61 +61,79 @@ class Signup extends Component {
     render() {
         return (
             <html>
-                <body style = {{backgroundColor: '#FFDAB9'}}>
-                    <div>
-                        <div class="sections" >
-                            <div class = "editTruck" style = {{alignContent: 'center', borderRadius: '100px', background: '#FA8072', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
-                                <form onSubmit={this.handleSubmit}>
-                                    <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Edit Your Truck</span>
+                <body style = {{backgroundColor: '#90AACB'}}>
 
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "menu" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Menu:</span>
-                                        <span id = "menuInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="menu" placeholder="Enter the Menu" value={this.state.menu} type="text" onChange={this.handleInputChange}/>
+                    <div name="menuBar" class="banner-area" style = {{ margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '100vh'}}>
+                        <div class="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
+                            <div class="navigation" style = {{height: '60px'}}>
+                                  <a href = "\" style = {{textDecoration: 'none', width: '20%', float: 'left', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
+                                    Food Truck Finder
+                                  </a>
+                                 <nav style = {{width: '75%', float: 'right', textAlign: 'right', padding: '30px 0 0', fontSize: '1rem'}}>
+                                    <a href = "\signup" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Sign Up</a>
+                                    <a href = "\login" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Log In</a>
+                                    <a href = "\search" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Search</a>
+                                    <a href = "\dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Dashboard</a>
+                                    <a href = "\about" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>About</a>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="sections" >
+                                <div class = "editTruck" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+                                    <form onSubmit={this.handleSubmit}>
+                                        <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Edit Your Truck</span>
+
+                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                            <span class = "menu" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Menu:</span>
+                                            <span id = "menuInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                                <input name="menu" placeholder="Enter the Menu" value={this.state.menu} type="text" onChange={this.handleInputChange}/>
+                                            </span>
+                                        </div>
+
+                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                            <span class = "truckName" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
+                                            <span id = "truckName" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                                <input name="truckName" placeholder="Enter the Truck Name" value={this.state.truckName} type="text" onChange={this.handleInputChange}/>
+                                            </span>
+                                        </div>
+
+                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                            <span class = "description" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Description:</span>
+                                            <span id = "descriptionInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                                <input name="description" placeholder="Enter the Description" value={this.state.description} type="text" onChange={this.handleInputChange}/>
+                                            </span>
+                                        </div>
+
+                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                            <span class = "details" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Details:</span>
+                                            <span id = "detailsInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                                <input name="details" placeholder="Enter the Details" value={this.state.details} type="text" onChange={this.handleInputChange}/>
+                                            </span>
+                                        </div>
+
+                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                            <span class = "route" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Route:</span>
+                                            <span id = "routeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                                <input name="route" placeholder="Enter the Route" value={this.state.route} type="text" onChange={this.handleInputChange}/>
+                                            </span>
+                                        </div>
+
+                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                            <span class = "schedule" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Schedule:</span>
+                                            <span id = "scheduleInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                                <input name="schedule" placeholder="Enter the Schedule" value={this.state.schedule} type="text" onChange={this.handleInputChange}/>
+                                            </span>
+                                        </div>
+
+                                        <br></br>
+
+                                        <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                            <input type="submit" value="Submit"/>
                                         </span>
-                                    </div>
-
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "truckName" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
-                                        <span id = "truckName" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="truckName" placeholder="Enter the Truck Name" value={this.state.truckName} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "description" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Description:</span>
-                                        <span id = "descriptionInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="description" placeholder="Enter the Description" value={this.state.description} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "details" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Details:</span>
-                                        <span id = "detailsInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="details" placeholder="Enter the Details" value={this.state.details} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "route" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Route:</span>
-                                        <span id = "routeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="route" placeholder="Enter the Route" value={this.state.route} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "schedule" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Schedule:</span>
-                                        <span id = "scheduleInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="schedule" placeholder="Enter the Schedule" value={this.state.schedule} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-
-                                    <br></br>
-
-                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <input type="submit" value="Submit"/>
-                                    </span>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
