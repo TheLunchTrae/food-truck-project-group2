@@ -7,7 +7,7 @@ class Dashboard extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { name: '' };
+        this.state = { name: '', foodPref: '', locPref: '', ratingPref: '' };
         
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -18,6 +18,10 @@ class Dashboard extends Component {
     handleSubmit(event) {
     }
     componentDidMount() {
+
+        // THIS IS TEMPORARY UNTIL BACKEND IMPLEMENT
+        this.setState({foodPref: "No Value Set", locPref: "No Location Set", ratingPref: "No Rating Set"});
+
         // gets the id from the url and sets it to the state
         const queryString = window.location.search;
         console.log(queryString);
@@ -36,15 +40,15 @@ class Dashboard extends Component {
     render() {
         return (
             <html>
-                <body style = {{backgroundColor: '#FFDAB9', marginLeft: '35px'}}>
+                <body style = {{backgroundColor: '#90AACB', marginLeft: '35px'}}>
                     <div>
                         <div style={{fontWeight: '500'}}>
-                            <h1 class = "heading" style = {{marginBottom: '0px', fontSize: '2.3rem', color: '#0F52BA'}}>Dashboard</h1>
-                            <p style = {{marginTop: '0px', fontSize: '1.3rem', color: '#002366'}}>Welcome to the Food Truck Finder Dashboard!</p>
+                            <h1 class = "heading" style = {{marginBottom: '0px', fontSize: '2.3rem', color: '#000000'}}>Dashboard</h1>
+                            <p style = {{marginTop: '0px', fontSize: '1.3rem', color: '#FFFFFF'}}>Welcome to the Food Truck Finder Dashboard!</p>
                         </div>
 
                         <div class = "sections">
-                            <div class = "userSection" style = {{float: 'left', borderRadius: '100px', background: '#FA8072', width: '25%', padding: '20px', display: 'inline-block', border: '3px solid black'}}>
+                            <div class = "userSection" style = {{float: 'left', borderRadius: '100px', background: '#F9D5A7', width: '25%', padding: '20px', display: 'inline-block', border: '3px solid black'}}>
                                 <div>
                                     <span style = {{height: '100px', width: '100px', background: '#bbbbbb', borderRadius: '50%', display: 'block', zIndex: '99', margin: '0 auto'}}></span>
                                     <span class = "userName" style = {{color: '#0F52BA', display: 'block', fontSize: '1.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}>{ this.state.name }</span>
@@ -54,11 +58,11 @@ class Dashboard extends Component {
                                     <span class = "userType" style = {{color: '#002366', display: 'block', fontSize: '1rem', textAlign: 'center', margin: '20px 0'}}>Notification1</span>
                                     <span class = "userType" style = {{color: '#002366', display: 'block', fontSize: '1rem', textAlign: 'center', margin: '20px 0'}}>Notification2</span>
                                     <span class = "userType" style = {{color: '#002366', display: 'block', fontSize: '1rem', textAlign: 'center', margin: '20px 0'}}>Notification3</span>
-                                    <a href="/createTruck">Create Truck</a>
+                                    <a href="/createTruck" style = {{display: 'block', fontSize: '1rem', textAlign: 'center', margin: '20px 0'}}>Create Truck</a>
                                 </div>
                             </div>
 
-                            <div class = "tableSection" style = {{marginLeft: '55px', float: 'left', borderRadius: '100px', background: '#FA8072', width: '65%', padding: '15px', display: 'inline-block', border: '3px solid black'}}>
+                            <div class = "tableSection" style = {{marginLeft: '55px', float: 'left', borderRadius: '100px', background: '#F9D5A7', width: '65%', padding: '15px', display: 'inline-block', border: '3px solid black'}}>
 
                                 <span class = "userName" style = {{color: '#000000', display: 'block', fontSize: '2rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}><u>Subscriptions</u></span>
 
@@ -95,6 +99,54 @@ class Dashboard extends Component {
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+
+                            <div class = "tableSection" style = {{marginLeft: '55px', float: 'left', borderRadius: '100px', background: '#F9D5A7', width: '55%', padding: '15px', display: 'inline-block', border: '3px solid black'}}>
+
+                                <span class = "userName" style = {{color: '#000000', display: 'block', fontSize: '2rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}><u>Preferences</u></span>
+
+                                <form onSubmit={this.handleSubmit}>
+
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                         <label>
+                                             <span class = "foodPref" style = {{color: '#0F52BA', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Food Preference:</span>
+                                         </label>
+                                         <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                             <input  name="password" placeholder={this.state.foodPref} value={this.state.foodPref} onChange={this.handleInputChange}/>
+                                         </span>
+                                    </div>
+
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                         <label>
+                                             <span class = "locPref" style = {{color: '#0F52BA', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Location Preference:</span>
+                                         </label>
+                                         <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                             <input name="password" placeholder={this.state.locPref} value={this.state.locPref} onChange={this.handleInputChange}/>
+                                         </span>
+                                    </div>
+
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                         <label>
+                                             <span class = "ratingPref" style = {{color: '#0F52BA', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating Preference:</span>
+                                         </label>
+                                         <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                             <select name="usertype">
+                                                <option value="" selected disabled hidden>N/A</option>
+                                                 <option value="1">***** (5)</option>
+                                                 <option value="2">**** (4)</option>
+                                                 <option value="3">*** (3)</option>
+                                                <option value="4">** (2)</option>
+                                                <option value="5">* (1)</option>
+                                             </select>
+                                         </span>
+                                    </div>
+
+                                    <br></br>
+
+                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <input type="submit" value="Login"/>
+                                    </span>
+                                </form>
                             </div>
                         </div>
                     </div>

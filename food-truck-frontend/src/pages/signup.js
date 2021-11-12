@@ -51,21 +51,21 @@ class Signup extends Component {
             <html>
                 <body style = {{backgroundColor: '#90AACB'}}>
                     <div>
-                        <div class="sections" >
-                            <div class = "signup" style = {{alignContent: 'center', borderRadius: '100px', background: 'none', width: '30%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+                        <div class="sections">
+                            <div class = "signup" style = {{backgroundColor: '#F9D5A7', alignContent: 'center', borderRadius: '100px', width: '30%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
                                 <form onSubmit={this.handleSubmit}>
 
                                     <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Sign Up</span>
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "username" style = {{color: '#ffffff', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Username:</span>
+                                        <span class = "username" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Username:</span>
                                         <span id = "usernameInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
                                             <input name="username" placeholder="Enter a Username" value={this.state.username} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                     </div>
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "email" style = {{color: '#ffffff', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Email:</span>
+                                        <span class = "email" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Email:</span>
                                         <span id = "emailInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
                                             <input name="email" pattern=".*@.*\..*" title="Must be in valid email format" placeholder="Enter an email" value={this.state.email} type="text" onChange={this.handleInputChange}/>
                                         </span>
@@ -73,17 +73,16 @@ class Signup extends Component {
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <label>
-                                            <span class = "password" style = {{color: '#ffffff', fontSize: '1.4rem',fontWeight: 'bold', marginTop: '5px'}}>Password:</span>
+                                            <span class = "password" style = {{color: '#000000', fontSize: '1.4rem',fontWeight: 'bold', marginTop: '5px'}}>Password:</span>
                                         </label>
                                         <span id = "passwordInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
                                             <input type="password" name="password" placeholder="Enter a password" value={this.state.password} onChange={this.handleInputChange}/>
                                         </span>
                                     </div>
 
-
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <label>
-                                            <span class = "userType" style = {{color: '#ffffff',      fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>User Type:</span>
+                                            <span class = "userType" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>User Type:</span>
                                         </label>
                                         <span id = "usertype" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
                                             <select name="usertype">

@@ -54,6 +54,14 @@ public class FoodTruckService {
         return truckRepository.findAllByOwnerId(ownerId);
     }
 
+    //TODO - add algorithm code here (i.e. replace "find all" trucks)
+    //Base algo on - food type, location, rating, & price preferences
+    public List<FoodTruck> getRecommendedTrucks(User user){
+        //add code here
+
+        return truckRepository.findAll();
+    }
+
     public FoodTruck getFoodTruckWithId(long id){
         return truckRepository.findByTruckId(id);
     }

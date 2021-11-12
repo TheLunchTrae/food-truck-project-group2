@@ -44,6 +44,18 @@ public class User {
     @Column(name = "TOKEN")
     String token;
 
+    @Column(name = "FOOD_TYPE_PREFERENCE")
+    String foodTypePreference;
+
+    @Column(name = "RATING_PREFERENCE")
+    Integer ratingPreference;
+
+    @Column(name = "PRICE_PREFERENCE")
+    Float pricePreference;
+
+    @Column(name = "LOCATION_PREFERENCE")
+    String locationPreference;
+
     public String toString() {
         return emailAddress + "," + password + "," + userType;
     }
