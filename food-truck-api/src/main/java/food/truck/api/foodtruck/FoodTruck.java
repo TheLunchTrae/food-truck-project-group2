@@ -81,7 +81,24 @@ public class FoodTruck {
         for (Integer i : ratings){
             sum += i;
         }
-        return sum / ratings.size();
+        if (ratings.size() > 0) {
+            return sum / ratings.size();
+        } else {
+            return 0;
+        }
+    }
+
+    //Return average price of the food items
+    public float averagePrice(){
+        int sum = 0;
+        for (FoodItem fi : menu){
+            sum += fi.getFoodItemPrice();
+        }
+        if (ratings.size() > 0) {
+            return sum / ratings.size();
+        } else {
+            return 0;
+        }
     }
 
     public String toString(){
