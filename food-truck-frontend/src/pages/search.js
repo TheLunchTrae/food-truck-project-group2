@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
 import ReactList from 'react-list';
 
@@ -15,13 +16,14 @@ class Search extends Component {
     handleSubmit(event) {
     }
     componentWillMount() {
-        this.state.foodTrucks = [{score: 7}, {score: 1}, {score: 8}, {score: 7}, {score: 10}, {score: 5}, {score: 4}, {score: 3}, {score: 2}, {score: 9}];
-        this.state.foodTrucks.sort(function(a, b) {return a.score - b.score});
+        Axios.get("http://localhost:8080/api/search/" + sessionStorage.getItem('token')).then(res => {
+            this.setState({ foodTrucks: res.data });
+        });
     }
     componentDidMount() {
     }
     itemRenderer(index, key) {
-        return <div key={key}>{this.state.foodTrucks[index].score}</div>;
+        return <div key={key}>{this.state.foodTrucks[index].name}</div>;
     }
     render() {
         return (

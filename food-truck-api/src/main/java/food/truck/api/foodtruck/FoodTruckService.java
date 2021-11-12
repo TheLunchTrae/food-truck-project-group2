@@ -3,9 +3,11 @@ package food.truck.api.foodtruck;
 import food.truck.api.other.FoodItem;
 import food.truck.api.user.User;
 import food.truck.api.user.UserRepository;
+import food.truck.api.other.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,9 +67,26 @@ public class FoodTruckService {
     //TODO - add algorithm code here (i.e. replace "find all" trucks)
     //Base algo on - food type, location, rating, & price preferences
     public List<FoodTruck> getRecommendedTrucks(User user){
-        //add code here
+        // list of all the food trucks with their recommended score
+        List<Pair<FoodTruck, Integer>> recList = new ArrayList<Pair<FoodTruck, Integer>>();
 
-        return truckRepository.findAll();
+        // add each food truck and initialize the score to 0
+        for (FoodTruck ft : truckRepository.findAll()) {
+            recList.add(new Pair<FoodTruck, Integer>(ft, 0));
+        }
+
+        // calculate the score for each truck
+        for (int i = 0; i < recList.size(); ++i) {
+
+        }
+
+        // convert to list
+        List<FoodTruck> resList = new ArrayList<FoodTruck>();
+        for (int i = 0; i < recList.size(); ++i) {
+            resList.add(recList.get(i).getL());
+        }
+
+        return resList;
     }
 
     public FoodTruck getFoodTruckWithId(long id){
