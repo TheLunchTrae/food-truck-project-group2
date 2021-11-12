@@ -68,16 +68,32 @@ public class FoodTruckService {
     //Base algo on - food type, location, rating, & price preferences
     public List<FoodTruck> getRecommendedTrucks(User user){
         // list of all the food trucks with their recommended score
-        List<Pair<FoodTruck, Integer>> recList = new ArrayList<Pair<FoodTruck, Integer>>();
+        List<Pair<FoodTruck, Float>> recList = new ArrayList<Pair<FoodTruck, Float>>();
 
         // add each food truck and initialize the score to 0
         for (FoodTruck ft : truckRepository.findAll()) {
-            recList.add(new Pair<FoodTruck, Integer>(ft, 0));
+            recList.add(new Pair<FoodTruck, Float>(ft, 0.0f));
         }
 
         // calculate the score for each truck
         for (int i = 0; i < recList.size(); ++i) {
+            // for each food type in the truck check if it matches a user preference
+            for (FoodItem fi : recList.get(i).getL().getMenu()) {
+                for (String pref : user.getFoodTypePreferences()) {
+                    if (pref == fi)
+                        recList.get(i).setR(recList.get(i).getR() + 1.0f);
+                }
+            }
 
+            // add score based on price
+            float priceScore = Math.abs(recList.get(i).getL().averagePrice() - user.getPricePreference());
+            if (1f / priceScore == Float.POSITIVE_INFINITY) {
+                priceScore = 1f;
+            }
+            else {
+                priceScore = 1f / priceScore;
+            }
+            recList.get(i).setR(recList.get(i).getR() + priceScore);
         }
 
         // convert to list

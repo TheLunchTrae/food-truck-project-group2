@@ -16,7 +16,7 @@ class Search extends Component {
     handleSubmit(event) {
     }
     componentWillMount() {
-        Axios.get("http://localhost:8080/api/search/" + sessionStorage.getItem('token')).then(res => {
+        Axios.get("http://localhost:8090/api/search/recommended", {headers: {'token': sessionStorage.getItem('token')}}).then(res => {
             this.setState({ foodTrucks: res.data });
         });
     }

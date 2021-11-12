@@ -78,9 +78,9 @@ public class FoodTruckController {
         }
     }
 
-    @GetMapping("/api/search/{id}")
+    @GetMapping("/api/search/recommended")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity getRecommendedTrucks(@PathVariable long id){
+    public ResponseEntity getRecommendedTrucks(@RequestHeader(name="token")Long id){
         User user = userService.getUserWithId(id);
         if (user != null){
             return ResponseEntity.ok()
