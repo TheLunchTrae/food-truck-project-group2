@@ -90,15 +90,15 @@ class Dashboard extends Component {
     render() {
         return (
         <html>
-            <body style = {{backgroundColor: '#FFDAB9', marginLeft: '35px'}}>
+            <body style = {{backgroundColor: '#90AACB', marginLeft: '35px'}}>
                 <div>
                     <div style={{fontWeight: '500'}}>
-                        <h1 class = "heading" style = {{marginBottom: '0px', fontSize: '2.3rem', color: '#0F52BA'}}>Dashboard</h1>
-                        <p style = {{marginTop: '0px', fontSize: '1.3rem', color: '#002366'}}>Welcome to the Food Truck Finder Dashboard!</p>
+                        <h1 class = "heading" style = {{marginBottom: '0px', fontSize: '2.3rem', color: '#000000'}}>Dashboard</h1>
+                        <p style = {{marginTop: '0px', fontSize: '1.3rem', color: '#FFFFFF'}}>Welcome to the Food Truck Finder Dashboard!</p>
                     </div>
 
                     <div class = "sections">
-                        <div class = "userSection" style = {{float: 'left', borderRadius: '100px', background: '#FA8072', width: '25%', padding: '20px', display: 'inline-block', border: '3px solid black'}}>
+                        <div class = "userSection" style = {{float: 'left', borderRadius: '100px', background: '#F9D5A7', width: '25%', padding: '20px', display: 'inline-block', border: '3px solid black'}}>
                             <div>
                                 <span style = {{height: '100px', width: '100px', background: '#bbbbbb', borderRadius: '50%', display: 'block', zIndex: '99', margin: '0 auto'}}></span>
                                 <span class = "userName" style = {{color: '#0F52BA', display: 'block', fontSize: '1.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}>{ this.state.name }</span>
@@ -111,7 +111,7 @@ class Dashboard extends Component {
                             </div>
                         </div>
 
-                        <div class = "tableSection" style = {{marginLeft: '55px', float: 'left', borderRadius: '100px', background: '#FA8072', width: '65%', padding: '15px', display: 'inline-block', border: '3px solid black'}}>
+                        <div class = "tableSection" style = {{marginLeft: '55px', float: 'left', borderRadius: '100px', background: '#F9D5A7', width: '65%', padding: '15px', display: 'inline-block', border: '3px solid black'}}>
 
                             <span class = "userName" style = {{color: '#000000', display: 'block', fontSize: '2rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}><u>Your Trucks</u></span>
 
