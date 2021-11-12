@@ -45,9 +45,6 @@ public class User {
     @Column(name="FOOD_TYPE_PREFERENCES")
     private List<String> foodTypePreferences;
 
-    @Column(name = "FOOD_TYPE_PREFERENCE")
-    String foodTypePreference;
-
     @Column(name = "RATING_PREFERENCE")
     Integer ratingPreference;
 
