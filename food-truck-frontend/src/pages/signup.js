@@ -51,7 +51,7 @@ class Signup extends Component {
             <html>
                 <body style = {{backgroundColor: '#90AACB'}}>
                     <div>
-                        <div class="sections" >
+                        <div class="sections">
                             <div class = "signup" style = {{backgroundColor: '#F9D5A7', alignContent: 'center', borderRadius: '100px', width: '30%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
                                 <form onSubmit={this.handleSubmit}>
 
@@ -79,7 +79,6 @@ class Signup extends Component {
                                             <input type="password" name="password" placeholder="Enter a password" value={this.state.password} onChange={this.handleInputChange}/>
                                         </span>
                                     </div>
-
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <label>
