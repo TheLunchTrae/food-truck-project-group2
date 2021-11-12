@@ -41,8 +41,8 @@ public class User {
     @Column(name = "SIGNUP_DATE")
     Date signupDate;
 
-    @Column(name = "USER_TOKEN")
-    String userToken;
+    @Column(name = "TOKEN")
+    String token;
 
     public String toString() {
         return emailAddress + "," + password + "," + userType;

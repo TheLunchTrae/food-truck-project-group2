@@ -1,5 +1,7 @@
 package food.truck.api.foodtruck;
 
+import food.truck.api.user.UserRepository;
+import food.truck.api.user.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +17,18 @@ public class FoodTruckController {
     private FoodTruckService foodTruckService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     public FoodTruckController(FoodTruckService foodTruckService){
         this.foodTruckService = foodTruckService;
     }
 
     @PostMapping("/api/addTruck")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, @CookieValue(value="userId", defaultValue="-1") Long userId){
+    public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, @RequestHeader(name="token")Long token){
         FoodTruck postFoodTruck;
-        foodTruck.setOwnerId(userId);
+        foodTruck.setOwnerId(token);
         //NOTE - MUST HAVE OWNER ID SET ON THE FRONT END!!!!!!
         if ((postFoodTruck = foodTruckService.addFoodTruck(foodTruck)) != null){
             return ResponseEntity.ok()

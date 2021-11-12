@@ -44,6 +44,8 @@ public class UserController {
         // hash the password
         user.setPassword(userService.hashPassword(user.getPassword()));
         user.setEmailAddress(user.getEmailAddress().toLowerCase());
+        user.setSignupDate(new java.sql.Date(new java.util.Date().getTime()));
+        user.setToken(userService.generateUserToken(user));
         //Check if successfully saved - will fail if username or email already exists in database
         User postUser = userService.saveUser(user);
 
@@ -52,9 +54,6 @@ public class UserController {
             return ResponseEntity.ok()
                     .body("Account Already Exists With This Email or Username");
         } else {
-            user.setSignupDate(new java.sql.Date(new java.util.Date().getTime()));
-            postUser.setUserToken(userService.generateUserToken(user));
-
             return ResponseEntity.ok()
                     .body("Successful Signup!");
         }
@@ -64,13 +63,13 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity loginUser(@RequestBody User user, HttpServletResponse response) throws NoSuchAlgorithmException {
         // hash the password=
-        User postUser;
         user.setPassword(userService.hashPassword(user.getPassword()));
 
-        if ((postUser = userService.loginUser(user)) != null) {
+        String token;
+        if ((token = userService.loginUser(user)) != null) {
             return ResponseEntity.ok()
-                    .header("userToken", postUser.getUserToken())
-                    .header("Access-Control-Expose-Headers", "userToken")
+                    .header("token", Long.toString(userService.findUser(token).getId()))
+                    .header("Access-Control-Expose-Headers", "token")
                     .body("Successful Login");
         } else {
             return ResponseEntity.ok()
@@ -78,7 +77,6 @@ public class UserController {
         }
     }
 
-    //TODO - change later - fine for now
     @GetMapping("/api/details/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getUserNameWithId(@PathVariable long id){
@@ -87,7 +85,6 @@ public class UserController {
                 //.body(userService.getUserWithId(id));
     }
 
-    //URGENT TODO - figure out what exactly the backend should return
     @GetMapping("/api/dashboard/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getDashboardContents(@PathVariable long id){
@@ -108,7 +105,6 @@ public class UserController {
                 .body(dashboardData);
     }
 
-    //URGENT TODO - figure out what exactly the backend should return
     @PostMapping("/api/dashboard/modify")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyUser(@RequestBody Event event){

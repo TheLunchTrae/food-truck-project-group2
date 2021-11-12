@@ -25,7 +25,10 @@ class Signup extends Component {
         };
 
         //Post to URL
-        const val = axios.post("http://localhost:8090/api/dashboard/modify", userDto).then(res => {
+        const val = axios.post("http://localhost:8090/api/dashboard/modify", userDto, { 
+            headers: { 
+                'token': sessionStorage.getItem['token']
+            }}).then(res => {
             console.log(res);
         });
 
@@ -45,7 +48,11 @@ class Signup extends Component {
             this.setState({
                 username: res.data
             });
+        }).catch(e => {
+            console.log(e);
         });
+
+        console.log(val);
     }
     render() {
         return (

@@ -21,15 +21,21 @@ class Signup extends Component {
         //Object that will be passed containing the users information
         const truckDto = {
             menu: this.state.menu,
+            truckName: this.state.truckName,
             description: this.state.description,
             details: this.state.details,
             route: this.state.route,
             schedule: this.state.schedule,
-            truckName: this.state.truckName,
         };
 
+        console.log(truckDto);
+
         //Post to URL
-        const val = axios.post("http://localhost:8090/api/addTruck", truckDto).then(res => {
+        const val = axios.post("http://localhost:8090/api/addTruck", truckDto, {
+            headers : {
+                'token': sessionStorage.getItem('token')
+            }
+        }).then(res => {
             console.log(res);
             /*this.setState({
                 truckName: '',
@@ -41,6 +47,8 @@ class Signup extends Component {
             });
             */
         });
+
+        console.log(val);
 
         event.preventDefault()
     }

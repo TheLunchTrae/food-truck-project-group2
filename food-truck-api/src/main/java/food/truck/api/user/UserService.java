@@ -23,6 +23,8 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
+    public User findUser(String token) { return userRepository.findByToken(token); }
+
     // Hashes the input string and returns the hash
     public String hashPassword(String password) throws NoSuchAlgorithmException {
         // hash the password
@@ -37,8 +39,12 @@ public class UserService {
         return sb.toString();
     }
 
-    public User loginUser(User user){
-        return userRepository.findByEmailAddressAndPassword(user.getEmailAddress(),user.getPassword());
+    public String loginUser(User user){
+        User postUser;
+        if((postUser = userRepository.findByEmailAddressAndPassword(user.getEmailAddress(), user.getPassword())) != null){
+            return postUser.getToken();
+        }
+        return null;
     }
 
     public String generateUserToken(User user) throws NoSuchAlgorithmException {

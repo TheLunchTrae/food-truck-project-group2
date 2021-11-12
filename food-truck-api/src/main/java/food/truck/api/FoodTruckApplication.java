@@ -9,7 +9,6 @@ import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHtt
 //        scanBasePackages = {"food.truck.api"}
 //)
 @SpringBootApplication
-@EnableJdbcHttpSession
 public class FoodTruckApplication {
     public static void main(String[] args) {
         SpringApplication.run(FoodTruckApplication.class, args);
