@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.sql.Date;
 
 import food.truck.api.other.Event;
+import food.truck.api.other.Preferences;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +76,34 @@ public class UserService {
             System.out.println("finding user with id "+event.getUserId()+ " failed");
             return null;
         }
+        return user;
+    }
+
+    public User modifyUserPreferences(Preferences preferences){
+        User user;
+        if ((user = userRepository.findById(preferences.getUserId())) != null) {
+            //Set rating (if set - if rating is 0, it means don't change)
+            if (preferences.getRating() > 0){
+                user.setRatingPreference(preferences.getRating());
+            }
+            //Set price (if set - if price is 0, it means don't change)
+            if (preferences.getPrice() > 0){
+                user.setPricePreference(preferences.getPrice());
+            }
+            //Set food preference (if set)
+            if (preferences.getFoodType() != null && preferences.getFoodType().length() > 0){
+                user.setFoodTypePreference(preferences.getFoodType());
+            }
+            //Set location preference (if set)
+            if (preferences.getLocation() != null && preferences.getLocation().length() > 0){
+                user.setLocationPreference(preferences.getLocation());
+            }
+        } else {
+            System.out.println("finding user with id "+preferences.getUserId()+ " failed");
+            return null;
+        }
+        //Save the modified user
+        userRepository.save(user);
         return user;
     }
 
