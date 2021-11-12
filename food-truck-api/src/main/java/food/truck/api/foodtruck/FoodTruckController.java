@@ -1,5 +1,7 @@
 package food.truck.api.foodtruck;
 
+import food.truck.api.user.User;
+import food.truck.api.user.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,12 @@ import javax.servlet.http.HttpSession;
 @Log4j2
 @RestController
 public class FoodTruckController {
+    private UserService userService;
     private FoodTruckService foodTruckService;
 
     @Autowired
-    public FoodTruckController(FoodTruckService foodTruckService){
+    public FoodTruckController(UserService userService, FoodTruckService foodTruckService){
+        this.userService = userService;
         this.foodTruckService = foodTruckService;
     }
 
@@ -75,6 +79,20 @@ public class FoodTruckController {
             return ResponseEntity.ok()
                     .body("Failed to find food truck with id");
         }
-
     }
+
+    @GetMapping("/api/search/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity getRecommendedTrucks(@PathVariable long id){
+        User user = userService.getUserWithId(id);
+        if (user != null){
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .body(foodTruckService.getRecommendedTrucks(user));
+        } else {
+            return ResponseEntity.ok()
+                    .body("Failed to find user with id");
+        }
+    }
+
 }

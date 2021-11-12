@@ -3,6 +3,7 @@ package food.truck.api.user;
 import food.truck.api.foodtruck.FoodTruckService;
 import food.truck.api.other.DashboardData;
 import food.truck.api.other.Event;
+import food.truck.api.other.Preferences;
 import food.truck.api.rating.Rating;
 import food.truck.api.subscription.Subscription;
 import org.apache.coyote.Response;
@@ -126,6 +127,20 @@ public class UserController {
         }
     }
 
+
+    @PostMapping("/api/dashboard/preferences")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity modifyUserPreferences(@RequestBody Preferences preferences){
+        User postUser;
+        if ((postUser = userService.modifyUserPreferences(preferences)) != null) {
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .body(postUser);
+        } else {
+            return ResponseEntity.ok()
+                    .body("User preference modification failed");
+        }
+    }
     //dash/board/addTruck is in FoodTruckController
 
 }
