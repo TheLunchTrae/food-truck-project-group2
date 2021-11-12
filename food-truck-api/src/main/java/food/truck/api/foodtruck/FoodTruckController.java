@@ -1,5 +1,6 @@
 package food.truck.api.foodtruck;
 
+import food.truck.api.other.FoodItem;
 import food.truck.api.user.User;
 import food.truck.api.user.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -49,6 +50,54 @@ public class FoodTruckController {
                     .body("Food truck modification failed");
         }
     }
+
+    //Call via editTruck frontend page
+    @PostMapping("/api/modifyTruck/menu/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity modifyFoodTruckMenuAddFoodItem(@RequestBody FoodItem foodItem, @PathVariable long id){
+        FoodTruck foodTruck;
+        if ((foodTruck = foodTruckService.getFoodTruckWithId(id)) != null){
+            foodTruck = foodTruckService.modifyFoodTruckMenuAddFoodItem(foodTruck, foodItem);
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .body(foodTruck);
+        } else {
+            return ResponseEntity.ok()
+                    .body("Failed to find food truck with id");
+        }
+    }
+    //Call via editTruck frontend page
+    @PostMapping("/api/modifyTruck/route/{id}")
+    public ResponseEntity modifyFoodTruckAddRouteLocation(@RequestBody String location, @PathVariable long id){
+        FoodTruck foodTruck;
+        if ((foodTruck = foodTruckService.getFoodTruckWithId(id)) != null){
+            foodTruck = foodTruckService.modifyFoodTruckAddRouteLocation(foodTruck, location);
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .body(foodTruck);
+        } else {
+            return ResponseEntity.ok()
+                    .body("Failed to find food truck with id");
+        }
+    }
+
+    //NOTE - don't need to call via front end for now (just test via postman)
+    @PostMapping("/api/addRating/{id}")
+    public ResponseEntity addRatingToFoodTruck(@RequestBody Integer rating, @PathVariable long id){
+        FoodTruck foodTruck;
+        if ((foodTruck = foodTruckService.getFoodTruckWithId(id)) != null){
+            foodTruck = foodTruckService.addRatingToFoodTruck(foodTruck, rating);
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .body(foodTruck);
+        } else {
+            return ResponseEntity.ok()
+                    .body("Failed to find food truck with id");
+        }
+    }
+
+
+
 
     @GetMapping("/api/getTruckName/{id}")
     @CrossOrigin(origins = "http://localhost:3000")

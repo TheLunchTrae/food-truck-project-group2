@@ -50,11 +50,35 @@ public class FoodTruckService {
             foodTruck.setMenu(foodTruckDiff.getMenu());
         }
         */
-        foodTruck.addFoodItem(new FoodItem("TEST_FOOD_NAME", (float) 7.99));
+        foodTruck.addFoodItem(new FoodItem("TEST_FOOD_TYPE","TEST_FOOD_NAME", (float) 7.99));
         if (foodTruckDiff.getDescription().length() > 0){
             foodTruck.setDescription(foodTruckDiff.getDescription());
         }
 
+        return truckRepository.save(foodTruck);
+    }
+
+    public FoodTruck modifyFoodTruckMenuAddFoodItem(FoodTruck foodTruck, FoodItem foodItem){
+        if (foodItem == null){
+            return null;
+        }
+        foodTruck.addFoodItem(foodItem);
+        return truckRepository.save(foodTruck);
+    }
+
+    public FoodTruck modifyFoodTruckAddRouteLocation(FoodTruck foodTruck, String location){
+        if (location == null){
+            return null;
+        }
+        foodTruck.addRouteLocation(location);
+        return truckRepository.save(foodTruck);
+    }
+
+    public FoodTruck addRatingToFoodTruck(FoodTruck foodTruck, Integer rating){
+        if (rating == null){
+            return null;
+        }
+        foodTruck.addRating(rating);
         return truckRepository.save(foodTruck);
     }
 
