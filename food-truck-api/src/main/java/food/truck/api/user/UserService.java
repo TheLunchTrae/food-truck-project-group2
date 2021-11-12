@@ -3,6 +3,7 @@ package food.truck.api.user;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
 import java.sql.Date;
 
@@ -98,7 +99,12 @@ public class UserService {
             }
             //Set food preference (if set)
             if (preferences.getFoodType() != null && preferences.getFoodType().length() > 0){
-                user.setFoodTypePreference(preferences.getFoodType());
+                //user.setFoodTypePreference(preferences.getFoodType());
+
+                //Add user preference
+                List<String> foodTypePreferences = user.getFoodTypePreferences();
+                foodTypePreferences.add(preferences.getFoodType());
+                user.setFoodTypePreferences(foodTypePreferences);
             }
             //Set location preference (if set)
             if (preferences.getLocation() != null && preferences.getLocation().length() > 0){

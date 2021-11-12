@@ -1,15 +1,12 @@
 package food.truck.api.user;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 
 import java.sql.Date;
+import java.util.List;
+import java.util.Map;
 
 @Data
 @Entity
@@ -43,6 +40,10 @@ public class User {
 
     @Column(name = "TOKEN")
     String token;
+
+    @ElementCollection
+    @Column(name="FOOD_TYPE_PREFERENCES")
+    private List<String> foodTypePreferences;
 
     @Column(name = "FOOD_TYPE_PREFERENCE")
     String foodTypePreference;

@@ -39,8 +39,8 @@ public class RepositoryTest {
     private void initializeFoodTruck(){
         foodTruck = new FoodTruck();
         foodTruck.setTruckName("truckName");
-        foodTruck.setRoute("route");
-        foodTruck.setMenu("menu");
+        //foodTruck.setRoute("route");
+        //foodTruck.setMenu("menu");
         foodTruck.setSchedule("schedule");
         foodTruck.setDescription("description");
     }

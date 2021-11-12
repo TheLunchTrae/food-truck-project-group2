@@ -1,5 +1,6 @@
 package food.truck.api.foodtruck;
 
+import food.truck.api.other.FoodItem;
 import food.truck.api.user.User;
 import food.truck.api.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +23,32 @@ public class FoodTruckService {
     }
 
     public FoodTruck addFoodTruck(FoodTruck foodTruck){
+        System.out.println(foodTruck);
         return truckRepository.save(foodTruck);
     }
 
+    //TODO - add custom way to add routes & food items
     public FoodTruck modifyFoodTruck(FoodTruck foodTruckDiff){
         FoodTruck foodTruck = truckRepository.findByTruckId(foodTruckDiff.getTruckId());
         if (foodTruck == null){
             return null;
         }
-
         //Change based on whether there was any input
+        /*
         if (foodTruckDiff.getRoute().length() > 0){
             foodTruck.setRoute(foodTruckDiff.getRoute());
         }
+        */
+        foodTruckDiff.addRouteLocation("TEST_LOCATION");
         if (foodTruckDiff.getSchedule().length() > 0){
             foodTruck.setSchedule(foodTruckDiff.getSchedule());
         }
+        /*
         if (foodTruckDiff.getMenu().length() > 0){
             foodTruck.setMenu(foodTruckDiff.getMenu());
         }
+        */
+        foodTruckDiff.addFoodItem(new FoodItem("TEST_FOOD_NAME", (float) 7.99));
         if (foodTruckDiff.getDescription().length() > 0){
             foodTruck.setDescription(foodTruckDiff.getDescription());
         }
