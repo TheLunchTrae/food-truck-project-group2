@@ -15,12 +15,13 @@ class Search extends Component {
     handleSubmit(event) {
     }
     componentWillMount() {
-        this.state.foodTrucks = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+        this.state.foodTrucks = [{score: 7}, {score: 1}, {score: 8}, {score: 7}, {score: 10}, {score: 5}, {score: 4}, {score: 3}, {score: 2}, {score: 9}];
+        this.state.foodTrucks.sort(function(a, b) {return a.score - b.score});
     }
     componentDidMount() {
     }
     itemRenderer(index, key) {
-        return <div key={key}>{this.state.foodTrucks[index].name}</div>;
+        return <div key={key}>{this.state.foodTrucks[index].score}</div>;
     }
     render() {
         return (
@@ -33,7 +34,7 @@ class Search extends Component {
                                 <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Search</span>
 
                                 <div style={{maxHeight: 100, overflow: 'auto'}}>
-                                    <ReactList length={this.state.foodTrucks.length} type='uniform' />
+                                    <ReactList itemRenderer = {this.itemRenderer} length={this.state.foodTrucks.length} type='uniform' />
                                 </div>
                             </div>
                         </div>
