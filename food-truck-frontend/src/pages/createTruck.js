@@ -63,10 +63,10 @@ class Signup extends Component {
     render() {
         return (
             <html>
-                <body style = {{backgroundColor: '#FFDAB9'}}>
+                <body style = {{backgroundColor: '#90AACB'}}>
                     <div>
                         <div class="sections" >
-                            <div class = "createTruck" style = {{alignContent: 'center', borderRadius: '100px', background: '#FA8072', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+                            <div class = "createTruck" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
                                 <form onSubmit={this.handleSubmit}>
                                     <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Create A New Truck</span>
 

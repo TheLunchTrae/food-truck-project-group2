@@ -7,9 +7,12 @@ class Dashboard extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { name: '', foodPref: '', locPref: '', ratingPref: '' };
+        this.state = { name: '' };
+        //this.state = { name: '', foodPref: '', locPref: '', ratingPref: '' };
         
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChangeStatus(event) {
     }
@@ -19,8 +22,6 @@ class Dashboard extends Component {
     }
     componentDidMount() {
 
-        // THIS IS TEMPORARY UNTIL BACKEND IMPLEMENT
-        this.setState({foodPref: "No Value Set", locPref: "No Location Set", ratingPref: "No Rating Set"});
 
         // gets the id from the url and sets it to the state
         const queryString = window.location.search;
@@ -101,7 +102,7 @@ class Dashboard extends Component {
                                 </table>
                             </div>
 
-                            <div class = "tableSection" style = {{marginLeft: '55px', float: 'left', borderRadius: '100px', background: '#F9D5A7', width: '55%', padding: '15px', display: 'inline-block', border: '3px solid black'}}>
+                            <div class = "tableSection" style = {{marginLeft: '55px', marginTop: '55px', marginBottom: '55px', float: 'left', borderRadius: '100px', background: '#F9D5A7', width: '55%', padding: '15px', display: 'inline-block', border: '3px solid black'}}>
 
                                 <span class = "userName" style = {{color: '#000000', display: 'block', fontSize: '2rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px'}}><u>Preferences</u></span>
 
@@ -112,7 +113,7 @@ class Dashboard extends Component {
                                              <span class = "foodPref" style = {{color: '#0F52BA', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Food Preference:</span>
                                          </label>
                                          <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                             <input  name="password" placeholder={this.state.foodPref} value={this.state.foodPref} onChange={this.handleInputChange}/>
+                                             <input name="password" placeholder="Food Preference" value={this.state.foodPref} type="text" onChange={this.handleInputChange}/>
                                          </span>
                                     </div>
 
@@ -121,7 +122,7 @@ class Dashboard extends Component {
                                              <span class = "locPref" style = {{color: '#0F52BA', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Location Preference:</span>
                                          </label>
                                          <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                             <input name="password" placeholder={this.state.locPref} value={this.state.locPref} onChange={this.handleInputChange}/>
+                                             <input name="email" placeholder="Location Preference" value={this.state.locPref} type="text" onChange={this.handleInputChange}/>
                                          </span>
                                     </div>
 

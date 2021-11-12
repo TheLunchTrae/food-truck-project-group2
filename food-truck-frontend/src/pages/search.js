@@ -33,7 +33,7 @@ class Search extends Component {
 
                                 <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Search</span>
 
-                                <div style={{maxHeight: 100, overflow: 'auto'}}>
+                                <div style={{marginLeft: '100px', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
                                     <ReactList itemRenderer = {this.itemRenderer} length={this.state.foodTrucks.length} type='uniform' />
                                 </div>
                             </div>
