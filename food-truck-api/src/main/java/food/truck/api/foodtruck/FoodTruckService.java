@@ -7,9 +7,7 @@ import food.truck.api.other.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class FoodTruckService {
@@ -104,7 +102,7 @@ public class FoodTruckService {
             // for each food type in the truck check if it matches a user preference
             for (FoodItem fi : recList.get(i).getL().getMenu()) {
                 for (String pref : user.getFoodTypePreferences()) {
-                    if (pref == fi)
+                    if (pref == fi.getFoodType())
                         recList.get(i).setR(recList.get(i).getR() + 1.0f);
                 }
             }
@@ -118,7 +116,25 @@ public class FoodTruckService {
                 priceScore = 1f / priceScore;
             }
             recList.get(i).setR(recList.get(i).getR() + priceScore);
+
+            // add score based on rating
+            float ratingScore = Math.abs(recList.get(i).getL().averageRating() - user.getRatingPreference());
+            if (1f / ratingScore == Float.POSITIVE_INFINITY) {
+                ratingScore = 1f;
+            }
+            else {
+                ratingScore = 1f / ratingScore;
+            }
+            recList.get(i).setR(recList.get(i).getR() + ratingScore);
         }
+
+        // sort by score
+        Collections.sort(recList, new Comparator<Pair<FoodTruck, Float>>() {
+            @Override
+            public int compare(Pair<FoodTruck, Float> o1, Pair<FoodTruck, Float> o2) {
+                return o1.getR() > o2.getR() ? 1 : o1.getR() < o2.getR() ? -1 : 0;
+            }
+        });
 
         // convert to list
         List<FoodTruck> resList = new ArrayList<FoodTruck>();
