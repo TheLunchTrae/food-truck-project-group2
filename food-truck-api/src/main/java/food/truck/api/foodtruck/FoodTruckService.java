@@ -41,7 +41,7 @@ public class FoodTruckService {
             foodTruck.setRoute(foodTruckDiff.getRoute());
         }
         */
-        foodTruckDiff.addRouteLocation("TEST_LOCATION");
+        foodTruck.addRouteLocation("TEST_LOCATION");
         if (foodTruckDiff.getSchedule().length() > 0){
             foodTruck.setSchedule(foodTruckDiff.getSchedule());
         }
@@ -50,7 +50,7 @@ public class FoodTruckService {
             foodTruck.setMenu(foodTruckDiff.getMenu());
         }
         */
-        foodTruckDiff.addFoodItem(new FoodItem("TEST_FOOD_NAME", (float) 7.99));
+        foodTruck.addFoodItem(new FoodItem("TEST_FOOD_NAME", (float) 7.99));
         if (foodTruckDiff.getDescription().length() > 0){
             foodTruck.setDescription(foodTruckDiff.getDescription());
         }
