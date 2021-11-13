@@ -21,11 +21,13 @@ class Search extends Component {
                 'token': sessionStorage.getItem('token')
             }
         }).then(res => {
-            this.setState({ foodTrucks: res.data.name });
+            console.log(res.data);
+            const foodTrucks = res.data.map(obj => ({truckName: obj.truckName}));
+            this.setState({ foodTrucks });
         });
     }
     itemRenderer(index, key) {
-        return <div key={key}>{this.state.foodTrucks[index].name}</div>;
+        return <div key={key}>{this.state.foodTrucks[index].truckName}</div>;
     }
     render() {
         return (

@@ -136,7 +136,7 @@ public class FoodTruckService {
         Collections.sort(recList, new Comparator<Pair<FoodTruck, Float>>() {
             @Override
             public int compare(Pair<FoodTruck, Float> o1, Pair<FoodTruck, Float> o2) {
-                return o1.getR() > o2.getR() ? 1 : o1.getR() < o2.getR() ? -1 : 0;
+                return o1.getR() < o2.getR() ? 1 : o1.getR() > o2.getR() ? -1 : 0;
             }
         });
 
