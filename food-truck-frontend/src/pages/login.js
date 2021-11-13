@@ -8,7 +8,7 @@ class Login extends Component {
         this.state = {email: '', password: ''};
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     handleInputChange(event) {
@@ -33,6 +33,11 @@ class Login extends Component {
         event.preventDefault()
        // window.location.href = "/search";
     }
+
+    componentDidMount(){
+        if(loginService.isUserLoggedIn) window.location.href="/dashboard";
+    }
+
     render() {
         return (
             <html>

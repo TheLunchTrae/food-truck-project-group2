@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Signup extends Component {
+class CreateTruck extends Component {
     constructor(props) {
         super();
         //this.state = { truckName: '', route: '', schedule: '', menu: '', description: '', details: ''};
@@ -114,4 +114,4 @@ class Signup extends Component {
         );
     }
 }
-export default Signup;
+export default CreateTruck;

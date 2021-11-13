@@ -10,6 +10,16 @@ function MenuBar(props) {
     return <NotLoggedIn />;
 }
 
+function GetUser(token) {
+    axios.get('http://localhost:8090/api/username', {
+        headers: {
+            'token': sessionStorage.getItem('token')
+        }
+    }).then(res => {
+        return res.data;
+    })
+}
+
 function LoggedIn(props){
     return (
             <div name="menuBar" class="banner-area" style = {{ margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '8vh'}}>
@@ -19,8 +29,9 @@ function LoggedIn(props){
                             Food Truck Finder
                         </a>
                         <nav style = {{width: '75%', float: 'right', textAlign: 'right', padding: '30px 0 0', fontSize: '1rem'}}>
-                            <a href = "\signup" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Sign Up</a>
-                            <a href = "\login" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Log In</a>
+                            <a href = "\dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>
+                                {GetUser(props.token)}
+                            </a>
                             <a href = "\search" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Search</a>
                             <a href = "\dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Dashboard</a>                                <a href = "\about" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>About</a>
                         </nav>
@@ -47,7 +58,7 @@ function NotLoggedIn(props){
                 </div>
             </div>
         </div>
-);
+    );
 }
 
 export default MenuBar

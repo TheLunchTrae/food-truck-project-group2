@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
 
 @Log4j2
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     private UserService userService;
     private FoodTruckService foodTruckService;
@@ -39,7 +40,6 @@ public class UserController {
     }
 
     @PostMapping("/api/signup")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity signupUser(@RequestBody User user) throws NoSuchAlgorithmException {
         // hash the password
         user.setPassword(userService.hashPassword(user.getPassword()));
@@ -60,7 +60,6 @@ public class UserController {
     }
 
     @PostMapping("/api/login")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity loginUser(@RequestBody User user, HttpServletResponse response) throws NoSuchAlgorithmException {
         // hash the password=
         user.setPassword(userService.hashPassword(user.getPassword()));
@@ -77,8 +76,12 @@ public class UserController {
         }
     }
 
+    @GetMapping("/api/username")
+    public String getUsername(@RequestHeader(name="token")Long userId) {
+        return userService.getUserNameWithId(userId);
+    }
+
     @GetMapping("/api/details/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getUserNameWithId(@PathVariable long id){
         return ResponseEntity.ok()
                 .body(userService.getUserNameWithId(id));
@@ -86,7 +89,6 @@ public class UserController {
     }
 
     @GetMapping("/api/dashboard/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getDashboardContents(@PathVariable long id){
         User user = userService.getUserWithId(id);
         DashboardData dashboardData = new DashboardData();
@@ -106,7 +108,6 @@ public class UserController {
     }
 
     @PostMapping("/api/dashboard/modify")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyUser(@RequestBody Event event){
         User postUser;
         if ((postUser = userService.modifyUser(event)) != null) {
@@ -123,9 +124,7 @@ public class UserController {
         }
     }
 
-
     @PostMapping("/api/dashboard/preferences")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyUserPreferences(@RequestBody Preferences preferences){
         User postUser;
         if ((postUser = userService.modifyUserPreferences(preferences)) != null) {
