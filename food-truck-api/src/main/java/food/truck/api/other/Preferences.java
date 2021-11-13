@@ -6,6 +6,6 @@ import lombok.Data;
 public class Preferences {
     private String foodType;
     private String location;
-    private int rating;
-    private float price;
+    private Integer rating;
+    private Float price;
 }

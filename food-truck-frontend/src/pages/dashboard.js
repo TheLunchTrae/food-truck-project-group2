@@ -6,14 +6,37 @@ import { FormatAlignLeftRounded } from '@material-ui/icons';
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: '', foodTruckData: [] };
+        this.state = { userId: '', name: '', foodTruckData: [] , foodTypePref: '', locationPref: '', ratingPref: 0, pricePref: 0};
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.handlePreferenceSubmit = this.handlePreferenceSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
     handleChangeStatus(event) {
     }
     handleInputChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        
+        this.setState({
+            [name]: value
+        });
     }
-    handleSubmit(event) {
+    handlePreferenceSubmit(event) {
+        const Preferences = {
+            foodType: this.state.foodTypePref,
+            location: this.state.locationPref,
+            rating: this.state.ratingPref,
+            price:  this.state.pricePref
+        };
+    
+        //Post to URL
+        const val = axios.post("http://localhost:8090/api/dashboard/preferences/", Preferences, {headers:{'userId': this.state.userId}}).then(res => {
+            console.log(res);
+        });
+
+        event.preventDefault()
+    
+    
     }
     componentDidMount() {
 
@@ -53,7 +76,7 @@ class Dashboard extends Component {
                 }
                 //alert(str);
 
-                this.setState({name: ownerName, foodTruckData: ftdata});
+                this.setState({userId: id, name: ownerName, foodTruckData: ftdata});
             })
             
         }
@@ -123,6 +146,44 @@ class Dashboard extends Component {
                                 <span class = "userType" style = {{color: '#002366', display: 'block', fontSize: '1rem', textAlign: 'center', margin: '20px 0'}}>Notification1</span>
                                 <span class = "userType" style = {{color: '#002366', display: 'block', fontSize: '1rem', textAlign: 'center', margin: '20px 0'}}>Notification2</span>
                                 <span class = "userType" style = {{color: '#002366', display: 'block', fontSize: '1rem', textAlign: 'center', margin: '20px 0'}}>Notification3</span>
+
+                                <span class = "userType" style = {{color: '#0F52BA', display: 'block', fontSize: '1.1rem', textAlign: 'center', margin: '20px 0', fontWeight: 'bold'}}><u>Preference Modification</u></span>
+                                
+                                <form id= "modify" onSubmit={this.handlePreferenceSubmit}>
+
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "foodTypePref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Food Type Preference:</span>
+                                        <span id = "foodTypeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="foodTypePref" value={this.state.foodTypePref} type="text" onChange={this.handleInputChange}/>
+                                        </span>
+                                    </div>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "locationPref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Location Preference:</span>
+                                        <span id = "locationInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="locationPref" value={this.state.locationPref} type="text" onChange={this.handleInputChange}/>
+                                        </span>
+                                    </div>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "ratingPref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating Preference:</span>
+                                        <span id = "ratingInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="ratingPref" value={this.state.ratingPref} type="text" onChange={this.handleInputChange}/>
+                                        </span>
+                                    </div>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "pricePref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Price Preference:</span>
+                                        <span id = "priceInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="pricePref" value={this.state.pricePref} type="text" onChange={this.handleInputChange}/>
+                                        </span>
+                                    </div>
+
+                                    <br></br>
+
+                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <input type="submit" value="Submit"/>
+                                    </span>
+                                </form>
+
+
                             </div>
                         </div>
 
