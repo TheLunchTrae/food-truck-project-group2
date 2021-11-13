@@ -6,7 +6,7 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = { foodTrucks: [] };
-        this.componentWillMount = this.componentWillMount.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
         this.itemRenderer = this.itemRenderer.bind(this);
     }
     handleChangeStatus(event) {
@@ -15,16 +15,13 @@ class Search extends Component {
     }
     handleSubmit(event) {
     }
-    componentWillMount() {
-        
-    }
     componentDidMount() {
         Axios.get("http://localhost:8090/api/search/recommended", {
             headers: {
                 'token': sessionStorage.getItem('token')
             }
         }).then(res => {
-            this.setState({ foodTrucks: res.data });
+            this.setState({ foodTrucks: res.data.name });
         });
     }
     itemRenderer(index, key) {
