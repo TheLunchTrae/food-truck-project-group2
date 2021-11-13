@@ -89,12 +89,12 @@ public class UserService {
     public User modifyUserPreferences(Preferences preferences, long id){
         User user;
         if ((user = userRepository.findById(id)) != null) {
-            //Set rating (if set - if rating is 0, it means don't change)
-            if (preferences.getRating() > 0){
+            //Set rating (if set)
+            if (preferences.getRating() != null){
                 user.setRatingPreference(preferences.getRating());
             }
-            //Set price (if set - if price is 0, it means don't change)
-            if (preferences.getPrice() > 0){
+            //Set price (if set)
+            if (preferences.getPrice() != null){
                 user.setPricePreference(preferences.getPrice());
             }
             //Set food preference (if set)
