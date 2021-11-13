@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Signup extends Component {
+class CreateTruck extends Component {
     constructor(props) {
         super();
         //this.state = { truckName: '', route: '', schedule: '', menu: '', description: '', details: ''};
@@ -32,21 +32,13 @@ class Signup extends Component {
         console.log(truckDto);
 
         //Post to URL
+        let token = sessionStorage.getItem('token');
         const val = axios.post("http://localhost:8090/api/addTruck", truckDto, {
-            headers : {
-                'token': sessionStorage.getItem('token')
+            headers: {
+                'token': token
             }
         }).then(res => {
             console.log(res);
-            /*this.setState({
-                truckName: '',
-                route: '',
-                schedule: '',
-                menu: '', 
-                description: '',
-                details: ''
-            });
-            */
         });
 
         console.log(val);
@@ -122,4 +114,4 @@ class Signup extends Component {
         );
     }
 }
-export default Signup;
+export default CreateTruck;

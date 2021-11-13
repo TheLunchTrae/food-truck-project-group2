@@ -16,11 +16,16 @@ class Search extends Component {
     handleSubmit(event) {
     }
     componentWillMount() {
-        Axios.get("http://localhost:8090/api/search/recommended", {headers: {'token': sessionStorage.getItem('token')}}).then(res => {
-            this.setState({ foodTrucks: res.data });
-        });
+        
     }
     componentDidMount() {
+        Axios.get("http://localhost:8090/api/search/recommended", {
+            headers: {
+                'token': sessionStorage.getItem('token')
+            }
+        }).then(res => {
+            this.setState({ foodTrucks: res.data });
+        });
     }
     itemRenderer(index, key) {
         return <div key={key}>{this.state.foodTrucks[index].name}</div>;

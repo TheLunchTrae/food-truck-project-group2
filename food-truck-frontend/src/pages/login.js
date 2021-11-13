@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import LoginService from '../documents/LoginService';
+import loginService from '../loginService';
 
 class Login extends Component {
     constructor(props) {
@@ -8,7 +8,7 @@ class Login extends Component {
         this.state = {email: '', password: ''};
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     handleInputChange(event) {
@@ -21,10 +21,10 @@ class Login extends Component {
     }
 
     handleSubmit(event) {
-        LoginService.doLogin(this.state.email, this.state.password)
+        loginService.doLogin(this.state.email, this.state.password)
         .then(res => {
             console.log(res);
-            LoginService.setToken(res.headers['token']);
+            loginService.setToken(res.headers['token']);
             window.Location.href="/dashboard";
         }).catch(e => {
             console.log(e);
@@ -33,6 +33,11 @@ class Login extends Component {
         event.preventDefault()
        // window.location.href = "/search";
     }
+
+    componentDidMount(){
+        if(loginService.isUserLoggedIn) window.location.href="/dashboard";
+    }
+
     render() {
         return (
             <html>

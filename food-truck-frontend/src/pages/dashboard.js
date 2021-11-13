@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './_app.js'
-import Axios from 'axios';
+import axios from 'axios';
 import { FormatAlignLeftRounded } from '@material-ui/icons';
 
 class Dashboard extends Component {
@@ -25,13 +25,13 @@ class Dashboard extends Component {
         var ownerName;
         if(id != null) {
             //First get owner's name from details
-            Axios.get("http://localhost:8090/api/details/" + id).then(res => {
+            axios.get("http://localhost:8090/api/details/" + id).then(res => {
                 console.log(res);
                 //this.setState({ name: res.data });
                 ownerName = res.data;
             })
             //Then get food truck data via dashbord data
-            Axios.get("http://localhost:8090/api/dashboard/" + id).then(res => {
+            axios.get("http://localhost:8090/api/dashboard/" + id).then(res => {
                 console.log(res);
 
                 var dashboardData = res.data;
