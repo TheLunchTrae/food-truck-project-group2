@@ -25,7 +25,7 @@ class Login extends Component {
         .then(res => {
             console.log(res);
             loginService.setToken(res.headers['token']);
-            window.Location.href="/dashboard";
+            window.location.href="/dashboard";
         }).catch(e => {
             console.log(e);
         });
@@ -35,7 +35,7 @@ class Login extends Component {
     }
 
     componentDidMount(){
-        if(loginService.isUserLoggedIn) window.location.href="/dashboard";
+        if(loginService.isUserLoggedIn()) { window.location.href="/dashboard"; }
     }
 
     render() {

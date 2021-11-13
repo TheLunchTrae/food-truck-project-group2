@@ -22,7 +22,7 @@ class LoginService {
 
     isUserLoggedIn() {
         let token = sessionStorage.getItem(USER_TOKEN)
-        if (token === null) return false
+        if (token === null) { return false }
         return true
     }
 }
