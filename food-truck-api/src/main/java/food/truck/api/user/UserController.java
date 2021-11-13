@@ -77,8 +77,8 @@ public class UserController {
     }
 
     @GetMapping("/api/username")
-    public String getUsername(@RequestHeader(name="token")Long userId) {
-        return userService.getUserNameWithId(userId);
+    public String getUsername(@RequestHeader(name="token")Long token) {
+        return userService.getUserNameWithId(token);
     }
 
     @GetMapping("/api/details/{id}")
