@@ -4,7 +4,8 @@ import axios from 'axios';
 class Signup extends Component {
     constructor(props) {
         super();
-        this.state = { truckName: '', route: '', schedule: '', menu: '', description: '', details: ''};
+        //this.state = { truckName: '', route: '', schedule: '', menu: '', description: '', details: ''};
+        this.state = { truckName: '', schedule: '', description: ''};
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -20,11 +21,11 @@ class Signup extends Component {
     handleSubmit(event) {
         //Object that will be passed containing the users information
         const truckDto = {
-            menu: this.state.menu,
+            //menu: this.state.menu,
             truckName: this.state.truckName,
             description: this.state.description,
-            details: this.state.details,
-            route: this.state.route,
+            //details: this.state.details,
+            //route: this.state.route,
             schedule: this.state.schedule,
         };
 
@@ -85,12 +86,6 @@ class Signup extends Component {
                                 <form onSubmit={this.handleSubmit}>
                                     <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Create A New Truck</span>
 
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "menu" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Menu:</span>
-                                        <span id = "menuInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="menu" placeholder="Enter the Menu" value={this.state.menu} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <span class = "truckName" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
@@ -103,20 +98,6 @@ class Signup extends Component {
                                         <span class = "description" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Description:</span>
                                         <span id = "descriptionInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
                                             <input name="description" placeholder="Enter the Description" value={this.state.description} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "details" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Details:</span>
-                                        <span id = "detailsInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="details" placeholder="Enter the Details" value={this.state.details} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "route" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Route:</span>
-                                        <span id = "routeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="route" placeholder="Enter the Route" value={this.state.route} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                     </div>
 
