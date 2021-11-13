@@ -124,10 +124,11 @@ public class UserController {
         }
     }
 
+    //TODO - double check this works especially with how I haven't tested sessions
     @PostMapping("/api/dashboard/preferences")
-    public ResponseEntity modifyUserPreferences(@RequestBody Preferences preferences){
+    public ResponseEntity modifyUserPreferences(@RequestBody Preferences preferences, @RequestHeader Long userId){
         User postUser;
-        if ((postUser = userService.modifyUserPreferences(preferences)) != null) {
+        if ((postUser = userService.modifyUserPreferences(preferences, userId)) != null) {
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
                     .body(postUser);
