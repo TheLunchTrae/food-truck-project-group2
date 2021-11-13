@@ -86,9 +86,9 @@ public class UserService {
         return user;
     }
 
-    public User modifyUserPreferences(Preferences preferences){
+    public User modifyUserPreferences(Preferences preferences, long id){
         User user;
-        if ((user = userRepository.findById(preferences.getUserId())) != null) {
+        if ((user = userRepository.findById(id)) != null) {
             //Set rating (if set - if rating is 0, it means don't change)
             if (preferences.getRating() > 0){
                 user.setRatingPreference(preferences.getRating());
@@ -111,7 +111,7 @@ public class UserService {
                 user.setLocationPreference(preferences.getLocation());
             }
         } else {
-            System.out.println("finding user with id "+preferences.getUserId()+ " failed");
+            System.out.println("finding user with id "+id+ " failed");
             return null;
         }
         //Save the modified user

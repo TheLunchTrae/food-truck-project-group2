@@ -124,11 +124,11 @@ public class UserController {
     }
 
 
-    @PostMapping("/api/dashboard/preferences")
+    @PostMapping("/api/dashboard/preferences/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity modifyUserPreferences(@RequestBody Preferences preferences){
+    public ResponseEntity modifyUserPreferences(@RequestBody Preferences preferences, @PathVariable long id){
         User postUser;
-        if ((postUser = userService.modifyUserPreferences(preferences)) != null) {
+        if ((postUser = userService.modifyUserPreferences(preferences, id)) != null) {
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
                     .body(postUser);

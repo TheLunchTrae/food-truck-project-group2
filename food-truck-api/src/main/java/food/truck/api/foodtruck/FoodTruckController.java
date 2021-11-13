@@ -1,6 +1,7 @@
 package food.truck.api.foodtruck;
 
 import food.truck.api.other.FoodItem;
+import food.truck.api.other.JSONWrapper;
 import food.truck.api.user.User;
 import food.truck.api.user.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -52,11 +53,13 @@ public class FoodTruckController {
     }
 
     //Call via editTruck frontend page
-    @PostMapping("/api/modifyTruck/menu/{id}")
+    @PostMapping("/api/modifyTruck/menu/")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity modifyFoodTruckMenuAddFoodItem(@RequestBody FoodItem foodItem, @PathVariable long id){
+    public ResponseEntity modifyFoodTruckMenuAddFoodItem(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
+        FoodItem foodItem = jsonWrapper.getFoodItem();
+
         FoodTruck foodTruck;
-        if ((foodTruck = foodTruckService.getFoodTruckWithId(id)) != null){
+        if ((foodTruck = foodTruckService.getFoodTruckWithId(truckID)) != null){
             foodTruck = foodTruckService.modifyFoodTruckMenuAddFoodItem(foodTruck, foodItem);
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
@@ -67,10 +70,14 @@ public class FoodTruckController {
         }
     }
     //Call via editTruck frontend page
-    @PostMapping("/api/modifyTruck/route/{id}")
-    public ResponseEntity modifyFoodTruckAddRouteLocation(@RequestBody String location, @PathVariable long id){
+    @PostMapping("/api/modifyTruck/route/")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity modifyFoodTruckAddRouteLocation(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
+        String location = jsonWrapper.getLocation();
+
+        System.out.println(location + ' '+ truckID);
         FoodTruck foodTruck;
-        if ((foodTruck = foodTruckService.getFoodTruckWithId(id)) != null){
+        if ((foodTruck = foodTruckService.getFoodTruckWithId(truckID)) != null){
             foodTruck = foodTruckService.modifyFoodTruckAddRouteLocation(foodTruck, location);
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
@@ -82,10 +89,13 @@ public class FoodTruckController {
     }
 
     //NOTE - don't need to call via front end for now (just test via postman)
-    @PostMapping("/api/addRating/{id}")
-    public ResponseEntity addRatingToFoodTruck(@RequestBody Integer rating, @PathVariable long id){
+    @PostMapping("/api/addRating/")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity addRatingToFoodTruck(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
+        Integer rating = jsonWrapper.getRating();
+
         FoodTruck foodTruck;
-        if ((foodTruck = foodTruckService.getFoodTruckWithId(id)) != null){
+        if ((foodTruck = foodTruckService.getFoodTruckWithId(truckID)) != null){
             foodTruck = foodTruckService.addRatingToFoodTruck(foodTruck, rating);
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
