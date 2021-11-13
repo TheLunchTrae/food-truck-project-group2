@@ -101,31 +101,35 @@ public class FoodTruckService {
         for (int i = 0; i < recList.size(); ++i) {
             // for each food type in the truck check if it matches a user preference
             for (FoodItem fi : recList.get(i).getL().getMenu()) {
-                for (String pref : user.getFoodTypePreferences()) {
-                    if (pref == fi.getFoodType())
-                        recList.get(i).setR(recList.get(i).getR() + 1.0f);
+                if (user.getFoodTypePreferences() != null) {
+                    for (String pref : user.getFoodTypePreferences()) {
+                        if (pref == fi.getFoodType())
+                            recList.get(i).setR(recList.get(i).getR() + 1.0f);
+                    }
                 }
             }
 
             // add score based on price
-            float priceScore = Math.abs(recList.get(i).getL().averagePrice() - user.getPricePreference());
-            if (1f / priceScore == Float.POSITIVE_INFINITY) {
-                priceScore = 1f;
+            if (user.getPricePreference() != null) {
+                float priceScore = Math.abs(recList.get(i).getL().averagePrice() - user.getPricePreference());
+                if (1f / priceScore == Float.POSITIVE_INFINITY) {
+                    priceScore = 1f;
+                } else {
+                    priceScore = 1f / priceScore;
+                }
+                recList.get(i).setR(recList.get(i).getR() + priceScore);
             }
-            else {
-                priceScore = 1f / priceScore;
-            }
-            recList.get(i).setR(recList.get(i).getR() + priceScore);
 
             // add score based on rating
-            float ratingScore = Math.abs(recList.get(i).getL().averageRating() - user.getRatingPreference());
-            if (1f / ratingScore == Float.POSITIVE_INFINITY) {
-                ratingScore = 1f;
+            if (user.getRatingPreference() != null) {
+                float ratingScore = Math.abs(recList.get(i).getL().averageRating() - user.getRatingPreference());
+                if (1f / ratingScore == Float.POSITIVE_INFINITY) {
+                    ratingScore = 1f;
+                } else {
+                    ratingScore = 1f / ratingScore;
+                }
+                recList.get(i).setR(recList.get(i).getR() + ratingScore);
             }
-            else {
-                ratingScore = 1f / ratingScore;
-            }
-            recList.get(i).setR(recList.get(i).getR() + ratingScore);
         }
 
         // sort by score
