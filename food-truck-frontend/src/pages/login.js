@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import LoginService from '../documents/LoginService';
+import loginService from '../loginService';
 
 class Login extends Component {
     constructor(props) {
@@ -21,10 +21,10 @@ class Login extends Component {
     }
 
     handleSubmit(event) {
-        LoginService.doLogin(this.state.email, this.state.password)
+        loginService.doLogin(this.state.email, this.state.password)
         .then(res => {
             console.log(res);
-            LoginService.setToken(res.headers['token']);
+            loginService.setToken(res.headers['token']);
             window.Location.href="/dashboard";
         }).catch(e => {
             console.log(e);
