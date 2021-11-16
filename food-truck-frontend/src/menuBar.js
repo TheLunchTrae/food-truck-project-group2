@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import loginService from './loginService';
 
-
-
-
 class MenuBar extends Component {
     constructor(props) {
         super(props);
@@ -30,14 +27,14 @@ class MenuBar extends Component {
     }
     
     LoggedIn(){
-        return (
-                <div name="menuBar" class="banner-area" style = {{ margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '8vh'}}>
+        return (    
+                <div name="menuBar" class="banner-area" style = {{margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '5vh'}}>
                     <div class="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
                         <div class="navigation" style = {{height: '60px'}}>
-                            <a href = "\" value='Food Truck Finder' style = {{textDecoration: 'none', width: '20%', float: 'left', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
-                                Food Truck Finder
-                            </a>
-                            <nav style = {{width: '75%', float: 'right', textAlign: 'right', padding: '30px 0 0', fontSize: '1rem'}}>
+                            <nav style = {{width: '75%', float: 'right', textAlign: 'center', padding: '30px 0 0', fontSize: '1rem'}}>
+                                <a href = "\\" style = {{textDecoration: 'none', marginRight: '10vw', padding: '15px 20px', fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
+                                    Food Truck Finder
+                                </a>
                                 <a href = "\dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>
                                     {this.state.username}
                                 </a>
@@ -53,7 +50,7 @@ class MenuBar extends Component {
     
     NotLoggedIn(){
         return (
-            <div name="menuBar" class="banner-area" style = {{ margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '8vh'}}>
+            <div name="menuBar" class="banner-area" style = {{ margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '5vh'}}>
                 <div class="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
                     <div class="navigation" style = {{height: '60px'}}>
                         <a href = "\" style = {{textDecoration: 'none', width: '20%', float: 'left', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
@@ -78,7 +75,11 @@ class MenuBar extends Component {
     }
 
     render(){
-        return this.renderType();
+        return (
+            <div name="menuBar" class="banner-area" style = {{ margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '7vh'}}>
+                {this.renderType()}
+            </div>
+        );
     }
 }
 export default MenuBar
