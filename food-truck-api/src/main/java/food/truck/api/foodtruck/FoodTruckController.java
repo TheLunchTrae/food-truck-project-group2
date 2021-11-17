@@ -149,7 +149,7 @@ public class FoodTruckController {
     }
 
     //TODO - add other search filters
-    @GetMapping("/api/search/{search}")
+    @GetMapping("/api/searchQuery/{search}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getTruckSearchResults(@PathVariable String search, @RequestHeader(name="token")Long id) {
         User user = userService.getUserWithId(id);
