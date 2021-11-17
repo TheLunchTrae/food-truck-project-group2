@@ -148,4 +148,18 @@ public class FoodTruckController {
         }
     }
 
+    //TODO - add other search filters
+    @GetMapping("/api/search/{search}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity getTruckSearchResults(@PathVariable String search, @RequestHeader(name="token")Long id) {
+        User user = userService.getUserWithId(id);
+        if (user != null) {
+            return ResponseEntity.ok()
+                .header("Content-Type", "application/json")
+                .body(foodTruckService.getTruckSearchResults(search));
+        } else {
+            return ResponseEntity.ok()
+                .body("Failed to find user with id");
+        }
+    }
 }
