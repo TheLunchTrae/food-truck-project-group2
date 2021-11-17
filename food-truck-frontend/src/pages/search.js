@@ -43,6 +43,18 @@ class Search extends Component {
 
                                 <div style={{marginLeft: '100px', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
                                     <ReactList itemRenderer = {this.itemRenderer} length={this.state.foodTrucks.length} type='uniform' />
+
+
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span id = "emailInput" style={{fontSize: '1.4rem', display: 'inline', marginLeft: '10px'}}>
+                                            <form action="/newPage.php">
+                                                <input type="text" placeholder="Search.." style = {{padding: '6px', marginTop: '8px', fontSize: '17px', border: 'none'}}/>
+                                                <button type="submit" style = {{float: 'right', padding: '6px', marginTop: '8px', marginRight: '16px', background: '#a9a9a9', fontSize: '17px', cursor: 'pointer', border: 'none'}}>Submit</button>
+                                            </form>
+                                        </span>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
