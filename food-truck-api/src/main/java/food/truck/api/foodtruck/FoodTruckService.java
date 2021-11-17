@@ -145,16 +145,19 @@ public class FoodTruckService {
     //Separate the string by space into separate lowercase strings for looser searching
         String[] searchStrings = searchText.toLowerCase().split(" ");
         List<FoodTruck> resList = new ArrayList<FoodTruck>();
+        boolean mayAdd;
         //Iterate over all trucks
         for (FoodTruck ft : truckRepository.findAll()){
+            mayAdd = true;
             String truckNameLowerCase = ft.getTruckName().toLowerCase();
-            //If truck name contains any search strings, add to list
+            //Truck name must contain all strings
             for (String string : searchStrings){
-                if (truckNameLowerCase.contains(string)){
-                    resList.add(ft);
-                    break;
+                if (!truckNameLowerCase.contains(string)){
+                    mayAdd = false;
                 }
             }
+            if (mayAdd)
+                resList.add(ft);
         }
 
         return resList;

@@ -89,6 +89,7 @@ public class FoodTruckController {
     }
 
     //NOTE - don't need to call via front end for now (just test via postman)
+    //TODO - add user token as header
     @PostMapping("/api/addRating/")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity addRatingToFoodTruck(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
