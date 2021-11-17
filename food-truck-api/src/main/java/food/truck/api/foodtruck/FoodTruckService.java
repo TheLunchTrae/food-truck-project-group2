@@ -140,6 +140,28 @@ public class FoodTruckService {
         return resList;
     }
 
+    //Returns list of food trucks fitting search query
+    public List<FoodTruck> getTruckSearchResults(String searchText){
+    //Separate the string by space into separate lowercase strings for looser searching
+        String[] searchStrings = searchText.toLowerCase().split(" ");
+        List<FoodTruck> resList = new ArrayList<FoodTruck>();
+        //Iterate over all trucks
+        for (FoodTruck ft : truckRepository.findAll()){
+            String truckNameLowerCase = ft.getTruckName().toLowerCase();
+            //If truck name contains any search strings, add to list
+            for (String string : searchStrings){
+                if (truckNameLowerCase.contains(string)){
+                    resList.add(ft);
+                    break;
+                }
+            }
+        }
+
+        return resList;
+    }
+
+
+
     public FoodTruck getFoodTruckWithId(long id){
         return truckRepository.findByTruckId(id);
     }

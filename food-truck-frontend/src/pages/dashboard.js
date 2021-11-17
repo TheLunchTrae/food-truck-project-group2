@@ -168,10 +168,19 @@ class Dashboard extends Component {
                                         </span>
                                     </div>
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "ratingPref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating Preference:</span>
-                                        <span id = "ratingInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="ratingPref" value={this.state.ratingPref} type="text" onChange={this.handleInputChange}/>
-                                        </span>
+                                         <label>
+                                             <span class = "ratingPref" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating Preference:</span>
+                                         </label>
+                                         <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                             <select name="usertype">
+                                                <option value="" selected disabled hidden>N/A</option>
+                                                 <option value="1">***** (5)</option>
+                                                 <option value="2">**** (4)</option>
+                                                 <option value="3">*** (3)</option>
+                                                <option value="4">** (2)</option>
+                                                <option value="5">* (1)</option>
+                                             </select>
+                                         </span>
                                     </div>
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <span class = "pricePref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Price Preference:</span>
