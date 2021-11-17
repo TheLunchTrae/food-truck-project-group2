@@ -11,6 +11,7 @@ class Search extends Component {
         this.renderRecommended = this.renderRecommended.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.renderSearch = this.renderSearch.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChangeStatus(event) {
     }
@@ -22,17 +23,32 @@ class Search extends Component {
             [name]: value
         });
 
-        Axios.get("http://localhost:8090/api/searchQuery/" + this.state.search, {
-            headers: {
-                'token': sessionStorage.getItem('token')
-            }
-            }).then(res => {
-                console.log(res.data);
-                const foodTrucks = res.data.map(obj => ({truckName: obj.truckName}));
-                this.setState({ foodTrucksSearch: foodTrucks });
-        });
+        console.log(this.state.search);
+
+        if (this.state.search.length > 0) {
+            Axios.get("http://localhost:8090/api/searchQuery/" + this.state.search, {
+                headers: {
+                    'token': sessionStorage.getItem('token')
+                }
+                }).then(res => {
+                    console.log(res.data);
+                    const foodTrucks = res.data.map(obj => ({truckName: obj.truckName}));
+                    this.setState({ foodTrucksSearch: foodTrucks });
+            });
+        }
     }
     handleSubmit(event) {
+        if (this.state.search.length > 0) {
+            Axios.get("http://localhost:8090/api/searchQuery/" + this.state.search, {
+                headers: {
+                    'token': sessionStorage.getItem('token')
+                }
+                }).then(res => {
+                    console.log(res.data);
+                    const foodTrucks = res.data.map(obj => ({truckName: obj.truckName}));
+                    this.setState({ foodTrucksSearch: foodTrucks });
+            });
+        }
     }
     componentDidMount() {
         Axios.get("http://localhost:8090/api/search/recommended", {
@@ -69,7 +85,7 @@ class Search extends Component {
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <span id = "emailInput" style={{fontSize: '1.4rem', display: 'inline', marginLeft: '10px'}}>
                                             <form>
-                                                <input type="text" placeholder="Search.." onChange={this.handleInputChange} value={this.state.search} style = {{padding: '6px', marginTop: '8px', fontSize: '17px', border: 'none'}}/>
+                                                <input type="text" placeholder="Search.." name="search" onChange={this.handleInputChange} value={this.state.search} style = {{padding: '6px', marginTop: '8px', fontSize: '17px', border: 'none'}}/>
                                                 <button type="submit" style = {{float: 'right', padding: '6px', marginTop: '8px', marginRight: '16px', background: '#a9a9a9', fontSize: '17px', cursor: 'pointer', border: 'none'}}>Submit</button>
                                             </form>
                                         </span>
