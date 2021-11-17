@@ -23,12 +23,8 @@ class Signup extends Component {
 
     //Exclusively for modifying description, schedule, name
     handleSubmit(event) {
-        //Object that will be passed containing the users information
         const truckDto = {
-            menu: this.state.menu,
             description: this.state.description,
-            details: this.state.details,
-            route: this.state.route,
             schedule: this.state.schedule,
             truckName: this.state.truckName,
             truckId: this.state.truckId
