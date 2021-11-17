@@ -28,7 +28,7 @@ class MenuBar extends Component {
     
     LoggedIn(){
         return (    
-            <nav style = {{width: '45%', float: 'right', textAlign: 'center', padding: '30px 0 0', fontSize: '1rem'}}>
+            <nav style = {{width: '25%', float: 'right', textAlign: 'center', padding: '30px 0 0', fontSize: '1rem'}}>
                 <a href = "\dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>
                     {this.state.username}
                 </a>
@@ -60,11 +60,13 @@ class MenuBar extends Component {
     render(){
         return (
         <div name="menuBar" class="banner-area" style = {{margin: 'auto 20px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '5vh'}}>
-            <div class="wrapper" style = {{width: '100vw', margin: '0 auto'}}>
-                <a href = "\\" style = {{textDecoration: 'none', width: '20%', float: 'left', textAlign: 'center', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
-                    Food Truck Finder
-                </a>
-                {this.renderType()}
+            <div class="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
+                <div class="navigation" style = {{height: '60px'}}>
+                    <a href = "\\" style = {{textDecoration: 'none', width: '20%', float: 'left', textAlign: 'center', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
+                        Food Truck Finder
+                    </a>
+                    {this.renderType()}
+                </div>
             </div>
         </div>
         );

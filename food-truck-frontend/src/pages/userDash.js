@@ -40,7 +40,9 @@ class Dashboard extends Component {
                         <p style = {{width: '100vw', textAlign: 'center', marginTop: '0px', fontSize: '1.3rem', color: '#FFFFFF'}}>Welcome to the Food Truck Finder Dashboard!</p>
                     </div>
                     <div class = "sections">
-                        <UserSection/>
+                        <div class = "userSection" style = {{alignContent: 'center', marginLeft: '3vw', float: 'left', borderRadius: '100px', background: '#F9D5A7', width: '20%', padding: '20px', display: 'inline-block', border: '3px solid black'}}>
+                            <UserSection/>
+                        </div>
                     </div>
                 </body>
                 
