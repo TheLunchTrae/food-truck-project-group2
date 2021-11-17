@@ -6,7 +6,7 @@ import { FormatAlignLeftRounded } from '@material-ui/icons';
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        this.state = { userId: '', name: '', foodTruckData: [] , foodTypePref: '', locationPref: '', ratingPref: 0, pricePref: 0};
+        this.state = { userId: '', name: '', foodTruckData: [] , foodTypePref: '', locationPrefX: '', locationPrefY: '', ratingPref: 0, pricePref: 0};
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handlePreferenceSubmit = this.handlePreferenceSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -24,7 +24,10 @@ class Dashboard extends Component {
     handlePreferenceSubmit(event) {
         const Preferences = {
             foodType: this.state.foodTypePref,
-            location: this.state.locationPref,
+            location: {
+                xcoordinate: this.state.locationPrefX,
+                ycoordinate: this.state.locationPrefY
+            },
             rating: this.state.ratingPref,
             price:  this.state.pricePref
         };
@@ -160,7 +163,8 @@ class Dashboard extends Component {
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <span class = "locationPref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Location Preference:</span>
                                         <span id = "locationInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="locationPref" value={this.state.locationPref} type="text" onChange={this.handleInputChange}/>
+                                            <input name="locationPrefX" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the X Coordinate" value={this.state.locationPrefX} type="text" onChange={this.handleInputChange}/>
+                                            <input name="locationPrefY" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the Y Coordinate" value={this.state.locationPrefY} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                     </div>
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
