@@ -76,9 +76,13 @@ public class UserController {
         }
     }
 
-    @GetMapping("/api/username")
-    public String getUsername(@RequestHeader(name="token")Long token) {
-        return userService.getUserNameWithId(token);
+    @GetMapping("/api/userinfo")
+    public User getUsername(@RequestHeader(name="token")Long token) {
+        User u = userService.getUserWithId(token);
+        User ret = new User();
+        ret.setUserName(u.getUserName());
+        ret.setUserType(u.getUserType());
+        return ret;
     }
 
     @GetMapping("/api/details/{id}")
@@ -88,9 +92,9 @@ public class UserController {
                 //.body(userService.getUserWithId(id));
     }
 
-    @GetMapping("/api/dashboard/{id}")
-    public ResponseEntity getDashboardContents(@PathVariable long id){
-        User user = userService.getUserWithId(id);
+    @GetMapping("/api/dashboard/")
+    public ResponseEntity getDashboardContents(@RequestHeader(name="token")Long token){
+        User user = userService.getUserWithId(token);
         DashboardData dashboardData = new DashboardData();
         /*
         if ((user = userService.loginUser(user)) == null){
