@@ -15,8 +15,8 @@ class About extends Component {
             <html>
                 <body style = {{backgroundColor: '#90AACB'}}>
                     <div name="menuBar" class="banner-area" style = {{ margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '100vh'}}>
-                        <div class="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
-                            <div class="navigation" style = {{height: '60px'}}>
+                        <div className="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
+                            <div className="navigation" style = {{height: '60px'}}>
                                   <a href = "\" style = {{textDecoration: 'none', width: '20%', float: 'left', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
                                     Food Truck Finder
                                   </a>
@@ -35,11 +35,21 @@ class About extends Component {
 
                                 <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Truck Details</span>
 
-                                <br></br>
-
-                                <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 30px'}}>
-                                    <span id = "text1" style={{fontSize: '1.2rem', marginLeft: '10px', fontWeight: 'bold', display: 'block'}}>Start to hash out truck detail</span>
-                                </div>
+                                <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                 <label>
+                                     <span class = "ratingPref" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating Preference:</span>
+                                 </label>
+                                 <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                     <select name="usertype">
+                                        <option value="" selected disabled hidden>N/A</option>
+                                         <option value="1">***** (5)</option>
+                                         <option value="2">**** (4)</option>
+                                         <option value="3">*** (3)</option>
+                                        <option value="4">** (2)</option>
+                                        <option value="5">* (1)</option>
+                                     </select>
+                                 </span>
+                            </div>
                             </div>
                         </div>
                     </div>
