@@ -4,8 +4,7 @@ import axios from 'axios';
 class Signup extends Component {
     constructor(props) {
         super();
-        //this.state = { truckID: -1, truckName: '', route: '', schedule: '', menu: '', description: '', details: ''};
-        this.state = { truckId: -1, truckName: '', newRoute: '', schedule: '', newMenuItemType: '', newMenuItemName: '', newMenuItemPrice: 0.0, description: '', newRating: 0.0};
+        this.state = { truckId: -1, truckName: '', newRouteX: '', newRouteY: '', schedule: '', newMenuItemType: '', newMenuItemName: '', newMenuItemPrice: 0.0, description: '', newRating: 0.0};
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleMenuItemSubmit = this.handleMenuItemSubmit.bind(this);
@@ -80,8 +79,12 @@ class Signup extends Component {
 
     //For new location to add to route
     handleRouteSubmit(event){
+        //Modified to be compatible with route being List<Location>
         const JSONWrapper = {
-            location: this.state.newRoute
+            location: {
+                xcoordinate: this.state.newRouteX,
+                ycoordinate: this.state.newRouteY
+            }
         };
         
         const val = axios.post("http://localhost:8090/api/modifyTruck/route/", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
@@ -173,7 +176,8 @@ class Signup extends Component {
                                         <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                             <span class = "newRoute" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Route Location:</span>
                                             <span id = "routeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                                <input name="newRoute" placeholder="Enter the Route" value={this.state.newRoute} type="text" onChange={this.handleInputChange}/>
+                                                <input name="newRouteX" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the X Coordinate" value={this.state.newRouteX} type="text" onChange={this.handleInputChange}/>
+                                                <input name="newRouteY" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the Y Coordinate" value={this.state.newRouteY} type="text" onChange={this.handleInputChange}/>
                                             </span>
                                         </div>
                                         <br></br>
