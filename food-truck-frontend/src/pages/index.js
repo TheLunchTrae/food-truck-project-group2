@@ -43,6 +43,7 @@ function HomePage() {
               <a href = "\editAccount" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Edit Account</a>
               <a href = "\editTruck" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Edit Truck</a>
               <a href = "\createTruck" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Create Truck</a>
+              <a href = "\truckDetails" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Truck Deatils</a>
             </div>
         </div>
 

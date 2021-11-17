@@ -34,21 +34,12 @@ public class FoodTruckService {
             return null;
         }
         //Change based on whether there was any input
-        /*
-        if (foodTruckDiff.getRoute().length() > 0){
-            foodTruck.setRoute(foodTruckDiff.getRoute());
+        if (foodTruckDiff.getTruckName().length() > 0){
+            foodTruck.setTruckName((foodTruckDiff.getTruckName()));
         }
-        */
-        foodTruck.addRouteLocation(new Location (0.0,0.0));
         if (foodTruckDiff.getSchedule().length() > 0){
             foodTruck.setSchedule(foodTruckDiff.getSchedule());
         }
-        /*
-        if (foodTruckDiff.getMenu().length() > 0){
-            foodTruck.setMenu(foodTruckDiff.getMenu());
-        }
-        */
-        foodTruck.addFoodItem(new FoodItem("TEST_FOOD_TYPE","TEST_FOOD_NAME", (float) 7.99));
         if (foodTruckDiff.getDescription().length() > 0){
             foodTruck.setDescription(foodTruckDiff.getDescription());
         }

@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 public class JSONWrapper {
     Location location;
-    Rating rating;
+    Rating rating;  /*TODO remove this, have rating set from different menu*/
     FoodItem foodItem;
 }
