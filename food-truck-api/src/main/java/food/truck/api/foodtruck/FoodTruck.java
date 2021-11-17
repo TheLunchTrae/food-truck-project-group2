@@ -1,7 +1,8 @@
 package food.truck.api.foodtruck;
 
-import food.truck.api.other.FoodItem;
+import food.truck.api.user.Rating;
 import lombok.Data;
+import org.springframework.data.util.Pair;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -32,11 +33,14 @@ public class FoodTruck {
     //TODO - route won't be String in future, this is temporary
     //@Column(name = "ROUTE")
     //String route;
-    @ElementCollection
-    List<String> route;
+    //@ElementCollection
+    //List<String> route;
 
     @ElementCollection
-    List<Integer> ratings;
+    List<Location> route;
+
+    @ElementCollection
+    List<Rating> ratings;
 
     @ElementCollection
     List<FoodItem> menu;
@@ -57,20 +61,30 @@ public class FoodTruck {
         this.menu.add(foodItem);
     }
 
-    //Add location (as a string) to the route list
-    public void addRouteLocation(String location){
+    //Add location (as XY coordinates) to the route list
+    public void addRouteLocation(Location location){
         //Initialize if route doesn't exist
         if (this.route == null){
-            route = new LinkedList<String>();
+            route = new LinkedList<>();
         }
         this.route.add(location);
     }
 
+    //TODO - implement
+    public Location findNearestRouteLocation(Location userLocation){
+        if (userLocation == null){
+            return null;
+        }
+
+
+        return null;
+    }
+
     //Add a rating - TODO error check
-    public void addRating(int rating){
+    public void addRating(Rating rating){
         //Initialize if ratings doesn't exist
         if (this.ratings == null){
-            ratings = new LinkedList<Integer>();
+            ratings = new LinkedList<>();
         }
         this.ratings.add(rating);
     }
@@ -78,8 +92,8 @@ public class FoodTruck {
     //Return the average ratings
     public float averageRating(){
         int sum = 0;
-        for (Integer i : ratings){
-            sum += i;
+        for (Rating r : ratings){
+            sum += r.getValue();
         }
         if (ratings.size() > 0) {
             return sum / ratings.size();

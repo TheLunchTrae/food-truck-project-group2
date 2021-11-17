@@ -1,4 +1,4 @@
-package food.truck.api.notification;
+package food.truck.api.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

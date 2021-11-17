@@ -107,7 +107,7 @@ public class UserService {
                 user.setFoodTypePreferences(foodTypePreferences);
             }
             //Set location preference (if set)
-            if (preferences.getLocation() != null && preferences.getLocation().length() > 0){
+            if (preferences.getLocation() != null){
                 user.setLocationPreference(preferences.getLocation());
             }
         } else {

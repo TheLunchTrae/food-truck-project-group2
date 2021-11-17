@@ -2,6 +2,7 @@ package food.truck.api.user;
 
 import javax.persistence.*;
 
+import food.truck.api.foodtruck.Location;
 import lombok.Data;
 
 import java.sql.Date;
@@ -41,10 +42,14 @@ public class User {
     @Column(name = "TOKEN")
     String token;
 
+    //List of truckIds that user is subscribed to
     @ElementCollection
-    @Column(name="FOOD_TYPE_PREFERENCES")
-    private List<String> foodTypePreferences;
+    List<Long> subscriptions;
 
+    @ElementCollection
+    List<String> foodTypePreferences;
+
+    //NOTE - this is just over the rating value (why it's not a Rating class)
     @Column(name = "RATING_PREFERENCE")
     Integer ratingPreference;
 
@@ -52,7 +57,12 @@ public class User {
     Float pricePreference;
 
     @Column(name = "LOCATION_PREFERENCE")
-    String locationPreference;
+    Location locationPreference;
+
+    //TODO - iterate over all food trucks & their ratings, return those w/matching userid
+    public List<Rating> getUserRatings(){
+        return null;
+    }
 
     public String toString() {
         return emailAddress + "," + password + "," + userType;

@@ -1,4 +1,4 @@
-package food.truck.api.other;
+package food.truck.api.foodtruck;
 
 import lombok.Data;
 
