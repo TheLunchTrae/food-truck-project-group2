@@ -1,7 +1,7 @@
 package food.truck.api.foodtruck;
 
-import food.truck.api.other.FoodItem;
 import food.truck.api.other.JSONWrapper;
+import food.truck.api.user.Rating;
 import food.truck.api.user.User;
 import food.truck.api.user.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -73,9 +73,9 @@ public class FoodTruckController {
     @PostMapping("/api/modifyTruck/route/")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyFoodTruckAddRouteLocation(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
-        String location = jsonWrapper.getLocation();
+        Location location = jsonWrapper.getLocation();
 
-        System.out.println(location + ' '+ truckID);
+        //System.out.println(location + ' '+ truckID);
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckID)) != null){
             foodTruck = foodTruckService.modifyFoodTruckAddRouteLocation(foodTruck, location);
@@ -92,7 +92,7 @@ public class FoodTruckController {
     @PostMapping("/api/addRating/")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity addRatingToFoodTruck(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
-        Integer rating = jsonWrapper.getRating();
+        Rating rating = jsonWrapper.getRating();
 
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckID)) != null){
@@ -105,9 +105,6 @@ public class FoodTruckController {
                     .body("Failed to find food truck with id");
         }
     }
-
-
-
 
     @GetMapping("/api/getTruckName/{id}")
     @CrossOrigin(origins = "http://localhost:3000")

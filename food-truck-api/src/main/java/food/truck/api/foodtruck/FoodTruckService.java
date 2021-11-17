@@ -1,6 +1,6 @@
 package food.truck.api.foodtruck;
 
-import food.truck.api.other.FoodItem;
+import food.truck.api.user.Rating;
 import food.truck.api.user.User;
 import food.truck.api.user.UserRepository;
 import food.truck.api.other.Pair;
@@ -39,7 +39,7 @@ public class FoodTruckService {
             foodTruck.setRoute(foodTruckDiff.getRoute());
         }
         */
-        foodTruck.addRouteLocation("TEST_LOCATION");
+        foodTruck.addRouteLocation(new Location (0.0,0.0));
         if (foodTruckDiff.getSchedule().length() > 0){
             foodTruck.setSchedule(foodTruckDiff.getSchedule());
         }
@@ -64,7 +64,7 @@ public class FoodTruckService {
         return truckRepository.save(foodTruck);
     }
 
-    public FoodTruck modifyFoodTruckAddRouteLocation(FoodTruck foodTruck, String location){
+    public FoodTruck modifyFoodTruckAddRouteLocation(FoodTruck foodTruck, Location location){
         if (location == null){
             return null;
         }
@@ -72,7 +72,7 @@ public class FoodTruckService {
         return truckRepository.save(foodTruck);
     }
 
-    public FoodTruck addRatingToFoodTruck(FoodTruck foodTruck, Integer rating){
+    public FoodTruck addRatingToFoodTruck(FoodTruck foodTruck, Rating rating){
         if (rating == null){
             return null;
         }

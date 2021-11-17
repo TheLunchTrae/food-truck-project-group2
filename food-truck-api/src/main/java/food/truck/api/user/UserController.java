@@ -4,9 +4,6 @@ import food.truck.api.foodtruck.FoodTruckService;
 import food.truck.api.other.DashboardData;
 import food.truck.api.other.Event;
 import food.truck.api.other.Preferences;
-import food.truck.api.rating.Rating;
-import food.truck.api.subscription.Subscription;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,16 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j2;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Date;
 
 import org.springframework.http.ResponseEntity;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Log4j2
 @RestController
@@ -104,7 +96,7 @@ public class UserController {
          */
         //TODO - these are temporary
         dashboardData.setRatings(new LinkedList<Rating>());
-        dashboardData.setSubscriptions(new LinkedList<Subscription>());
+        dashboardData.setSubscriptions(new LinkedList<Long>());
         dashboardData.setFoodTrucks(foodTruckService.getOwnerFoodTrucks(user));
 
         return ResponseEntity.ok()
@@ -116,14 +108,10 @@ public class UserController {
         User postUser;
         if ((postUser = userService.modifyUser(event)) != null) {
             return ResponseEntity.ok()
-                    //.header("Access-Control-Allow-Origin", "*")
-                    //.header("Access-Control-Allow-Methods", "POST")
                     .header("Content-Type", "application/json")
                     .body(postUser);
         } else {
             return ResponseEntity.ok()
-                    //.header("Access-Control-Allow-Origin", "*")
-                    //.header("Access-Control-Allow-Methods", "POST")
                     .body("User modification failed");
         }
     }
