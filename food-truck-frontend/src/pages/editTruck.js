@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import MenuBar from '../menuBar';
 
 class Signup extends Component {
     constructor(props) {
