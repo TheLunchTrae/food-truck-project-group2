@@ -8,7 +8,6 @@ class About extends Component {
     handleInputChange(event) {
     }
     handleSubmit(event) {
-
     }
     render() {
         return (
