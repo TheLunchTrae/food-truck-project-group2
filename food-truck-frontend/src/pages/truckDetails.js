@@ -201,11 +201,12 @@ class About extends Component {
                                         </div>
 
                                         <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <span class = "review" style = {{fontSize: '1.0rem', fontWeight: 'bold', marginTop: '5px'}}>Review (optional):</span>
+                                            <span class = "revie" style = {{fontSize: '1.0rem', fontWeight: 'bold', marginTop: '5px'}}>Review (optional):</span>
                                              <span id = "ratingReview" style={{fontSize: '1.4rem'}}>
                                                 <input style = {{width: '600px', height: '20px'}} name="ratingReview" placeholder="Enter review" value={this.state.ratingReview} type="text" onChange={this.handleInputChange}/>
                                             </span>
                                         </div>
+
 
                                         <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                             <button type="submit">Leave Rating</button>
