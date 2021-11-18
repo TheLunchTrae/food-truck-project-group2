@@ -53,7 +53,7 @@ public class FoodTruckController {
     }
 
     //Call via editTruck frontend page
-    @PostMapping("/api/modifyTruck/menu/")
+    @PostMapping("/api/modifyTruck/menu")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyFoodTruckMenuAddFoodItem(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
         FoodItem foodItem = jsonWrapper.getFoodItem();
@@ -70,7 +70,7 @@ public class FoodTruckController {
         }
     }
     //Call via editTruck frontend page
-    @PostMapping("/api/modifyTruck/route/")
+    @PostMapping("/api/modifyTruck/route")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyFoodTruckAddRouteLocation(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
         Location location = jsonWrapper.getLocation();
@@ -90,7 +90,7 @@ public class FoodTruckController {
 
     //NOTE - don't need to call via front end for now (just test via postman)
     //TODO - add user token as header
-    @PostMapping("/api/addRating/")
+    @PostMapping("/api/addRating")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity addRatingToFoodTruck(@RequestBody Rating rating, @RequestHeader Long truckID){
         FoodTruck foodTruck;
@@ -159,6 +159,21 @@ public class FoodTruckController {
         } else {
             return ResponseEntity.ok()
                 .body("Failed to find user with id");
+        }
+    }
+
+    //In progress
+    @GetMapping("/api/map/nearestTrucks")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity getNearestTrucks(@RequestHeader Long userId){
+        User user = userService.getUserWithId(userId);
+        if (user != null) {
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .body(foodTruckService.getNearestTrucks(user.getLocationPreference(), user.getDistancePreference()));
+        } else {
+            return ResponseEntity.ok()
+                    .body("Failed to find user with id");
         }
     }
 }

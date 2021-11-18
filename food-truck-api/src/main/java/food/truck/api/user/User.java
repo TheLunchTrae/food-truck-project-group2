@@ -58,6 +58,10 @@ public class User {
     @Column(name = "LOCATION_PREFERENCE")
     Location locationPreference;
 
+    //TODO - CODE EVERYWHERE TO ALLOW USER TO SET THIS
+    @Column(name = "DISTANCE_PREFERENCE")
+    Integer distancePreference;
+
     public void addFoodTypePreferences(List<String> foodTypePreferences){
         if (this.foodTypePreferences == null){
             this.foodTypePreferences = new LinkedList<>();

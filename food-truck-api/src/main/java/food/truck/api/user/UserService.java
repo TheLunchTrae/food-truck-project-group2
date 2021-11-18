@@ -34,6 +34,7 @@ public class UserService {
         sec.setEmailAddress(user.getEmailAddress());
         sec.setFoodTypePreferences(user.getFoodTypePreferences());
         sec.setLocationPreference(user.getLocationPreference());
+        sec.setDistancePreference(user.getDistancePreference());    /*Added by sam*/
         sec.setRatingPreference(user.getRatingPreference());
         sec.setPricePreference(user.getPricePreference());
         return sec;
@@ -116,6 +117,11 @@ public class UserService {
             if (preferences.getLocation() != null){
                 user.setLocationPreference(preferences.getLocation());
             }
+            //Set distance preference
+            if (preferences.getDistance() != null){
+                user.setDistancePreference(preferences.getDistance());
+            }
+
         } else {
             System.out.println("finding user with id "+id+ " failed");
             return null;

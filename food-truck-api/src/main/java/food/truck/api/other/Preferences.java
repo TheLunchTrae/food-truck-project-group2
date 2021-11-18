@@ -9,6 +9,7 @@ import java.util.List;
 public class Preferences {
     private List<String> foodTypes;
     private Location location;
+    private Integer distance;
     //NOTE - must be integer, not rating (only concerned with rating value)
     private Integer rating;
     private Float price;

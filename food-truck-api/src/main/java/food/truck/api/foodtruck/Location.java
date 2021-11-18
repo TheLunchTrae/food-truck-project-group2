@@ -7,11 +7,11 @@ import javax.persistence.Embeddable;
 @Data
 @Embeddable
 public class Location {
-    private Double xCoordinate;
-    private Double yCoordinate;
+    private Double latitude;
+    private Double longitude;
     public Location(){}
-    public Location(double xCoordinate, double yCoordinate){
-        this.xCoordinate = xCoordinate;
-        this.yCoordinate = yCoordinate;
+    public Location(double latitude, double longitude){
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }

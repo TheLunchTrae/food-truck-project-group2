@@ -6766,7 +6766,7 @@ react-final-form@6.5.1:
 
 react-geocode@^0.2.3:
   version "0.2.3"
-  resolved "https://registry.npmjs.org/react-geocode/-/react-geocode-0.2.3.tgz"
+  resolved "https://registry.yarnpkg.com/react-geocode/-/react-geocode-0.2.3.tgz#e27fa3f212a2629b2b2bb2a3a325a12b802b2dae"
   integrity sha512-sIpbgmn1IUzAxO4haOZ6jeeFnMD8ya9PC38yiNrmJ9vPWbvAO2D/2yfCBzZjGZVUm4PRzKAc0KghXfaEnug0TQ==
   dependencies:
     regenerator-runtime "^0.13.3"

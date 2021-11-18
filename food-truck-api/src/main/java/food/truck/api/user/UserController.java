@@ -1,5 +1,6 @@
 package food.truck.api.user;
 
+import food.truck.api.foodtruck.FoodTruck;
 import food.truck.api.foodtruck.FoodTruckService;
 import food.truck.api.other.DashboardData;
 import food.truck.api.other.Event;
@@ -77,24 +78,22 @@ public class UserController {
     public ResponseEntity getUserNameWithId(@PathVariable long id){
         return ResponseEntity.ok()
                 .body(userService.getUserNameWithId(id));
-                //.body(userService.getUserWithId(id));
     }
 
     @GetMapping("/api/dashboard/{id}")
     public ResponseEntity getDashboardContents(@PathVariable long id){
         User user = userService.getUserWithId(id);
         DashboardData dashboardData = new DashboardData();
-        /*
-        if ((user = userService.loginUser(user)) == null){
-            return ResponseEntity.ok()
-                .body("User is not logged in");
-        }
-         */
-        //TODO - these are temporary
-        dashboardData.setRatings(new LinkedList<Rating>());
-        dashboardData.setSubscriptions(new LinkedList<Long>());
-        dashboardData.setFoodTrucks(foodTruckService.getOwnerFoodTrucks(user));
+        if (user != null){
+            dashboardData.setRatings(user.getUserRatings());
+            dashboardData.setSubscriptions(user.getSubscriptions());
+            dashboardData.setFoodTrucks(foodTruckService.getOwnerFoodTrucks(user));
 
+        } else {
+            dashboardData.setRatings(new LinkedList<Rating>());
+            dashboardData.setSubscriptions(new LinkedList<Long>());
+            dashboardData.setFoodTrucks(new LinkedList<FoodTruck>());
+        }
         return ResponseEntity.ok()
                 .body(dashboardData);
     }

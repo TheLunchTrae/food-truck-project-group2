@@ -163,7 +163,43 @@ public class FoodTruckService {
         return resList;
     }
 
+    //TODO - IMPLEMENT
+    public List<FoodTruck> getNearestTrucks(Location userLocation, int preferredDistance){
+        List<FoodTruck> nearestTrucks = new LinkedList<>();
+        //Iterate over all food trucks
+        for (FoodTruck ft : truckRepository.findAll()){
+            //Iterate over all locations in truck's route
+            for (Location truckLocation : ft.getRoute()){
+                double distanceBetween = haversineDistance(userLocation,truckLocation);
+                if (distanceBetween <= preferredDistance){
+                    nearestTrucks.add(ft);
+                }
+            }
+        }
 
+        return nearestTrucks;
+    }
+
+    //Derived from https://www.geeksforgeeks.org/haversine-formula-to-find-distance-between-two-points-on-a-sphere/
+    //private double haversineDistance(double lat1, double lon1, double lat2, double lon2){
+    private double haversineDistance(Location loc1, Location loc2){
+        //Calculate distance between latitudes and longitudes
+        double dLat = Math.toRadians(loc2.getLatitude() - loc1.getLatitude());
+        double dLon = Math.toRadians(loc2.getLongitude() - loc1.getLongitude());
+
+        //Convert to radians
+        double lat1 = Math.toRadians(loc1.getLatitude());
+        double lat2 = Math.toRadians(loc2.getLatitude());
+
+        //Apply haversine formulas
+        double a = Math.pow(Math.sin(dLat / 2), 2) +
+                Math.pow(Math.sin(dLon / 2), 2) *
+                        Math.cos(lat1) *
+                        Math.cos(lat2);
+        double rad = 6371;
+        double c = 2 * Math.asin(Math.sqrt(a));
+        return rad * c;
+    }
 
     public FoodTruck getFoodTruckWithId(long id){
         return truckRepository.findByTruckId(id);

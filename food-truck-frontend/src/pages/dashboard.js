@@ -38,6 +38,9 @@ class Dashboard extends Component {
             lngi = lng;
         })
 
+        alert(lati);
+        alert(lngi);
+
         const Preferences = {
             foodType: this.state.foodTypePref,
             location: {
@@ -49,15 +52,14 @@ class Dashboard extends Component {
         };
     
         //Post to URL
-        const val = axios.post("http://localhost:8090/api/dashboard/preferences/", Preferences, {headers:{'userId': this.state.userId}}).then(res => {
+        const val = axios.post("http://localhost:8090/api/dashboard/preferences", Preferences, {headers:{'userId': this.state.userId}}).then(res => {
             console.log(res);
         });
 
-        event.preventDefault()
-    
+        event.preventDefault()    
     }
-    componentDidMount() {
 
+    componentDidMount() {
         // gets the id from the url and sets it to the state
         const queryString = window.location.search;
         console.log(queryString);
@@ -101,29 +103,6 @@ class Dashboard extends Component {
         else {
             this.setState({name: "USER_NAME", foodTruckData: []});
         }
-    }
-    renderNotifications(){}
-    renderSubsctions(){}    /*Should technically only be in details but oh well*/
-    //TODO - add some other stuff later
-    renderFoodTrucks(){
-        /*
-        if (foodTruckData == undefined){
-            return "FoodTruckData is undefined!!";
-        }
-        */
-        //Food truck name + link
-        //Food truck ID
-        //Rating
-        let htmldata = "";//"<tbody style = {{color: '#FFFFFF', fontSize: '1.2rem'}}>";
-        var ftdata = this.state.foodTruckData;
-        for (var i = 0; i < ftdata.length; i++){
-            var truckName = ftdata[i]["truckName"];
-            var truckId = ftdata[i]["truckId"];
-            var rating = "PLACEHOLDER_RATING";
-            htmldata += "<tr><td>"+truckName+"</td><td>"+truckId+"</td><td>"+rating+"</td></tr>";
-        }
-        //htmldata += "</tbody>";
-        return htmldata;
     }
     myURL(id){
         return "/editTruck?id="+id

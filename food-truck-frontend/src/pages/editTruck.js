@@ -54,7 +54,7 @@ class Signup extends Component {
         };
 
         //Post to URL
-        const val = axios.post("http://localhost:8090/api/modifyTruck/menu/", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
+        const val = axios.post("http://localhost:8090/api/modifyTruck/menu", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
             console.log(res);
         });
 
@@ -66,7 +66,7 @@ class Signup extends Component {
             rating: this.state.newRating
         };
         
-        const val = axios.post("http://localhost:8090/api/addRating/", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
+        const val = axios.post("http://localhost:8090/api/addRating", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
             console.log(res);
         });
         event.preventDefault()
@@ -83,7 +83,7 @@ class Signup extends Component {
             }
         };
         
-        const val = axios.post("http://localhost:8090/api/modifyTruck/route/", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
+        const val = axios.post("http://localhost:8090/api/modifyTruck/route", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
             console.log(res);
         });
 
