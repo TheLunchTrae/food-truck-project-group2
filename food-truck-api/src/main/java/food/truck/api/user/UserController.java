@@ -80,9 +80,9 @@ public class UserController {
                 //.body(userService.getUserWithId(id));
     }
 
-    @GetMapping("/api/dashboard/")
-    public ResponseEntity getDashboardContents(@RequestHeader(name="token")Long token){
-        User user = userService.getUserWithId(token);
+    @GetMapping("/api/dashboard/{id}")
+    public ResponseEntity getDashboardContents(@PathVariable long id){
+        User user = userService.getUserWithId(id);
         DashboardData dashboardData = new DashboardData();
         /*
         if ((user = userService.loginUser(user)) == null){
@@ -126,9 +126,9 @@ public class UserController {
     }
 
     @PostMapping("/api/subscribe/{truckId}")
-    public ResponseEntity subscribeUserToTruck(@PathVariable Long truckId, @RequestHeader Long userId){
+    public ResponseEntity subscribeUserToTruck(@PathVariable Long truckId, @RequestHeader (name="token")Long token){
         User postUser;
-        if ((postUser = userService.addSubscription(truckId, userId)) != null) {
+        if ((postUser = userService.addSubscription(truckId, token)) != null) {
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
                     .body(postUser);
