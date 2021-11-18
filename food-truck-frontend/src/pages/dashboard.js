@@ -3,17 +3,23 @@ import './_app.js'
 import axios from 'axios';
 import { FormatAlignLeftRounded } from '@material-ui/icons';
 import MenuBar from '../menuBar.js';
+import MapComponent from '../mapComponent.js';
+import Geocode from 'react-geocode';
+
+Geocode.setApiKey("AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk");
+Geocode.setLanguage("en");
 
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        this.state = { userId: '', name: '', foodTruckData: [] , foodTypePref: '', locationPrefX: '', locationPrefY: '', ratingPref: 0, pricePref: 0};
+        this.state = { userId: '', name: '', foodTruckData: [] , foodTypePref: '', address: '', range: '', ratingPref: 0, pricePref: 0.00};
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handlePreferenceSubmit = this.handlePreferenceSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
     handleChangeStatus(event) {
     }
+
     handleInputChange(event) {
         const name = event.target.name;
         const value = event.target.value;
@@ -22,12 +28,21 @@ class Dashboard extends Component {
             [name]: value
         });
     }
+
     handlePreferenceSubmit(event) {
+        var lati, lngi;
+        Geocode.fromAddress(this.state.address).then(res => {
+            const { lat, lng } = res.results[0].geometry.location;
+            console.log(lat, lng);
+            lati = lat;
+            lngi = lng;
+        })
+
         const Preferences = {
             foodType: this.state.foodTypePref,
             location: {
-                xcoordinate: this.state.locationPrefX,
-                ycoordinate: this.state.locationPrefY
+                longitude: lngi,
+                latitude: lati
             },
             rating: this.state.ratingPref,
             price:  this.state.pricePref
@@ -39,7 +54,6 @@ class Dashboard extends Component {
         });
 
         event.preventDefault()
-    
     
     }
     componentDidMount() {
@@ -112,7 +126,7 @@ class Dashboard extends Component {
         return htmldata;
     }
     myURL(id){
-        return "\editTruck?id="+id
+        return "/editTruck?id="+id
     }
     render() {
         return (
@@ -142,23 +156,28 @@ class Dashboard extends Component {
                             <form id= "modify" onSubmit={this.handlePreferenceSubmit}>
 
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <span class = "foodTypePref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Food Type Preference:</span>
+                                    <span class = "foodTypePref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Food Type:</span>
                                     <span id = "foodTypeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                        <input name="foodTypePref" value={this.state.foodTypePref} type="text" onChange={this.handleInputChange}/>
+                                        <input name="foodTypePref" placeholder="Please Enter a Food Type" value={this.state.foodTypePref} type="text" onChange={this.handleInputChange}/>
                                     </span>
                                 </div>
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <span class = "locationPref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Location Preference:</span>
-                                    <span id = "locationInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                        <input name="locationPrefX" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the X Coordinate" value={this.state.locationPrefX} type="text" onChange={this.handleInputChange}/>
-                                        <input name="locationPrefY" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the Y Coordinate" value={this.state.locationPrefY} type="text" onChange={this.handleInputChange}/>
-                                    </span>
+                                    <span class = "locationPref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Location:</span>
+                                        <span id = "locationInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="address" placeholder="Please Enter An Address" value={this.state.address} type="text" onChange={this.handleInputChange}/>
+                                        </span>
                                 </div>
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                    <span class = "locationPref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Range:</span>
+                                        <span id = "locationInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="range" placeholder="Please enter a Range" pattern="[1-9][0-9]{2}" title="Must be a positive value between 0 and 999" value={this.state.range} type="text" onChange={this.handleInputChange}/>
+                                        </span>
+                                </div>
+                                <div style = {{ display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <label>
-                                            <span class = "ratingPref" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating Preference:</span>
+                                            <span class = "ratingPref" style = {{marginLeft: '17%', float: 'left', color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating:</span>
                                         </label>
-                                        <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                        <span id = "foodLocInput" style={{float: 'left', fontSize: '1.4rem', marginLeft: '10px'}}>
                                             <select name="usertype">
                                             <option value="" selected disabled hidden>N/A</option>
                                                 <option value="1">***** (5)</option>
@@ -169,8 +188,8 @@ class Dashboard extends Component {
                                             </select>
                                         </span>
                                 </div>
-                                <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <span class = "pricePref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Price Preference:</span>
+                                <div style = {{display: 'inline-block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                    <span class = "pricePref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Price:</span>
                                     <span id = "priceInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
                                         <input name="pricePref" value={this.state.pricePref} type="text" onChange={this.handleInputChange}/>
                                     </span>

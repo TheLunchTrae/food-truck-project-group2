@@ -10,15 +10,11 @@ const containerStyle = {
   height: '400px'
 };
 
-const center = {
-  lat: -3.745,
-  lng: -38.523
-};
-
 class MapComponent extends Component {
   constructor(props){
     super();
-    this.setState()
+    this.state = { center: { lng: 0.000, lat: 0.000} }
+
   }
   render() {
     return (
@@ -27,7 +23,7 @@ class MapComponent extends Component {
       >
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={center}
+          center={this.state.center}
           zoom={10}
         >
           { /* Child components, such as markers, info windows, etc. */ }
