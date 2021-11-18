@@ -125,6 +125,22 @@ public class UserController {
                     .body("User preference modification failed");
         }
     }
+
+    @PostMapping("/api/subscribe/{truckId}")
+    public ResponseEntity subscribeUserToTruck(@PathVariable Long truckId, @RequestHeader Long userId){
+        User postUser;
+        if ((postUser = userService.addSubscription(truckId, userId)) != null) {
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .body(postUser);
+        } else {
+            return ResponseEntity.ok()
+                    .body("User subscription failed");
+        }
+
+
+    }
+
     //dash/board/addTruck is in FoodTruckController
 
 }
