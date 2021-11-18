@@ -22,7 +22,7 @@ class About extends Component {
                             <br></br>
 
                             <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 30px'}}>
-                                <span id = "text1" style={{fontSize: '1.2rem', marginLeft: '10px', fontWeight: 'bold', display: 'block'}}>IDK WHAT YALL WANNA PUT HERE</span>
+                                <span id = "text1" style={{fontSize: '1.5rem', marginLeft: '10px', fontWeight: 'bold', display: 'block'}}>Group 2 - Food Truck Finder Application</span>
                                 <br></br>
                                 <span id = "text2" style={{fontSize: '1.2rem', marginLeft: '10px', fontWeight: 'bold'}}>This is the Food Truck Finder Application which is an application for...</span>
                             </div>

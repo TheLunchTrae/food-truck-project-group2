@@ -119,6 +119,7 @@ class Dashboard extends Component {
         <html>
             <body style = {{backgroundColor: '#90AACB', marginLeft: '35px'}}>
                 <MenuBar/>
+                <br></br>
                 <div style={{fontWeight: '500'}}>
                     <h1 class = "heading" style = {{marginBottom: '0px', fontSize: '2.3rem', color: '#000000'}}>Dashboard</h1>
                     <p style = {{marginTop: '0px', fontSize: '1.3rem', color: '#FFFFFF'}}>Welcome to the Food Truck Finder Dashboard!</p>
