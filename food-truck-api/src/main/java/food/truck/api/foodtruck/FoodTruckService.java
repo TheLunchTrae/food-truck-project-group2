@@ -165,12 +165,16 @@ public class FoodTruckService {
 
     //TODO - IMPLEMENT
     public List<FoodTruck> getNearestTrucks(Location userLocation, int preferredDistance){
+        System.out.println("Preferred distance: "+preferredDistance);
         List<FoodTruck> nearestTrucks = new LinkedList<>();
         //Iterate over all food trucks
         for (FoodTruck ft : truckRepository.findAll()){
+            System.out.println("Current truck: "+ft.getTruckName());
             //Iterate over all locations in truck's route
             for (Location truckLocation : ft.getRoute()){
+                System.out.println("\tCurrent location: "+truckLocation);
                 double distanceBetween = haversineDistance(userLocation,truckLocation);
+                System.out.println("Calculated distance to "+userLocation+": "+distanceBetween);
                 if (distanceBetween <= preferredDistance){
                     nearestTrucks.add(ft);
                 }

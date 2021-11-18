@@ -148,7 +148,7 @@ public class FoodTruckController {
     }
 
     //TODO - add other search filters
-    @GetMapping("/api/searchQuery/{search}")
+    @PostMapping("/api/searchQuery/{search}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getTruckSearchResults(@PathVariable String search, @RequestHeader(name="token")Long id) {
         User user = userService.getUserWithId(id);
@@ -163,7 +163,7 @@ public class FoodTruckController {
     }
 
     //In progress
-    @GetMapping("/api/map/nearestTrucks")
+    @PostMapping("/api/map/nearestTrucks")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getNearestTrucks(@RequestHeader Long userId){
         User user = userService.getUserWithId(userId);

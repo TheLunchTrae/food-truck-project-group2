@@ -79,8 +79,8 @@ class Signup extends Component {
         //Modified to be compatible with route being List<Location>
         const JSONWrapper = {
             location: {
-                xcoordinate: this.state.newRouteX,
-                ycoordinate: this.state.newRouteY
+                latitude: this.state.newRouteX,
+                longitude: this.state.newRouteY
             }
         };
         

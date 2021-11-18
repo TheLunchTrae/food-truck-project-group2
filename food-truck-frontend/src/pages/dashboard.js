@@ -12,7 +12,7 @@ Geocode.setLanguage("en");
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        this.state = { userId: '', name: '', foodTruckData: [] , foodTypePref: '', address: '', range: '', ratingPref: 0, pricePref: 0.00};
+        this.state = { userId: '', name: '', foodTruckData: [] , foodTrucksNearby: [], foodTypePref: '', address: '', range: '', ratingPref: 0, pricePref: 0.00};
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handlePreferenceSubmit = this.handlePreferenceSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -77,6 +77,7 @@ class Dashboard extends Component {
         console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
         const id = urlParams.get('id');
+        this.setState({userId: id});
         var ownerName;
         if(id != null) {
             //First get owner's name from details
@@ -110,6 +111,11 @@ class Dashboard extends Component {
 
                 this.setState({userId: id, name: ownerName, foodTruckData: ftdata});
             })
+
+            axios.post("http://localhost:8090/api/map/nearestTrucks", {}, {headers:{'userId': id}}).then(res => {
+                console.log(res);
+                this.setState({foodTrucksNearby: res.data});
+            });
             
         }
         else {
@@ -225,6 +231,10 @@ class Dashboard extends Component {
                             </tbody>
                         </table>
                     </div>
+                    trucks nearby
+                    <div>{this.state.foodTrucksNearby.map(ft => (
+                        ft["truckName"]
+                    ))}</div>
                 </div>
             </body>
         </html>
