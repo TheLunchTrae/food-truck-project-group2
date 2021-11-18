@@ -18,6 +18,7 @@ class LoginService {
 
     logout() {
         sessionStorage.removeItem(USER_TOKEN);
+        window.location.href="/";
     }
 
     isUserLoggedIn() {

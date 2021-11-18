@@ -114,124 +114,107 @@ class Signup extends Component {
     render() {
         return (
             <html>
-                <body style = {{backgroundColor: '#90AACB'}}>
+                <body style = {{backgroundColor: '#90AACB'}}>\
+                    <MenuBar/>
+                    <div>
+                        <div class="sections" >
+                            <div class = "editTruck" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+                                <form id= "modify" onSubmit={this.handleSubmit}>
+                                    <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Edit Your Truck</span>
 
-                    <div name="menuBar" class="banner-area" style = {{ margin: 'auto 30px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '100vh'}}>
-                        <div class="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
-                            <div class="navigation" style = {{height: '60px'}}>
-                                  <a href = "\" style = {{textDecoration: 'none', width: '20%', float: 'left', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
-                                    Food Truck Finder
-                                  </a>
-                                 <nav style = {{width: '75%', float: 'right', textAlign: 'right', padding: '30px 0 0', fontSize: '1rem'}}>
-                                    <a href = "\signup" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Sign Up</a>
-                                    <a href = "\login" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Log In</a>
-                                    <a href = "\search" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Search</a>
-                                    <a href = "\dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Dashboard</a>
-                                    <a href = "\about" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>About</a>
-                                </nav>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="sections" >
-                                <div class = "editTruck" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
-                                    <form id= "modify" onSubmit={this.handleSubmit}>
-                                        <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Edit Your Truck</span>
-
-                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <span class = "truckName" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
-                                            <span id = "truckName" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                                <input name="truckName" placeholder="Enter the Truck Name" value={this.state.truckName} type="text" onChange={this.handleInputChange}/>
-                                            </span>
-                                        </div>
-
-                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <span class = "description" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Description:</span>
-                                            <span id = "descriptionInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                                <input name="description" placeholder="Enter the Description" value={this.state.description} type="text" onChange={this.handleInputChange}/>
-                                            </span>
-                                        </div>
-
-                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <span class = "schedule" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Schedule:</span>
-                                            <span id = "scheduleInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                                <input name="schedule" placeholder="Enter the Schedule" value={this.state.schedule} type="text" onChange={this.handleInputChange}/>
-                                            </span>
-                                        </div>
-
-                                        <br></br>
-
-                                        <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <input type="submit" value="Submit"/>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "truckName" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
+                                        <span id = "truckName" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="truckName" placeholder="Enter the Truck Name" value={this.state.truckName} type="text" onChange={this.handleInputChange}/>
                                         </span>
-                                    </form>
+                                    </div>
 
-                                    <br></br>
-                                    
-                                    <form id= "route" onSubmit={this.handleRouteSubmit}>
-                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <span class = "newRoute" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Route Location:</span>
-                                            <span id = "routeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                                <input name="newRouteX" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the X Coordinate" value={this.state.newRouteX} type="text" onChange={this.handleInputChange}/>
-                                                <input name="newRouteY" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the Y Coordinate" value={this.state.newRouteY} type="text" onChange={this.handleInputChange}/>
-                                            </span>
-                                        </div>
-                                        <br></br>
-
-                                        <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <input type="submit" value="Submit"/>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "description" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Description:</span>
+                                        <span id = "descriptionInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="description" placeholder="Enter the Description" value={this.state.description} type="text" onChange={this.handleInputChange}/>
                                         </span>
+                                    </div>
 
-                                    </form>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "schedule" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Schedule:</span>
+                                        <span id = "scheduleInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="schedule" placeholder="Enter the Schedule" value={this.state.schedule} type="text" onChange={this.handleInputChange}/>
+                                        </span>
+                                    </div>
 
                                     <br></br>
 
-                                    <form onSubmit={this.handleMenuItemSubmit}>
-                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <span class = "newMenuItemType" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Menu Item Type:</span>
-                                            <span id = "itemInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                                <input name="newMenuItemType" placeholder="Enter the food item's food type" value={this.state.newMenuItemType} type="text" onChange={this.handleInputChange}/>
-                                            </span>
-                                        </div>
-                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <span class = "newMenuItemName" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Menu Item Name:</span>
-                                            <span id = "itemInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                                <input name="newMenuItemName" placeholder="Enter the food item's food type" value={this.state.newMenuItemName} type="text" onChange={this.handleInputChange}/>
-                                            </span>
-                                        </div>
-                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <span class = "newMenuItemPrice" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Menu Item Price:</span>
-                                            <span id = "itemInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                                <input name="newMenuItemPrice" placeholder="Enter the food item's price" value={this.state.newMenuItemPrice} type="text" onChange={this.handleInputChange}/>
-                                            </span>
-                                        </div>
+                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <input type="submit" value="Submit"/>
+                                    </span>
+                                </form>
 
-                                        <br></br>
-
-                                        <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <input type="submit" value="Submit"/>
+                                <br></br>
+                                
+                                <form id= "route" onSubmit={this.handleRouteSubmit}>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "newRoute" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Route Location:</span>
+                                        <span id = "routeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="newRouteX" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the X Coordinate" value={this.state.newRouteX} type="text" onChange={this.handleInputChange}/>
+                                            <input name="newRouteY" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the Y Coordinate" value={this.state.newRouteY} type="text" onChange={this.handleInputChange}/>
                                         </span>
+                                    </div>
+                                    <br></br>
 
-                                    </form>
+                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <input type="submit" value="Submit"/>
+                                    </span>
+
+                                </form>
+
+                                <br></br>
+
+                                <form onSubmit={this.handleMenuItemSubmit}>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "newMenuItemType" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Menu Item Type:</span>
+                                        <span id = "itemInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="newMenuItemType" placeholder="Enter the food item's food type" value={this.state.newMenuItemType} type="text" onChange={this.handleInputChange}/>
+                                        </span>
+                                    </div>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "newMenuItemName" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Menu Item Name:</span>
+                                        <span id = "itemInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="newMenuItemName" placeholder="Enter the food item's food type" value={this.state.newMenuItemName} type="text" onChange={this.handleInputChange}/>
+                                        </span>
+                                    </div>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "newMenuItemPrice" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Menu Item Price:</span>
+                                        <span id = "itemInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="newMenuItemPrice" placeholder="Enter the food item's price" value={this.state.newMenuItemPrice} type="text" onChange={this.handleInputChange}/>
+                                        </span>
+                                    </div>
 
                                     <br></br>
 
-                                    <form onSubmit={this.handleRatingSubmit}>
-                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <span class = "newRating" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Rating:</span>
-                                            <span id = "ratingInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                                <input name="newRating" placeholder="Select a new rating (DEBUG)" value={this.state.newRating} type="text" onChange={this.handleInputChange}/>
-                                            </span>
-                                        </div>
-                                        <br></br>
+                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <input type="submit" value="Submit"/>
+                                    </span>
 
-                                        <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                            <input type="submit" value="Submit"/>
+                                </form>
+
+                                <br></br>
+
+                                <form onSubmit={this.handleRatingSubmit}>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <span class = "newRating" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Rating:</span>
+                                        <span id = "ratingInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                            <input name="newRating" placeholder="Select a new rating (DEBUG)" value={this.state.newRating} type="text" onChange={this.handleInputChange}/>
                                         </span>
+                                    </div>
+                                    <br></br>
 
-                                    </form>
+                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <input type="submit" value="Submit"/>
+                                    </span>
 
-                                </div>
+                                </form>
+
                             </div>
                         </div>
                     </div>

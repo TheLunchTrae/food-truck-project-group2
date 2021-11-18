@@ -68,9 +68,9 @@ public class UserController {
         }
     }
 
-    @GetMapping("/api/username")
-    public String getUsername(@RequestHeader(name="token")Long token) {
-        return userService.getUserNameWithId(token);
+    @GetMapping("/api/userinfo")
+    public User getUsername(@RequestHeader(name="token")Long token) {
+        return userService.secureUser(userService.getUserWithId(token));
     }
 
     @GetMapping("/api/details/{id}")
@@ -80,9 +80,9 @@ public class UserController {
                 //.body(userService.getUserWithId(id));
     }
 
-    @GetMapping("/api/dashboard/{id}")
-    public ResponseEntity getDashboardContents(@PathVariable long id){
-        User user = userService.getUserWithId(id);
+    @GetMapping("/api/dashboard/")
+    public ResponseEntity getDashboardContents(@RequestHeader(name="token")Long token){
+        User user = userService.getUserWithId(token);
         DashboardData dashboardData = new DashboardData();
         /*
         if ((user = userService.loginUser(user)) == null){
@@ -118,8 +118,7 @@ public class UserController {
         User postUser;
         if ((postUser = userService.modifyUserPreferences(preferences, userId)) != null) {
             return ResponseEntity.ok()
-                    .header("Content-Type", "application/json")
-                    .body(postUser);
+                    .body(userService.secureUser(postUser));
         } else {
             return ResponseEntity.ok()
                     .body("User preference modification failed");

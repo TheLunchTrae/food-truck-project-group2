@@ -28,6 +28,16 @@ public class UserService {
 
     public User findUser(String token) { return userRepository.findByToken(token); }
 
+    public User secureUser(User user){
+        User sec = new User();
+        sec.setUserName(user.getUserName());
+        sec.setEmailAddress(user.getEmailAddress());
+        sec.setFoodTypePreferences(user.getFoodTypePreferences());
+        sec.setLocationPreference(user.getLocationPreference());
+        sec.setRatingPreference(user.getRatingPreference());
+        sec.setPricePreference(user.getPricePreference());
+        return sec;
+    }
     // Hashes the input string and returns the hash
     public String hashPassword(String password) throws NoSuchAlgorithmException {
         // hash the password
