@@ -17,6 +17,7 @@ const center = {
 
 class MapComponent extends Component {
   constructor(props){
+    super();
     this.setState()
   }
   render() {
