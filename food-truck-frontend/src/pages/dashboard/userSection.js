@@ -6,8 +6,10 @@ class UserSection extends Component {
     constructor(props){
         super(props);
         this.state = { username: '', usertype: '', typePref: 'None', 
-                        locPref: 'None',ratingPref: 'None', pricePref: 'None',
-                        editing: false };
+                        rangePref: 'None', ratingPref: 'None', pricePref: 'None',
+                     editing: false
+                    };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     
     componentDidMount(){
@@ -23,91 +25,142 @@ class UserSection extends Component {
         })
     }
 
-    componentDidUpdate(prevProps){
-        document.getElementById('editButton').addEventListener(this.changeEdit);
-    }
-
-    changeEdit(){
-        console.log("HERE FOR FUN");
-        if(this.editing){
-             //axios post goes here
+    handleSubmit(event){
+        event.preventDefault();
+        if(event.target.id === 'prefs'){
+            if(!this.state.editing){
+                this.setState({
+                    ['editing']: true
+                });
+            } else {
+                const userPrefs = {
+                    'foodType': document.getElementById('typeSelect').value,
+                    'location': null,
+                    'rating': document.getElementById('ratingSelect').value,
+                    'pricePref': document.getElementById('priceSelect').value
+                }
+                axios.post("http://localhost:8090/api/dashboard/preferences", userPrefs, {
+                    headers: {
+                        'userId': sessionStorage.getItem('token')
+                    }
+                })
+                .then(res => {
+                    console.log(res);
+                })
+                this.setState({
+                    ['editing']: false
+                });
+            }
+        } else if(event.target.id === 'drop'){
+            //document.getElementById("typesDropdown").classList.toggle("show");
         }
+        
     }
 
     renderEdit(){
         return(
             <div class={styles.parent}>
                 <span style={{ textAlign: 'center' }}>
-                    <button value="Save Preferences" id="editButton" class={styles.editButton}/>
+                    <form id="prefs" onSubmit={this.handleSubmit}>
+                        <button type="submit" id="editButton" class={styles.editButton}>
+                            Save Preferences
+                        </button>
+                    </form>
                 </span>
-                <table class={styles.prefTableD}>
-                    <tr>
-                        {/* Food Type Preference*/}
-                        <td>
-                            <span class={styles.prefHead}>
-                                Food Type:
-                            </span>
-                        </td>
-                        <td>
-                            <span class={styles.prefBody} name="typePref">
-                                {this.state.typePref}
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        {/* Location Preference*/}
-                        <td>
-                            <span class= {styles.prefHead}>
-                                Truck Location:
-                            </span>
-                        </td>
-                        <td>
-                            <span class = {styles.prefBody} name="locProf">
-                                {this.state.locPref}
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        {/* Rating Preference*/}
-                        <td>
-                            <span class={styles.prefHead}>
-                                Minimum Rating:
-                            </span>
-                        </td>
-                        <td>
-                            <span class ={styles.prefBody} name="ratingPref">
-                                <select class={styles.dropdown} name="ratingSelect">
-                                    <option value="american">American</option>
-                                    <option value="mexican">Mexican</option>
-                                    <option value="indian">Indian</option>
-                                </select>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        {/* Price Range Preference*/}
-                        <td>
-                            <span class={styles.prefHead}>
-                                Price Range:
-                            </span>
-                        </td>
-                        <td>                       
-                            <span class ={styles.prefBody} name="pricePref">
-                                {this.state.pricePref}
-                            </span>
-                        </td>
-                    </tr>
+                <table class={styles.prefTableE}>
+                    <tbody>
+                        <tr>
+                            {/* Food Type Preference*/}
+                            <td>
+                                <span class={styles.prefHead}>
+                                    Food Type:
+                                </span>
+                            </td>
+                            <td> 
+                                <span class ={styles.prefChoice} name="ratingPref">
+                                    <select class={styles.dropdown} id="ratingSelect"> 
+                                        <option value="null">None</option>
+                                        <option value="American">American</option>
+                                        <option value="Mexican">Mexican</option>
+                                        <option value="TexMex">TexMex</option>
+                                        <option value="Indian">Indian</option>
+                                        <option value="Chinese">Chinese</option>
+                                        <option value="Japanese">Japanese</option>
+                                        <option value="Thai">Thai</option>
+                                    </select>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            {/* Location Preference*/}
+                            <td>
+                                <span class= {styles.prefHead}>
+                                    Truck Range:
+                                </span>
+                            </td>
+                            <td>
+                                <span class = {styles.prefChoice} name="rangePref">
+                                    <select class={styles.dropdown} id="rangeSelect">
+                                        <option value="null">None</option>
+                                        <option value="5">5 Miles</option>
+                                        <option value="10">10 Miles</option>
+                                        <option value="25">25 Miles</option>
+                                    </select>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            {/* Rating Preference*/}
+                            <td>
+                                <span class={styles.prefHead}>
+                                    Minimum Rating:
+                                </span>
+                            </td>
+                            <td>
+                                <span class ={styles.prefChoice} name="ratingPref">
+                                    <select class={styles.dropdown} id="ratingSelect"> 
+                                        <option value="null">None</option>
+                                        <option value="5">***** (5)</option>
+                                        <option value="4">**** (4)</option>
+                                        <option value="3">*** (3)</option>
+                                        <option value="2">** (2)</option>
+                                        <option value="1">* (1)</option>
+                                    </select>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            {/* Price Range Preference*/}
+                            <td>
+                                <span class={styles.prefHead}>
+                                    Price Range:
+                                </span>
+                            </td>
+                            <td>                       
+                                <span class ={styles.prefBody} name="pricePref">
+                                    <select class={styles.dropdown} id="priceSelect">    
+                                        <option value="null">None</option>
+                                        <option value="Average < $5">Less Than $5</option>
+                                        <option value="Average $5-$10">$5 - $10</option>
+                                        <option value="Average $10+">$10+</option>
+                                    </select>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         );
     }
 
+   
+
     renderDisplay(){
         return ( 
             <div class={styles.parent}>
                 <span style={{ textAlign: 'center' }}>
-                    <form onSubmit={this.changeEdit}>
-                        <button type="submit" class={styles.editButton}>
+                    <form id="prefs" onSubmit={this.handleSubmit}>
+                        <button type="submit" id="editButton" class={styles.editButton}>
                             Edit Preferences
                         </button>
                     </form>
@@ -131,12 +184,12 @@ class UserSection extends Component {
                             {/* Location Preference*/}
                             <td>
                                 <span class= {styles.prefHead}>
-                                    Truck Location:
+                                    Truck Range:
                                 </span>
                             </td>
                             <td>
                                 <span class = {styles.prefBody}>
-                                    {this.state.locPref}
+                                    {this.state.rangePref}
                                 </span>
                             </td>
                         </tr>

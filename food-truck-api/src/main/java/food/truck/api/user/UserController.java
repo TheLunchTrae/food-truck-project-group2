@@ -70,11 +70,7 @@ public class UserController {
 
     @GetMapping("/api/userinfo")
     public User getUsername(@RequestHeader(name="token")Long token) {
-        User u = userService.getUserWithId(token);
-        User ret = new User();
-        ret.setUserName(u.getUserName());
-        ret.setUserType(u.getUserType());
-        return ret;
+        return userService.secureUser(userService.getUserWithId(token));
     }
 
     @GetMapping("/api/details/{id}")
@@ -122,8 +118,7 @@ public class UserController {
         User postUser;
         if ((postUser = userService.modifyUserPreferences(preferences, userId)) != null) {
             return ResponseEntity.ok()
-                    .header("Content-Type", "application/json")
-                    .body(postUser);
+                    .body(userService.secureUser(postUser));
         } else {
             return ResponseEntity.ok()
                     .body("User preference modification failed");
