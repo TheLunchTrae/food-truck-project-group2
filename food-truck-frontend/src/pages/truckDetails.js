@@ -23,7 +23,7 @@ class About extends Component {
         console.log(sessionStorage.getItem('token'));
         axios.get("http://localhost:8090/api/subscribe/" + this.state.truckId, {
             headers:{
-                'token': sessionStorage.getItem('token')
+                'userId': sessionStorage.getItem('token')
             }
         }).then(res => {
             console.log(res);
