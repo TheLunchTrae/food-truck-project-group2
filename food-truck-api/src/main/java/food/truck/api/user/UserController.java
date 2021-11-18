@@ -125,7 +125,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/api/subscribe/{truckId}")
+    @GetMapping("/api/subscribe/{truckId}")
     public ResponseEntity subscribeUserToTruck(@PathVariable Long truckId, @RequestHeader Long userId){
         User postUser;
         if ((postUser = userService.addSubscription(truckId, userId)) != null) {
@@ -136,8 +136,6 @@ public class UserController {
             return ResponseEntity.ok()
                     .body("User subscription failed");
         }
-
-
     }
 
     //dash/board/addTruck is in FoodTruckController
