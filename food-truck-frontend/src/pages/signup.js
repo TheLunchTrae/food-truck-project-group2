@@ -26,7 +26,7 @@ class Signup extends Component {
             userName: this.state.username,
             emailAddress: this.state.email,
             password: this.state.password,
-            userType: document.getElementsByName("userTypeChoice").value
+            userType: document.getElementById("userType").value
         };
 
         //Post to URL
@@ -86,7 +86,7 @@ class Signup extends Component {
                                         <span class = "userType" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>User Type:</span>
                                     </label>
                                     <span id = "usertype" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                        <select name="userTypeChoice">
+                                        <select id="userType">
                                             <option value="Customer">Customer</option>
                                             <option value="Owner">Food Truck Owner</option>
                                         </select>
