@@ -31,32 +31,43 @@ class Dashboard extends Component {
 
     handlePreferenceSubmit(event) {
         var lati, lngi;
-        Geocode.fromAddress(this.state.address).then(res => {
-            const { lat, lng } = res.results[0].geometry.location;
-            console.log(lat, lng);
-            lati = lat;
-            lngi = lng;
-        })
-
-        alert(lati);
-        alert(lngi);
-
-        const Preferences = {
-            foodType: this.state.foodTypePref,
-            location: {
-                longitude: lngi,
-                latitude: lati
-            },
-            rating: this.state.ratingPref,
-            price:  this.state.pricePref,
-            distance: this.state.range
-        };
-    
-        //Post to URL
-        const val = axios.post("http://localhost:8090/api/dashboard/preferences", Preferences, {headers:{'userId': this.state.userId}}).then(res => {
-            console.log(res);
-        });
-
+        //TODO - add error check for invalid address
+        if (this.state.address.length > 0){
+            Geocode.fromAddress(this.state.address).then(res => {
+                const { lat, lng } = res.results[0].geometry.location;
+                console.log(lat, lng);
+                lati = lat;
+                lngi = lng;
+                
+                const Preferences = {
+                    foodType: this.state.foodTypePref,
+                    location: {
+                        longitude: lngi,
+                        latitude: lati
+                    },
+                    rating: this.state.ratingPref,
+                    price:  this.state.pricePref,
+                    distance: this.state.range
+                };
+            
+                //Post to URL
+                const val = axios.post("http://localhost:8090/api/dashboard/preferences", Preferences, {headers:{'userId': this.state.userId}}).then(res => {
+                    console.log(res);
+                });
+            })
+        } else {
+            //No address provided
+            const Preferences = {
+                foodType: this.state.foodTypePref,
+                rating: this.state.ratingPref,
+                price:  this.state.pricePref,
+                distance: this.state.range
+            };
+            //Post to URL
+            const val = axios.post("http://localhost:8090/api/dashboard/preferences", Preferences, {headers:{'userId': this.state.userId}}).then(res => {
+                console.log(res);
+            });
+        }
         event.preventDefault()    
     }
 
@@ -164,7 +175,7 @@ class Dashboard extends Component {
                                             </span>
                                         </div>
                                 </div>
-                                
+
                                 <div style = {{display: 'inline-block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                     <span class = "pricePref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Price:</span>
                                     <span id = "priceInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
