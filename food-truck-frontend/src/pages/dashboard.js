@@ -48,7 +48,8 @@ class Dashboard extends Component {
                 latitude: lati
             },
             rating: this.state.ratingPref,
-            price:  this.state.pricePref
+            price:  this.state.pricePref,
+            distance: this.state.range
         };
     
         //Post to URL
@@ -149,24 +150,21 @@ class Dashboard extends Component {
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                     <span class = "locationPref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Range:</span>
                                         <span id = "locationInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="range" placeholder="Please enter a Range" pattern="[1-9][0-9]{2}" title="Must be a positive value between 0 and 999" value={this.state.range} type="text" onChange={this.handleInputChange}/>
+                                            <input name="range" placeholder="Please enter a Range" pattern="[0-9]+" title="Must be a positive integer value" value={this.state.range} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                 </div>
                                 <div style = {{ display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <label>
                                             <span class = "ratingPref" style = {{marginLeft: '17%', float: 'left', color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating:</span>
                                         </label>
-                                        <span id = "foodLocInput" style={{float: 'left', fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <select name="usertype">
-                                            <option value="" selected disabled hidden>N/A</option>
-                                                <option value="1">***** (5)</option>
-                                                <option value="2">**** (4)</option>
-                                                <option value="3">*** (3)</option>
-                                            <option value="4">** (2)</option>
-                                            <option value="5">* (1)</option>
-                                            </select>
-                                        </span>
+                                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                            <span class = "value" style = {{fontSize: '1.0rem', fontWeight: 'bold', marginTop: '5px'}}>Rating value:</span>
+                                            <span id = "ratingPref" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                                <input name="ratingPref" placeholder="Enter rating value (1-5)" pattern= "[1-5]" title="Must be 1-5" value={this.state.ratingPref} type="text" onChange={this.handleInputChange}/>
+                                            </span>
+                                        </div>
                                 </div>
+                                
                                 <div style = {{display: 'inline-block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                     <span class = "pricePref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Price:</span>
                                     <span id = "priceInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
