@@ -4,6 +4,7 @@ import axios from 'axios';
 import { FormatAlignLeftRounded } from '@material-ui/icons';
 import MenuBar from '../menuBar.js';
 import UserSection from './dashboard/userSection.js';
+import MapComponent from '../mapComponent.js'
 
 class Dashboard extends Component {
     constructor(props) {
@@ -44,8 +45,8 @@ class Dashboard extends Component {
                             <UserSection/>
                         </div>
                     </div>
+                    <MapComponent/>
                 </body>
-                
             </html>
         );
     }
