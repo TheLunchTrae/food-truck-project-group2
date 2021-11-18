@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import MenuBar from '../menuBar';
 
 class About extends Component {
     constructor(props) {
         super();
-        this.state = { userId: '', truckId: -1, truckName: '', route: [], schedule: '', menu: '', description: '', ratings: [], ratingValue: '', ratingReview: ''};
+        this.state = { truckId: -1, truckName: '', route: [], schedule: '', menu: '', description: '', ratings: [], ratingValue: '', ratingReview: ''};
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubscribeSubmit = this.handleSubscribeSubmit.bind(this);
@@ -19,9 +20,12 @@ class About extends Component {
         });
     }
     handleSubscribeSubmit(event) {
-
-
-        const val = axios.post("http://localhost:8090/api/subscribe/" + this.state.truckId, {}, {headers:{'userId': this.state.userId}}).then(res => {
+        console.log(sessionStorage.getItem('token'));
+        const val = axios.post("http://localhost:8090/api/subscribe/" + this.state.truckId, {
+            headers:{
+                'token': sessionStorage.getItem('token')
+            }
+        }).then(res => {
             console.log(res);
         });
         if (val != null)
@@ -31,8 +35,9 @@ class About extends Component {
     }
 
     handleRatingSubmit(event){
+        const userId = sessionStorage.getItem('token');
         const Rating = {
-            userId: this.state.userId,
+            userId: userId,
             value: this.state.ratingValue,
             review: this.state.ratingReview
         };
