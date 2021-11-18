@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.sql.Date;
 
+import food.truck.api.foodtruck.FoodTruckService;
 import food.truck.api.other.Event;
 import food.truck.api.other.Preferences;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,13 +109,8 @@ public class UserService {
                 user.setPricePreference(preferences.getPrice());
             }
             //Set food preference (if set)
-            if (preferences.getFoodType() != null && preferences.getFoodType().length() > 0){
-                //user.setFoodTypePreference(preferences.getFoodType());
-
-                //Add user preference
-                List<String> foodTypePreferences = user.getFoodTypePreferences();
-                foodTypePreferences.add(preferences.getFoodType());
-                user.setFoodTypePreferences(foodTypePreferences);
+            if (preferences.getFoodTypes() != null){
+                user.addFoodTypePreferences(preferences.getFoodTypes());
             }
             //Set location preference (if set)
             if (preferences.getLocation() != null){
@@ -122,6 +118,20 @@ public class UserService {
             }
         } else {
             System.out.println("finding user with id "+id+ " failed");
+            return null;
+        }
+        //Save the modified user
+        userRepository.save(user);
+        return user;
+    }
+
+    public User addSubscription(long truckId, long userId){
+        User user;
+        if ((user = userRepository.findById(userId)) != null) {
+            //NOTE - no check as to whether truck w/Id actually exists
+            user.addSubscription(truckId);
+        } else {
+            System.out.println("finding user with id "+userId+ " failed");
             return null;
         }
         //Save the modified user

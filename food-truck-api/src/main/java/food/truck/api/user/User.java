@@ -6,8 +6,7 @@ import food.truck.api.foodtruck.Location;
 import lombok.Data;
 
 import java.sql.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Data
 @Entity
@@ -58,6 +57,28 @@ public class User {
 
     @Column(name = "LOCATION_PREFERENCE")
     Location locationPreference;
+
+    public void addFoodTypePreferences(List<String> foodTypePreferences){
+        if (this.foodTypePreferences == null){
+            this.foodTypePreferences = new LinkedList<>();
+        }
+        for (String foodType : foodTypePreferences){
+            //Don't add preference if it's already there
+            if (!this.foodTypePreferences.contains(foodType)){
+                this.foodTypePreferences.add(foodType);
+            }
+        }
+    }
+
+    public void addSubscription(long truckId){
+        if (subscriptions == null){
+            subscriptions = new LinkedList<>();
+        }
+        //Don't add subscription if already present
+        if (!subscriptions.contains(truckId)){
+            subscriptions.add(truckId);
+        }
+    }
 
     //TODO - iterate over all food trucks & their ratings, return those w/matching userid
     public List<Rating> getUserRatings(){

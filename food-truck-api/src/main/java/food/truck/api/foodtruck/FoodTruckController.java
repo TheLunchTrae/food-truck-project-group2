@@ -92,9 +92,7 @@ public class FoodTruckController {
     //TODO - add user token as header
     @PostMapping("/api/addRating/")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity addRatingToFoodTruck(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
-        Rating rating = jsonWrapper.getRating();
-
+    public ResponseEntity addRatingToFoodTruck(@RequestBody Rating rating, @RequestHeader Long truckID){
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckID)) != null){
             foodTruck = foodTruckService.addRatingToFoodTruck(foodTruck, rating);
