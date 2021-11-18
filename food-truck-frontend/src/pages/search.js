@@ -6,12 +6,13 @@ import MenuBar from '../menuBar';
 class Search extends Component {
     constructor(props) {
         super(props);
-        this.state = { foodTrucksRec: [], foodTrucksSearch: [], search: '' };
+        this.state = { foodTrucksRec: [], foodTrucksSearch: [], search: '', listColor: 'white' };
         this.componentDidMount = this.componentDidMount.bind(this);
         this.renderRecommended = this.renderRecommended.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.renderSearch = this.renderSearch.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleTruckClick = this.handleTruckClick.bind(this);
     }
     handleChangeStatus(event) {
     }
@@ -32,7 +33,7 @@ class Search extends Component {
                 }
                 }).then(res => {
                     console.log(res.data);
-                    const foodTrucks = res.data.map(obj => ({truckName: obj.truckName}));
+                    const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
                     this.setState({ foodTrucksSearch: foodTrucks });
             });
         }
@@ -45,7 +46,7 @@ class Search extends Component {
                 }
                 }).then(res => {
                     console.log(res.data);
-                    const foodTrucks = res.data.map(obj => ({truckName: obj.truckName}));
+                    const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
                     this.setState({ foodTrucksSearch: foodTrucks });
             });
         }
@@ -57,15 +58,19 @@ class Search extends Component {
             }
         }).then(res => {
             console.log(res.data);
-            const foodTrucks = res.data.map(obj => ({truckName: obj.truckName}));
+            const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
             this.setState({ foodTrucksRec: foodTrucks });
         });
     }
     renderRecommended(index, key) {
-        return <div key={key}>{this.state.foodTrucksRec[index].truckName}</div>;
+        return <div key={key} onClick={this.handleTruckClick} id={this.state.foodTrucksRec[index].truckId}>{this.state.foodTrucksRec[index].truckName}</div>;
     }
     renderSearch(index, key) {
-        return <div key={key}>{this.state.foodTrucksSearch[index].truckName}</div>;
+        return <div key={key} onClick={this.handleTruckClick} id={this.state.foodTrucksSearch[index].truckId}>{this.state.foodTrucksSearch[index].truckName}</div>;
+    }
+    handleTruckClick(event) {
+        console.log(event.target.id);
+        window.location.href="/truckDetails?truckId=" + event.target.id;
     }
     render() {
         return (
@@ -79,7 +84,6 @@ class Search extends Component {
                                 <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Search</span>
 
                                 <div style={{marginLeft: '100px', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
-                                    <ReactList itemRenderer = {this.renderRecommended} length={this.state.foodTrucksRec.length} type='uniform' />
 
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
@@ -100,11 +104,23 @@ class Search extends Component {
                             <div class = "block" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
 
                                 <div style={{marginLeft: '100px', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
-                                    <ReactList itemRenderer = {this.renderSearch} length={this.state.foodTrucksSearch.length} type='uniform' />
+                                    <ReactList itemRenderer = {this.renderSearch} length={this.state.foodTrucksSearch.length} type='uniform'/>
                                 </div>
 
                             </div>
                         </div>
+
+                        <div class="sections">
+                            <div class = "block" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+
+                                <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Recommended</span>
+
+                                <div style={{marginLeft: '100px', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
+                                    <ReactList itemRenderer = {this.renderRecommended} length={this.state.foodTrucksRec.length} type='uniform' alignContent='center' />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </body>
             </html>
