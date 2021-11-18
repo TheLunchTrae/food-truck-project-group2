@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import Geocode from "react-geocode";
+
+Geocode.setApiKey("AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk");
+Geocode.setLanguage("en");
 
 const containerStyle = {
   width: '400px',
@@ -12,6 +16,9 @@ const center = {
 };
 
 class MapComponent extends Component {
+  constructor(props){
+    this.setState()
+  }
   render() {
     return (
       <LoadScript

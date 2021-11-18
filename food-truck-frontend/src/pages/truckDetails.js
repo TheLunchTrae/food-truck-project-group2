@@ -21,16 +21,13 @@ class About extends Component {
     }
     handleSubscribeSubmit(event) {
         console.log(sessionStorage.getItem('token'));
-        const val = axios.post("http://localhost:8090/api/subscribe/" + this.state.truckId, {
+        axios.get("http://localhost:8090/api/subscribe/" + this.state.truckId, {
             headers:{
                 'token': sessionStorage.getItem('token')
             }
         }).then(res => {
             console.log(res);
         });
-        if (val != null)
-            alert("Subscription successful")
-
         event.preventDefault()
     }
 
@@ -45,9 +42,7 @@ class About extends Component {
         const val = axios.post("http://localhost:8090/api/addRating/", Rating, {headers:{'truckId': this.state.truckId}}).then(res => {
             console.log(res);
         });
-        if (val != null)
-            alert("Rating add successful")
-
+        
         event.preventDefault()
 
     }

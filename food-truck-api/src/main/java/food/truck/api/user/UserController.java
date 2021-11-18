@@ -125,13 +125,12 @@ public class UserController {
         }
     }
 
-    @PostMapping("/api/subscribe/{truckId}")
-    public ResponseEntity subscribeUserToTruck(@PathVariable Long truckId, @RequestHeader Long userId){
+    @PostMapping("/api/subscribe")
+    public ResponseEntity subscribeUserToTruck(@RequestBody Long truckId, @RequestHeader Long userId){
         User postUser;
         if ((postUser = userService.addSubscription(truckId, userId)) != null) {
             return ResponseEntity.ok()
-                    .header("Content-Type", "application/json")
-                    .body(postUser);
+                    .body("Successfully Subscribed");
         } else {
             return ResponseEntity.ok()
                     .body("User subscription failed");
