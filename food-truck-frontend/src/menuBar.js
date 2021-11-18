@@ -28,13 +28,16 @@ class MenuBar extends Component {
     
     LoggedIn(){
         return (    
-            <nav style = {{width: '25%', float: 'right', textAlign: 'center', padding: '30px 0 0', fontSize: '1rem'}}>
-                <a href = "\dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>
+            <nav style = {{width: '40%', float: 'right', textAlign: 'center', padding: '30px 0 0', fontSize: '1rem'}}>
+                <a href = "/dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>
                     {this.state.username}
                 </a>
-                <a href = "\search" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Search</a>
-                <a href = "\dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Dashboard</a>
-                <a href = "\about" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>About</a>
+                <a href = "/search" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Search</a>
+                <a href = "/dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Dashboard</a>
+                <a href = "/about" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>About</a>
+                <button type="submit" id="logout" onClick={loginService.logout} style = {{fontSize: '1.0rem', backgroundColor: '#90AACB', border: 'none', color: '#FFFFFF', padding: '15px 20px', cursor: 'pointer'}}>
+                    Logout
+                </button>
             </nav>
             
         );
