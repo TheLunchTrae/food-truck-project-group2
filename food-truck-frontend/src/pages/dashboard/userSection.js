@@ -5,11 +5,12 @@ import styles from './userSection.module.scss';
 class UserSection extends Component {
     constructor(props){
         super(props);
-        this.state = { username: '', usertype: '', typePref: 'None', 
+        this.state = {  username: '', usertype: '', typePref: 'None', 
                         rangePref: 'None', ratingPref: 'None', pricePref: 'None',
-                     editing: false
+                        editing: false
                     };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
     
     componentDidMount(){
@@ -25,6 +26,16 @@ class UserSection extends Component {
         })
     }
 
+    handleInputChange(event) {
+        console.log(event.target);
+        const name = event.target.name;
+        const value = event.target.value;
+        
+        this.setState({
+            [name]: value
+        });
+    }
+
     handleSubmit(event){
         event.preventDefault();
         if(event.target.id === 'prefs'){
@@ -37,7 +48,7 @@ class UserSection extends Component {
                     'foodType': document.getElementById('typeSelect').value,
                     'location': null,
                     'rating': document.getElementById('ratingSelect').value,
-                    'pricePref': document.getElementById('priceSelect').value
+                    'pricePref': this.state.pricePref
                 }
                 axios.post("http://localhost:8090/api/dashboard/preferences", userPrefs, {
                     headers: {
@@ -78,7 +89,7 @@ class UserSection extends Component {
                             </td>
                             <td> 
                                 <span class ={styles.prefChoice} name="ratingPref">
-                                    <select class={styles.dropdown} id="ratingSelect"> 
+                                    <select class={styles.dropdown} id="typeSelect"> 
                                         <option value="null">None</option>
                                         <option value="American">American</option>
                                         <option value="Mexican">Mexican</option>
@@ -113,7 +124,7 @@ class UserSection extends Component {
                             {/* Rating Preference*/}
                             <td>
                                 <span class={styles.prefHead}>
-                                    Minimum Rating:
+                                    Rating:
                                 </span>
                             </td>
                             <td>
@@ -133,17 +144,14 @@ class UserSection extends Component {
                             {/* Price Range Preference*/}
                             <td>
                                 <span class={styles.prefHead}>
-                                    Price Range:
+                                    Price:
                                 </span>
                             </td>
                             <td>                       
                                 <span class ={styles.prefBody} name="pricePref">
-                                    <select class={styles.dropdown} id="priceSelect">    
-                                        <option value="null">None</option>
-                                        <option value="Average < $5">Less Than $5</option>
-                                        <option value="Average $5-$10">$5 - $10</option>
-                                        <option value="Average $10+">$10+</option>
-                                    </select>
+                                    <input type="text" placeholder="Enter a Price" name="pricePref" 
+                                    value={this.state.pricePref} pattern="[1-9][0-9]\.[0-9][0-9]"
+                                    onChange={this.handleInputChange}/>
                                 </span>
                             </td>
                         </tr>
@@ -197,7 +205,7 @@ class UserSection extends Component {
                             {/* Rating Preference*/}
                             <td>
                                 <span class={styles.prefHead}>
-                                    Minimum Rating:
+                                    Rating:
                                 </span>
                             </td>
                             <td>
@@ -210,7 +218,7 @@ class UserSection extends Component {
                             {/* Price Range Preference*/}
                             <td>
                                 <span class={styles.prefHead}>
-                                    Price Range:
+                                    Price:
                                 </span>
                             </td>
                             <td>                       

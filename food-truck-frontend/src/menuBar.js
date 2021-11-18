@@ -62,7 +62,7 @@ class MenuBar extends Component {
         <div name="menuBar" class="banner-area" style = {{margin: 'auto 20px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '5vh'}}>
             <div class="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
                 <div class="navigation" style = {{height: '60px'}}>
-                    <a href = "\\" style = {{textDecoration: 'none', width: '20%', float: 'left', textAlign: 'center', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
+                    <a href = "/" style = {{textDecoration: 'none', width: '20%', float: 'left', textAlign: 'center', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
                         Food Truck Finder
                     </a>
                     {this.renderType()}

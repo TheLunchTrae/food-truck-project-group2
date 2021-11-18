@@ -52,7 +52,6 @@ class Signup extends Component {
             <html>
                 <body style = {{backgroundColor: '#90AACB'}}>
                     <MenuBar/>
-
                     <div class="sections">
                         <div class = "signup" style = {{backgroundColor: '#F9D5A7', alignContent: 'center', borderRadius: '100px', width: '30%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
                             <form onSubmit={this.handleSubmit}>
