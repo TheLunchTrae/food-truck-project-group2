@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import loginService from '../loginService';
-import MenuBar from '../menuBar';
+import { MenuBar } from './index.js';
 
 class Login extends Component {
     constructor(props) {

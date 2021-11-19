@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {wait} from "@testing-library/dom";
 import { Public } from '@material-ui/icons';
-import MenuBar from '../menuBar';
+import { MenuBar } from './index.js'
 
 class Signup extends Component {
     constructor(props) {

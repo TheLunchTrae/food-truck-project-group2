@@ -1,8 +1,7 @@
 import { HighlightSharp } from '@material-ui/icons';
 import axios from 'axios';
 import React, { Component } from 'react';
-import './_app.js'
-import MenuBar from '../menuBar.js';
+import { MenuBar } from './index.js';
 
 class Dashboard extends Component {
 

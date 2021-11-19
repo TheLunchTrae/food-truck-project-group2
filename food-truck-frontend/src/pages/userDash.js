@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import './_app.js'
 import axios from 'axios';
 import { FormatAlignLeftRounded } from '@material-ui/icons';
-import MenuBar from '../menuBar.js';
 import UserSection from './dashboard/userSection.js';
-import MapComponent from '../mapComponent.js'
+import { MenuBar, MapComponent } from './index.js';
 
 class Dashboard extends Component {
     constructor(props) {
