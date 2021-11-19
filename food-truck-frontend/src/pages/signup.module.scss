@@ -75,21 +75,19 @@
 }
 
 
-
-
-.formelementinput.hasValue ~ .formelementbar::after,
+.formelementinput:valid ~ .formelementbar::after,
 .formelementinput:focus ~ .formelementbar::after {
   transform: rotateY(0deg);
 }
-.formelementinput.hasValue ~ .formelementlabel,
+.formelementinput:valid ~ .formelementlabel,
 .formelementinput:focus ~ .formelementlabel {
   color: #337ab7;
 }
-.formelementinput.hasValue,
+.formelementinput:valid,
 .formelementinput:focus {
   opacity: 1;
 }
-.formelementinput.hasValue ~ .formelementlabel,
+.formelementinput:valid ~ .formelementlabel,
 .formelementinput:focus ~ .formelementlabel {
   transform: translateY(-100%) translateY(-0.5em) translateY(-2px);
   cursor: pointer;
