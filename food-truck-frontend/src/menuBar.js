@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import loginService from './loginService';
+import styles from './menuBar.module.scss';
 
 class MenuBar extends Component {
     constructor(props) {
@@ -27,31 +28,23 @@ class MenuBar extends Component {
     }
     
     LoggedIn(){
-        return (    
-            <nav style = {{fontFamily: 'poppins', width: '40%', float: 'right', textAlign: 'center', padding: '30px 0 0', fontSize: '1rem'}}>
-                <a href = "/dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>
-                    {this.state.username}
-                </a>
-                <a href = "/search" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Search</a>
-                <a href = "/dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Dashboard</a>
-                <a href = "/about" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>About</a>
-                <button type="submit" id="logout" onClick={loginService.logout} style = {{textDecoration: 'none', fontSize: '1.0rem', backgroundColor: '#90AACB', border: 'none', color: '#FFFFFF', padding: '15px 20px', cursor: 'pointer'}}>
-                    Logout
-                </button>
-            </nav>
-            
+        return (
+            <>
+                <a class={styles.right} href="/dashboard">{this.state.username}</a>
+                <a class={styles.right} href="/search">Search</a>
+                <a class={styles.right} href="/about">About</a>
+            </>
         );
     }
     
     NotLoggedIn(){
         return (
-            <nav style = {{fontFamily: 'poppins', width: '45%', float: 'right', textAlign: 'center', padding: '30px 0 0', fontSize: '1rem'}}>
-                <a href = "\signup" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Sign Up</a>
-                <a href = "\login" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Log In</a>
-                <a href = "\search" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Search</a>
-                <a href = "\dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Dashboard</a>
-                <a href = "\about" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>About</a>
-            </nav>
+            <div>
+                <a class={styles.right} href="/signup">Sign Up</a>
+                <a class={styles.right} href="/login">Log In</a>
+                <a class={styles.right} href="/search">Search</a>
+                <a class={styles.right} href="/about">About</a>
+            </div>
         );
     }
 
@@ -62,16 +55,12 @@ class MenuBar extends Component {
 
     render(){
         return (
-        <div name="menuBar" class="banner-area" style = {{fontFamily: 'poppins', margin: 'auto 20px', animationName: 'animate', animationDuration: '7s', animationIterationCount: 'infinite', animationTimingFunction: 'ease-in-out', height: '5vh'}}>
-            <div class="wrapper" style = {{width: '1170px', margin: '0 auto'}}>
-                <div class="navigation" style = {{height: '60px'}}>
-                    <a href = "/" style = {{textDecoration: 'none', width: '20%', float: 'left', textAlign: 'center', padding: '30px 0 0',fontSize: '25px', fontWeight: '700', color: '#FFFFFF'}}>
-                        Food Truck Finder
-                    </a>
+            <div class={styles.topDiv}>
+                <div id='topNav' class={styles.topNav}>
+                    <a class={styles.FTF} href = "/">Food Truck Finder</a>
                     {this.renderType()}
                 </div>
             </div>
-        </div>
         );
     }
 }

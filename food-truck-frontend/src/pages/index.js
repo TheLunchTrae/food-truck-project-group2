@@ -1,13 +1,12 @@
 require('dotenv').config();
 import MenuBar from '../menuBar';
+import styles from './index.module.scss';
 
 function HomePage() {
     return (
-        <div style = {{backgroundColor: '#90AACB', padding: '10px', fontFamily: 'poppins', height: '100vh'}}>
-            <header style = {{backgroundColor: '#000000'}}>
+        <html>
+            <body class={styles.body}>
                 <MenuBar/>
-            </header>
-            <body style = {{backgroundColor: '#000000'}}>
                 <div class="banner-text">
                     <div class="text-area" style = {{textAlign: 'center', width: '75%', margin: '0 auto'}}>
                         <h2 style = {{fontSize: '75px', color: '#FFFFFF', margin: '10% 0 0'}}>Food Truck Finder</h2>
@@ -16,9 +15,7 @@ function HomePage() {
                     </div>
                 </div>
             </body>
-        </div>
-
-
+        </html>
     )
 }
 

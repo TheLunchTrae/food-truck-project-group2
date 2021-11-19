@@ -4,10 +4,6 @@ import axios from 'axios';
 import { FormatAlignLeftRounded } from '@material-ui/icons';
 import MenuBar from '../menuBar.js';
 import MapComponent from '../mapComponent.js';
-import Geocode from 'react-geocode';
-
-Geocode.setApiKey("AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk");
-Geocode.setLanguage("en");
 
 class Dashboard extends Component {
     constructor(props) {
@@ -33,7 +29,7 @@ class Dashboard extends Component {
         var lati, lngi;
         //TODO - add error check for invalid address
         if (this.state.address.length > 0){
-            Geocode.fromAddress(this.state.address).then(res => {
+            MapComponent.Geocode.fromAddress(this.state.address).then(res => {
                 const { lat, lng } = res.results[0].geometry.location;
                 console.log(lat, lng);
                 lati = lat;
