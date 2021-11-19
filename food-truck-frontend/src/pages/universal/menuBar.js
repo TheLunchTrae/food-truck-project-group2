@@ -40,10 +40,10 @@ class MenuBar extends Component {
     NotLoggedIn(){
         return (
             <div>
-                <a class={styles.right} href="/signup">Sign Up</a>
-                <a class={styles.right} href="/login">Log In</a>
-                <a class={styles.right} href="/search">Search</a>
                 <a class={styles.right} href="/about">About</a>
+                <a class={styles.right} href="/search">Search</a>
+                <a class={styles.right} href="/login">Log In</a>
+                <a class={styles.right} href="/signup">Sign Up</a>
             </div>
         );
     }
