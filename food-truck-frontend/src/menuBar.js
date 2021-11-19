@@ -35,7 +35,7 @@ class MenuBar extends Component {
                 <a href = "/search" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Search</a>
                 <a href = "/dashboard" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>Dashboard</a>
                 <a href = "/about" style = {{textDecoration: 'none', color: '#FFFFFF', padding: '15px 20px'}}>About</a>
-                <button type="submit" id="logout" onClick={loginService.logout} style = {{fontSize: '1.0rem', backgroundColor: '#90AACB', border: 'none', color: '#FFFFFF', padding: '15px 20px', cursor: 'pointer'}}>
+                <button type="submit" id="logout" onClick={loginService.logout} style = {{textDecoration: 'none', fontSize: '1.0rem', backgroundColor: '#90AACB', border: 'none', color: '#FFFFFF', padding: '15px 20px', cursor: 'pointer'}}>
                     Logout
                 </button>
             </nav>
