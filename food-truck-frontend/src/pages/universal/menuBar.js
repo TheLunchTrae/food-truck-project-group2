@@ -13,6 +13,10 @@ class MenuBar extends Component {
         this.state.token = sessionStorage.getItem('token');
         console.log('token = ' + this.state.token);
         if(this.state.token != null){
+            axios.interceptors.request.use(req => {
+                req.headers['token']=this.state.token;
+                return req;
+            })
             axios.get('http://localhost:8090/api/userinfo', {
                 headers: {
                     'token': this.state.token

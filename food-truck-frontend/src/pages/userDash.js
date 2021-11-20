@@ -4,6 +4,7 @@ import axios from 'axios';
 import { FormatAlignLeftRounded } from '@material-ui/icons';
 import UserSection from './dashboard/userSection.js';
 import { MenuBar, MapComponent } from './index.js';
+import styles from './userDash.module.scss';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -33,18 +34,12 @@ class Dashboard extends Component {
     render() {
         return (
             <html lang='en'>
-                <body style = {{backgroundColor: '#90AACB'}}>
+                <body class={styles.body}>
                     <MenuBar/>
-                    <div style={{fontWeight: '500'}}>
-                        <h1 class = "heading" style = {{width: '100vw', textAlign: 'center', marginBottom: '0px', fontSize: '2.3rem', color: '#000000'}}>Dashboard</h1>
-                        <p style = {{width: '100vw', textAlign: 'center', marginTop: '0px', fontSize: '1.3rem', color: '#FFFFFF'}}>Welcome to the Food Truck Finder Dashboard!</p>
+                    <h1 class={styles.dHeading}>Dashboard</h1>
+                    <div class={styles.userSection}>
+                        <UserSection/>
                     </div>
-                    <div class = "sections">
-                        <div class = "userSection" style = {{alignContent: 'center', marginLeft: '3vw', float: 'left', borderRadius: '100px', background: '#F9D5A7', width: '20%', padding: '20px', display: 'inline-block', border: '3px solid black'}}>
-                            <UserSection/>
-                        </div>
-                    </div>
-                    <MapComponent/>
                 </body>
             </html>
         );

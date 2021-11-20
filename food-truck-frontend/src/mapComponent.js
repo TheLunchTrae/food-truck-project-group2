@@ -19,11 +19,11 @@ class MapComponent extends Component {
     }
   }
 
-  render(props) {
+  render() {
     return (
       <LoadScript googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk">
         <GoogleMap mapContainerStyle={containerStyle}
-                    center={props.center}
+                    center={this.props.center}
                     zoom={10} >
         </GoogleMap>
       </LoadScript>
