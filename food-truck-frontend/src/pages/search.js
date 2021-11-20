@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
 import ReactList from 'react-list';
-import MenuBar from '../menuBar';
+import { MenuBar } from './index.js'
 
 class Search extends Component {
     constructor(props) {

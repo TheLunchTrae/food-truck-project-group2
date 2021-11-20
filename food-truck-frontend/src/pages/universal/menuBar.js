@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import loginService from './loginService';
 import styles from './menuBar.module.scss';
+import loginService from './loginService';
 
 class MenuBar extends Component {
     constructor(props) {

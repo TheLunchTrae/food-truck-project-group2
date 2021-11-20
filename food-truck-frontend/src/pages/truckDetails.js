@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import MenuBar from '../menuBar';
+import { MenuBar } from './index.js';
+import MapComponent from '../mapComponent.js';
 
 class About extends Component {
     constructor(props) {
-        super();
+        super(props);
         this.state = { truckId: -1, truckName: '', route: [], schedule: '', menu: '', description: '', ratings: [], ratingValue: '', ratingReview: ''};
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -79,7 +80,6 @@ class About extends Component {
                 <body style = {{backgroundColor: '#90AACB'}}>
                     <MenuBar/>
                     <div class="sections" >
-
                         <div class = "headerText" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '35%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
                             <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>{this.state.truckName}Truck</span>
                             <span class = "ratingPref" style = {{color: '#000000', display: 'block', fontSize: '1.4rem', fontWeight: 'bold', textAlign: 'center'}}>ID: {this.state.truckId}</span>

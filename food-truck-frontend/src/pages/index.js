@@ -1,6 +1,9 @@
 require('dotenv').config();
-import MenuBar from '../menuBar';
 import styles from './index.module.scss';
+import MenuBar from './universal/menuBar';
+import MapComponent from '../mapComponent';
+
+export { MenuBar, MapComponent };
 
 function HomePage() {
     return (
