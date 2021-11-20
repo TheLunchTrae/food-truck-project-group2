@@ -9,6 +9,7 @@ class LoginService {
             emailAddress: email,
             password: password
         };
+        console.log(userDto);
         return axios.post("http://localhost:8090/api/login", userDto) 
     }
 

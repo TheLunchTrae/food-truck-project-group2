@@ -62,7 +62,7 @@ public class UserService {
     }
 
     public String generateUserToken(User user) throws NoSuchAlgorithmException {
-        return hashPassword(user.getId() + user.getSignupDate().toString() + user.getPassword());
+        return hashPassword(user.getId() + user.getEmailAddress() + user.getSignupDate().toString() + user.getPassword());
     }
 
     public User saveUser(User user){
