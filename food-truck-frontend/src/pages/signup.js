@@ -27,7 +27,7 @@ class Signup extends Component {
             userName: this.state.username,
             emailAddress: this.state.email,
             password: this.state.password,
-            userType: document.getElementById("userType").value
+            userType: document.getElementById("userTypeInput").value
         };
 
         //Post to URL

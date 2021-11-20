@@ -39,7 +39,6 @@ class UserSection extends Component {
     render(){
         return (
             <div class={styles.userSection}>
-                {this.state.username}
                 {this.state.usertype}
             </div>
         );
