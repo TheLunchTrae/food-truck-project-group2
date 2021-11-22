@@ -3,11 +3,8 @@ package food.truck.api.user;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 import java.util.Optional;
-import java.sql.Date;
 
-import food.truck.api.foodtruck.FoodTruckService;
 import food.truck.api.other.Event;
 import food.truck.api.other.Preferences;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +74,23 @@ public class UserService {
         }
     }
 
+    public Preferences getUserPreferences(long id){
+        Preferences preferences = new Preferences();
+        User user;
+        if ((user = userRepository.findById(id)) != null){
+            preferences.setDistance(user.getDistancePreference());
+            preferences.setPrice(user.getPricePreference());
+            preferences.setFoodTypes(user.getFoodTypePreferences());
+            //Location not here
+            preferences.setRating(user.getRatingPreference());
+
+            return preferences;
+        } else {
+            //TODO - implement fall back
+            return null;
+        }
+    }
+
     public User modifyUser(Event event){
         User user;
         if ((user = userRepository.findById(event.getUserId())) != null) {
@@ -99,7 +113,9 @@ public class UserService {
         return user;
     }
 
+    //TODO - error check
     public User modifyUserPreferences(Preferences preferences, long id){
+        System.out.println(preferences);
         User user;
         if ((user = userRepository.findById(id)) != null) {
             //Set rating (if set)
@@ -112,7 +128,7 @@ public class UserService {
             }
             //Set food preference (if set)
             if (preferences.getFoodTypes() != null){
-                user.addFoodTypePreferences(preferences.getFoodTypes());
+                user.setFoodTypePreferences(preferences.getFoodTypes());
             }
             //Set location preference (if set)
             if (preferences.getLocation() != null){
@@ -131,6 +147,8 @@ public class UserService {
         userRepository.save(user);
         return user;
     }
+
+    /**************************************************************************/
 
     public User addSubscription(long truckId, long userId){
         User user;

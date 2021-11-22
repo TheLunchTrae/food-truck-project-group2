@@ -80,6 +80,7 @@ public class UserController {
                 .body(userService.getUserNameWithId(id));
     }
 
+    //TODO - seriously change this
     @GetMapping("/api/dashboard/{id}")
     public ResponseEntity getDashboardContents(@PathVariable long id){
         User user = userService.getUserWithId(id);
@@ -98,6 +99,20 @@ public class UserController {
                 .body(dashboardData);
     }
 
+    //Note Location is not one of the preferences returned (it'll be left blank)
+    @GetMapping("/api/getPreferences/{id}")
+    public ResponseEntity getUserPreferences(@PathVariable long id){
+        User user = userService.getUserWithId(id);
+        Preferences preferences;
+        if ((preferences = userService.getUserPreferences(id)) != null) {
+            return ResponseEntity.ok().body(preferences);
+        } else {
+            //TODO - should this really be here???
+            return ResponseEntity.ok().body(new Preferences());
+        }
+    }
+
+    //TODO - REMOVE; FUNDAMENTALLY BROKEN
     @PostMapping("/api/dashboard/modify")
     public ResponseEntity modifyUser(@RequestBody Event event){
         User postUser;
@@ -111,6 +126,7 @@ public class UserController {
         }
     }
 
+    //TODO - DEPRECATED; REMOVE SOON
     //TODO - double check this works especially with how I haven't tested sessions
     @PostMapping("/api/dashboard/preferences")
     public ResponseEntity modifyUserPreferences(@RequestBody Preferences preferences, @RequestHeader Long userId){
@@ -124,6 +140,15 @@ public class UserController {
         }
     }
 
+    /*************************USER MODIFICATION FUNCTIONS*****************************/
+
+    @PostMapping("/api/modify/username")
+    public ResponseEntity modifyUsername(@RequestBody String newUsername, @RequestHeader Long userId){return null;}
+    @PostMapping("/api/modify/password")
+    public ResponseEntity modifyPassword(@RequestBody String newPassword, @RequestHeader Long userId){return null;}
+
+    /*********************************************************************************/
+
     @GetMapping("/api/subscribe/{truckId}")
     public ResponseEntity subscribeUserToTruck(@PathVariable Long truckId, @RequestHeader Long userId){
         User postUser;
@@ -136,7 +161,4 @@ public class UserController {
                     .body("User subscription failed");
         }
     }
-
-    //dash/board/addTruck is in FoodTruckController
-
 }

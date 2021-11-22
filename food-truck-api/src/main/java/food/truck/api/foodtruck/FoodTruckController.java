@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class FoodTruckController {
     private UserService userService;
     private FoodTruckService foodTruckService;
@@ -22,7 +23,6 @@ public class FoodTruckController {
     }
 
     @PostMapping("/api/addTruck")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, @RequestHeader(name="token")Long token){
         FoodTruck postFoodTruck;
         foodTruck.setOwnerId(token);
@@ -38,7 +38,6 @@ public class FoodTruckController {
     }
 
     @PostMapping("/api/modifyTruck")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyFoodTruck(@RequestBody FoodTruck foodTruckDiff){
         FoodTruck postFoodTruck;
         //NOTE - MUST HAVE OWNER ID SET ON THE FRONT END!!!!!!
@@ -54,7 +53,6 @@ public class FoodTruckController {
 
     //Call via editTruck frontend page
     @PostMapping("/api/modifyTruck/menu")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyFoodTruckMenuAddFoodItem(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
         FoodItem foodItem = jsonWrapper.getFoodItem();
 
@@ -71,7 +69,6 @@ public class FoodTruckController {
     }
     //Call via editTruck frontend page
     @PostMapping("/api/modifyTruck/route")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyFoodTruckAddRouteLocation(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
         Location location = jsonWrapper.getLocation();
 
@@ -91,7 +88,6 @@ public class FoodTruckController {
     //NOTE - don't need to call via front end for now (just test via postman)
     //TODO - add user token as header
     @PostMapping("/api/addRating")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity addRatingToFoodTruck(@RequestBody Rating rating, @RequestHeader Long truckID){
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckID)) != null){
@@ -106,7 +102,6 @@ public class FoodTruckController {
     }
 
     @GetMapping("/api/getTruckName/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getFoodTruckNameWithId(@PathVariable long id){
         String foodTruckName;
         if ((foodTruckName = foodTruckService.getFoodTruckNameWithId(id)) != null){
@@ -120,7 +115,6 @@ public class FoodTruckController {
     }
 
     @GetMapping("/api/getTruck/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getFoodTruckWithId(@PathVariable long id){
         FoodTruck postFoodTruck;
         if ((postFoodTruck = foodTruckService.getFoodTruckWithId(id)) != null){
@@ -134,7 +128,6 @@ public class FoodTruckController {
     }
 
     @GetMapping("/api/search/recommended")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getRecommendedTrucks(@RequestHeader(name="token")Long id){
         User user = userService.getUserWithId(id);
         if (user != null){
@@ -149,7 +142,6 @@ public class FoodTruckController {
 
     //TODO - add other search filters
     @GetMapping("/api/searchQuery/{search}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getTruckSearchResults(@PathVariable String search, @RequestHeader(name="token")Long id) {
         User user = userService.getUserWithId(id);
         if (user != null) {
@@ -164,7 +156,6 @@ public class FoodTruckController {
 
     //In progress
     @PostMapping("/api/map/nearestTrucks")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getNearestTrucks(@RequestHeader Long userId){
         User user = userService.getUserWithId(userId);
         if (user != null) {
