@@ -31,6 +31,7 @@ public class UserService {
     public User secureUser(User user){
         User sec = new User();
         sec.setUserName(user.getUserName());
+        sec.setUserType(user.getUserType());
         sec.setEmailAddress(user.getEmailAddress());
         sec.setFoodTypePreferences(user.getFoodTypePreferences());
         sec.setLocationPreference(user.getLocationPreference());

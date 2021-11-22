@@ -1,0 +1,97 @@
+//Overall dashboard table wrapper
+.wrapper{
+    border: none;
+}
+//Tab bar settings
+.typeBar{
+    background-color: #708090;
+    display: block;
+    height: 5%;
+    border: none;
+}
+
+//Default options for both buttons
+.subButton, .ownButton{
+    background-color: #333;
+    color:white;
+    border: none;
+    font-size: 2.2rem;
+    vertical-align: bottom;
+}
+
+//Button hover effects
+.subButton:hover, .ownButton:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+//If customer, show only 1 tab
+.customer .subButton{
+    width: 100%;
+}
+.customer .ownButton{
+    display: none;
+}
+
+//If owner, show 2 tabs 
+.owner .subButton, .owner .ownButton {
+    display: inline-block;
+    width: 50%;
+}
+
+//What to do with selected tab
+.subTab .subButton, .ownTab .ownButton{
+    font-weight: bold;
+    font-size: 2.0rem;
+    width: 52%;
+    transition: font-size 0.1s linear, height 3s linear;
+}
+
+//What to do with not selected tab
+.subTab .ownButton, .ownTab .subButton{
+    opacity: 0.7;
+    font-size: 1.2rem;
+    width: 48%;
+    transition: font-size 0.1s linear, height 3s linear;
+}
+
+//Hides table for unselected tab
+.subTab ~ .displayTable .ownTrucks, .ownTab ~ .displayTable .subTrucks{
+    display: none;
+}
+
+//Parent div for tables
+.displayTable{
+    border: none;
+    display: flex;
+    height: 95%;
+    vertical-align: top;
+    background-color: #555555;
+}
+
+//For both table <span>s
+.ownTrucks, .subTrucks{
+    width: 100%;
+}
+
+//Actual tables
+.table{
+    color: white;
+    width: 100%;
+}
+
+//Table headings
+.tableHeading{
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+//Adds borders between column headings
+.tableHeading + .tableHeading {
+    border-left: 2px black;
+}
+
+//Table rows
+.tableRow + .tableRow{
+    border-top: black;
+}

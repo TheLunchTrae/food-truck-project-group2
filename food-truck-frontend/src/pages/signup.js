@@ -51,11 +51,11 @@ class Signup extends Component {
     render() {
         return (
             <html>
-                <body style = {{backgroundColor: '#a9a9a9'}}>
+                <body style = {{backgroundColor: '#708090'}}>
                     <MenuBar/>
                     <div class="sections">
                         <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Sign Up</span>
-                        <div class = "signup" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '30%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
+                        <div class = "signup" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '18%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
                             <form onSubmit={this.handleSubmit}>
                                 <div class={styles.wrapper}>
 
@@ -87,7 +87,7 @@ class Signup extends Component {
                                     </div>
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <button type="submit" style = {{background: '#a9a9a9', fontSize: '17px', cursor: 'pointer'}}>Sign Up!</button>
+                                        <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Sign Up!</button>
                                     </div>
                                 </div>
                             </form>
