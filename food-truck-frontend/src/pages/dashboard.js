@@ -3,15 +3,23 @@ import './_app.js'
 import axios from 'axios';
 import { FormatAlignLeftRounded } from '@material-ui/icons';
 import { MenuBar, MapComponent } from './index.js';
+//import { Checkbox } from './Checkbox';
+//import { iteratorSymbol } from '@reduxjs/toolkit/node_modules/immer/dist/internal';
 
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        this.state = { userId: '', name: '', foodTruckData: [] , foodTrucksNearby: [], foodTypePref: '', address: '', range: '', ratingPref: 0, pricePref: 0.00};
+        this.state = { userId: '', name: '', foodTruckData: [] , foodTrucksNearby: [], foodTypePref: '', address: '', range: '', ratingPref: 5, pricePref: 0.00};
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.componentWillMount = this.componentWillMount.bind(this);
         this.handlePreferenceSubmit = this.handlePreferenceSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
+
+    componentWillMount(){
+        this.selectedCheckboxes = new Set();
+    }
+
     handleChangeStatus(event) {
     }
 
@@ -25,8 +33,28 @@ class Dashboard extends Component {
     }
 
     handlePreferenceSubmit(event) {
+        event.preventDefault();        
+
+        //Post food type preferences
+        beef = document.getElementById('beef');
+        chicken = document.getElementById('chicken');
+        turkey = document.getElementById('turkey');
+
+        //Should be string array
+        var foodPreferences = [];
+        if (beef.checked == true){
+            foodPreferences.push('beef');
+        }
+        if (chicken.checked == true){
+            foodPreferences.push('chicken');
+        }
+        if (turkey.checked == true){
+            foodPreferences.push('turkey');
+        }
+
         var lati, lngi;
         //TODO - add error check for invalid address
+        //TODO - not finding mapcomponent for some reason
         if (this.state.address.length > 0){
             MapComponent.Geocode.fromAddress(this.state.address).then(res => {
                 const { lat, lng } = res.results[0].geometry.location;
@@ -35,7 +63,8 @@ class Dashboard extends Component {
                 lngi = lng;
                 
                 const Preferences = {
-                    foodType: this.state.foodTypePref,
+                    //foodType: this.state.foodTypePref,
+                    foodTypes: foodPreferences,
                     location: {
                         longitude: lngi,
                         latitude: lati
@@ -53,7 +82,8 @@ class Dashboard extends Component {
         } else {
             //No address provided
             const Preferences = {
-                foodType: this.state.foodTypePref,
+                //foodType: this.state.foodTypePref,
+                foodTypes: foodPreferences,
                 rating: this.state.ratingPref,
                 price:  this.state.pricePref,
                 distance: this.state.range
@@ -63,8 +93,8 @@ class Dashboard extends Component {
                 console.log(res);
             });
         }
-        event.preventDefault()    
     }
+
 
     componentDidMount() {
         // gets the id from the url and sets it to the state
@@ -74,39 +104,31 @@ class Dashboard extends Component {
         const id = urlParams.get('id');
         this.setState({userId: id});
         var ownerName;
+        //TODO - have restriction so it doesn't get food trucks if user is not owner (i.e. via looking at user type)
         if(id != null) {
-            //First get owner's name from details
+            //First get user's name from details
             axios.get("http://localhost:8090/api/details/" + id).then(res => {
                 console.log(res);
                 //this.setState({ name: res.data });
                 ownerName = res.data;
-            })
+            });
+            //Get user's preferences to set as the default values for the preference settings
+            axios.get("http://localhost:8090/api/getPreferences/" + id).then(res => {
+                console.log(res);
+                //TODO - add food type preferences among these
+                this.setState({range: res.data.distance, ratingPref: res.data.rating, pricePref: res.data.price});
+            });
+
+
             //Then get food truck data via dashbord data
             axios.get("http://localhost:8090/api/dashboard/" + id).then(res => {
                 console.log(res);
 
-                var dashboardData = res.data;
-                //alert(res.data.foodTrucks[0]["truckName"]);
-                var str = " ";
-                str += dashboardData["subscriptions"] + ' ';
-                str += dashboardData["ratings"] + ' ';
-                //ftd = dashboardData.foodTrucks;
-                var ftdata = dashboardData.foodTrucks;
-                for (var i = 0; i < ftdata.length; i++){
-                    str += ftdata[i]["truckId"] + ' ';
-                    str += ftdata[i]["truckName"] + ' ';
-                    str += ftdata[i]["ownerId"] + ' ';
-                    str += ftdata[i]["route"] + ' ';
-                    str += ftdata[i]["schedule"] + ' ';
-                    str += ftdata[i]["menu"] + ' ';
-                    str += ftdata[i]["description"] + ' ';
-                    str += ftdata[i]["ownerId"] + ' ';
-                }
-                //alert(str);
+                var ftdata = res.data.foodTrucks;
 
                 this.setState({userId: id, name: ownerName, foodTruckData: ftdata});
-            })
-
+            });
+            //Get nearest trucks (TODO - format)
             axios.post("http://localhost:8090/api/map/nearestTrucks", {}, {headers:{'userId': id}}).then(res => {
                 console.log(res);
                 this.setState({foodTrucksNearby: res.data});
@@ -120,6 +142,7 @@ class Dashboard extends Component {
     myURL(id){
         return "/editTruck?id="+id
     }
+
     render() {
         return (
         <html>
@@ -145,14 +168,16 @@ class Dashboard extends Component {
 
                             <span class = "userType" style = {{color: '#0F52BA', display: 'block', fontSize: '1.1rem', textAlign: 'center', margin: '20px 0', fontWeight: 'bold'}}><u>Preference Modification</u></span>
                             
-                            <form id= "modify" onSubmit={this.handlePreferenceSubmit}>
-
+                            <form id= "modify" onSubmit={this.handlePreferenceSubmit}>                                
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                     <span class = "foodTypePref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Food Type:</span>
                                     <span id = "foodTypeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                        <input name="foodTypePref" placeholder="Please Enter a Food Type" value={this.state.foodTypePref} type="text" onChange={this.handleInputChange}/>
+                                        <input type="checkbox" id="beef" name="foodTypeBeef" onChange={this.handleInputChange}/>Beef
+                                        <input type="checkbox" id="chicken" name="foodTypeChicken" onChange={this.handleInputChange}/>Chicken
+                                        <input type="checkbox" id="turkey" name="foodTypeTurkey" onChange={this.handleInputChange}/>Turkey
                                     </span>
                                 </div>
+
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                     <span class = "locationPref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Location:</span>
                                         <span id = "locationInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
@@ -160,8 +185,8 @@ class Dashboard extends Component {
                                         </span>
                                 </div>
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <span class = "locationPref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Range:</span>
-                                        <span id = "locationInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                    <span class = "rangePref" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Range:</span>
+                                        <span id = "rangeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
                                             <input name="range" placeholder="Please enter a Range" pattern="[0-9]+" title="Must be a positive integer value" value={this.state.range} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                 </div>
