@@ -73,8 +73,17 @@ class UserSection extends Component {
                 </button>
                 <span class={styles.choice}>
                     <div>
-                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="American">American</button>
-
+                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="American">
+                            American>
+                            <span>
+                                
+                            </span>
+                        </button>
+                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Mexican">Mexican</button>
+                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Japanese">Japanese</button>
+                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Chinese">Chinese</button>
+                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Thai">Thai</button>
+                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Indian">Indian</button>
                     </div>
                 </span>
 

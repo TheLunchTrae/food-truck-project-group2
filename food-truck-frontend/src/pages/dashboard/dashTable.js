@@ -9,6 +9,7 @@ class DashTable extends Component {
     }
 
     componentDidMount(){
+        //Get userinfo to determine type of tabbar
         axios.get("http://localhost:8090/api/userinfo").then(res => {
             if(res.data.usertype === "Customer"){
                 document.getElementById("typeBar").classList.add(styles.customer);
@@ -17,8 +18,8 @@ class DashTable extends Component {
                 document.getElementById("typeBar").classList.add(styles.owner);
                 document.getElementById("typeBar").classList.add(styles.ownTab);
             }
-        })
-
+        });
+        axios.get
     }
 
     changeTab(event){
@@ -54,7 +55,8 @@ class DashTable extends Component {
                     <span class={styles.ownTrucks}>
                         <table class={styles.table}>
                             <tr class={styles.tableRow}>
-                                <th class={styles.tableHeading}>Truck Name</th> 
+                                <th class={styles.tableHeading}>Name</th> 
+                                <th class={styles.tableHeading}>Description</th> 
                                 <th class={styles.tableHeading}>Rating</th>       
                                 <th class={styles.tableHeading}>Food Types</th>  
                                 <th class={styles.tableHeading}></th>
