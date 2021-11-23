@@ -55,7 +55,7 @@ class Signup extends Component {
                     <MenuBar/>
                     <div class="sections">
                         <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Sign Up</span>
-                        <div class = "signup" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '18%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
+                        <div class = "signup" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
                             <form onSubmit={this.handleSubmit}>
                                 <div class={styles.wrapper}>
 
