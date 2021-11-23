@@ -1,9 +1,9 @@
 require('dotenv').config();
 import styles from './index.module.scss';
 import MenuBar from './universal/menuBar';
-import MapComponent from '../mapComponent';
+import AutoCompleteMap from './MapComponents/AutoComplete.js';
 
-export { MenuBar, MapComponent };
+export { MenuBar, AutoCompleteMap };
 
 function HomePage() {
     return (
