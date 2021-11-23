@@ -16,6 +16,8 @@ function HomePage() {
                         <h3 style = {{color: '#000000', textTransform: 'uppercase', margin: '0 0 15px', fontSize: '35px'}}>Group 2</h3>
                         <p style = {{fontSize: '18px', color: '#000000', width: '70%', margin: '0 auto', lineHeight: '1.9'}}>Welcome to the Food Truck Finder Application for Group 2!</p>
                     </div>
+
+                    <img src={"https://www.bakemag.com/ext/resources/images/TiffsTreats_FoodTruck.jpg?t=1604679543"}/>
                 </div>
             </body>
         </html>
