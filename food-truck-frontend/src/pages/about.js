@@ -24,7 +24,7 @@ class About extends Component {
                         </div>
 
 
-                        <div class = "block" style = {{alignContent: 'center', width: '75%', padding: '20px', margin: '15px auto', textAllign: 'center'}}>
+                        <div class = "block" style = {{alignContent: 'center', width: '75%', margin: '20px auto', textAllign: 'center'}}>
 
                             <br></br>
 
