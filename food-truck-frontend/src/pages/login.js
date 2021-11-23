@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { MenuBar } from './index.js';
 import loginService from './universal/loginService.js';
+import styles from './signup.module.scss';
 
 class Login extends Component {
     constructor(props) {
@@ -44,35 +45,28 @@ class Login extends Component {
     render() {
         return (
             <html>
-                <body style = {{backgroundColor: '#90AACB'}}>
+                <body style = {{backgroundColor: '#708090'}}>
                     <MenuBar/>
                     <div class="sections">
-                        <div class = "login" style = {{backgroundColor: '#F9D5A7', alignContent: 'center', borderRadius: '100px', width: '30%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+                        <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Login</span>
+                        <div class = "login" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
                             <form onSubmit={this.handleSubmit}>
 
-                                <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Login</span>
+                                <div class={styles.formnput}>
+                                    <input id="emailInput" name="email" class={styles.formelementinput} type="text" pattern=".*@.*\..*" title="Must be in valid email format" placeholder="Please enter your email" value={this.state.email} required onChange={this.handleInputChange}/>
+                                    <div class={styles.formelementbar}></div>
+                                    <label class={styles.formelementlabel} for="email">Email</label>
+                                </div>
 
-                                <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <span class = "email" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Email:</span>
-                                    <span id = "emailInput" style={{fontSize: '1.4rem', display: 'inline', marginLeft: '10px'}}>
-                                        <input name="email" pattern=".*@.*\..*" title="Must be in valid email format" placeholder="Enter an Email" value={this.state.email} type="text" onChange={this.handleInputChange}/>
-                                    </span>
+                                <div class={styles.formnput}>
+                                    <input id="passwordInput" name="password" class={styles.formelementinput} type="password" placeholder="Please enter your password" required value={this.state.password} onChange={this.handleInputChange}/>
+                                    <div class={styles.formelementbar}></div>
+                                    <label class={styles.formelementlabel} for="password">Password</label>
                                 </div>
 
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <label>
-                                            <span class = "password" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Password:</span>
-                                        </label>
-                                        <span id = "passwordInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input type="password" name="password" placeholder="Enter a password" value={this.state.password} onChange={this.handleInputChange}/>
-                                        </span>
+                                    <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Login</button>
                                 </div>
-
-                                <br></br>
-
-                                <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <input type="submit" value="Login"/>
-                                </span>
                             </form>
                         </div>
                     </div>
