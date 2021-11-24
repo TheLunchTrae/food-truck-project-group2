@@ -1,9 +1,9 @@
 require('dotenv').config();
 import styles from './index.module.scss';
 import MenuBar from './universal/menuBar';
-import MapComponent from '../mapComponent';
+import AutoCompleteMap from './MapComponents/AutoComplete.js';
 
-export { MenuBar, MapComponent };
+export { MenuBar, AutoCompleteMap };
 
 function HomePage() {
     return (
@@ -17,7 +17,9 @@ function HomePage() {
                         <p style = {{fontSize: '18px', color: '#000000', width: '70%', margin: '0 auto', lineHeight: '1.9'}}>Welcome to the Food Truck Finder Application for Group 2!</p>
                     </div>
 
-                    <img src={"https://www.bakemag.com/ext/resources/images/TiffsTreats_FoodTruck.jpg?t=1604679543"}/>
+                    <div style={{marginTop: '30px', textAlign: 'center', display: 'block'}}>
+                        <img style={{width: '400px', height: '240px'}} src={"https://www.bakemag.com/ext/resources/images/TiffsTreats_FoodTruck.jpg?t=1604679543"}/>
+                    </div>
                 </div>
             </body>
         </html>

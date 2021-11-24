@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styles from './userSection.module.scss';
+import { LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
 
 class UserSection extends Component {
     constructor(props){
@@ -67,16 +68,14 @@ class UserSection extends Component {
                     <span class={styles.buttonText}>
                     Food Type
                     </span>
-                    <span class={styles.buttonImage}>
-
-                    </span>
+                    <img class={styles.buttonImage} src="https://i.imgur.com/qxQk2c1.png"/>
                 </button>
                 <span class={styles.choice}>
                     <div>
                         <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="American">
-                            American>
+                            American
                             <span>
-                                
+
                             </span>
                         </button>
                         <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Mexican">Mexican</button>
@@ -98,7 +97,31 @@ class UserSection extends Component {
                         
                     </span>
                 </button>
-                    
+                <span class={styles.choice}>
+                    <LoadScript id="script-loader" googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={["places"]}>
+                        <StandaloneSearchBox onPlacesChanged={this.onPlacesChanged}>
+                            <input
+                                type="text"
+                                placeholder="Address"
+                                style={{
+                                boxSizing: `border-box`,
+                                border: `1px solid transparent`,
+                                width: `240px`,
+                                height: `32px`,
+                                padding: `0 12px`,
+                                borderRadius: `3px`,
+                                boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+                                fontSize: `14px`,
+                                outline: `none`,
+                                textOverflow: `ellipses`,
+                                position: "absolute",
+                                }}
+                            />
+                        </StandaloneSearchBox>
+                    </LoadScript>
+                </span>
+
+
                 <button type="button" class={styles.prefPopout} id="ratingButton" onClick={this.pressed} name="prefButton">
                     <span class={styles.buttonText}>
                         Rating

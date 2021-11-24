@@ -48,13 +48,13 @@
 }
 
 .buttonText {
-    float: right;
+    float: left;
     font-weight: bold;
 }
 
 .buttonImage {
-    float: left;
-    z-index:1;
+    position: absolute;
+    height: inherit;
 }
 
 //Disallows buttonText/Images from being
@@ -70,14 +70,17 @@
     cursor: pointer;
 }
 
-.open ~ .choice {
+//Show choice selection/input for selected preference
+.open + .choice {
     display: block;
     z-index: 1;
 }
 
+//General settings for all choices
 .choice{
     display: none;
     position: absolute;
+    left: 110%;
 }
 
 //For Food Type Preference Popout
@@ -90,4 +93,13 @@
     height: 10%;
 }
 
+//Textbox settings
+.textbox{
+    width: 100%;
+    height: 100%
+}
+
+.locationTextBox{
+    height: 200%;
+}
 
