@@ -14,17 +14,24 @@ class About extends Component {
     render() {
         return (
             <html>
-                <body style = {{backgroundColor: '#90AACB'}}>
+                <body style = {{}}>
                     <MenuBar/>
                     <div class="sections" >
-                        <div class = "block" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
-                            <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>About</span>
+
+                        <div class="idk" style={{backgroundColor: '#708090', width: '100%', padding: '20px', textAlign: 'center'}}>
+                            <span class="heading" style={{color: "#000000", marginTop: '40px', display: 'block', fontSize: '3.7rem', textAlign: 'center', fontWeight: 'bold'}}>About</span>
+                            <span id = "text1" style={{color: "#FFFFFF", fontSize: '1.8rem', marginTop: '10px', marginBottom: '40px', marginLeft: '10px', fontWeight: 'bold', display: 'block'}}>Group 2 - Food Truck Finder Application</span>
+                        </div>
+
+
+                        <div class = "block" style = {{alignContent: 'center', width: '75%', margin: '20px auto', textAllign: 'center'}}>
+
                             <br></br>
 
                             <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 30px'}}>
-                                <span id = "text1" style={{fontSize: '1.5rem', marginLeft: '10px', fontWeight: 'bold', display: 'block'}}>Group 2 - Food Truck Finder Application</span>
+
                                 <br></br>
-                                <span id = "text2" style={{fontSize: '1.2rem', marginLeft: '10px', fontWeight: 'bold'}}>This is the Food Truck Finder Application which is an application for...</span>
+                                <span id = "text2" style={{fontSize: '1.3rem', marginLeft: '10px', fontWeight: 'bold'}}>Welcome to the Food Truck Finder Application! This application was created & developed by Sam Hobbs, Trae Stevens, Joshua Hunter & Tyler Ross. The Food Truck Finder Application is built and responsible for...</span>
                             </div>
                         </div>
                     </div>
