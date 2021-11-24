@@ -185,4 +185,17 @@ public class UserController {
             return null;
         }
     }
+
+    @GetMapping("api/owner/trucks")
+    public List<FoodTruck> getOwnersTrucks(@RequestHeader(name="token")Long token) {
+        User user;
+        user = userService.secureUser(userService.getUserWithId(token));
+
+        // make sure the user is an owner
+        if (user.getUserType() == "Owner") {
+            return foodTruckService.getOwnerFoodTrucks(user);
+        }
+
+        return null;
+    }
 }
