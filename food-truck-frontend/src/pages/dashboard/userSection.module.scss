@@ -40,10 +40,12 @@
     font-weight: bold;
 }
 
+//For all buttons
 .prefPopout{
     position: relative;
     margin-top: 5%;
     height: fit-content;
+    width: 100%;
     font-size: 1.5rem;
 }
 
@@ -54,7 +56,8 @@
 
 .buttonImage {
     position: absolute;
-    height: inherit;
+    width: 20%;
+    right: 1%;
 }
 
 //Disallows buttonText/Images from being
@@ -62,6 +65,7 @@
 .buttonText, .buttonImage{
     pointer-events: none;
 }
+
 
 .prefPopout:hover, .savePrefs:hover{
     background-color: #708090;
@@ -71,9 +75,8 @@
 }
 
 //Show choice selection/input for selected preference
-.open + .choice {
-    display: block;
-    z-index: 1;
+.open .choice {
+    display:block;
 }
 
 //General settings for all choices
@@ -93,13 +96,18 @@
     height: 10%;
 }
 
-//Textbox settings
-.textbox{
-    width: 100%;
-    height: 100%
-}
-
-.locationTextBox{
-    height: 200%;
+//Location textboxes
+.locTextBox{
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    width: 240px;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    outline: none;
+    text-overflow: ellipses;
+    position: relative;
 }
 

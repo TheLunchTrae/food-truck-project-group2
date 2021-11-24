@@ -68,23 +68,18 @@ class UserSection extends Component {
                     <span class={styles.buttonText}>
                     Food Type
                     </span>
-                    <img class={styles.buttonImage} src="https://i.imgur.com/qxQk2c1.png"/>
+                    {/*<img class={styles.buttonImage} src="https://i.imgur.com/qxQk2c1.png"/>*/}
+                    <span class={styles.choice}>
+                        <div>
+                            <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="American">American</button>
+                            <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Mexican">Mexican</button>
+                            <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Japanese">Japanese</button>
+                            <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Chinese">Chinese</button>
+                            <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Thai">Thai</button>
+                            <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Indian">Indian</button>
+                        </div>
+                    </span>
                 </button>
-                <span class={styles.choice}>
-                    <div>
-                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="American">
-                            American
-                            <span>
-
-                            </span>
-                        </button>
-                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Mexican">Mexican</button>
-                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Japanese">Japanese</button>
-                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Chinese">Chinese</button>
-                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Thai">Thai</button>
-                        <button type="button" class={styles.typeChoice} onClick={this.chooseType} id="Indian">Indian</button>
-                    </div>
-                </span>
 
                 <button type="button" class={styles.prefPopout} id="locButton" onClick={this.pressed} name="prefButton">
                     <span class={styles.buttonText}>
@@ -93,33 +88,16 @@ class UserSection extends Component {
                     <span class={styles.buttonImage}>
                         
                     </span>
-                    <span class={styles.choice} >
-                        
+                    <span class={styles.choice}>
+                    <input id="range" type="text" placeholder="Range (in miles)" class={styles.locTextBox}/>
+                        <LoadScript id="script-loader" googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={["places"]}>
+                            <StandaloneSearchBox>
+                                <input id="address" type="text" placeholder="Address" class={styles.locTextBox}/>
+                            </StandaloneSearchBox>
+                        </LoadScript>
                     </span>
                 </button>
-                <span class={styles.choice}>
-                    <LoadScript id="script-loader" googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={["places"]}>
-                        <StandaloneSearchBox onPlacesChanged={this.onPlacesChanged}>
-                            <input
-                                type="text"
-                                placeholder="Address"
-                                style={{
-                                boxSizing: `border-box`,
-                                border: `1px solid transparent`,
-                                width: `240px`,
-                                height: `32px`,
-                                padding: `0 12px`,
-                                borderRadius: `3px`,
-                                boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-                                fontSize: `14px`,
-                                outline: `none`,
-                                textOverflow: `ellipses`,
-                                position: "absolute",
-                                }}
-                            />
-                        </StandaloneSearchBox>
-                    </LoadScript>
-                </span>
+                
 
 
                 <button type="button" class={styles.prefPopout} id="ratingButton" onClick={this.pressed} name="prefButton">
@@ -129,10 +107,10 @@ class UserSection extends Component {
                     <span class={styles.buttonImage}>
                         
                     </span>
-                    <span class={styles.choice} >
-                        
-                    </span>
                 </button>
+                <span class={styles.choice} >
+                        
+                </span>
                 
                 <button type="button" class={styles.prefPopout} id="priceButton" onClick={this.pressed} name="prefButton">
                     <span class={styles.buttonText}>
@@ -141,10 +119,10 @@ class UserSection extends Component {
                     <span class={styles.buttonImage}>
                         
                     </span>
-                    <span class={styles.choice} >
-                        
-                    </span>
                 </button>
+                <span class={styles.choice} >
+                    
+                </span>
             </div>
         );
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './_app.js'
 import axios from 'axios';
 import { FormatAlignLeftRounded } from '@material-ui/icons';
-import { MenuBar, MapComponent } from './index.js';
+import { MenuBar, DefaultMap } from './index.js';
 //import { Checkbox } from './Checkbox';
 //import { iteratorSymbol } from '@reduxjs/toolkit/node_modules/immer/dist/internal';
 

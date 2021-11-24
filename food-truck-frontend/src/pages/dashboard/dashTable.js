@@ -49,7 +49,7 @@ class DashTable extends Component {
                             <th class={styles.tableHeading}>Description</th>     
                             <th class={styles.tableHeading}>Rating</th>       
                             <th class={styles.tableHeading}>Food Types</th>
-                            <th class={styles.tableHeading}>Owner</th>    
+                            <th class={styles.tableHeading}>Location</th>    
                         </table>
                     </span>
                     <span class={styles.ownTrucks}>
@@ -59,7 +59,7 @@ class DashTable extends Component {
                                 <th class={styles.tableHeading}>Description</th> 
                                 <th class={styles.tableHeading}>Rating</th>       
                                 <th class={styles.tableHeading}>Food Types</th>  
-                                <th class={styles.tableHeading}></th>
+                                <th class={styles.tableHeading}>Location</th>
                             </tr>
                         </table>
                     </span>

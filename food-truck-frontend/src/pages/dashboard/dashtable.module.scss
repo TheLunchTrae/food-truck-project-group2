@@ -44,7 +44,7 @@
     font-weight: bold;
     font-size: 2.0rem;
     width: 52%;
-    transition: font-size 0.1s linear, height 3s linear;
+    transition: font-size 0.1s ease-in-out;
 }
 
 //What to do with not selected tab
@@ -52,7 +52,7 @@
     opacity: 0.7;
     font-size: 1.2rem;
     width: 48%;
-    transition: font-size 0.1s linear, height 3s linear;
+    transition: font-size 0.1s ease-in-out;
 }
 
 //Hides table for unselected tab
@@ -79,6 +79,7 @@
 .table{
     color: white;
     width: 100%;
+    column-count: 5;
 }
 
 //Table headings
