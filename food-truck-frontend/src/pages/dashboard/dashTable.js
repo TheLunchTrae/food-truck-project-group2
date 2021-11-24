@@ -17,9 +17,14 @@ class DashTable extends Component {
             } else {
                 document.getElementById("typeBar").classList.add(styles.owner);
                 document.getElementById("typeBar").classList.add(styles.ownTab);
+                
             }
         });
-        axios.get
+
+        axios.get("http://localhost:8090/api/owner/trucks").then(trucks => {
+            console.log("Hello");
+            console.log(trucks);
+        });
     }
 
     changeTab(event){

@@ -3,6 +3,8 @@ import axios from 'axios';
 import styles from './userSection.module.scss';
 import { LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
 
+const libraries=["places"];
+
 class UserSection extends Component {
     constructor(props){
         super(props);
@@ -90,7 +92,7 @@ class UserSection extends Component {
                     </span>
                     <span class={styles.choice}>
                     <input id="range" type="text" placeholder="Range (in miles)" class={styles.locTextBox}/>
-                        <LoadScript id="script-loader" googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={["places"]}>
+                        <LoadScript id="script-loader" googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={libraries}>
                             <StandaloneSearchBox>
                                 <input id="address" type="text" placeholder="Address" class={styles.locTextBox}/>
                             </StandaloneSearchBox>

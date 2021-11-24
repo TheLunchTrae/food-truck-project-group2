@@ -33,21 +33,24 @@ class MenuBar extends Component {
     LoggedIn(){
         return (
             <>
+                {/*They float right so must be in order they appear right to left on MenuBar*/}
+                <a class={styles.right} href="/logout">Logout</a>
                 <a class={styles.right} href="/dashboard">{this.state.username}</a>
-                <a class={styles.right} href="/search">Search</a>
                 <a class={styles.right} href="/about">About</a>
+                <a class={styles.right} href="/search">Search</a>
             </>
         );
     }
     
     NotLoggedIn(){
         return (
-            <div>
+            <>
+                {/*They float right so must be in order they appear right to left on MenuBar*/}
                 <a class={styles.right} href="/about">About</a>
                 <a class={styles.right} href="/search">Search</a>
-                <a class={styles.right} href="/login">Log In</a>
                 <a class={styles.right} href="/signup">Sign Up</a>
-            </div>
+                <a class={styles.right} href="/login">Log In</a>
+            </>
         );
     }
 

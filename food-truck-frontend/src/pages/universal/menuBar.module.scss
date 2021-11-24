@@ -4,7 +4,7 @@
     z-index: 1;
 }
 
-.topNav a {
+.topNav a, .topNav span {
     color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
@@ -12,7 +12,8 @@
     font-size: 17px;
 }
 
-.topNav a:hover {
+.topNav a:hover,
+.topNav span:hover {
     background-color: #ddd;
     color: black;
 }
@@ -24,7 +25,7 @@
     color: #333;
 }
 
-.topNav a.right {
+.topNav .right {
     float: right;
     text-align:center;
     margin: 0;
