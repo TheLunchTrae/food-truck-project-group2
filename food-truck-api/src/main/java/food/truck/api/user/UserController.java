@@ -177,7 +177,12 @@ public class UserController {
             foodTruckList.add(foodTruckService.getFoodTruckWithId(id));
         }
 
-        // return the list
-        return foodTruckList;
+        // return
+        if (foodTruckList.size() != 0) {
+            return foodTruckList;
+        }
+        else {
+            return null;
+        }
     }
 }
