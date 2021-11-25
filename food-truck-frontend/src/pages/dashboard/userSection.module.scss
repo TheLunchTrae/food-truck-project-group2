@@ -75,13 +75,6 @@
     display:block;
 }
 
-//General settings for all choices
-.choice{
-    display: none;
-    position: absolute;
-    left: 110%;
-}
-
 //For all choice buttons
 .choiceButton{
     font-weight: bold;
@@ -91,10 +84,6 @@
     width: 100%;
     height: 10%;
     cursor: pointer;
-}
-
-.selectedType, .selectedRating, .selectedPrice{
-    background-color: green;
 }
 
 //Location textboxes
@@ -111,4 +100,83 @@
     text-overflow: ellipses;
     position: relative;
 }
+
+//General settings for all choice popouts
+.choice{
+    display: none;
+    position: absolute;
+    background-color: #a8a8a8;
+    height: fit-content;
+    left: 110%;
+}
+
+//Label and checkboxes
+.choiceLabel {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: bold;
+    height: fit-content;
+    width: 160px;
+    text-align: center;
+}
+
+
+//Hide initial boxes
+.typeCheckbox, .typeRadio{
+    visibility: hidden;
+}
+
+//Hover settings
+.choiceLabel:hover input ~ .customBox{
+    background-color: gray;
+}
+//Active settings
+.choiceLabel:hover input:active ~ .customBox{
+    background-color: white;
+}
+
+//Checked settings
+.choiceLabel:hover input:checked ~ .customBox{
+    background-color: #a9a9a9;
+}
+//Custom checkbox position
+.customBox{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: black;
+}
+
+//Custom checkbox 
+.customBox:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+//How to display checkmark
+.choiceLabel input:checked ~ .customBox:after {
+    display: block;
+}
+//Settings for checkmark
+.choiceLabel .customBox:after {
+    left: 8px;
+    bottom: 5px;
+    width: 6px;
+    height: 16px;
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+
+
 

@@ -38,30 +38,41 @@ class UserSection extends Component {
             });
         })
         //Set default preferences
+        
         axios.get("http://localhost:8090/api/getPreferences").then(res => {
             console.log(res.data);
             //Food Types by changing CSS
             var types = res.data.foodTypes;
-            document.getElementById("typeChoiceButtons").childNodes.forEach(node => {
+            document.getElementsByName("foodType").forEach(node => {
                 if(types.includes(node.value)){
-                    node.classList.add(styles.selectedType);
+                    node.checked = true;
                 }
             });
             //Distance/location by setting state values
 
             //Rating
+            var rate = document.getElementsByName("rating");
             if(res.data.rating == null){
-                document.getElementById("noRating").classList.add(styles.selectedRating);
+                rate[0].checked = true;
             } else {
-                document.getElementById(res.data.rating).classList.add(styles.selectedRating);
+                rate.forEach(opt => {
+                    if(res.data.rating == opt.value){
+                        opt.checked = true;
+                    }
+                })
             }
             //Price
+            var price = document.getElementsByName("price");
             if(res.data.price == null){
-                document.getElementById("noPrice").classList.add(styles.selectedPrice);
+                price[0].checked = true;
             } else {
-                document.getElementById(res.data.price).classList.add(styles.selectedPrice);
+                price.forEach(opt => {
+                    if(res.data.price == opt.value){
+                        opt.checked = true;
+                    }
+                });
             }
-        })
+        });
     }
 
     pressed(event){
@@ -82,31 +93,10 @@ class UserSection extends Component {
         
     }
 
-    chooseType(event){
-        var choice = event.target.classList;
-        if(choice.contains(styles.selectedType)){
-            choice.remove(styles.selectedType);
-        } else {
-            choice.add(styles.selectedType);
-        }
-    }
-
-    chooseRating(event){
-        var doc = document.getElementsByClassName(styles.selectedRating);
-        if(doc.length != 0) { doc[0].classList.remove(styles.selectedRating); }
-        event.target.classList.add(styles.selectedRating);
-    }
-
-    choosePrice(event){
-        var doc = document.getElementsByClassName(styles.selectedPrice);
-        if(doc.length != 0) { doc[0].classList.remove(styles.selectedPrice); }
-        event.target.classList.add(styles.selectedPrice);
-    }
-
     async savePrefs(){
         //Build food type string
-        const nodes = document.getElementsByClassName(styles.selectedType);
         var foodTypes = [];
+        const nodes = document.querySelectorAll('input[name="foodType"]:checked');
         Array.from(nodes).forEach(choice => {
             foodTypes.push(choice.value);
         });
@@ -120,24 +110,22 @@ class UserSection extends Component {
         } else {
             address = null;
         }
-        //Range
-        var range = this.state.range;
-        if(range == ""){
-            range = null;
+        //Distance
+        var distance = this.state.distance;
+        if(distance == ""){
+            distance = null;
         }
         //Rating
-        var rating = document.getElementsByClassName(styles.selectedRating);
-        if(rating[0].value == "None") { rating = null; }
-        else rating = rating[0].value;
+        var rating = document.querySelector('input[name="rating"]:checked').value;
+        if(rating == "None") { rating = null; }
         //Price
-        var price = document.getElementsByClassName(styles.selectedPrice);
-        if(price[0].value == "None") { price = null; }
-        else price = price[0].value;
-        
+        var price = document.querySelector('input[name="price"]:checked').value;
+        if(price == "None") { price = null; }
+
         const prefs = {
             foodTypes: foodTypes,
             location: location,
-            distance: range,
+            distance: distance,
             rating: rating,
             price: price
         };
@@ -163,14 +151,32 @@ class UserSection extends Component {
                     {/*<img class={styles.buttonImage} src="https://i.imgur.com/qxQk2c1.png"/>*/}
                 </button>
                 <span class={styles.choice}>
-                    <div id="typeChoiceButtons">
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseType} value="American">American</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseType} value="Mexican">Mexican</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseType} value="Japanese">Japanese</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseType} value="Chinese">Chinese</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseType} value="Thai">Thai</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseType} value="Indian">Indian</button>
-                    </div>
+                    <label class={styles.choiceLabel}>
+                        American
+                        <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="American"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        Mexican
+                        <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Mexican"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        Indian
+                        <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Indian"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        Japanese
+                        <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Japanese"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        Chinese
+                        <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Chinese"/>
+                        <span class={styles.customBox}/>
+                    </label>
+
                 </span>
 
                 <button type="button" class={styles.prefPopout} id="locButton" onClick={this.pressed} name="prefButton">
@@ -199,14 +205,36 @@ class UserSection extends Component {
                     </span>
                 </button>
                 <span class={styles.choice} >
-                    <div id="ratingChoiceButtons">
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseRating} id="noRating" value="None">None</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseRating} id="5" value="5">5 stars</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseRating} id="4"value="4">4 stars</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseRating} id="3"value="3">3 stars</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseRating} id="2"value="2">2 stars</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.chooseRating} id="1"value="1">1 star</button>
-                    </div>
+                    <label class={styles.choiceLabel}>
+                        None
+                        <input type="radio" name="rating" class={styles.typeRadio} value="None"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        5 Stars
+                        <input type="radio" name="rating" class={styles.typeRadio} value="5"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        4 Stars
+                        <input type="radio" name="rating" class={styles.typeRadio} value="4"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        3 Stars
+                        <input type="radio" name="rating" class={styles.typeRadio} value="3"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        2 Stars
+                        <input type="radio" name="rating" class={styles.typeRadio} value="2"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        1 Stars
+                        <input type="radio" name="rating" class={styles.typeRadio} value="1"/>
+                        <span class={styles.customBox}/>
+                    </label>
                 </span>
                 
                 <button type="button" class={styles.prefPopout} id="priceButton" onClick={this.pressed} name="prefButton">
@@ -218,12 +246,26 @@ class UserSection extends Component {
                     </span>
                 </button>
                 <span class={styles.choice} >
-                    <div id="priceChoiceButtons">
-                        <button type="button" class={styles.choiceButton} onClick={this.choosePrice} id="noPrice" value="None">None</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.choosePrice} id="15" value="15.00">$$$</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.choosePrice} id="10" value="10.00">$$</button>
-                        <button type="button" class={styles.choiceButton} onClick={this.choosePrice} id="5"  value="5.00" >$</button>
-                    </div>
+                    <label class={styles.choiceLabel}>
+                        None
+                        <input type="radio" name="price" class={styles.typeRadio} value="None"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        $$$
+                        <input type="radio" name="price" class={styles.typeRadio} value="15"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        $$
+                        <input type="radio" name="price" class={styles.typeRadio} value="10"/>
+                        <span class={styles.customBox}/>
+                    </label>
+                    <label class={styles.choiceLabel}>
+                        $
+                        <input type="radio" name="price" class={styles.typeRadio} value="5"/>
+                        <span class={styles.customBox}/>
+                    </label>
                 </span>
             </div>
         );
