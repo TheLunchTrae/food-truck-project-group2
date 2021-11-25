@@ -118,26 +118,16 @@ public class UserService {
         System.out.println(preferences);
         User user;
         if ((user = userRepository.findById(id)) != null) {
-            //Set rating (if set)
-            if (preferences.getRating() != null){
-                user.setRatingPreference(preferences.getRating());
-            }
-            //Set price (if set)
-            if (preferences.getPrice() != null){
-                user.setPricePreference(preferences.getPrice());
-            }
-            //Set food preference (if set)
-            if (preferences.getFoodTypes() != null){
-                user.setFoodTypePreferences(preferences.getFoodTypes());
-            }
+            //Set rating
+            user.setRatingPreference(preferences.getRating());
+            //Set price
+            user.setPricePreference(preferences.getPrice());
+            //Set food preference
+            user.setFoodTypePreferences(preferences.getFoodTypes());
             //Set location preference (if set)
-            if (preferences.getLocation() != null){
-                user.setLocationPreference(preferences.getLocation());
-            }
+            user.setLocationPreference(preferences.getLocation());
             //Set distance preference
-            if (preferences.getDistance() != null){
-                user.setDistancePreference(preferences.getDistance());
-            }
+            user.setDistancePreference(preferences.getDistance());
 
         } else {
             System.out.println("finding user with id "+id+ " failed");

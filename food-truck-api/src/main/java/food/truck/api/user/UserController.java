@@ -102,11 +102,11 @@ public class UserController {
     }
 
     //Note Location is not one of the preferences returned (it'll be left blank)
-    @GetMapping("/api/getPreferences/{id}")
-    public ResponseEntity getUserPreferences(@PathVariable long id){
-        User user = userService.getUserWithId(id);
+    @GetMapping("/api/getPreferences")
+    public ResponseEntity getUserPreferences(@RequestHeader Long token){
+        User user = userService.getUserWithId(token);
         Preferences preferences;
-        if ((preferences = userService.getUserPreferences(id)) != null) {
+        if ((preferences = userService.getUserPreferences(token)) != null) {
             return ResponseEntity.ok().body(preferences);
         } else {
             //TODO - should this really be here???
@@ -131,9 +131,9 @@ public class UserController {
     //TODO - DEPRECATED; REMOVE SOON
     //TODO - double check this works especially with how I haven't tested sessions
     @PostMapping("/api/dashboard/preferences")
-    public ResponseEntity modifyUserPreferences(@RequestBody Preferences preferences, @RequestHeader Long userId){
+    public ResponseEntity modifyUserPreferences(@RequestBody Preferences preferences, @RequestHeader Long token){
         User postUser;
-        if ((postUser = userService.modifyUserPreferences(preferences, userId)) != null) {
+        if ((postUser = userService.modifyUserPreferences(preferences, token)) != null) {
             return ResponseEntity.ok()
                     .body(userService.secureUser(postUser));
         } else {
@@ -165,7 +165,7 @@ public class UserController {
     }
 
     @GetMapping("/api/user/subscriptions")
-    public List<FoodTruck> getUserSubscriptions(@RequestHeader(name="token")Long token) {
+    public List<FoodTruck> getUserSubscriptions(@RequestHeader(name="token") long token) {
         User user;
         user = userService.secureUser(userService.getUserWithId(token));
 
@@ -173,8 +173,10 @@ public class UserController {
         List<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
 
         // get the truck ids that the user is subscribed to
-        for (long id : user.getSubscriptions()) {
-            foodTruckList.add(foodTruckService.getFoodTruckWithId(id));
+        if(user.getSubscriptions() != null){
+            for (long id : user.getSubscriptions()) {
+                foodTruckList.add(foodTruckService.getFoodTruckWithId(id));
+            }
         }
 
         // return
@@ -187,12 +189,12 @@ public class UserController {
     }
 
     @GetMapping("api/owner/trucks")
-    public List<FoodTruck> getOwnersTrucks(@RequestHeader(name="token")Long token) {
+    public List<FoodTruck> getOwnersTrucks(@RequestHeader(name="token") long token) {
         User user;
         user = userService.secureUser(userService.getUserWithId(token));
 
         // make sure the user is an owner
-        if (user.getUserType() == "Owner") {
+        if (user.getUserType().equals("Owner")) {
             return foodTruckService.getOwnerFoodTrucks(user);
         }
 

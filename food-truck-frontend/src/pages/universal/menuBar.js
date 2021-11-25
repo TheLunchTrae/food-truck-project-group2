@@ -27,7 +27,6 @@ class MenuBar extends Component {
                 })
             })
         }
-        this.render();
     }
     
     LoggedIn(){

@@ -20,8 +20,9 @@ class DashTable extends Component {
             } else {
                 document.getElementById("typeBar").classList.add(styles.owner);
                 document.getElementById("typeBar").classList.add(styles.ownTab);
-                axios.get("http://localhost:8090/api/owner/trucks").then(res =>{
-                    this.setState({
+                axios.get("http://localhost:8090/api/owner/trucks").then(res =>{ 
+                console.log(res);    
+                this.setState({
                         ownTrucks: res.data
                     });
                     if(res.data.length == 0){
@@ -63,8 +64,8 @@ class DashTable extends Component {
                 <td>
                     <a href={"/truckDetails?id=" + truck.truckId} class={styles.tableText}>{truck.truckName}</a>
                 </td>
-                <td>
-                    <text class={styles.tableText}>{truck.description}</text>
+                <td class={styles.tableText}>
+                    {truck.description}
                 </td>
                 <td>
                     Location
