@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { MenuBar, DefaultMap } from './index.js';
+import { MenuBar } from './index.js';
+import MapComponent from '../mapComponent.js';
 
 class About extends Component {
     constructor(props) {

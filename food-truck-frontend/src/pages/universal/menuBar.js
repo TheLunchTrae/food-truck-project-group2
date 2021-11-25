@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styles from './menuBar.module.scss';
+import loginService from './loginService';
 
 class MenuBar extends Component {
     constructor(props) {
@@ -15,13 +16,18 @@ class MenuBar extends Component {
                 req.headers['token']=this.state.token;
                 return req;
             });
-            axios.get('http://localhost:8090/api/userinfo').then(res => {
+            axios.get('http://localhost:8090/api/userinfo', {
+                headers: {
+                    'token': this.state.token
+                }
+            }).then(res => {
                 console.log(res);
                 this.setState({
                     ['username']: res.data.userName
                 })
             })
         }
+        this.render();
     }
     
     LoggedIn(){

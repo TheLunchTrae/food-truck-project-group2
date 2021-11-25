@@ -2,7 +2,6 @@ import Axios from 'axios';
 import React, { Component } from 'react';
 import ReactList from 'react-list';
 import { MenuBar } from './index.js'
-import loginService from './universal/loginService.js';
 
 class Search extends Component {
     constructor(props) {
@@ -53,14 +52,15 @@ class Search extends Component {
         }
     }
     componentDidMount() {
-        if(loginService.isUserLoggedIn){
-            Axios.get("http://localhost:8090/api/search/recommended").then(res => {
-                console.log(res.data);
-                const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
-                this.setState({ foodTrucksRec: foodTrucks });
-            });
-        }
-        
+        Axios.get("http://localhost:8090/api/search/recommended", {
+            headers: {
+                'token': sessionStorage.getItem('token')
+            }
+        }).then(res => {
+            console.log(res.data);
+            const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
+            this.setState({ foodTrucksRec: foodTrucks });
+        });
     }
     renderRecommended(index, key) {
         return <div key={key} onClick={this.handleTruckClick} id={this.state.foodTrucksRec[index].truckId}>{this.state.foodTrucksRec[index].truckName}</div>;
