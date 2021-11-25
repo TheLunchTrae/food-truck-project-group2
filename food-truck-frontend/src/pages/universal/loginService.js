@@ -15,6 +15,7 @@ class LoginService {
 
     setToken(token) {
         sessionStorage.setItem(USER_TOKEN, token)
+        document.cookie = "token=" + token;
     }
 
     logout() {

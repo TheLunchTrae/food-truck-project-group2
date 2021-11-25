@@ -60,6 +60,10 @@
     display: none;
 }
 
+.subTab ~ .displayTable .subTrucks, .ownTab ~ .displayTable .ownTrucks {
+    display: block;
+}
+
 //Parent div for tables
 .displayTable{
     border: none;
@@ -73,19 +77,21 @@
 //For both table <span>s
 .ownTrucks, .subTrucks{
     width: 100%;
+    height: 100%;
 }
 
 //Actual tables
 .table{
+    background-color:#555555;
     color: white;
     width: 100%;
-    column-count: 5;
 }
 
 //Table headings
 .tableHeading{
     font-size: 1.4rem;
     font-weight: bold;
+    border-bottom-color: black;
 }
 
 //Adds borders between column headings
@@ -93,7 +99,27 @@
     border-left: 2px black;
 }
 
+.tableBody{
+    text-align: center;
+}
+
+.tableRow{
+
+}
+
 //Table rows
 .tableRow + .tableRow{
-    border-top: black;
+    border-top-color: black;
+}
+
+//No subs message
+.noSub, .noOwn{
+    display: none;
+    text-align: center;
+    color: white;
+    font-size: 1.8rem;
+}
+//Shows if no subscriptions/owned trucks
+.noSub ~ .noSub, .noOwn ~ .noOwn{
+    display: block;
 }

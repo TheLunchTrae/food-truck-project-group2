@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styles from './dashTable.module.scss';
+import { nodes } from 'traverse';
+import { ThreeDRotationSharp } from '@material-ui/icons';
 
 class DashTable extends Component {
 
     constructor(){
         super();
+        this.state = { subTrucks: [], ownTrucks: []};
     }
 
     componentDidMount(){
@@ -17,14 +20,27 @@ class DashTable extends Component {
             } else {
                 document.getElementById("typeBar").classList.add(styles.owner);
                 document.getElementById("typeBar").classList.add(styles.ownTab);
-                
+                axios.get("http://localhost:8090/api/owner/trucks").then(res =>{
+                    this.setState({
+                        ownTrucks: res.data
+                    });
+                    if(res.data.length == 0){
+                        document.getElementById("ownTable").classList.add(styles.noOwn);
+                    }
+                })
             }
         });
 
-        axios.get("http://localhost:8090/api/owner/trucks").then(trucks => {
-            console.log("Hello");
-            console.log(trucks);
+        axios.get("http://localhost:8090/api/user/subscriptions").then(res =>{
+            this.setState({
+                subTrucks: res.data
+            });
+            if(res.data.length == 0){
+                document.getElementById("subTable").classList.add(styles.noSub);
+            }
         });
+
+        document.querySelector("tr").className=styles.tableRow;
     }
 
     changeTab(event){
@@ -40,6 +56,30 @@ class DashTable extends Component {
         }
     }
 
+    createTruckRow(truck, index){
+        console.log(truck);
+        return(
+            <tr key={index} class={styles.tableRow}>
+                <td>
+                    <a href={"/truckDetails?id=" + truck.truckId} class={styles.tableText}>{truck.truckName}</a>
+                </td>
+                <td>
+                    <text class={styles.tableText}>{truck.description}</text>
+                </td>
+                <td>
+                    Location
+                </td>
+                <td>
+                    {/*Will setup to show stars for rating}*/}
+                    Rating
+                </td>
+                <td>
+                    Food Types
+                </td>
+            </tr>
+        );
+    }
+
     render(){
         return(
             <div class={styles.wrapper}>
@@ -49,24 +89,48 @@ class DashTable extends Component {
                 </div>
                 <div class={styles.displayTable}>
                     <span class={styles.subTrucks}>
-                        <table class={styles.table}>
-                            <th class={styles.tableHeading}>Name</th>
-                            <th class={styles.tableHeading}>Description</th>     
-                            <th class={styles.tableHeading}>Rating</th>       
-                            <th class={styles.tableHeading}>Food Types</th>
-                            <th class={styles.tableHeading}>Location</th>    
+                        <table id="subTable" class={styles.table}>
+                            <thead class={styles.tableHeading}>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>  
+                                    <th>Location</th>      
+                                    <th>Rating</th>       
+                                    <th>Food Types</th>
+                                </tr>
+                            </thead>
+                            <tbody class={styles.tableBody}>
+                                {this.state.subTrucks.length != 0 ? this.state.subTrucks.map(this.createTruckRow) : null} 
+                            </tbody>
                         </table>
+                        <span class={styles.noSub}>
+                            <text >
+                                You are not subscribed to any food trucks.<br/>
+                                Click <a href="/search">here</a> to find some trucks that interest you!
+                            </text>
+                        </span>
                     </span>
                     <span class={styles.ownTrucks}>
-                        <table class={styles.table}>
-                            <tr class={styles.tableRow}>
-                                <th class={styles.tableHeading}>Name</th> 
-                                <th class={styles.tableHeading}>Description</th> 
-                                <th class={styles.tableHeading}>Rating</th>       
-                                <th class={styles.tableHeading}>Food Types</th>  
-                                <th class={styles.tableHeading}>Location</th>
-                            </tr>
+                        <table id="ownTable" class={styles.table}>
+                            <thead class={styles.tableHeading}>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>  
+                                    <th>Location</th>      
+                                    <th>Rating</th>       
+                                    <th>Food Types</th>
+                                </tr>
+                            </thead>
+                            <tbody class={styles.tableBody}>
+                                {this.state.ownTrucks.length != 0 ?  this.state.ownTrucks.map(this.createTruckRow) : null} 
+                            </tbody>
                         </table>
+                        <span class={styles.noOwn}>
+                            <text>
+                                You do not own any Food Trucks.<br/>
+                                Click <a href="/createTruck">here</a> to get started!
+                            </text>
+                        </span>
                     </span>
                 </div>
             </div>
