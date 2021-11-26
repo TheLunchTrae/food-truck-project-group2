@@ -62,7 +62,7 @@ class DashTable extends Component {
         return(
             <tr key={index} class={styles.tableRow}>
                 <td>
-                    <a href={"/truckDetails?id=" + truck.truckId} class={styles.tableText}>{truck.truckName}</a>
+                    <a href={"/truckDetails?truckId=" + truck.truckId} class={styles.tableText}>{truck.truckName}</a>
                 </td>
                 <td class={styles.tableText}>
                     {truck.description}
