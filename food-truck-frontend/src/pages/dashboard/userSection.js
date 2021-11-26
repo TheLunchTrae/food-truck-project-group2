@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import styles from './userSection.module.scss';
 import { LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
+import Geocode from 'react-geocode';
 
 const libraries=["places"];
 
@@ -96,11 +97,15 @@ class UserSection extends Component {
         });
         //Build location object
         var address = this.state.address;
-        var location;
+        var location, loc;
         if(address != ""){
             await Geocode.fromAddress(address).then(geo => {
-                location = geo.results[0].geometry.location;
+                loc = geo.results[0].geometry.location;
             });
+            location = {
+                latitude: loc.lat,
+                longitude: loc.lng
+            };
         } else {
             address = null;
         }
