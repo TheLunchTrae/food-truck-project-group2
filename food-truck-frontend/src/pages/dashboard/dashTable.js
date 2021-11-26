@@ -21,7 +21,7 @@ class DashTable extends Component {
                 document.getElementById("typeBar").classList.add(styles.owner);
                 document.getElementById("typeBar").classList.add(styles.ownTab);
                 axios.get("http://localhost:8090/api/owner/trucks").then(res =>{ 
-                console.log(res);    
+                console.log(res); 
                 this.setState({
                         ownTrucks: res.data
                     });

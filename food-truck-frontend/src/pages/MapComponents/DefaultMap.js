@@ -11,28 +11,28 @@ const containerStyle = {
 };
 
 class DefaultMap extends Component {
-  
+
   constructor (props) {
     super(props)
+    this.state = { markers: [] };
+    this.addMarker = this.addMarker.bind(this);
 
-    this.autocomplete = null
-
-    this.onLoad = this.onLoad.bind(this)
-    this.onPlaceChanged = this.onPlaceChanged.bind(this)
   }
 
-  onLoad (autocomplete) {
-    console.log('autocomplete: ', autocomplete)
-
-    this.autocomplete = autocomplete
+  addMarker(lat, lng){
+    const marker = { lat, lng };
+    var newMarkers = this.state.markers;
+    newMarkers.push(marker);
+    this.setState({
+      ['markers']: newMarkers
+    });
   }
 
-  onPlaceChanged () {
-    if (this.autocomplete !== null) {
-      console.log(this.autocomplete.getPlace())
-    } else {
-      console.log('Autocomplete is not loaded yet!')
-    }
+  renderMarkers(marker){
+    const position = { lat: marker.lat, lng: marker.lng };
+    return(
+      <Marker position={position}/>
+    );
   }
 
   render() {
@@ -42,7 +42,7 @@ class DefaultMap extends Component {
                     center={{lat: 31.547164416064646, lng: -97.11819049760257}}
                     zoom={10} >
         </GoogleMap>
-        { /* Child components, such as markers, info windows, etc. */ }
+        {this.state.markers.length != 0 ? this.state.markers.map(renderMarkers) : null}
       </LoadScript>
     )
   }

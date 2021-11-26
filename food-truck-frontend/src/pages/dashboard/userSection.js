@@ -182,10 +182,10 @@ class UserSection extends Component {
                     </span>
                 </button>
                 <span class={styles.choice}>
-                    <input id="distance" type="text" placeholder="Range (in miles)" class={styles.locTextBox} onChange={this.handleInputChange} value={this.state.distance}/>
+                    <input id="distance" name="distance" type="text" placeholder="Range (in miles)" class={styles.locTextBox} onChange={this.handleInputChange} value={this.state.distance}/>
                     <LoadScript id="script-loader" googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={libraries}>
                         <StandaloneSearchBox>
-                            <input id="address" type="text" placeholder="Address" onChange={this.handleInputChange} class={styles.locTextBox} value={this.state.address}/>
+                            <input id="address" name="address" type="text" placeholder="Address" onChange={this.handleInputChange} class={styles.locTextBox} value={this.state.address}/>
                         </StandaloneSearchBox>
                     </LoadScript>
                 </span>

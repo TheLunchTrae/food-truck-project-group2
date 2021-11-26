@@ -2,8 +2,9 @@ require('dotenv').config();
 import styles from './index.module.scss';
 import MenuBar from './universal/menuBar';
 import DefaultMap from './MapComponents/DefaultMap';
+import RouteMap from './MapComponents/RouteMap';
 
-export { MenuBar, DefaultMap };
+export { MenuBar, DefaultMap, RouteMap };
 
 function HomePage() {
     return (

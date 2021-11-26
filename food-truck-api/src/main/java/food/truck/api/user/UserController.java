@@ -191,7 +191,7 @@ public class UserController {
     @GetMapping("api/owner/trucks")
     public List<FoodTruck> getOwnersTrucks(@RequestHeader(name="token") long token) {
         User user;
-        user = userService.secureUser(userService.getUserWithId(token));
+        user = userService.getUserWithId(token);
 
         // make sure the user is an owner
         if (user.getUserType().equals("Owner")) {
