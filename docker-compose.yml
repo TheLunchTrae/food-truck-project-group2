@@ -7,7 +7,7 @@ services:
 
   MySQL:
     image: 'mysql/mysql-server:latest'
-    container_name: FoodTruckSQL
+    container_name: FoodTruckDatabase
     environment:
       - MYSQL_DATABASE=food-truck-finder
       - MYSQL_USER=root
