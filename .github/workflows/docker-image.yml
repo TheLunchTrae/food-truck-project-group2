@@ -1,0 +1,33 @@
+name: food-truck-finder-app CD
+
+on:
+  push:
+    branches: [ heroku ]
+  pull_request:
+    branches: [ heroku ]
+    
+#set environment variables 
+env:
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  APP_NAME: ${{ 'food-truck-finder-group2' }}
+  
+jobs:
+  
+  deploy:
+    name: Deploy to Heroku
+    runs-on: ubuntu-18.04
+    steps:
+
+    # Clone the repository
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Build Docker frontend
+    - name: Build compose container
+      run: docker-compose up --build
+
+    # Push the Docker image to Heroku Container Registry
+    - name: Publish
+      run: |
+        heroku container:push food-truck-project-group2 -a $APP_NAME
+        heroku container:release food-truck-project-group2 -a $APP_NAME
