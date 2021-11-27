@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Component } from 'react';
 import { MenuBar } from './index.js';
-import loginService from './universal/loginService.js';
+import loginService from '../util/loginService.js';
 
 class Logout extends Component{
 

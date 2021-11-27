@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import styles from './dashTable.module.scss';
 import { nodes } from 'traverse';
 import { ThreeDRotationSharp } from '@material-ui/icons';
+import styles from './dashTable.module.scss';
 
 class DashTable extends Component {
 
