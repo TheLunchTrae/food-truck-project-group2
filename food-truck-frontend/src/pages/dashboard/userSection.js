@@ -120,7 +120,7 @@ class UserSection extends Component {
         //Price
         var price = document.querySelector('input[name="price"]:checked').value;
         if(price == "None") { price = null; }
-
+        
         const prefs = {
             foodTypes: foodTypes,
             location: location,
