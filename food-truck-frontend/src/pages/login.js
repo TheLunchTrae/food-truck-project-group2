@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { MenuBar } from './index.js';
-import loginService from './universal/loginService.js';
+import loginService from '../util/loginService.js';
 import styles from './signup.module.scss';
 
 class Login extends Component {
