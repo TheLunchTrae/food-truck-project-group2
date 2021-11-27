@@ -21,19 +21,4 @@ services:
     container_name: FoodTruckFrontend
     ports: 
       - 3000:3000
-  API:
-    build: './food-truck-api'
-    image: 'food-truck-api'
-    container_name: FoodTruckAPI
-    restart: always
-    ports:
-      - 8090:8090
-    environment:
-      - spring.datasource.url=jdbc:mysql://MySQL:3306/food-truck-finder?createDatabaseIfNotExist=true
-      - spring.datasource.username=root
-      - spring.datasource.password=password
-      - spring.jpa.hibernate.ddl-auto=update
-      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
-      - spring.session.store-type=jdbc
-      - spring.session.jdbc.initialize-schema=always
-      - spring.session.jdbc.table-name=SPRING_SESSION
+

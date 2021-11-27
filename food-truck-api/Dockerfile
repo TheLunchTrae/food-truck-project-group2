@@ -1,7 +1,3 @@
-FROM maven:3.8.3-openjdk-16
-
-mvn install -DskipTests
-
 FROM openjdk:16
 
 ARG JAR_FILE=target/*.jar
