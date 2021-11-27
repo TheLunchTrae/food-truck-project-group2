@@ -21,6 +21,9 @@ jobs:
     # Clone the repository
     - name: Checkout
       uses: actions/checkout@v2
+    
+    - name: Create network
+      run: docker network create FoodTruckFinder
 
     # Build Docker frontend
     - name: Build compose container
