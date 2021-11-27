@@ -2,9 +2,9 @@ name: food-truck-finder-app CD
 
 on:
   push:
-    branches: [ heroku ]
+    branches: [ master ]
   pull_request:
-    branches: [ heroku ]
+    branches: [ master ]
     
 #set environment variables 
 env:
