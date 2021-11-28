@@ -2,16 +2,12 @@ FROM node:12
 
 WORKDIR /food-truck-frontend
 
-COPY package*.json ./
-
-COPY yarn.lock ./
+COPY . .
 
 RUN yarn install
 
-COPY . .
+RUN yarn run build
 
-RUN yarn build
+RUN chmod +x ./frontend-entrypoint
 
-EXPOSE 3000
-
-CMD ["yarn", "start"]
+ENTRYPOINT ./frontend-entrypoint
