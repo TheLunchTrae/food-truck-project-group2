@@ -1,6 +1,6 @@
 FROM openjdk:16
 
-mvn install
+RUN mvn install
 
 COPY target/food-truck-api.jar .app.jar
 
