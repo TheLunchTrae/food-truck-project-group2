@@ -27,10 +27,12 @@ jobs:
 
     # Build Docker frontend
     - name: Build compose container
-      run: docker-compose up --build -d
+      run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
     # Push the Docker image to Heroku Container Registry
     - name: Publish
       run: |
-        heroku container:push food-truck-project-group2 -a $APP_NAME
-        heroku container:release food-truck-project-group2 -a $APP_NAME
+        heroku container:push web -a $APP_NAME
+        heroku container:release web -a $APP_NAME
+        heroku container:push server -a $APP_NAME
+        heroku container:release server -a $APP_NAME
