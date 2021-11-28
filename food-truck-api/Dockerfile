@@ -1,8 +1,8 @@
 FROM openjdk:16
 
-ARG JAR_FILE=target/*.jar
+CMD ["mvn", "install"]
 
-COPY ${JAR_FILE} app.jar
+COPY target/food-truck-api.jar .app.jar
 
 EXPOSE 8090
 
