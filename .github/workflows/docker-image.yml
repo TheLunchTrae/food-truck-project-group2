@@ -30,11 +30,13 @@ jobs:
       run: | 
         cd ./food-truck-frontend
         docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+        docker build -t="frontend"
     
     - name: Backend
       run: |
         cd ./food-truck-api
         docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+        docker build -t="backend"
     
     # Push the Docker image to Heroku Container Registry
     - name: Publish
