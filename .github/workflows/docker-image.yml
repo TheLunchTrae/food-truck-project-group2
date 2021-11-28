@@ -26,11 +26,16 @@ jobs:
       run: docker network create FoodTruckFinder
 
     # Build Docker frontend
-    - name: Build compose container
+    - name: Frontend
       run: | 
-        docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com -f ./food-truck-frontend
-        docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com -f ./food-truck-api
-        
+        cd ./food-truck-frontend
+        docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    
+    - name: Backend
+      run: |
+        cd ./food-truck-api
+        docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    
     # Push the Docker image to Heroku Container Registry
     - name: Publish
       run: |
