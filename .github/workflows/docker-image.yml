@@ -27,7 +27,7 @@ jobs:
 
     # Build Docker frontend
     - name: Build compose container
-      run: docker-compose up --build
+      run: docker-compose up --build -d
 
     # Push the Docker image to Heroku Container Registry
     - name: Publish
