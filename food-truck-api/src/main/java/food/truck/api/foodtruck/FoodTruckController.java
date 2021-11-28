@@ -37,6 +37,20 @@ public class FoodTruckController {
         }
     }
 
+    //idk what the response should be - also may want to confirm owner token as permission? idk
+    @GetMapping("/api/deleteTruck/{id}")
+    public ResponseEntity deleteFoodTruck(@PathVariable long id){
+        FoodTruck ft = foodTruckService.deleteFoodTruck(id);
+        if (ft != null){
+            return ResponseEntity.ok()
+                    //.header("Content-Type", "application/json")
+                    .body("success");
+        } else {
+            return ResponseEntity.ok()
+                    .body("Deleting food truck failed");
+        }
+    }
+
     @PostMapping("/api/modifyTruck")
     public ResponseEntity modifyFoodTruck(@RequestBody FoodTruck foodTruckDiff){
         FoodTruck postFoodTruck;
@@ -53,11 +67,11 @@ public class FoodTruckController {
 
     //Call via editTruck frontend page
     @PostMapping("/api/modifyTruck/menu")
-    public ResponseEntity modifyFoodTruckMenuAddFoodItem(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
+    public ResponseEntity modifyFoodTruckMenuAddFoodItem(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckId){
         FoodItem foodItem = jsonWrapper.getFoodItem();
 
         FoodTruck foodTruck;
-        if ((foodTruck = foodTruckService.getFoodTruckWithId(truckID)) != null){
+        if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){
             foodTruck = foodTruckService.modifyFoodTruckMenuAddFoodItem(foodTruck, foodItem);
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
@@ -67,15 +81,47 @@ public class FoodTruckController {
                     .body("Failed to find food truck with id");
         }
     }
+
+    //IMPORTANT NOTE - assumption is that backend sends the index of the item to be removed (having mapped them to the front page)
+    @PostMapping("/api/modifyTruck/menu/remove/{itemIndex}")
+    public ResponseEntity modifyFoodTruckMenuDeleteFoodItem(@PathVariable int itemIndex, @RequestHeader Long truckId){
+        FoodTruck foodTruck;
+        if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){
+            foodTruck = foodTruckService.modifyFoodTruckMenuDeleteFoodItem(foodTruck, itemIndex);
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .body(foodTruck);
+        } else {
+            return ResponseEntity.ok()
+                    .body("Failed to find food truck with id");
+        }
+    }
+
+
     //Call via editTruck frontend page
     @PostMapping("/api/modifyTruck/route")
-    public ResponseEntity modifyFoodTruckAddRouteLocation(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckID){
+    public ResponseEntity modifyFoodTruckAddRouteLocation(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckId){
         Location location = jsonWrapper.getLocation();
 
         //System.out.println(location + ' '+ truckID);
         FoodTruck foodTruck;
-        if ((foodTruck = foodTruckService.getFoodTruckWithId(truckID)) != null){
+        if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){
             foodTruck = foodTruckService.modifyFoodTruckAddRouteLocation(foodTruck, location);
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .body(foodTruck);
+        } else {
+            return ResponseEntity.ok()
+                    .body("Failed to find food truck with id");
+        }
+    }
+
+    //IMPORTANT NOTE - assumption is that backend sends the index of the item to be removed (having mapped them to the front page)
+    @PostMapping("/api/modifyTruck/route/remove/{locationIndex}")
+    public ResponseEntity modifyFoodTruckDeleteRouteLocation(@PathVariable int locationIndex, @RequestHeader Long truckId){
+        FoodTruck foodTruck;
+        if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){
+            foodTruck = foodTruckService.modifyFoodTruckDeleteRouteLocation(foodTruck, locationIndex);
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
                     .body(foodTruck);

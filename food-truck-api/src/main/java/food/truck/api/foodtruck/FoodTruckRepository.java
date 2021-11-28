@@ -11,4 +11,5 @@ public interface FoodTruckRepository extends JpaRepository<FoodTruck, Long> {
     FoodTruck findByTruckName(String truckName);
     FoodTruck findByTruckId(Long id);
     List<FoodTruck> findAllByOwnerId(Long id);
+    //FoodTruck deleteById(Long id);
 }

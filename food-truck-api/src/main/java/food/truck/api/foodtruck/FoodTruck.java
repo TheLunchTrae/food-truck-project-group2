@@ -30,12 +30,6 @@ public class FoodTruck {
     @Column(name = "OWNER_ID")
     Long ownerId;
 
-    //TODO - route won't be String in future, this is temporary
-    //@Column(name = "ROUTE")
-    //String route;
-    //@ElementCollection
-    //List<String> route;
-
     @ElementCollection
     List<Location> route;
 
@@ -61,6 +55,17 @@ public class FoodTruck {
         this.menu.add(foodItem);
     }
 
+    //Removes a food item from the menu
+    public void deleteFoodItem(int itemIndex){
+        //Don't do if out of bounds
+        if (itemIndex >= menu.size()){
+            return;
+        }
+        System.out.println("Removing "+menu.get(itemIndex));
+        this.menu.remove(itemIndex);
+    }
+
+
     //Add location (as XY coordinates) to the route list
     public void addRouteLocation(Location location){
         //Initialize if route doesn't exist
@@ -68,6 +73,16 @@ public class FoodTruck {
             route = new LinkedList<>();
         }
         this.route.add(location);
+    }
+
+    //Remove route location from the route
+    public void deleteRouteLocation(int routeIndex){
+        //Don't do if out of bounds
+        if (routeIndex >= route.size()){
+            return;
+        }
+        System.out.println("Removing "+route.get(routeIndex));
+        this.route.remove(routeIndex);
     }
 
     //TODO - implement
@@ -113,6 +128,10 @@ public class FoodTruck {
         } else {
             return 0;
         }
+    }
+
+    public List<Rating> getRatings(){
+        return ratings;
     }
 
     public String toString(){

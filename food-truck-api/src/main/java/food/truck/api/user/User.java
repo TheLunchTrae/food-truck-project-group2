@@ -2,6 +2,7 @@ package food.truck.api.user;
 
 import javax.persistence.*;
 
+import food.truck.api.foodtruck.FoodTruck;
 import food.truck.api.foodtruck.Location;
 import lombok.Data;
 
@@ -84,9 +85,18 @@ public class User {
         }
     }
 
+    public void deleteSubscription(long truckId){
+        //Only remove if it contains the truck
+        if (subscriptions.contains(truckId))
+            subscriptions.remove(truckId);
+    }
+
     //TODO - iterate over all food trucks & their ratings, return those w/matching userid
     public List<Rating> getUserRatings(){
         return null;
+    }
+    public List<Long> getSubscriptions(){
+        return subscriptions;
     }
 
     public String toString() {

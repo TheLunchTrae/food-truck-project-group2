@@ -157,37 +157,63 @@ public class UserController {
         if ((postUser = userService.addSubscription(truckId, userId)) != null) {
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
-                    .body(postUser);
+                    .body(userService.secureUser(postUser));
         } else {
             return ResponseEntity.ok()
                     .body("User subscription failed");
         }
     }
 
+    @GetMapping("/api/unsubscribe/{truckId}")
+    public ResponseEntity unsubscribeUserToTruck(@PathVariable Long truckId, @RequestHeader Long userId){
+        User postUser;
+        FoodTruck foodTruck = foodTruckService.getFoodTruckWithId(truckId);
+        //If truck could not be found
+        if (foodTruck == null){
+            return ResponseEntity.ok()
+                    .body("Couldn't find truck with that id of "+truckId);
+        }
+
+        if ((postUser = userService.deleteSubscription(foodTruck, userId)) != null) {
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .body(userService.secureUser(postUser));
+        } else {
+            return ResponseEntity.ok()
+                    .body("User unsubscription failed");
+        }
+    }
+
+    //NOTE - use the bottom two/three in coding the userdetails page (it needs both the user's subscriptions,
+    //ratings, maybe food trucks if an owner)
+    //OTHER NOTE - sam changed this so it delegates to foodtruckservice
     @GetMapping("/api/user/subscriptions")
     public List<FoodTruck> getUserSubscriptions(@RequestHeader(name="token") long token) {
         User user;
-        user = userService.secureUser(userService.getUserWithId(token));
-
-        // the return list
-        List<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
-
-        // get the truck ids that the user is subscribed to
-        if(user.getSubscriptions() != null){
-            for (long id : user.getSubscriptions()) {
-                foodTruckList.add(foodTruckService.getFoodTruckWithId(id));
-            }
+        //User must be present
+        if ((user = userService.getUserWithId(token)) == null){
+            return null;
         }
+        //Delegate to foodtruckservice
+        return foodTruckService.getUserSubscriptions(user);
+    }
 
-        // return
-        if (foodTruckList.size() != 0) {
-            return foodTruckList;
+    @GetMapping("/api/user/ratings")
+    public List<Rating> getUserRatings(@RequestHeader(name="token") long token) {
+        User user;
+        //User must be present
+        if ((user = userService.getUserWithId(token)) == null){
+            return null;
         }
-        else {
+        List<Rating> ratingList = foodTruckService.getUserRatings(user.getId());
+        if (ratingList.size() != 0){
+            return ratingList;
+        } else {
             return null;
         }
     }
 
+    //If this is working, no need to change???
     @GetMapping("api/owner/trucks")
     public List<FoodTruck> getOwnersTrucks(@RequestHeader(name="token") long token) {
         User user;

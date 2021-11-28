@@ -13,10 +13,6 @@ import java.util.*;
 public class FoodTruckService {
     private FoodTruckRepository truckRepository;
 
-    //TODO - this an OK idea?
-    @Autowired
-    private UserRepository userRepository;
-
     @Autowired
     public FoodTruckService(FoodTruckRepository truckRepository){
         this.truckRepository = truckRepository;
@@ -25,6 +21,19 @@ public class FoodTruckService {
     public FoodTruck addFoodTruck(FoodTruck foodTruck){
         System.out.println(foodTruck);
         return truckRepository.save(foodTruck);
+    }
+
+    public FoodTruck deleteFoodTruck(long truckId) {
+        FoodTruck ft = truckRepository.findByTruckId(truckId);
+        //If truck not found
+        if (ft == null){
+            return null;
+        }
+
+        //Potential todo - add check if deleting failed
+        truckRepository.deleteById(truckId);
+
+        return ft;
     }
 
     //TODO - add custom way to add routes & food items
@@ -55,11 +64,21 @@ public class FoodTruckService {
         return truckRepository.save(foodTruck);
     }
 
+    public FoodTruck modifyFoodTruckMenuDeleteFoodItem(FoodTruck foodTruck, int itemIndex){
+        foodTruck.deleteFoodItem(itemIndex);
+        return truckRepository.save(foodTruck);
+    }
+
     public FoodTruck modifyFoodTruckAddRouteLocation(FoodTruck foodTruck, Location location){
         if (location == null){
             return null;
         }
         foodTruck.addRouteLocation(location);
+        return truckRepository.save(foodTruck);
+    }
+
+    public FoodTruck modifyFoodTruckDeleteRouteLocation(FoodTruck foodTruck, int locationIndex){
+        foodTruck.deleteRouteLocation(locationIndex);
         return truckRepository.save(foodTruck);
     }
 
@@ -182,6 +201,52 @@ public class FoodTruckService {
         }
 
         return nearestTrucks;
+    }
+
+    public List<FoodTruck> getUserSubscriptions(User user){
+        // the return list
+        List<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
+
+        // get the truck ids that the user is subscribed to
+        if(user.getSubscriptions() != null){
+            for (long id : user.getSubscriptions()) {
+                FoodTruck ft = getFoodTruckWithId(id);
+                //If food truck with Id could be found, add it
+                //(So it covers case where truck with that id was deleted)
+                if (ft != null){
+                    foodTruckList.add(ft);
+                }
+            }
+        }
+
+        // return
+        if (foodTruckList.size() != 0) {
+            return foodTruckList;
+        }
+        else {
+            return null;    /*???*/
+        }
+
+    }
+
+
+    //Iterate over every truck, return all ratings made by user w/id
+    //User already found in UserController btw
+    //Worth noting that leftover ratings for a truck that no longer exists won't be returned
+    public List<Rating> getUserRatings(Long userId){
+        List<Rating> ratingList = new LinkedList<>();
+        //Iterate over all trucks
+        for (FoodTruck ft : truckRepository.findAll()){
+            //Iterate over all of trucks' ratings
+            if (ft.getRatings() != null){
+                for (Rating r : ft.getRatings()){
+                    if (userId.equals(r.getUserId())){
+                        ratingList.add(r);
+                    }
+                }
+            }
+        }
+        return ratingList;
     }
 
     //Derived from https://www.geeksforgeeks.org/haversine-formula-to-find-distance-between-two-points-on-a-sphere/

@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
+import food.truck.api.foodtruck.FoodTruck;
 import food.truck.api.other.Event;
 import food.truck.api.other.Preferences;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class UserService {
         sec.setDistancePreference(user.getDistancePreference());    /*Added by sam*/
         sec.setRatingPreference(user.getRatingPreference());
         sec.setPricePreference(user.getPricePreference());
+        sec.setSubscriptions(user.getSubscriptions());  /*Also added by sam*/
         return sec;
     }
     // Hashes the input string and returns the hash
@@ -149,6 +151,24 @@ public class UserService {
             System.out.println("finding user with id "+userId+ " failed");
             return null;
         }
+        //Save the modified user
+        userRepository.save(user);
+        return user;
+    }
+
+    public User deleteSubscription(FoodTruck foodTruck, long userId){
+        User user;
+        //Inform user if user couldn't be found
+        if ((user = userRepository.findById(userId)) == null) {
+            System.out.println("finding user with id "+userId+ " failed");
+            return null;
+        }
+        if (foodTruck == null){
+            return null;
+        }
+        //Delete the subscription
+        user.deleteSubscription(foodTruck.getTruckId());
+
         //Save the modified user
         userRepository.save(user);
         return user;
