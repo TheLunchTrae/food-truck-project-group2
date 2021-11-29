@@ -1,6 +1,12 @@
 FROM maven:3.8.4
 
-RUN mvn clean install -DskipTests
+WORKDIR /food-truck-backend
+
+COPY /src .
+
+COPY pom.xml .
+
+RUN mvn install -DskipTests
 
 FROM openjdk:16
 
