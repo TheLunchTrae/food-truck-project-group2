@@ -2,9 +2,9 @@ name: food-truck-finder-app CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ none ]
   pull_request:
-    branches: [ master ]
+    branches: [ none ]
     
 #set environment variables 
 env:
