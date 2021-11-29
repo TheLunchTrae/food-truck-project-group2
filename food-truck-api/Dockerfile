@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN apt install maven
+RUN sudo apt install maven
 
 FROM openjdk:16
 
