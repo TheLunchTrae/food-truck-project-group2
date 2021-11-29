@@ -1,6 +1,6 @@
 FROM tomcat:8.0    
 
-RUN mvn install
+RUN mvn clean install -DskipTests
 
 FROM openjdk:16
 
