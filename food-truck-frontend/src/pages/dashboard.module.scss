@@ -1,7 +1,7 @@
 .wrapper{
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+    display: block;
+    text-align: center;
+    height: 425px;
 }
 
 .body{
@@ -15,23 +15,18 @@
     font-size: 2.5rem;
 }
 
-.userSectionParent, .dashTableParent{
-    background-color: white;
-    position: static;
+.userSection, .dashTable {
     display: inline-block;
-    border: none;
+    margin: 15px;
 }
 
-.userSectionParent{
-    height: fit-content;
-    width: 10%;
-    float: left;
-    margin-right: 3%;
-    padding: 1%;
+.userSection {
+    width: fit-content;
+    height: 100%;
 }
 
-.dashTableParent{
-    width: 45%;
-    float: right;
-    margin-left: 3%;
+.dashTable {
+    width: 50%;
+    vertical-align: top;
+    height: 100%;
 }

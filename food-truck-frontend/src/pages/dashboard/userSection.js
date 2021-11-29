@@ -149,6 +149,23 @@ class UserSection extends Component {
                 <h2 class={styles.prefHead}>Preferences</h2>
                 <button type="submit" class={styles.savePrefs} onClick={this.savePrefs}>Save Preferences</button>
 
+                <button type="button" class={styles.prefPopout} id="locButton" onClick={this.pressed} name="prefButton">
+                    <span class={styles.buttonText}>
+                        Location
+                    </span>
+                    <span class={styles.buttonImage}>
+                        
+                    </span>
+                </button>
+                <span class={styles.choice}>
+                    <input id="distance" name="distance" type="text" placeholder="Range (in miles)" class={styles.locTextBox} onChange={this.handleInputChange} value={this.state.distance}/>
+                    <LoadScript id="script-loader" googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={libraries}>
+                        <StandaloneSearchBox>
+                            <input id="address" name="address" type="text" placeholder="Address" onChange={this.handleInputChange} class={styles.locTextBox} value={this.state.address}/>
+                        </StandaloneSearchBox>
+                    </LoadScript>
+                </span>
+
                 <button type="button" class={styles.prefPopout} id="typeButton" onClick={this.pressed} name="prefButton">
                     <span class={styles.buttonText}>
                     Food Type
@@ -181,25 +198,9 @@ class UserSection extends Component {
                         <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Chinese"/>
                         <span class={styles.customBox}/>
                     </label>
-
                 </span>
 
-                <button type="button" class={styles.prefPopout} id="locButton" onClick={this.pressed} name="prefButton">
-                    <span class={styles.buttonText}>
-                        Location
-                    </span>
-                    <span class={styles.buttonImage}>
-                        
-                    </span>
-                </button>
-                <span class={styles.choice}>
-                    <input id="distance" name="distance" type="text" placeholder="Range (in miles)" class={styles.locTextBox} onChange={this.handleInputChange} value={this.state.distance}/>
-                    <LoadScript id="script-loader" googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={libraries}>
-                        <StandaloneSearchBox>
-                            <input id="address" name="address" type="text" placeholder="Address" onChange={this.handleInputChange} class={styles.locTextBox} value={this.state.address}/>
-                        </StandaloneSearchBox>
-                    </LoadScript>
-                </span>
+                
 
                 <button type="button" class={styles.prefPopout} id="ratingButton" onClick={this.pressed} name="prefButton">
                     <span class={styles.buttonText}>

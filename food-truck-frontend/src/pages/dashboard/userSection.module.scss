@@ -1,7 +1,9 @@
+//Overall <div>
 .userSection {
-    position: relative;
-    width: 100%;
-    height: fit-content;
+    display: inline-block;
+    width: fit-content;
+    padding: 15px;
+    background-color: #FFFFFF;
 }
 
 .username {
@@ -35,6 +37,11 @@
     width: 100%;
 }
 
+.prefPopout, .savePrefs {
+    background-color: #555555;
+    color: white;
+}
+
 .savePrefs{
     height: 30px;
     font-weight: bold;
@@ -66,7 +73,7 @@
     pointer-events: none;
 }
 
-
+//Button hover events
 .prefPopout:hover, .savePrefs:hover{
     background-color: #708090;
     font-weight: bold;
@@ -77,17 +84,6 @@
 //Show choice selection/input for selected preference
 .open + .choice {
     display:block;
-}
-
-//For all choice buttons
-.choiceButton{
-    font-weight: bold;
-    font-size: 1.1rem;
-    text-align: left;
-    background-color: #a8a8a8;
-    width: 100%;
-    height: 10%;
-    cursor: pointer;
 }
 
 //Location textboxes
@@ -108,7 +104,6 @@
 //General settings for all choice popouts
 .choice{
     display: none;
-    position: absolute;
     background-color: #a8a8a8;
     height: fit-content;
     left: 110%;
