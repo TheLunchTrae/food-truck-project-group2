@@ -1,6 +1,8 @@
-FROM openjdk:16
+FROM ubuntu:latest
 
 RUN apt-get install maven
+
+FROM openjdk:16
 
 RUN mvn install
 
