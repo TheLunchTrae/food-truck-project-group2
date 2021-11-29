@@ -1,10 +1,8 @@
-FROM ubuntu:latest
-
-RUN sudo apt-get install maven
-
-FROM openjdk:16
+FROM tomcat:8.0    
 
 RUN mvn install
+
+FROM openjdk:16
 
 COPY target/food-truck-api.jar .app.jar
 
