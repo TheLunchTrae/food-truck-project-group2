@@ -13,7 +13,7 @@ import java.util.*;
 @Entity
 @Table(name = User.TABLE_NAME)
 public class User {
-    public static final String TABLE_NAME = "USER";
+    public static final String TABLE_NAME = "USERS";
 
     @Id
     @GeneratedValue(generator = TABLE_NAME + "_GENERATOR")
