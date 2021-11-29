@@ -1,8 +1,6 @@
 package food.truck.api.user;
 
 import javax.persistence.*;
-
-import food.truck.api.foodtruck.FoodTruck;
 import food.truck.api.foodtruck.Location;
 import lombok.Data;
 

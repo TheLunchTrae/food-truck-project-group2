@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
-
 import food.truck.api.foodtruck.FoodTruck;
 import food.truck.api.other.Event;
 import food.truck.api.other.Preferences;

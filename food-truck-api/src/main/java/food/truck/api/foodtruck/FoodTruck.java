@@ -2,8 +2,6 @@ package food.truck.api.foodtruck;
 
 import food.truck.api.user.Rating;
 import lombok.Data;
-import org.springframework.data.util.Pair;
-
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
