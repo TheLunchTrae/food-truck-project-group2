@@ -7,8 +7,7 @@ const jss = create({plugins: [...jssPreset().plugins, rtl()]});
 
 const themeOptions = {
     typography: {
-        fontFamily: 'Encode Sans, sans-serif',
-        fontFamily: 'Quattrocento Sans, sans-serif',
+        fontFamily: 'Noto Sans, sans-serif',
         fontStyle: 'normal',
         fontWeight: 400,
         fontSize: 14,
