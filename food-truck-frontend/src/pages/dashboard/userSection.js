@@ -147,7 +147,6 @@ class UserSection extends Component {
                 <h3 class={styles.usertype}>{this.state.usertype}</h3>
                 <hr class={styles.divider}/>
                 <h2 class={styles.prefHead}>Preferences</h2>
-                <button type="submit" class={styles.savePrefs} onClick={this.savePrefs}>Save Preferences</button>
 
                 <button type="button" class={styles.prefPopout} id="locButton" onClick={this.pressed} name="prefButton">
                     <span class={styles.buttonText}>
@@ -273,6 +272,8 @@ class UserSection extends Component {
                         <span class={styles.customBox}/>
                     </label>
                 </span>
+
+                <button type="submit" class={styles.savePrefs} onClick={this.savePrefs}>Save Preferences</button>
             </div>
         );
     }
