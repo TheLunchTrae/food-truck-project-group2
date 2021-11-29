@@ -1,4 +1,4 @@
-FROM maven:3.5.4-jdk-16-alpine
+FROM maven:3.8.4
 
 RUN mvn clean install -DskipTests
 
