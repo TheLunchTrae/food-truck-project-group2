@@ -30,7 +30,9 @@ class UserSection extends Component {
                 ['username']: res.data.userName,
                 ['usertype']: res.data.userType
             });
-        })
+        }).catch(err => {
+            console.log(err);
+        });
         //Set default preferences
         
         axios.get("http://localhost:8090/api/getPreferences").then(res => {
@@ -66,6 +68,8 @@ class UserSection extends Component {
                     }
                 });
             }
+        }).catch(err => {
+            console.log(err);
         });
     }
 
@@ -131,6 +135,8 @@ class UserSection extends Component {
         console.log(prefs);
         axios.post("http://localhost:8090/api/dashboard/preferences", prefs).then(res => {
             console.log(res);
+        }).catch(err => {
+            console.log(err);
         });
     }
 

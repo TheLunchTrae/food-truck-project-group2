@@ -26,7 +26,7 @@ class Dashboard extends Component {
     
     componentDidMount() {
         if(sessionStorage.getItem('token') === null){
-            window.location.href="/login";
+            //window.location.href="/login";
         }
     }
 

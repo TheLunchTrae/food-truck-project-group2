@@ -30,6 +30,9 @@ class DashTable extends Component {
                     }
                 })
             }
+        }).catch(err => {
+            console.log(err);
+            document.getElementById("typeBar").classList.add(styles.ownTab);
         });
 
         axios.get("http://localhost:8090/api/user/subscriptions").then(res =>{
@@ -39,6 +42,8 @@ class DashTable extends Component {
             if(res.data.length == 0){
                 document.getElementById("subTable").classList.add(styles.noSub);
             }
+        }).catch(err => {
+            console.log(err);
         });
 
         document.querySelector("tr").className=styles.tableRow;
