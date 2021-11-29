@@ -1,4 +1,4 @@
-FROM tomcat:8.0    
+FROM maven:3.5.4-jdk-16-alpine
 
 RUN mvn clean install -DskipTests
 
