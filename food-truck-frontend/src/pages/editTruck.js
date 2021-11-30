@@ -127,29 +127,22 @@ class Signup extends Component {
                                     <span class = "editTruckHeader" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Edit Truck Details</span>
 
                                     <div class={styles.formnput}>
-                                        <input id="truckName" name="truckName" class={styles.formelementinput} type="text" placeholder="Enter Truck Name" value={this.state.truckName} required onChange={this.handleInputChange}/>
+                                        <input id="truckName" name="truckName" class={styles.formelementinput} type="text" placeholder="Enter New Truck Name" value={this.state.truckName} required onChange={this.handleInputChange}/>
                                         <div class={styles.formelementbar}></div>
                                         <label class={styles.formelementlabel} for="truckName">Truck Name</label>
                                     </div>
 
-                                    <br></br>
-
-
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "description" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Description:</span>
-                                        <span id = "descriptionInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="description" placeholder="Enter the Description" value={this.state.description} type="text" onChange={this.handleInputChange}/>
-                                        </span>
+                                    <div class={styles.formnput}>
+                                        <input id="description" name="description" class={styles.formelementinput} type="text" placeholder="Enter New Description" value={this.state.description} required onChange={this.handleInputChange}/>
+                                        <div class={styles.formelementbar}></div>
+                                        <label class={styles.formelementlabel} for="description">Description</label>
                                     </div>
 
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "schedule" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Schedule:</span>
-                                        <span id = "scheduleInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="schedule" placeholder="Enter the Schedule" value={this.state.schedule} type="text" onChange={this.handleInputChange}/>
-                                        </span>
+                                    <div class={styles.formnput}>
+                                        <input id="scheduleInput" name="schedule" class={styles.formelementinput} type="text" placeholder="Enter New Schedule" value={this.state.schedule} required onChange={this.handleInputChange}/>
+                                        <div class={styles.formelementbar}></div>
+                                        <label class={styles.formelementlabel} for="schedule">Schedule</label>
                                     </div>
-
-                                    <br></br>
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit Changes</button>
@@ -157,8 +150,6 @@ class Signup extends Component {
 
                                 </form>
                             </div>
-
-                            <br></br>
 
                             <div class = "editTruck" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
                                 
@@ -175,8 +166,9 @@ class Signup extends Component {
                                         <input type="submit" value="Submit"/>
                                     </span>
                                 </form>
+                            </div>
 
-                                <br></br>
+                            <div class = "editTruck" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
 
                                 <form onSubmit={this.handleMenuItemSubmit}>
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
@@ -204,21 +196,24 @@ class Signup extends Component {
                                         <input type="submit" value="Submit"/>
                                     </span>
                                 </form>
+                            </div>
 
-                                <br></br>
+
+                            <div class = "editTruck" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
 
                                 <form onSubmit={this.handleRatingSubmit}>
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "newRating" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Rating:</span>
-                                        <span id = "ratingInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="newRating" placeholder="Select a new rating (DEBUG)" value={this.state.newRating} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-                                    <br></br>
 
-                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <input type="submit" value="Submit"/>
-                                    </span>
+                                    <span class = "editTruckHeader" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Edit Rating</span>
+
+                                    <div class={styles.formnput}>
+                                        <input id="ratingInput" name="newRating" class={styles.formelementinput} type="text" placeholder="Select a New Rating" value={this.state.newRating} required onChange={this.handleInputChange}/>
+                                        <div class={styles.formelementbar}></div>
+                                        <label class={styles.formelementlabel} for="newRating">Change Rating</label>
+                                    </div>
+
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit Changes</button>
+                                    </div>
                                 </form>
 
                             </div>
