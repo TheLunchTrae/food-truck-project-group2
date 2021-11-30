@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { MenuBar } from './index.js';
+import styles from './signup.module.scss';
 
 class Signup extends Component {
     constructor(props) {
@@ -115,20 +116,24 @@ class Signup extends Component {
     render() {
         return (
             <html>
-                <body style = {{backgroundColor: '#90AACB'}}>\
+                <body style = {{backgroundColor: '#708090'}}>
                     <MenuBar/>
                     <div>
-                        <div class="sections" >
-                            <div class = "editTruck" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+                        <div class="sections">
+                            <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Edit Your Truck</span>
+                            <div class = "editTruck" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
                                 <form id= "modify" onSubmit={this.handleSubmit}>
-                                    <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Edit Your Truck</span>
 
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "truckName" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
-                                        <span id = "truckName" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="truckName" placeholder="Enter the Truck Name" value={this.state.truckName} type="text" onChange={this.handleInputChange}/>
-                                        </span>
+                                    <span class = "editTruckHeader" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Edit Truck Details</span>
+
+                                    <div class={styles.formnput}>
+                                        <input id="truckName" name="truckName" class={styles.formelementinput} type="text" placeholder="Enter Truck Name" value={this.state.truckName} required onChange={this.handleInputChange}/>
+                                        <div class={styles.formelementbar}></div>
+                                        <label class={styles.formelementlabel} for="truckName">Truck Name</label>
                                     </div>
+
+                                    <br></br>
+
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <span class = "description" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Description:</span>
@@ -146,12 +151,16 @@ class Signup extends Component {
 
                                     <br></br>
 
-                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <input type="submit" value="Submit"/>
-                                    </span>
-                                </form>
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit Changes</button>
+                                    </div>
 
-                                <br></br>
+                                </form>
+                            </div>
+
+                            <br></br>
+
+                            <div class = "editTruck" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
                                 
                                 <form id= "route" onSubmit={this.handleRouteSubmit}>
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
@@ -162,11 +171,9 @@ class Signup extends Component {
                                         </span>
                                     </div>
                                     <br></br>
-
                                     <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <input type="submit" value="Submit"/>
                                     </span>
-
                                 </form>
 
                                 <br></br>
@@ -196,7 +203,6 @@ class Signup extends Component {
                                     <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <input type="submit" value="Submit"/>
                                     </span>
-
                                 </form>
 
                                 <br></br>
@@ -213,7 +219,6 @@ class Signup extends Component {
                                     <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <input type="submit" value="Submit"/>
                                     </span>
-
                                 </form>
 
                             </div>
