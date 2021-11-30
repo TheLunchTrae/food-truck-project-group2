@@ -6,7 +6,7 @@ COPY /src .
 
 COPY pom.xml .
 
-RUN mvn install -DskipTests -Dspring.datasource.url -Dspring.datasource.username -Dspring.datasource.password
+RUN mvn install -DskipTests
 
 FROM openjdk:16
 

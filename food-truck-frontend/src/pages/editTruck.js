@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { MenuBar } from './index.js';
+import styles from './signup.module.scss';
 
 class Signup extends Component {
     constructor(props) {
@@ -115,43 +116,42 @@ class Signup extends Component {
     render() {
         return (
             <html>
-                <body style = {{backgroundColor: '#90AACB'}}>\
+                <body style = {{backgroundColor: '#708090'}}>
                     <MenuBar/>
                     <div>
-                        <div class="sections" >
-                            <div class = "editTruck" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+                        <div class="sections">
+                            <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Edit Your Truck</span>
+                            <div class = "editTruck" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
                                 <form id= "modify" onSubmit={this.handleSubmit}>
-                                    <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Edit Your Truck</span>
 
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "truckName" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Truck Name:</span>
-                                        <span id = "truckName" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="truckName" placeholder="Enter the Truck Name" value={this.state.truckName} type="text" onChange={this.handleInputChange}/>
-                                        </span>
+                                    <span class = "editTruckHeader" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Edit Truck Details</span>
+
+                                    <div class={styles.formnput}>
+                                        <input id="truckName" name="truckName" class={styles.formelementinput} type="text" placeholder="Enter New Truck Name" value={this.state.truckName} required onChange={this.handleInputChange}/>
+                                        <div class={styles.formelementbar}></div>
+                                        <label class={styles.formelementlabel} for="truckName">Truck Name</label>
+                                    </div>
+
+                                    <div class={styles.formnput}>
+                                        <input id="description" name="description" class={styles.formelementinput} type="text" placeholder="Enter New Description" value={this.state.description} required onChange={this.handleInputChange}/>
+                                        <div class={styles.formelementbar}></div>
+                                        <label class={styles.formelementlabel} for="description">Description</label>
+                                    </div>
+
+                                    <div class={styles.formnput}>
+                                        <input id="scheduleInput" name="schedule" class={styles.formelementinput} type="text" placeholder="Enter New Schedule" value={this.state.schedule} required onChange={this.handleInputChange}/>
+                                        <div class={styles.formelementbar}></div>
+                                        <label class={styles.formelementlabel} for="schedule">Schedule</label>
                                     </div>
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "description" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Description:</span>
-                                        <span id = "descriptionInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="description" placeholder="Enter the Description" value={this.state.description} type="text" onChange={this.handleInputChange}/>
-                                        </span>
+                                        <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit Changes</button>
                                     </div>
 
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "schedule" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Schedule:</span>
-                                        <span id = "scheduleInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="schedule" placeholder="Enter the Schedule" value={this.state.schedule} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-
-                                    <br></br>
-
-                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <input type="submit" value="Submit"/>
-                                    </span>
                                 </form>
+                            </div>
 
-                                <br></br>
+                            <div class = "editRoute" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
                                 
                                 <form id= "route" onSubmit={this.handleRouteSubmit}>
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
@@ -161,15 +161,14 @@ class Signup extends Component {
                                             <input name="newRouteY" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the Y Coordinate" value={this.state.newRouteY} type="text" onChange={this.handleInputChange}/>
                                         </span>
                                     </div>
-                                    <br></br>
 
-                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <input type="submit" value="Submit"/>
-                                    </span>
-
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit New Route</button>
+                                    </div>
                                 </form>
+                            </div>
 
-                                <br></br>
+                            <div class = "newMenuItem" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
 
                                 <form onSubmit={this.handleMenuItemSubmit}>
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
@@ -193,27 +192,28 @@ class Signup extends Component {
 
                                     <br></br>
 
-                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <input type="submit" value="Submit"/>
-                                    </span>
-
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit New Item</button>
+                                    </div>
                                 </form>
+                            </div>
 
-                                <br></br>
+
+                            <div class = "newRatingCheck" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
 
                                 <form onSubmit={this.handleRatingSubmit}>
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "newRating" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Rating:</span>
-                                        <span id = "ratingInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="newRating" placeholder="Select a new rating (DEBUG)" value={this.state.newRating} type="text" onChange={this.handleInputChange}/>
-                                        </span>
+
+                                    <span class = "editTruckHeader" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Edit Rating</span>
+
+                                    <div class={styles.formnput}>
+                                        <input id="ratingInput" name="newRating" class={styles.formelementinput} type="text" placeholder="Select a New Rating" value={this.state.newRating} required onChange={this.handleInputChange}/>
+                                        <div class={styles.formelementbar}></div>
+                                        <label class={styles.formelementlabel} for="newRating">Change Rating</label>
                                     </div>
-                                    <br></br>
 
-                                    <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <input type="submit" value="Submit"/>
-                                    </span>
-
+                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                        <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit Changes</button>
+                                    </div>
                                 </form>
 
                             </div>
