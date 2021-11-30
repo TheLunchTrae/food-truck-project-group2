@@ -30,6 +30,9 @@ class DashTable extends Component {
                     }
                 })
             }
+        }).catch(err => {
+            console.log(err);
+            document.getElementById("typeBar").classList.add(styles.ownTab);
         });
 
         axios.get("http://localhost:8090/api/user/subscriptions").then(res =>{
@@ -39,6 +42,8 @@ class DashTable extends Component {
             if(res.data.length == 0){
                 document.getElementById("subTable").classList.add(styles.noSub);
             }
+        }).catch(err => {
+            console.log(err);
         });
 
         document.querySelector("tr").className=styles.tableRow;
@@ -83,7 +88,7 @@ class DashTable extends Component {
 
     render(){
         return(
-            <div class={styles.wrapper}>
+            <div class={styles.dashTable}>
                 <div id="typeBar" class={styles.typeBar}>
                     <button class={styles.subButton} id="subButton" onClick={this.changeTab}>Subscribed Food Trucks</button>
                     <button class={styles.ownButton} id="ownButton" onClick={this.changeTab}>Your Food Trucks</button>
@@ -105,10 +110,10 @@ class DashTable extends Component {
                             </tbody>
                         </table>
                         <span class={styles.noSub}>
-                            <text >
+                            <h5>
                                 You are not subscribed to any food trucks.<br/>
                                 Click <a href="/search">here</a> to find some trucks that interest you!
-                            </text>
+                            </h5>
                         </span>
                     </span>
                     <span class={styles.ownTrucks}>
@@ -127,10 +132,10 @@ class DashTable extends Component {
                             </tbody>
                         </table>
                         <span class={styles.noOwn}>
-                            <text>
+                            <h5>
                                 You do not own any Food Trucks.<br/>
                                 Click <a href="/createTruck">here</a> to get started!
-                            </text>
+                            </h5>
                         </span>
                     </span>
                 </div>

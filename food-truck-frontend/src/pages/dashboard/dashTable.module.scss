@@ -1,12 +1,17 @@
 //Overall dashboard table wrapper
-.wrapper{
+.dashTable{
+    display: inline-block;
     border: none;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
 }
 //Tab bar settings
 .typeBar{
     background-color: #708090;
     display: block;
-    height: 5%;
+    width: 100%;
+    height: 10%;
     border: none;
 }
 
@@ -17,6 +22,8 @@
     border: none;
     font-size: 2.2rem;
     vertical-align: bottom;
+    height: 100%;
+    width: 50%;
 }
 
 //Button hover effects
@@ -43,16 +50,15 @@
 .subTab .subButton, .ownTab .ownButton{
     font-weight: bold;
     font-size: 2.0rem;
-    width: 52%;
-    transition: font-size 0.1s ease-in-out;
+    width: 51%;
 }
 
 //What to do with not selected tab
 .subTab .ownButton, .ownTab .subButton{
     opacity: 0.7;
     font-size: 1.2rem;
-    width: 48%;
-    transition: font-size 0.1s ease-in-out;
+    width: 49%;
+    height: 55%;
 }
 
 //Hides table for unselected tab
@@ -68,8 +74,7 @@
 .displayTable{
     border: none;
     display: flex;
-    height: 95%;
-    vertical-align: top;
+    height: 90%;
     background-color: #555555;
     overflow-y: auto;
 }

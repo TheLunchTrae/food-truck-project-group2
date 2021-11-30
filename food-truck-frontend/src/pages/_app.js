@@ -21,7 +21,7 @@ const FoodTruckApp = ({ Component, pageProps }) => {
     return (
         <Provider store={ store }>
             <Head>
-                <title>My page</title>
+                <title>Food Truck Finder</title>
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
             </Head>
 

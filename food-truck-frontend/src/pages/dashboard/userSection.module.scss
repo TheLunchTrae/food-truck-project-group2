@@ -1,7 +1,9 @@
+//Overall <div>
 .userSection {
-    position: relative;
-    width: 100%;
-    height: fit-content;
+    display: inline-block;
+    width: fit-content;
+    padding: 15px;
+    background-color: #FFFFFF;
 }
 
 .username {
@@ -28,30 +30,34 @@
 }
 
 .savePrefs, .prefPopout{
+    color: white;
     background-color: #708090;
     display: block;
     margin: 0 auto;
     border: none;
     width: 100%;
+    font-size: 1.5rem;
 }
 
 .savePrefs{
+    background-color: #555555;
+    margin-top: 5%;
     height: 30px;
     font-weight: bold;
 }
 
 //For all buttons
 .prefPopout{
+    background-color: #6d6d6d;
     position: relative;
     margin-top: 5%;
     height: fit-content;
     width: 100%;
-    font-size: 1.5rem;
+    
 }
 
 .buttonText {
-    float: left;
-    font-weight: bold;
+    text-align: center;
 }
 
 .buttonImage {
@@ -66,7 +72,7 @@
     pointer-events: none;
 }
 
-
+//Button hover events
 .prefPopout:hover, .savePrefs:hover{
     background-color: #708090;
     font-weight: bold;
@@ -77,17 +83,6 @@
 //Show choice selection/input for selected preference
 .open + .choice {
     display:block;
-}
-
-//For all choice buttons
-.choiceButton{
-    font-weight: bold;
-    font-size: 1.1rem;
-    text-align: left;
-    background-color: #a8a8a8;
-    width: 100%;
-    height: 10%;
-    cursor: pointer;
 }
 
 //Location textboxes
@@ -108,7 +103,6 @@
 //General settings for all choice popouts
 .choice{
     display: none;
-    position: absolute;
     background-color: #a8a8a8;
     height: fit-content;
     left: 110%;
@@ -169,12 +163,12 @@
 }
 //Settings for checkmark
 .choiceLabel .customBox:after {
-    left: 8px;
+    left: 10px;
     bottom: 5px;
     width: 6px;
     height: 16px;
     border: solid white;
-    border-width: 0 4px 4px 0;
+    border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
