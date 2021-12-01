@@ -89,15 +89,11 @@ public class User {
             subscriptions.remove(truckId);
     }
 
-    //TODO - iterate over all food trucks & their ratings, return those w/matching userid
-    public List<Rating> getUserRatings(){
-        return null;
-    }
     public List<Long> getSubscriptions(){
         return subscriptions;
     }
 
     public String toString() {
-        return emailAddress + "," + password + "," + userType;
+        return userName + "," + emailAddress + "," + password + "," + userType;
     }
 }

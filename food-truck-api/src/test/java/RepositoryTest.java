@@ -51,6 +51,7 @@ public class RepositoryTest {
         initializeFoodTruck();
     }
 
+    /*
     @Test
     @Order(1)
     public void saveUser(){
@@ -102,4 +103,6 @@ public class RepositoryTest {
 
     @Test
     public void deleteFoodTruck(){}
+    */
+
 }

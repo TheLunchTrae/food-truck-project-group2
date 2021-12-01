@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import food.truck.api.user.User;
 import food.truck.api.user.UserController;
+import food.truck.api.user.UserRepository;
 import food.truck.api.user.UserService;
 import org.junit.Before;
 import org.junit.jupiter.api.*;
@@ -41,16 +42,73 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.transaction.Transactional;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = FoodTruckApplication.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class UserControllerTest {
+    //Taken from https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockmvc-example/
+    public static String jsonString(Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-public class UserServiceTest {
+    private MockMvc mockMvc;
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @BeforeEach
+    public void setup(){
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
+
+    //Add and make sure user is there
+    @Test
+    @Order(1)
+    public void signupUser() throws Exception {
+        User user = new User();
+        user.setUserName("test_username");
+        user.setPassword("test_password");
+        user.setEmailAddress("test_email@yahoo.com");
+        user.setUserType("Customer");
+
+        String userJson = jsonString(user);
+                //"{\"userName\": \"test_username\", \"emailAddress\": \"test_email@yahoo.com\", " +
+                //"\"password\": \"test_password\",\"userType\": \"Customer\"}";
+        System.out.println("UserControllerTest: userJson is "+userJson);
+
+        mockMvc.perform(post("/api/signup")
+                .content(userJson)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string("Successful Signup!"));
+    }
+
+    //Remove test user on completion (must be last)
+    @Test
+    @Order(2)
+    public void deleteUser() {
+        User user = userRepository.findByEmailAddress("test_email@yahoo.com");
+        long userId = user.getId();
+        userRepository.deleteById(userId);
+        //TODO - assert equals??
+    }
+
 
 }
 /*

@@ -35,6 +35,7 @@ public class UserController {
 
     @PostMapping("/api/signup")
     public ResponseEntity signupUser(@RequestBody User user) throws NoSuchAlgorithmException {
+        System.out.println("UserController.signupUser: got "+user+" from request body.");
         // hash the password
         user.setPassword(userService.hashPassword(user.getPassword()));
         user.setEmailAddress(user.getEmailAddress().toLowerCase());
@@ -45,6 +46,7 @@ public class UserController {
 
         //TODO - fix check
         if (postUser == null){
+            System.out.println("UserController.signupUser: could not add "+user+" to database.");
             return ResponseEntity.ok()
                     .body("Account Already Exists With This Email or Username");
         } else {
@@ -87,7 +89,7 @@ public class UserController {
         User user = userService.getUserWithId(id);
         DashboardData dashboardData = new DashboardData();
         if (user != null){
-            dashboardData.setRatings(user.getUserRatings());
+            dashboardData.setRatings(foodTruckService.getUserRatings(id));
             dashboardData.setSubscriptions(user.getSubscriptions());
             dashboardData.setFoodTrucks(foodTruckService.getOwnerFoodTrucks(user));
 
