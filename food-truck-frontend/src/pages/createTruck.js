@@ -63,7 +63,7 @@ class CreateTruck extends Component {
                     <MenuBar/>
                     <div class="sections">
                         <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px', padding: '20px'}}>New Truck</span>
-                        <div class = "signup" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '30%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
+                        <div class = "signup" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '35%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
                             <form onSubmit={this.handleSubmit}>
                                 <div class={styles.wrapper}>
 
@@ -79,7 +79,7 @@ class CreateTruck extends Component {
                                         <label class={styles.formelementlabel} for="description">Description</label>
                                     </div>
 
-                                    <div class={styles.formnput} style={{alignContent: 'center', width: '100%', height: '100%'}}>
+                                    <div class={styles.formnput}>
                                         <RouteMap/>
                                     </div>
 

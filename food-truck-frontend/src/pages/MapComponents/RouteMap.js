@@ -8,7 +8,7 @@ Geocode.setApiKey("AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk");
 Geocode.setLanguage("en");
 
 const containerStyle = {
-  width: '400px',
+  width: '100%',
   height: '400px'
 };
 
