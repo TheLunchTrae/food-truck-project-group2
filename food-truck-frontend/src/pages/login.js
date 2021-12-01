@@ -26,9 +26,12 @@ class Login extends Component {
         loginService.doLogin(this.state.email, this.state.password)
         .then(res => {
             console.log(res);
-            if(res.headers['token'] !== null){
+            if(res.headers['token'] != null){
                 loginService.setToken(res.headers['token']);
                 window.location.href="/dashboard";
+            }
+            else {
+                alert("Invalid login");
             }
         }).catch(e => {
             console.log(e);

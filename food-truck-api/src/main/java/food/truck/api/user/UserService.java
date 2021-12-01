@@ -54,7 +54,7 @@ public class UserService {
 
     public String loginUser(User user){
         User postUser;
-        if((postUser = userRepository.findByEmailAddressAndPassword(user.getEmailAddress(), user.getPassword())) != null){
+        if((postUser = userRepository.findByEmailAddressAndPassword(user.getEmailAddress().toLowerCase(), user.getPassword())) != null){
             return postUser.getToken();
         }
         return null;
