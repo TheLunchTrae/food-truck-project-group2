@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { MenuBar } from './index.js';
 //import MapComponent from '../mapComponent.js';
+import styles from './signup.module.scss';
 
 class About extends Component {
     constructor(props) {
@@ -77,11 +78,11 @@ class About extends Component {
     render() {
         return (
             <html>
-                <body style = {{backgroundColor: '#90AACB'}}>
+                <body style = {{backgroundColor: '#708090'}}>
                     <MenuBar/>
                     <div class="sections" >
-                        <div class = "headerText" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '35%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
-                            <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>{this.state.truckName}Truck</span>
+                        <div class = "headerText" style = {{alignContent: 'center', background: '#FFFFFF', width: '30%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+                            <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>{this.state.truckName}<u>Truck</u></span>
                             <span class = "ratingPref" style = {{color: '#000000', display: 'block', fontSize: '1.4rem', fontWeight: 'bold', textAlign: 'center'}}>ID: {this.state.truckId}</span>
                             <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                 <form id = "subscribe" onSubmit={this.handleSubscribeSubmit}>
@@ -93,9 +94,9 @@ class About extends Component {
                         </div>
 
 
-                        <div class = "block" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+                        <div class = "block" style = {{alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
 
-                            <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Truck Details</span>
+                            <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}><u>Truck Details</u></span>
 
                             <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                 <label>
@@ -173,31 +174,33 @@ class About extends Component {
                                 </table>
                             </div>
 
-                            <hr style = {{border: '1px solid black', width: '85%', marginTop: '15px', marginBottom: '15px'}}></hr>
+                        </div>
 
-                            <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                        <div class = "block" style = {{alignContent: 'center', background: '#FFFFFF', width: '30%', padding: '20px', margin: '35px auto'}}>
+                            <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Leave a Review!</span>
+                            <br></br>
+                            <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', padding: '5px 0'}}>
 
-                                <form id = "rating" onSubmit={this.handleRatingSubmit}>
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "value" style = {{fontSize: '1.0rem', fontWeight: 'bold', marginTop: '5px'}}>Rating value:</span>
-                                        <span id = "ratingValue" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="ratingValue" placeholder="Enter rating value (1-5)" pattern= "[1-5]" title="Must be 1-5" value={this.state.ratingValue} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "revie" style = {{fontSize: '1.0rem', fontWeight: 'bold', marginTop: '5px'}}>Review (optional):</span>
-                                            <span id = "ratingReview" style={{fontSize: '1.4rem'}}>
-                                            <input style = {{width: '600px', height: '20px'}} name="ratingReview" placeholder="Enter review" value={this.state.ratingReview} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
+                            <form id = "rating" onSubmit={this.handleRatingSubmit}>
 
 
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <button type="submit">Leave Rating</button>
-                                    </div>
-                                </form>
-                            </div>
+                                <div class={styles.formnput}>
+                                    <input id="ratingValue" name="ratingValue" class={styles.formelementinput} type="text" placeholder="Enter rating value (1-5)" pattern= "[1-5]" title="Must be 1-5" value={this.state.ratingValue} required onChange={this.handleInputChange}/>
+                                    <div class={styles.formelementbar}></div>
+                                    <label class={styles.formelementlabel} for="ratingValue">Rating Value</label>
+                                </div>
+
+                                <div class={styles.formnput}>
+                                    <input id="ratingReview" name="revie" class={styles.formelementinput} type="text" placeholder="Enter review" value={this.state.ratingReview} required onChange={this.handleInputChange}/>
+                                    <div class={styles.formelementbar}></div>
+                                    <label class={styles.formelementlabel} for="revie">Review</label>
+                                </div>
+
+                                <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                    <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Leave Rating</button>
+                                </div>
+                            </form>
+                        </div>
                         </div>
                     </div>
                 </body>
