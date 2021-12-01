@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { MenuBar } from './index.js';
+import styles from './signup.module.scss';
 
 class Signup extends Component {
     constructor(props) {
@@ -58,32 +59,29 @@ class Signup extends Component {
     render() {
         return (
             <html>
-                <body style = {{backgroundColor: '#90AACB'}}>
+                <body style = {{backgroundColor: '#708090'}}>
                     <MenuBar/>
                     <div class="sections">
-                        <div class = "editAccount" style = {{alignContent: 'center', borderRadius: '100px', background: '#F9D5A7', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+                        <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Edit Your Account</span>
+                        <div class = "editAccount" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
                             <form onSubmit={this.handleSubmit}>
-                                <span class="heading" style={{color: "#0F52BA", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Edit Your Account</span>
 
-                                <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <span class = "username" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Username:</span>
-                                    <span id = "usernameInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                        <input name="username" placeholder="Enter Your Username" value={this.state.username} type="text" onChange={this.handleInputChange}/>
-                                    </span>
+
+                                <div class={styles.formnput}>
+                                    <input id="usernameInput" name="username" class={styles.formelementinput} value={this.state.username} type="input" placeholder="Enter Your Username"  required onChange={this.handleInputChange}/>
+                                    <div class={styles.formelementbar}></div>
+                                    <label class={styles.formelementlabel} for="username">Username</label>
+                                </div>
+
+                                <div class={styles.formnput}>
+                                    <input id="passwordInput" name="password" class={styles.formelementinput} value={this.state.password} type="text" placeholder="Enter A New Password"  required onChange={this.handleInputChange}/>
+                                    <div class={styles.formelementbar}></div>
+                                    <label class={styles.formelementlabel} for="password">New Password</label>
                                 </div>
 
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <span class = "password" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Password:</span>
-                                    <span id = "passwordInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                        <input name="password" placeholder="Enter A New Password" value={this.state.password} type="text" onChange={this.handleInputChange}/>
-                                    </span>
+                                    <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit</button>
                                 </div>
-                                
-                                <br></br>
-
-                                <span style={{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <input type="submit" value="Submit"/>
-                                </span>
                             </form>
                         </div>
                     </div>
