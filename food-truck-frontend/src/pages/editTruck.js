@@ -171,26 +171,24 @@ class Signup extends Component {
                             <div class = "newMenuItem" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
 
                                 <form onSubmit={this.handleMenuItemSubmit}>
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "newMenuItemType" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Menu Item Type:</span>
-                                        <span id = "itemInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="newMenuItemType" placeholder="Enter the food item's food type" value={this.state.newMenuItemType} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "newMenuItemName" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Menu Item Name:</span>
-                                        <span id = "itemInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="newMenuItemName" placeholder="Enter the food item's food type" value={this.state.newMenuItemName} type="text" onChange={this.handleInputChange}/>
-                                        </span>
-                                    </div>
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <span class = "newMenuItemPrice" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Menu Item Price:</span>
-                                        <span id = "itemInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                            <input name="newMenuItemPrice" placeholder="Enter the food item's price" value={this.state.newMenuItemPrice} type="text" onChange={this.handleInputChange}/>
-                                        </span>
+
+                                    <div class={styles.formnput}>
+                                        <input id="itemInput" name="newMenuItemName" class={styles.formelementinput} type="text" placeholder="Enter the food item's name" value={this.state.newMenuItemName} required onChange={this.handleInputChange}/>
+                                        <div class={styles.formelementbar}></div>
+                                        <label class={styles.formelementlabel} for="newMenuItemName">New Menu Item Name</label>
                                     </div>
 
-                                    <br></br>
+                                    <div class={styles.formnput}>
+                                        <input id="itemInput" name="newMenuItemType" class={styles.formelementinput} type="text" placeholder="Enter the food item's type" value={this.state.newMenuItemType} required onChange={this.handleInputChange}/>
+                                        <div class={styles.formelementbar}></div>
+                                        <label class={styles.formelementlabel} for="newMenuItemType">New Menu Item Type</label>
+                                    </div>
+
+                                    <div class={styles.formnput}>
+                                        <input id="itemInput" name="newMenuItemPrice" class={styles.formelementinput} type="text" placeholder="Enter the food item's price" value={this.state.newMenuItemPrice} required onChange={this.handleInputChange}/>
+                                        <div class={styles.formelementbar}></div>
+                                        <label class={styles.formelementlabel} for="newMenuItemPrice">New Menu Item Price</label>
+                                    </div>
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit New Item</button>
