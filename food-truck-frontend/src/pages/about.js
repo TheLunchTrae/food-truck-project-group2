@@ -31,7 +31,7 @@ class About extends Component {
                             <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 30px'}}>
 
                                 <br></br>
-                                <span id = "text2" style={{fontSize: '1.3rem', marginLeft: '10px', fontWeight: 'bold'}}>Welcome to the Food Truck Finder Application! This application was created & developed by Sam Hobbs, Trae Stevens, Joshua Hunter & Tyler Ross. The Food Truck Finder Application is built and responsible for...</span>
+                                <span id = "text2" style={{fontSize: '1.3rem', marginLeft: '10px', fontWeight: 'bold'}}>Welcome to the Food Truck Finder Application! This application was created & developed by Sam Hobbs, Trae Stevens, Joshua Hunter & Tyler Ross. The Food Truck Finder Application is responsible for serving as our group project for 3472 Software Engineering 2 at Baylor University.</span>
                             </div>
                         </div>
                     </div>
