@@ -200,7 +200,6 @@ class Signup extends Component {
                             <div class = "newRatingCheck" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
 
                                 <form onSubmit={this.handleRatingSubmit}>
-
                                     <span class = "editTruckHeader" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Edit Rating</span>
 
                                     <div class={styles.formnput}>
@@ -213,7 +212,6 @@ class Signup extends Component {
                                         <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit Changes</button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
