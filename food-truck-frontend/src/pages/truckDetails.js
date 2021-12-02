@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { MenuBar } from './index.js';
-//import MapComponent from '../mapComponent.js';
 import styles from './signup.module.scss';
 
 class About extends Component {
@@ -176,13 +175,12 @@ class About extends Component {
 
                         </div>
 
-                        <div class = "block" style = {{alignContent: 'center', background: '#FFFFFF', width: '30%', padding: '20px', margin: '35px auto'}}>
+                        <div class = "block" style = {{alignContent: 'center', width: '30%', padding: '20px', background: '#FFFFFF', margin: '35px auto'}}>
                             <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Leave a Review!</span>
                             <br></br>
                             <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', padding: '5px 0'}}>
 
                             <form id = "rating" onSubmit={this.handleRatingSubmit}>
-
 
                                 <div class={styles.formnput}>
                                     <input id="ratingValue" name="ratingValue" class={styles.formelementinput} type="text" placeholder="Enter rating value (1-5)" pattern= "[1-5]" title="Must be 1-5" value={this.state.ratingValue} required onChange={this.handleInputChange}/>
@@ -191,13 +189,13 @@ class About extends Component {
                                 </div>
 
                                 <div class={styles.formnput}>
-                                    <input id="ratingReview" name="revie" class={styles.formelementinput} type="text" placeholder="Enter review" value={this.state.ratingReview} required onChange={this.handleInputChange}/>
+                                    <input id="ratingReview" name="revie" class={styles.formelementinput} placeholder="Enter review" type="text" value={this.state.ratingReview} required onChange={this.handleInputChange}/>
                                     <div class={styles.formelementbar}></div>
                                     <label class={styles.formelementlabel} for="revie">Review</label>
                                 </div>
 
-                                <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Leave Rating</button>
+                                <div style = {{display: 'block', margin: '0 auto', alignContent: 'center', textAlign: 'center', padding: '5px 0'}}>
+                                    <button type="submit" style = {{fontSize: '17px', cursor: 'pointer', background: '#708090'}}>Leave Rating</button>
                                 </div>
                             </form>
                         </div>
