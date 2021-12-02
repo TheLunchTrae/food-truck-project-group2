@@ -45,7 +45,9 @@ class CreateTruck extends Component {
 
         console.log(val);
 
-        event.preventDefault()
+        alert("Truck Created");
+
+        window.location.href = '/dashboard';
     }
 
 

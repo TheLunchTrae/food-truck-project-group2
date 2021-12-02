@@ -6,11 +6,13 @@ import styles from './signup.module.scss';
 class About extends Component {
     constructor(props) {
         super(props);
-        this.state = { truckId: -1, truckName: '', route: [], schedule: '', menu: '', description: '', ratings: [], ratingValue: '', ratingReview: ''};
+        this.state = { truckId: -1, truckName: '', route: [], schedule: '', menu: '', description: '', ratings: [], ratingValue: '', ratingReview: '', isSubscribed: false };
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubscribeSubmit = this.handleSubscribeSubmit.bind(this);
         this.handleRatingSubmit = this.handleRatingSubmit.bind(this);
+        this.handleUnsubscribeSubmit = this.handleUnsubscribeSubmit.bind(this);
+        this.renderSubButton = this.renderSubButton.bind(this);
     }
     handleInputChange(event) {
         const name = event.target.name;
@@ -29,7 +31,21 @@ class About extends Component {
         }).then(res => {
             console.log(res);
         });
-        event.preventDefault()
+
+        window.location.href = "/truckDetails?truckId=" + this.state.truckId;
+    }
+
+    handleUnsubscribeSubmit(event) {
+        console.log(sessionStorage.getItem('token'));
+        axios.get("http://localhost:8090/api/unsubscribe/" + this.state.truckId, {
+            headers:{
+                'userId': sessionStorage.getItem('token')
+            }
+        }).then(res => {
+            console.log(res);
+        });
+
+        window.location.href = "/truckDetails?truckId=" + this.state.truckId;
     }
 
     handleRatingSubmit(event){
@@ -46,6 +62,26 @@ class About extends Component {
         
         event.preventDefault()
 
+    }
+
+    renderSubButton() {
+        if (this.state.isSubscribed) {
+            return (
+                <form id = "subscribe" onSubmit={this.handleUnsubscribeSubmit}>
+                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                        <button type="submit" style = {{background: '#a9a9a9', fontSize: '17px', cursor: 'pointer'}}>Unsubscribe</button>
+                    </div>
+                </form>
+            );
+        } else {
+            return (
+                <form id = "subscribe" onSubmit={this.handleSubscribeSubmit}>
+                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                        <button type="submit" style = {{background: '#a9a9a9', fontSize: '17px', cursor: 'pointer'}}>Subscribe</button>
+                    </div>
+                </form>
+            );
+        }
     }
 
     componentDidMount(){
@@ -68,10 +104,17 @@ class About extends Component {
                     ratings: res.data.ratings
                 });
             });
+
+            // set the subscribed state
+            axios.get("http://localhost:8090/api/user/isSubscribed/" + this.state.truckId, {
+                headers:{ 'token': sessionStorage.getItem('token') }
+            }).then(res => {
+                console.log(res);
+                this.setState({ isSubscribed: res.data });
+            });
         } else {
 
         }
-
     }
 
     render() {
@@ -84,11 +127,7 @@ class About extends Component {
                             <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>{this.state.truckName}<u>Truck</u></span>
                             <span class = "ratingPref" style = {{color: '#000000', display: 'block', fontSize: '1.4rem', fontWeight: 'bold', textAlign: 'center'}}>ID: {this.state.truckId}</span>
                             <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                <form id = "subscribe" onSubmit={this.handleSubscribeSubmit}>
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <button type="submit" style = {{background: '#a9a9a9', fontSize: '17px', cursor: 'pointer'}}>Subscribe</button>
-                                    </div>
-                                </form>
+                                {this.renderSubButton()}
                             </div>
                         </div>
 

@@ -185,6 +185,23 @@ public class UserController {
         }
     }
 
+    @GetMapping("api/user/isSubscribed/{truckId}")
+    public Boolean isSubscribed(@PathVariable Long truckId, @RequestHeader(name="token")long token) {
+        User user = userService.secureUser(userService.getUserWithId(token));
+
+        // get user subscription list
+        List<FoodTruck> foodTruckList = foodTruckService.getUserSubscriptions(user);
+
+        if (foodTruckList != null) {
+            for (FoodTruck f : foodTruckList) {
+                if (f.getTruckId() == truckId)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
     //NOTE - use the bottom two/three in coding the userdetails page (it needs both the user's subscriptions,
     //ratings, maybe food trucks if an owner)
     //OTHER NOTE - sam changed this so it delegates to foodtruckservice
