@@ -32,6 +32,7 @@ class About extends Component {
             console.log(res);
         });
 
+        event.preventDefault();
         window.location.href = "/truckDetails?truckId=" + this.state.truckId;
     }
 
@@ -45,6 +46,7 @@ class About extends Component {
             console.log(res);
         });
 
+        event.preventDefault();
         window.location.href = "/truckDetails?truckId=" + this.state.truckId;
     }
 
