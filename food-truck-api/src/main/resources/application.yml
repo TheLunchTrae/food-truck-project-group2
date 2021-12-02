@@ -1,2 +1,12 @@
 server:
   port : 8090
+spring:
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://ec2-3-94-232-234.compute-1.amazonaws.com:5432/d6iaa0fiadhjh5?sslmode=require
+    username: jufyymcngegdrc
+    password: 17e0ddc1c58e1d77292b472f99ad39eb54a13fab568c237c13f9f380a5ae7161
