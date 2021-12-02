@@ -124,7 +124,7 @@ class About extends Component {
             <html>
                 <body style = {{backgroundColor: '#708090'}}>
                     <MenuBar/>
-                    <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}><u>Truck</u></span>
+                    <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Truck</span>
                     <div class="sections" >
                         <div class = "headerText" style = {{alignContent: 'center', background: '#FFFFFF', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
                             <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>{this.state.truckName}</span>
