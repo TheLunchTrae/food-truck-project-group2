@@ -145,6 +145,11 @@ class UserSection extends Component {
             <div class={styles.userSection}>
                 <h1 class={styles.username}>{this.state.username}</h1>
                 <h3 class={styles.usertype}>{this.state.usertype}</h3>
+
+                <form action="/editAccount">
+                    <button type="submit" class={styles.savePrefs}>Edit Account</button>
+                </form>
+
                 <hr class={styles.divider}/>
                 <h2 class={styles.prefHead}>Preferences</h2>
 

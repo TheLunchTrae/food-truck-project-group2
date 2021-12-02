@@ -6,7 +6,7 @@ COPY /src .
 
 COPY pom.xml .
 
-RUN mvn install -DskipTests
+RUN mvn clean package -DskipTests
 
 FROM openjdk:16
 

@@ -28,6 +28,9 @@ class DashTable extends Component {
                     if(res.data.length == 0){
                         document.getElementById("ownTable").classList.add(styles.noOwn);
                     }
+                    else {
+                        document.getElementById("ownTable").classList.add(styles.own);
+                    }
                 })
             }
         }).catch(err => {
@@ -131,6 +134,11 @@ class DashTable extends Component {
                                 {this.state.ownTrucks.length != 0 ?  this.state.ownTrucks.map(this.createTruckRow) : null} 
                             </tbody>
                         </table>
+                        <span class={styles.own}>
+                            <h5>
+                                Click <a href="/createTruck">here</a> to add another food truck!
+                            </h5>
+                        </span>
                         <span class={styles.noOwn}>
                             <h5>
                                 You do not own any Food Trucks.<br/>
