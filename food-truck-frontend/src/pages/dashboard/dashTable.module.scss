@@ -124,3 +124,10 @@
 .noSub ~ .noSub, .noOwn ~ .noOwn{
     display: block;
 }
+
+.own{
+    display: block;
+    text-align: center;
+    color: white;
+    font-size: 1.8rem;
+}
