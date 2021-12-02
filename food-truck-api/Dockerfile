@@ -12,7 +12,7 @@ FROM openjdk:16
 
 WORKDIR /food-truck-backend
 
-COPY /target/food-truck-api.jar app.jar
+COPY target/food-truck-api.jar app.jar
 
 EXPOSE 8090
 
