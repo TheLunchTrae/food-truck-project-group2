@@ -32,6 +32,7 @@ class About extends Component {
             console.log(res);
         });
 
+        event.preventDefault();
         window.location.href = "/truckDetails?truckId=" + this.state.truckId;
     }
 
@@ -45,6 +46,7 @@ class About extends Component {
             console.log(res);
         });
 
+        event.preventDefault();
         window.location.href = "/truckDetails?truckId=" + this.state.truckId;
     }
 
@@ -59,9 +61,9 @@ class About extends Component {
         const val = axios.post("http://localhost:8090/api/addRating/", Rating, {headers:{'truckId': this.state.truckId}}).then(res => {
             console.log(res);
         });
-        
-        event.preventDefault()
 
+        event.preventDefault();
+        window.location.href = "/truckDetails?truckId=" + this.state.truckId;
     }
 
     renderSubButton() {
@@ -230,7 +232,7 @@ class About extends Component {
                                 </div>
 
                                 <div class={styles.formnput}>
-                                    <input id="ratingReview" name="revie" class={styles.formelementinput} placeholder="Enter review" type="text" value={this.state.ratingReview} required onChange={this.handleInputChange}/>
+                                    <input id="ratingReview" name="ratingReview" class={styles.formelementinput} placeholder="Enter review" type="text" value={this.state.ratingReview} required onChange={this.handleInputChange}/>
                                     <div class={styles.formelementbar}></div>
                                     <label class={styles.formelementlabel} for="revie">Review</label>
                                 </div>
