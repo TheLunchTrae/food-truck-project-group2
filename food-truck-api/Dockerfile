@@ -6,11 +6,9 @@ COPY /src .
 
 COPY pom.xml .
 
-RUN mvn clean install -DskipTests
+RUN mvn clean package -DskipTests
 
 FROM openjdk:16
-
-WORKDIR /food-truck-backend
 
 COPY target/food-truck-api.jar app.jar
 
