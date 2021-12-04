@@ -10,7 +10,6 @@ class Signup extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleMenuItemSubmit = this.handleMenuItemSubmit.bind(this);
-        this.handleRatingSubmit = this.handleRatingSubmit.bind(this);
         this.handleRouteSubmit = this.handleRouteSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -61,18 +60,6 @@ class Signup extends Component {
         });
 
         event.preventDefault()
-    }
-    //For adding new rating (FOR DEBUGGING - REMOVE LATER)
-    handleRatingSubmit(event){
-        const JSONWrapper = {
-            rating: this.state.newRating
-        };
-        
-        const val = axios.post("http://localhost:8090/api/addRating", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
-            console.log(res);
-        });
-        event.preventDefault()
-
     }
 
     //For new location to add to route
@@ -192,24 +179,6 @@ class Signup extends Component {
 
                                     <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                         <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit New Item</button>
-                                    </div>
-                                </form>
-                            </div>
-
-
-                            <div class = "newRatingCheck" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
-
-                                <form onSubmit={this.handleRatingSubmit}>
-                                    <span class = "editTruckHeader" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Edit Rating</span>
-
-                                    <div class={styles.formnput}>
-                                        <input id="ratingInput" name="newRating" class={styles.formelementinput} type="text" placeholder="Select a New Rating" value={this.state.newRating} required onChange={this.handleInputChange}/>
-                                        <div class={styles.formelementbar}></div>
-                                        <label class={styles.formelementlabel} for="newRating">Change Rating</label>
-                                    </div>
-
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit Changes</button>
                                     </div>
                                 </form>
                             </div>

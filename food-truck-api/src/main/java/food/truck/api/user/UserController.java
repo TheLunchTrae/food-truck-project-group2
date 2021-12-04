@@ -48,7 +48,7 @@ public class UserController {
         if (postUser == null){
             System.out.println("UserController.signupUser: could not add "+user+" to database.");
             return ResponseEntity.ok()
-                    .body("Account Already Exists With This Email or Username");
+                    .body("EMAIL_EXISTS");
         } else {
             return ResponseEntity.ok()
                     .body("Successful Signup!");

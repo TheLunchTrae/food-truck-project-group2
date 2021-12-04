@@ -33,12 +33,17 @@ class Signup extends Component {
         //Post to URL
         axios.post("http://localhost:8090/api/signup", userDto).then(res => {
             console.log(res);
-            this.setState({
-                username:'',
-                email:'',
-                password:''
-            })
-            window.location.href = "/login";
+            if (res.data == "EMAIL_EXISTS"){
+                alert("Email already exists");
+            } else {
+                this.setState({
+                    username:'',
+                    email:'',
+                    password:''
+                })
+                window.location.href = "/login";
+            }
+
         }).catch(e => {
             console.log(e);
             console.log(userDto);
