@@ -1,0 +1,121 @@
+# Created at 2021-11-20T15:19:35.383
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: null
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:397)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:830)
+
+
+# Created at 2021-11-20T15:19:35.907
+Unexpected IOException with stream: 2021-11-20 15:19:35.905  INFO 14312 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 137 ms. Found 2 JPA repository interfaces.
+
+
+# Created at 2021-11-20T15:19:37.581
+Unexpected IOException with stream: 2021-11-20 15:19:37.576  INFO 14312 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+
+
+# Created at 2021-11-20T15:19:39.105
+Unexpected IOException with stream: 2021-11-20 15:19:39.103  INFO 14312 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+
+
+# Created at 2021-11-20T15:19:39.760
+Unexpected IOException with stream: 2021-11-20 15:19:39.758  INFO 14312 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+
+
+# Created at 2021-11-20T15:19:39.988
+Unexpected IOException with stream: 2021-11-20 15:19:39.987  INFO 14312 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
+
+
+# Created at 2021-11-20T15:19:40.463
+Unexpected IOException with stream: 2021-11-20 15:19:40.445  INFO 14312 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+
+
+# Created at 2021-11-20T15:19:40.807
+Unexpected IOException with stream: 2021-11-20 15:19:40.806  INFO 14312 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+
+# Created at 2021-11-20T15:19:44.105
+Unexpected IOException with stream: 2021-11-20 15:19:44.104  INFO 14312 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+
+
+# Created at 2021-11-20T15:19:44.139
+Unexpected IOException with stream: 2021-11-20 15:19:44.137  INFO 14312 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+
+
+# Created at 2021-11-20T15:19:46.864
+Unexpected IOException with stream: 2021-11-20 15:19:46.862  WARN 14312 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+
+# Created at 2021-11-20T15:19:48.645
+Unexpected IOException with stream: 2021-11-20 15:19:48.643  WARN 14312 --- [           main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+
+
+# Created at 2021-11-20T15:19:49.817
+Unexpected IOException with stream: 2021-11-20 15:19:49.815  INFO 14312 --- [           main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+
+
+# Created at 2021-11-20T15:19:49.881
+Unexpected IOException with stream: 2021-11-20 15:19:49.880  INFO 14312 --- [           main] RepositoryTest                           : Started RepositoryTest in 16.882 seconds (JVM running for 19.101)
+
+
+# Created at 2021-11-20T15:19:49.933
+Unexpected IOException: 5,1,RepositoryTest,saveUser,null,null,null
+
+
+# Created at 2021-11-20T15:19:50.743
+Unexpected IOException: 6,1,RepositoryTest,saveUser,null,null,null
+
+
+# Created at 2021-11-20T15:19:50.747
+Unexpected IOException: 5,1,RepositoryTest,getUser,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.151
+Unexpected IOException: 6,1,RepositoryTest,getUser,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.155
+Unexpected IOException: 5,1,RepositoryTest,modifyUser,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.275
+Unexpected IOException: 6,1,RepositoryTest,modifyUser,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.278
+Unexpected IOException: 5,1,RepositoryTest,addFoodTruck,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.403
+Unexpected IOException: 6,1,RepositoryTest,addFoodTruck,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.406
+Unexpected IOException: 5,1,RepositoryTest,getFoodTruck,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.428
+Unexpected IOException: 6,1,RepositoryTest,getFoodTruck,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.431
+Unexpected IOException: 5,1,RepositoryTest,modifyFoodTruck,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.499
+Unexpected IOException: 6,1,RepositoryTest,modifyFoodTruck,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.502
+Unexpected IOException: 5,1,RepositoryTest,deleteFoodTruck,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.510
+Unexpected IOException: 6,1,RepositoryTest,deleteFoodTruck,null,null,null
+
+
+# Created at 2021-11-20T15:19:51.515
+Unexpected IOException: 2,1,org.apache.maven.surefire.junitplatform.JUnitPlatformProvider,RepositoryTest,null,null,null
+
+
