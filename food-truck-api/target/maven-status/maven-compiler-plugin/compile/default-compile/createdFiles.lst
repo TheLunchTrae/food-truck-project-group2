@@ -16,4 +16,5 @@ food\truck\api\other\JSONWrapper.class
 food\truck\api\user\UserService.class
 food\truck\api\other\DashboardData.class
 food\truck\api\other\Pair.class
+food\truck\api\DatabaseConfig.class
 food\truck\api\foodtruck\FoodItem.class
