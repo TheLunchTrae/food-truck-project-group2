@@ -18,9 +18,7 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:16
 
-WORKDIR /food-truck-backend
-
-RUN cp -a target/food-truck-api.jar app.jar
+RUN cp target/food-truck-api.jar app.jar
 
 EXPOSE 8090
 
