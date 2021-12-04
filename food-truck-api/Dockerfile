@@ -14,11 +14,9 @@ COPY /src .
 
 COPY pom.xml .
 
-RUN mvn clean package -DskipTests
+RUN mvn install jar:jar && cp -a target/food-truck-api.jar app.jar && rm -rf target "$HOME/.m2"
 
 FROM openjdk:16
-
-COPY target/food-truck-api.jar app.jar
 
 EXPOSE 8090
 
