@@ -18,7 +18,9 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:16
 
-RUN cp target/food-truck-api.jar app.jar
+ARG JAR_FILE=target/*.jar
+
+COPY ${JAR_FILE} app.jar
 
 EXPOSE 8090
 
