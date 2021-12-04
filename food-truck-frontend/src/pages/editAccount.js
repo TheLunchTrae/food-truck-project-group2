@@ -22,7 +22,7 @@ class Signup extends Component {
     handleSubmit(event) {
         //Object that will be passed containing the users information
         const userDto = {
-            username: this.state.username,
+            userName: this.state.username,
             password: this.state.password
         };
 

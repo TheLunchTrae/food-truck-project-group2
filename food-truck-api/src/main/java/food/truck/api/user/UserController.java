@@ -117,19 +117,18 @@ public class UserController {
 
     //TODO - REMOVE; FUNDAMENTALLY BROKEN
     @PostMapping("/api/dashboard/modify")
-    public ResponseEntity modifyUser(@RequestBody Event event){
+    public ResponseEntity modifyUser(@RequestBody User userChanges, @RequestHeader Long token){
         User postUser;
-        if ((postUser = userService.modifyUser(event)) != null) {
+        if ((postUser = userService.modifyUser(userChanges, token)) != null) {
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
-                    .body(postUser);
+                    .body(userService.secureUser(postUser));
         } else {
             return ResponseEntity.ok()
                     .body("User modification failed");
         }
     }
 
-    //TODO - DEPRECATED; REMOVE SOON
     //TODO - double check this works especially with how I haven't tested sessions
     @PostMapping("/api/dashboard/preferences")
     public ResponseEntity modifyUserPreferences(@RequestBody Preferences preferences, @RequestHeader Long token){
@@ -142,15 +141,6 @@ public class UserController {
                     .body("User preference modification failed");
         }
     }
-
-    /*************************USER MODIFICATION FUNCTIONS*****************************/
-
-    @PostMapping("/api/modify/username")
-    public ResponseEntity modifyUsername(@RequestBody String newUsername, @RequestHeader Long userId){return null;}
-    @PostMapping("/api/modify/password")
-    public ResponseEntity modifyPassword(@RequestBody String newPassword, @RequestHeader Long userId){return null;}
-
-    /*********************************************************************************/
 
     @GetMapping("/api/subscribe/{truckId}")
     public ResponseEntity subscribeUserToTruck(@PathVariable Long truckId, @RequestHeader Long userId){

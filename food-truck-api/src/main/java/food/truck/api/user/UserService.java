@@ -92,23 +92,21 @@ public class UserService {
         }
     }
 
-    public User modifyUser(Event event){
+    //Fixed
+    public User modifyUser(User userChanges, long id){
         User user;
-        if ((user = userRepository.findById(event.getUserId())) != null) {
-            if ("NEW_UNAME".equals(event.getEventName())){
-                user.setEmailAddress(event.getVal());
-            } else if ("NEW_PASSWORD".equals(event.getEventName())){
-                try {
-                    user.setPassword(hashPassword(event.getVal()));
-                } catch (NoSuchAlgorithmException e) {}
-            } else {
-                System.out.println("bad event name: "+event.getEventName());
-                return null;
-            }
+        if ((user = userRepository.findById(id)) != null) {
+            //Change username
+            if (userChanges.getPassword() != null)
+                user.setUserName(userChanges.getUserName());
+            //Change password
+            if (userChanges.getPassword() != null)
+                user.setPassword(userChanges.getPassword());
+
             //Save the modified user
             userRepository.save(user);
         } else {
-            System.out.println("finding user with id "+event.getUserId()+ " failed");
+            System.out.println("finding user with id "+id+ " failed");
             return null;
         }
         return user;
