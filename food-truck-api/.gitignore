@@ -3,4 +3,5 @@
 /out
 /build
 /target/*
+!/target/*.jar
 /src/main/resources/application.properties

@@ -61,7 +61,7 @@ class MenuBar extends Component {
         return (
             <div class={styles.topDiv}>
                 <div id='topNav' class={styles.topNav}>
-                    <a class={styles.FTF} href = "/">Food Truck Finder</a>
+                    <a className={styles.FTF} href = "/">Food Truck Finder</a>
                     {this.renderType()}
                 </div>
             </div>
