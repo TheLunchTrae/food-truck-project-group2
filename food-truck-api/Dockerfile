@@ -14,7 +14,7 @@ COPY /src .
 
 COPY pom.xml .
 
-RUN mvn clean install -DskipTests jar:jar && cp -a target/food-truck-api.jar app.jar && rm -rf target "$HOME/.m2"
+RUN mvn clean package -DskipTests jar:jar && cp -a target/food-truck-api.jar app.jar && rm -rf target "$HOME/.m2"
 
 FROM openjdk:16
 
