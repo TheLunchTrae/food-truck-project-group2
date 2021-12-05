@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GoogleMap, LoadScript, Autocomplete } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import Geocode from "react-geocode";
 
 Geocode.setApiKey("AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk");

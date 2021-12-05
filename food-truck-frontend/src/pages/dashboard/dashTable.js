@@ -27,9 +27,10 @@ class DashTable extends Component {
                     });
                     if(res.data.length == 0){
                         document.getElementById("ownTable").classList.add(styles.noOwn);
+                        document.getElementById("noOwn").classList.add(styles.show)
                     }
                     else {
-                        document.getElementById("ownTable").classList.add(styles.own);
+                        document.getElementById("own").classList.add(styles.show);
                     }
                 })
             }
@@ -43,7 +44,7 @@ class DashTable extends Component {
                 subTrucks: res.data
             });
             if(res.data.length == 0){
-                document.getElementById("subTable").classList.add(styles.noSub);
+                document.getElementById("noSub").classList.add(styles.show);
             }
         }).catch(err => {
             console.log(err);
@@ -76,7 +77,7 @@ class DashTable extends Component {
                     {truck.description}
                 </td>
                 <td>
-                    Location
+                    Route
                 </td>
                 <td>
                     {/*Will setup to show stars for rating}*/}
@@ -91,65 +92,65 @@ class DashTable extends Component {
 
     render(){
         return(
-            <div class={styles.dashTable}>
-                <div id="typeBar" class={styles.typeBar}>
-                    <button class={styles.subButton} id="subButton" onClick={this.changeTab}>Subscribed Food Trucks</button>
-                    <button class={styles.ownButton} id="ownButton" onClick={this.changeTab}>Your Food Trucks</button>
-                </div>
-                <div class={styles.displayTable}>
-                    <span class={styles.subTrucks}>
-                        <table id="subTable" class={styles.table}>
-                            <thead class={styles.tableHeading}>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Description</th>  
-                                    <th>Location</th>      
-                                    <th>Rating</th>       
-                                    <th>Food Types</th>
-                                </tr>
-                            </thead>
-                            <tbody class={styles.tableBody}>
-                                {this.state.subTrucks.length != 0 ? this.state.subTrucks.map(this.createTruckRow) : null} 
-                            </tbody>
-                        </table>
-                        <span class={styles.noSub}>
-                            <h5>
-                                You are not subscribed to any food trucks.<br/>
-                                Click <a href="/search">here</a> to find some trucks that interest you!
-                            </h5>
-                        </span>
-                    </span>
-                    <span class={styles.ownTrucks}>
-                        <table id="ownTable" class={styles.table}>
-                            <thead class={styles.tableHeading}>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Description</th>  
-                                    <th>Location</th>      
-                                    <th>Rating</th>       
-                                    <th>Food Types</th>
-                                </tr>
-                            </thead>
-                            <tbody class={styles.tableBody}>
-                                {this.state.ownTrucks.length != 0 ?  this.state.ownTrucks.map(this.createTruckRow) : null} 
-                            </tbody>
-                        </table>
-                        <span class={styles.own}>
-                            <h5>
-                                Click <a href="/createTruck">here</a> to add another food truck!
-                            </h5>
-                        </span>
-                        <span class={styles.noOwn}>
-                            <h5>
-                                You do not own any Food Trucks.<br/>
-                                Click <a href="/createTruck">here</a> to get started!
-                            </h5>
-                        </span>
-                    </span>
+            <div class={styles.wrapper}>
+                <div class={styles.componentDashTable}>
+                    <div id="typeBar" class={styles.typeBar}>
+                        <button class={styles.subButton} id="subButton" onClick={this.changeTab}>Subscribed Food Trucks</button>
+                        <button class={styles.ownButton} id="ownButton" onClick={this.changeTab}>Your Food Trucks</button>
+                    </div>
+                    <div class={styles.tablesDiv}>
+                        <div class={styles.subTable}>
+                            <table id="subTable" class={styles.table}>
+                                <thead class={styles.tableHeading}>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>  
+                                        <th>Route</th>      
+                                        <th>Rating</th>       
+                                        <th>Food Types</th>
+                                    </tr>
+                                </thead>
+                                <tbody class={styles.tableBody}>
+                                    {this.state.subTrucks.length != 0 ? this.state.subTrucks.map(this.createTruckRow) : null} 
+                                </tbody>
+                            </table>
+                            <span id="noSub" class={styles.msg}>
+                                <h5>
+                                    You are not subscribed to any food trucks.<br/>
+                                    Click <a href="/search">here</a> to find some trucks that interest you!
+                                </h5>
+                            </span>
+                        </div>
+                        <div class={styles.ownTable}>
+                            <table id="ownTable" class={styles.table}>
+                                <thead class={styles.tableHeading}>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>  
+                                        <th>Route</th>      
+                                        <th>Rating</th>       
+                                        <th>Food Types</th>
+                                    </tr>
+                                </thead>
+                                <tbody class={styles.tableBody}>
+                                    {this.state.ownTrucks.length != 0 ?  this.state.ownTrucks.map(this.createTruckRow) : null} 
+                                </tbody>
+                            </table>
+                            <span id="own" class={styles.msg}>
+                                <h5>
+                                    Click <a href="/createTruck">here</a> to create a new food truck!
+                                </h5>
+                            </span>
+                            <span id="noOwn" class={styles.msg}>
+                                <h5>
+                                    You do not own any Food Trucks.<br/>
+                                    Click <a href="/createTruck">here</a> to get started!
+                                </h5>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            
         );
     }
 }

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styles from './createTruck.module.scss';
-import { MenuBar, RouteMap } from './index.js';
+import { MenuBar } from './index.js';
+import { LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
+
+const libraries = [ 'places' ]
 
 class CreateTruck extends Component {
     constructor(props) {
@@ -58,42 +61,43 @@ class CreateTruck extends Component {
         const urlParams = new URLSearchParams(queryString);
         const id = urlParams.get('id');
     }
+
     render() {
         return (
-            <html>
-                <body style = {{backgroundColor: '#90AACB'}}>
-                    <MenuBar/>
-                    <div class="sections">
-                        <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px', padding: '20px'}}>New Truck</span>
-                        <div class = "signup" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '35%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
-                            <form onSubmit={this.handleSubmit}>
-                                <div class={styles.wrapper}>
+            <body style = {{backgroundColor: '#90AACB'}}>
+                <MenuBar/>
+                <div class="sections">
+                    <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px', padding: '20px'}}>New Truck</span>
+                    <div class = "formDiv" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '25%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
+                        <form onSubmit={this.handleSubmit}>
+                            <div class={styles.wrapper}>
 
-                                    <div class={styles.formnput}>
-                                        <input id="truckName" name="truckName" class={styles.formelementinput} value={this.state.truckName} type="input" placeholder="Please write your trucks name"  required onChange={this.handleInputChange}/>
-                                        <div class={styles.formelementbar}></div>
-                                        <label class={styles.formelementlabel} for="truckName">Truck Name</label>
-                                    </div>
-
-                                    <div class={styles.formnput}>
-                                        <input id="description" name="description" class={styles.formelementinput} type="input" placeholder="Please write a description for your truck"  value={this.state.description} required onChange={this.handleInputChange}/>
-                                        <div class={styles.formelementbar}></div>
-                                        <label class={styles.formelementlabel} for="description">Description</label>
-                                    </div>
-
-                                    <div class={styles.formnput}>
-                                        <RouteMap/>
-                                    </div>
-
-                                    <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                        <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Create Truck</button>
-                                    </div>
+                                <div class={styles.formnput}>
+                                    <input id="truckName" name="truckName" class={styles.formelementinput} value={this.state.truckName} type="input" placeholder="Please write your trucks name"  required onChange={this.handleInputChange}/>
+                                    <div class={styles.formelementbar}></div>
+                                    <label class={styles.formelementlabel} for="truckName">Truck Name</label>
                                 </div>
-                            </form>
-                        </div>
+
+                                <div class={styles.formnput}>
+                                    <input id="description" name="description" class={styles.formelementinput} type="input" placeholder="Please write a description for your truck"  value={this.state.description} required onChange={this.handleInputChange}/>
+                                    <div class={styles.formelementbar}></div>
+                                    <label class={styles.formelementlabel} for="description">Description</label>
+                                </div>
+
+                                <div class={styles.formnput}>
+                                    <input id="routeStart" name="routeStart" class={styles.formelementinput} type="input" placeholder="Please write a description for your truck" required/>
+                                    <div class={styles.formelementbar}></div>
+                                    <label class={styles.formelementlabel} for="routeStart">Route Start</label>
+                                </div>
+
+                                <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                                    <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Create Truck</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </body>
-            </html>
+                </div>
+            </body>
         );
     }
 }
