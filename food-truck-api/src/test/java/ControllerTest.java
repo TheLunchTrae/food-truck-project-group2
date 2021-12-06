@@ -53,7 +53,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = FoodTruckApplication.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class UserControllerTest {
+public class ControllerTest {
     //Taken from https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockmvc-example/
     public static String jsonString(Object obj) {
         try {
@@ -75,6 +75,8 @@ public class UserControllerTest {
     public void setup(){
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
+
+    public void signupOwner(){}
 
     //Add and make sure user is there
     @Test
@@ -99,6 +101,28 @@ public class UserControllerTest {
                 .andExpect(content().string("Successful Signup!"));
     }
 
+    public void loginUser(){}
+    public void modifyUser(){}
+    public void modifyUserPreferences(){}
+    public void getUserPreferences(){}
+    public void subscribeUserToTruck(){
+        //isSubscribed()
+    }
+    public void unsubscribeUserToTruck(){
+        //isSubscribed()
+    }
+
+    public void addFoodTruck(){}
+    public void getFoodTruckNameWithId(){}
+    public void modifyFoodTruckMenuAddFoodItem() {}
+    public void modifyFoodTruckAddRouteLocation() {}
+    public void modifyFoodTruckMenuDeleteFoodItem() {}
+    public void modifyFoodTruckDeleteRouteLocation() {}
+    public void addRatingToFoodTruck(){}
+
+    public void getRecommendedTrucks(){}
+    public void getNearestTrucks(){}
+
     //Remove test user on completion (must be last)
     @Test
     @Order(2)
@@ -108,6 +132,8 @@ public class UserControllerTest {
         userRepository.deleteById(userId);
         //TODO - assert equals??
     }
+
+    public void deleteFoodTruck(){}
 
 
 }
