@@ -8,10 +8,10 @@ import Geocode from 'react-geocode';
 
 const libraries = ['places'];
 
-class Signup extends Component {
+class EditTruck extends Component {
     constructor(props) {
         super();
-        this.state = { ownerId: -1, truckId: -1, truckName: '', route: [], locations: [], schedule: '', newMenuItemType: '', newMenuItemName: '', newMenuItemPrice: 0.0, description: '', newRating: 0.0, menu: [] };
+        this.state = { ownerId: -1, truckId: -1, truckName: '', schedule: '', description: '', route: [], locations: [], menu: [] };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleMenuItemSubmit = this.handleMenuItemSubmit.bind(this);
@@ -65,24 +65,16 @@ class Signup extends Component {
 
         event.preventDefault()
     }
-    //For adding new item
-    handleMenuItemSubmit(event){
-        const itemDto = {
-            foodType: this.state.newMenuItemType,
-            foodItemName: this.state.newMenuItemName,
-            foodItemPrice: this.state.newMenuItemPrice
-        }
-
-        event.preventDefault()
-    }
 
     //For new location to add to route
     handleRouteSubmit(){
         Geocode.fromAddress(document.getElementById('routeInput').value).then(res => {
             var loc = res.results[0].geometry.location
+            const latitude = loc.lat;
+            const longitude = loc.lng;
             axios.post("http://localhost:8090/api/modifyTruck/route", {
-                latitude: loc.lat,
-                longitude: loc.lng
+                latitude: latitude,
+                longitude: longitude
             }, {
                 headers:{
                     'truckId': this.state.truckId
@@ -91,11 +83,11 @@ class Signup extends Component {
                 console.log(resp);
             })
             var newRoute = this.state.route;
-            newRoute.push(loc);
+            newRoute.push({ latitude, longitude });
 
             var newLocations = []
             for(let i = 0; i < newRoute.length; ++i){
-                Geocode.fromLatLng(newRoute[i].lat, newRoute[i].lng).then(resp => {
+                Geocode.fromLatLng(newRoute[i].latitude, newRoute[i].longitude).then(resp => {
                     newLocations.push(resp.results[0].formatted_address);
                     this.setState({
                         locations: newLocations
@@ -142,6 +134,35 @@ class Signup extends Component {
         )
     }
 
+    handleMenuItemSubmit(event){
+        if (this.state.ownerId == sessionStorage.getItem('token')) {
+            const itemDto = {
+                foodType: this.state.newMenuItemType,
+                foodItemName: this.state.newMenuItemName,
+                foodItemPrice: this.state.newMenuItemPrice
+            }
+
+            const JSONWrapper = {
+                foodItem: {
+                    foodType: this.state.newMenuItemType,
+                    foodItemName: this.state.newMenuItemName,
+                    foodItemPrice: this.state.newMenuItemPrice
+                }
+            };
+
+            //Post to URL
+            axios.post("http://localhost:8090/api/modifyTruck/menu", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
+                console.log(res);
+            });
+            alert("Changes saved");
+        }
+        else {
+            alert("You are not the owner of this truck");
+        }
+
+        event.preventDefault()
+    }
+
     removeMenuItem(event){
 
     }
@@ -171,17 +192,18 @@ class Signup extends Component {
                 description: res.data.description,
                 details: res.data.details,
             });
-            var locations = [];
-            for(let i = 0; i < this.state.route; ++i){
-                Geocode.fromLatLng(this.state.route[i].lat, this.state.route[i].lng).then(resp => {
-                    locations.push(resp.results[0].formatted_address);
+            var newLocations = [];
+            for(let i = 0; i < this.state.route.length; ++i){
+                Geocode.fromLatLng(this.state.route[i].latitude, this.state.route[i].longitude).then(resp => {
+                    newLocations.push(resp.results[0].formatted_address);
                     this.setState({
                         locations: newLocations
                     });
+                }).catch(err => {
+                    console.log("Invalid Address");
                 });
             }
-            console.log(this.state.ownerId);
-            console.log(this.state.menu);
+            console.log(this.state.locations);
         });
     }
 
@@ -283,4 +305,4 @@ class Signup extends Component {
         );
     }
 }
-export default Signup;
+export default EditTruck;
