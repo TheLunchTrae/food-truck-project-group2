@@ -1852,7 +1852,7 @@
 
 "@react-google-maps/api@^2.7.0":
   version "2.7.0"
-  resolved "https://registry.npmjs.org/@react-google-maps/api/-/api-2.7.0.tgz"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/api/-/api-2.7.0.tgz#c4d7b8a53f03ee63643b0d0f313aa3b2d79dde92"
   integrity sha512-Fb/l7aR69ObYvzhpt1d1931454ylRkTPKF1C8GfLvXtg19wc36zTev2Afbahd+qAdyKuQyDdf5/SQyMjYBHI/A==
   dependencies:
     "@googlemaps/js-api-loader" "1.12.8"
@@ -6766,7 +6766,7 @@ react-final-form@6.5.1:
 
 react-geocode@^0.2.3:
   version "0.2.3"
-  resolved "https://registry.npmjs.org/react-geocode/-/react-geocode-0.2.3.tgz"
+  resolved "https://registry.yarnpkg.com/react-geocode/-/react-geocode-0.2.3.tgz#e27fa3f212a2629b2b2bb2a3a325a12b802b2dae"
   integrity sha512-sIpbgmn1IUzAxO4haOZ6jeeFnMD8ya9PC38yiNrmJ9vPWbvAO2D/2yfCBzZjGZVUm4PRzKAc0KghXfaEnug0TQ==
   dependencies:
     regenerator-runtime "^0.13.3"
