@@ -5,3 +5,4 @@ setup:
 build:
     docker:
         web: /food-truck-frontend/Dockerfile
+        worker: /food-truck-api/Dockerfile

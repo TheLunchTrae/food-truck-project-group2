@@ -10,7 +10,7 @@ class LoginService {
             password: password
         };
         console.log(userDto);
-        return axios.post("https://food-truck-finder-group2-api.herokuapp.com/api/login", userDto) 
+        return axios.post("http://localhost:8090/api/login", userDto) 
     }
 
     setToken(token) {

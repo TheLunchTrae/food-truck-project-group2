@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @Log4j2
 @RestController
-@CrossOrigin(origins = { "http://localhost" , "https://food-truck-finder-group2.herokuapp.com" } )
 public class UserController {
     private UserService userService;
     private FoodTruckService foodTruckService;
