@@ -8,13 +8,14 @@ import styles2 from './search.module.scss';
 class Search extends Component {
     constructor(props) {
         super(props);
-        this.state = { foodTrucksRec: [], foodTrucksSearch: [], search: '', listColor: 'white' };
+        this.state = { foodTrucksRec: [], foodTrucksSearch: [], search: '', listColor: 'white', nearbyTrucks: [] };
         this.componentDidMount = this.componentDidMount.bind(this);
         this.renderRecommended = this.renderRecommended.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.renderSearch = this.renderSearch.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTruckClick = this.handleTruckClick.bind(this);
+        this.renderNearby = this.renderNearby.bind(this);
     }
     handleChangeStatus(event) {
     }
@@ -63,12 +64,24 @@ class Search extends Component {
             const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
             this.setState({ foodTrucksRec: foodTrucks });
         });
+        Axios.post("http://localhost:8090/api/map/nearestTrucks", null, {
+            headers: {
+                'userId': sessionStorage.getItem('token')
+            }
+        }).then(res => {
+            console.log(res.data);
+            const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
+            this.setState({ nearbyTrucks: foodTrucks });
+        });
     }
     renderRecommended(index, key) {
         return <div key={key} onClick={this.handleTruckClick} id={this.state.foodTrucksRec[index].truckId}>{this.state.foodTrucksRec[index].truckName}</div>;
     }
     renderSearch(index, key) {
         return <div key={key} onClick={this.handleTruckClick} id={this.state.foodTrucksSearch[index].truckId}>{this.state.foodTrucksSearch[index].truckName}</div>;
+    }
+    renderNearby(index, key) {
+        return <div key={key} onClick={this.handleTruckClick} id={this.state.nearbyTrucks[index].truckId}>{this.state.nearbyTrucks[index].truckName}</div>;
     }
     handleTruckClick(event) {
         console.log(event.target.id);
@@ -95,13 +108,13 @@ class Search extends Component {
 
                     </div>
 
+                    
                     <div class="sections">
-                        <div class = "block" style = {{alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
+                        <div class = "block" style = {{height: '200px', alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
 
-                            <div style={{marginLeft: '100px', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
+                            <div style={{height: '200px', fontSize: '1.0rem', textAlign: 'center', fontWeight: 'bold', maxHeight: '100%', overflow: 'auto', width:'100%' }}>
                                 <ReactList class={styles2.reactList} itemRenderer = {this.renderSearch} length={this.state.foodTrucksSearch.length} type='uniform'/>
                             </div>
-
                         </div>
                     </div>
 
@@ -111,6 +124,16 @@ class Search extends Component {
 
                             <div style={{height: '200px', fontSize: '1.0rem', textAlign: 'center', fontWeight: 'bold', maxHeight: '100%', overflow: 'auto', width:'100%' }}>
                                 <ReactList class={styles2.reactList} itemRenderer = {this.renderRecommended} length={this.state.foodTrucksRec.length} type='uniform' alignContent='center' />
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Nearby</span>
+                    <div class="sections">
+                        <div class = "block" style = {{height: '200px', alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
+
+                            <div style={{height: '200px', fontSize: '1.0rem', textAlign: 'center', fontWeight: 'bold', maxHeight: '100%', overflow: 'auto', width:'100%' }}>
+                                <ReactList class={styles2.reactList} itemRenderer = {this.renderNearby} length={this.state.nearbyTrucks.length} type='uniform' alignContent='center' />
                             </div>
                         </div>
                     </div>

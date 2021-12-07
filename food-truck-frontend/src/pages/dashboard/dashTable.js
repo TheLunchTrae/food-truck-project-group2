@@ -122,9 +122,11 @@ class DashTable extends Component {
         //Will add confirm event of some sort later
         axios.get("http://localhost:8090/api/deleteTruck/" + event.target.name).then(res => {
             console.log(res);
-        });
+        })
 
+        window.location.reload();
     }
+
     createSubTruckRow(truck, index){
         console.log(truck);
         

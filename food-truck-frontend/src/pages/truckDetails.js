@@ -6,7 +6,7 @@ import styles from './signup.module.scss';
 class About extends Component {
     constructor(props) {
         super(props);
-        this.state = { truckId: -1, truckName: '', route: [], schedule: '', menu: '', description: '', ratings: [], ratingValue: '', ratingReview: '', isSubscribed: false };
+        this.state = { truckId: -1, truckName: '', route: [], schedule: '', menu: [], description: '', ratings: [], ratingValue: '', ratingReview: '', isSubscribed: false };
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubscribeSubmit = this.handleSubscribeSubmit.bind(this);
@@ -163,6 +163,41 @@ class About extends Component {
 
                         <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                             <label>
+                                <span class = "ratings" style = {{color: '#000000', fontSize: '1.7rem', fontWeight: 'bold', marginTop: '5px'}}><u>Menu</u></span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <table style = {{marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}}>
+                                <thead style = {{color: '#0F52BA', fontSize: '1.5rem'}}>
+                                    <tr>
+                                        <th style = {{height: '50px', width: '200px'}}>
+                                            Item
+                                        </th>
+                                        <th style = {{height: '50px', width: '200px'}}>
+                                            Price
+                                        </th>
+                                        <th style = {{height: '50px', width: '200px'}}>
+                                            Food Type
+                                        </th>
+                                    </tr>                                        
+                                </thead>
+                                <tbody style = {{color: '#000000', fontSize: '1.2rem'}}>
+                                    {this.state.menu.map(menu => (
+                                        <tr>
+                                            <td>{menu["foodItemName"]}</td>
+                                            <td>{menu["foodItemPrice"]}</td>
+                                            <td>{menu["foodType"]}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <hr style = {{border: '1px solid black', width: '85%', marginTop: '15px'}}></hr>
+
+                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                            <label>
                                 <span class = "ratings" style = {{color: '#000000', fontSize: '1.7rem', fontWeight: 'bold', marginTop: '5px'}}><u>Ratings</u></span>
                             </label>
                         </div>
@@ -195,6 +230,8 @@ class About extends Component {
                         </div>
 
                     </div>
+
+                    
 
                     <div class = "block" style = {{alignContent: 'center', width: '30%', padding: '20px', background: '#FFFFFF', margin: '35px auto'}}>
                         <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Leave a Review!</span>
