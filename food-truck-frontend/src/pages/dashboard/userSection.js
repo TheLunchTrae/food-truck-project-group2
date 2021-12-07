@@ -134,11 +134,12 @@ class UserSection extends Component {
         };
         console.log(prefs);
         axios.post("http://localhost:8090/api/dashboard/preferences", prefs).then(res => {
-            console.log(res);
+            console.log(res);            
+            window.location.reload()
         }).catch(err => {
-            console.log(err);
+            console.log(err);            
+            window.location.reload()
         });
-        window.location.reload()
     }
 
     render(){
