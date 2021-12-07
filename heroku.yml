@@ -4,5 +4,4 @@ setup:
           as: DATABASE
 build:
     docker:
-        web: /food-truck-frontend/Dockerfile
-        web: /food-truck-api/Dockerfile
+        web: /docker-compose.yml
