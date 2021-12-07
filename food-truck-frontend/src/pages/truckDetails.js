@@ -194,7 +194,10 @@ class About extends Component {
                                 <thead style = {{color: '#0F52BA', fontSize: '1.5rem'}}>
                                     <tr>
                                         <th style = {{height: '50px', width: '200px'}}>
-                                            VALUE
+                                            USER ID
+                                        </th>
+                                        <th style = {{height: '50px', width: '200px'}}>
+                                            RATING
                                         </th>
                                         <th style = {{height: '50px', width: '200px'}}>
                                             REVIEW

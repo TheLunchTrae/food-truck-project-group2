@@ -64,7 +64,7 @@ class CreateTruck extends Component {
 
     render() {
         return (
-            <body style = {{backgroundColor: '#90AACB'}}>
+            <body style = {{backgroundColor: '#708090'}}>
                 <MenuBar/>
                 <div class="sections">
                     <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px', padding: '20px'}}>New Truck</span>
@@ -85,7 +85,7 @@ class CreateTruck extends Component {
                                 </div>
 
                                 <div class={styles.formnput}>
-                                    <input id="routeStart" name="routeStart" class={styles.formelementinput} type="input" placeholder="Please write a description for your truck" required/>
+                                    <input id="routeStart" name="routeStart" class={styles.formelementinput} type="input" placeholder="Please enter a default route" required/>
                                     <div class={styles.formelementbar}></div>
                                     <label class={styles.formelementlabel} for="routeStart">Route Start</label>
                                 </div>
