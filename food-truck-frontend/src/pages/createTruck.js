@@ -43,12 +43,7 @@ class CreateTruck extends Component {
 
         //Post to URL
         let token = sessionStorage.getItem('token');
-        const val = axios.post("http://localhost:8090/api/addTruck", truckAndString, {
-        }, {
-            headers: {
-                'token': token
-            }
-        }).then(res => {
+        const val = axios.post("http://localhost:8090/api/addTruck", truckAndString).then(res => {
             console.log(res);
         });
 

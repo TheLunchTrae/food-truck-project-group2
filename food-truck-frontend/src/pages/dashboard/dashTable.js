@@ -61,8 +61,6 @@ class DashTable extends Component {
 
     changeTab(event){
         console.log("Showing " + event.target.id + " tab");
-        const sub = document.getElementById("subButton").classList;
-        const own = document.getElementById("ownButton").classList;
         if(event.target.id === "subButton"){
             document.getElementById("typeBar").classList.add(styles.subTab);
             document.getElementById("typeBar").classList.remove(styles.ownTab);
