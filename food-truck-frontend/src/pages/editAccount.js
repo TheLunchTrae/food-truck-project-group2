@@ -35,6 +35,8 @@ class Signup extends Component {
         });
 
         event.preventDefault()
+
+        window.location.href="/dashboard";
     }
     
     componentDidMount() {

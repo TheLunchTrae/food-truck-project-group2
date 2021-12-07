@@ -30,7 +30,6 @@ class DefaultMap extends Component {
     return (
       <LoadScript googleMapsApiKey={APICode} libraries={["places"]}>
         <GoogleMap mapContainerStyle={props.containerStyle} center={props.center} zoom={10}>
-          {props.markers.length != 0 ? props.markers.map(this.renderMarkers) : null }
         </GoogleMap>
       </LoadScript>
     )
