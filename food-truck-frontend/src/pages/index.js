@@ -2,14 +2,13 @@ require('dotenv').config();
 import styles from './index.module.scss';
 import MenuBar from './universal/menuBar';
 import DefaultMap from './MapComponents/DefaultMap';
-import RouteMap from './MapComponents/RouteMap';
 
-export { MenuBar, DefaultMap, RouteMap };
+export { MenuBar, DefaultMap };
 
 function HomePage() {
     return (
         <html>
-            <body class={styles.body}>
+           <body class={styles.body}>
                 <MenuBar/>
                 <div class="banner-text">
                     <div class="text-area" style = {{textAlign: 'center', width: '75%', margin: '0 auto', fontFamily: 'Playfair Display'}}>
@@ -26,5 +25,7 @@ function HomePage() {
         </html>
     )
 }
+
+
 
 export default HomePage;

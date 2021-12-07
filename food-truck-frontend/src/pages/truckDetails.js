@@ -58,7 +58,7 @@ class About extends Component {
             review: this.state.ratingReview
         };
 
-        const val = axios.post("http://localhost:8090/api/addRating/", Rating, {headers:{'truckId': this.state.truckId}}).then(res => {
+         axios.post("http://localhost:8090/api/addRating/", Rating, {headers:{'truckId': this.state.truckId}}).then(res => {
             console.log(res);
         });
 
@@ -115,137 +115,133 @@ class About extends Component {
                 this.setState({ isSubscribed: res.data });
             });
         } else {
-
+            document.getElementById("id");
         }
     }
 
     render() {
         return (
-            <html>
-                <body style = {{backgroundColor: '#708090'}}>
-                    <MenuBar/>
-                    <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Truck</span>
-                    <div class="sections" >
-                        <div class = "headerText" style = {{alignContent: 'center', background: '#FFFFFF', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
-                            <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>{this.state.truckName}</span>
+            <body style = {{backgroundColor: '#708090'}}>
+                <MenuBar/>
+                <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Truck</span>
+                <div class="sections" >
+                    <div class = "headerText" style = {{alignContent: 'center', background: '#FFFFFF', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
+                        <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>{this.state.truckName}</span>
+                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                            {this.renderSubButton()}
+                        </div>
+                    </div>
 
-                            <span class = "ratingPref" style = {{color: '#000000', display: 'block', fontSize: '1.4rem', fontWeight: 'bold', textAlign: 'center'}}>ID: {this.state.truckId}</span>
-                            <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                {this.renderSubButton()}
-                            </div>
+
+                    <div class = "block" style = {{alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
+
+                        <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}><u>Truck Details</u></span>
+
+                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                            <label>
+                                <span class = "ratingPref" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating Preference:</span>
+                            </label>
+                            <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
+                                    <select name="usertype">
+                                        <option value="" selected disabled hidden>N/A</option>
+                                        <option value="1">***** (5)</option>
+                                        <option value="2">**** (4)</option>
+                                        <option value="3">*** (3)</option>
+                                        <option value="4">** (2)</option>
+                                        <option value="5">* (1)</option>
+                                    </select>
+                            </span>
                         </div>
 
+                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                            <label>
+                                <span class = "description" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Description: </span>
+                            </label>
+                            <span class = "schedule" style = {{color: '#000000', fontSize: '1.0rem', marginTop: '5px'}}>{this.state.description}</span>
+                        </div>
 
-                        <div class = "block" style = {{alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
+                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                            <label>
+                                <span class = "schedule" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Schedule: </span>
+                            </label>
+                            <span class = "schedule" style = {{color: '#000000', fontSize: '1.0rem', marginTop: '5px'}}>{this.state.schedule}</span>
+                        </div>
 
-                            <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}><u>Truck Details</u></span>
+                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                            <label>
+                                <span class = "route" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Route: </span>
+                            </label>
+                            <tbody style = {{color: '#000000', fontSize: '1.2rem'}}>
+                                {this.state.route.map(location => (
+                                    <tr>
+                                        <td>{location["xcoordinate"]}</td>
+                                        <td>{location["ycoordinate"]}</td>                            
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </div>
 
-                            <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                <label>
-                                    <span class = "ratingPref" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating Preference:</span>
-                                </label>
-                                <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                        <select name="usertype">
-                                            <option value="" selected disabled hidden>N/A</option>
-                                            <option value="1">***** (5)</option>
-                                            <option value="2">**** (4)</option>
-                                            <option value="3">*** (3)</option>
-                                            <option value="4">** (2)</option>
-                                            <option value="5">* (1)</option>
-                                        </select>
-                                </span>
-                            </div>
+                        <hr style = {{border: '1px solid black', width: '85%', marginTop: '15px'}}></hr>
 
-                            <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                <label>
-                                    <span class = "description" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Description: </span>
-                                </label>
-                                <span class = "schedule" style = {{color: '#000000', fontSize: '1.0rem', marginTop: '5px'}}>{this.state.description}</span>
-                            </div>
+                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
+                            <label>
+                                <span class = "ratings" style = {{color: '#000000', fontSize: '1.7rem', fontWeight: 'bold', marginTop: '5px'}}><u>Ratings</u></span>
+                            </label>
+                        </div>
 
-                            <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                <label>
-                                    <span class = "schedule" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Schedule: </span>
-                                </label>
-                                <span class = "schedule" style = {{color: '#000000', fontSize: '1.0rem', marginTop: '5px'}}>{this.state.schedule}</span>
-                            </div>
-
-                            <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                <label>
-                                    <span class = "route" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Route: </span>
-                                </label>
+                        <div>
+                            <table style = {{marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}}>
+                                <thead style = {{color: '#0F52BA', fontSize: '1.5rem'}}>
+                                    <tr>
+                                        <th style = {{height: '50px', width: '200px'}}>
+                                            VALUE
+                                        </th>
+                                        <th style = {{height: '50px', width: '200px'}}>
+                                            REVIEW
+                                        </th>
+                                    </tr>                                        
+                                </thead>
                                 <tbody style = {{color: '#000000', fontSize: '1.2rem'}}>
-                                    {this.state.route.map(location => (
+                                    {this.state.ratings.map(location => (
                                         <tr>
-                                            <td>{location["xcoordinate"]}</td>
-                                            <td>{location["ycoordinate"]}</td>                            
+                                            <td>{location["userId"]}</td>
+                                            <td>{location["value"]}</td>
+                                            <td>{location["review"]}</td>
                                         </tr>
                                     ))}
                                 </tbody>
-                            </div>
-
-                            <hr style = {{border: '1px solid black', width: '85%', marginTop: '15px'}}></hr>
-
-                            <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                <label>
-                                    <span class = "ratings" style = {{color: '#000000', fontSize: '1.7rem', fontWeight: 'bold', marginTop: '5px'}}><u>Ratings</u></span>
-                                </label>
-                            </div>
-
-                            <div>
-                                <table style = {{marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}}>
-                                    <thead style = {{color: '#0F52BA', fontSize: '1.5rem'}}>
-                                        <tr>
-                                            <th style = {{height: '50px', width: '200px'}}>
-                                                VALUE
-                                            </th>
-                                            <th style = {{height: '50px', width: '200px'}}>
-                                                REVIEW
-                                            </th>
-                                        </tr>                                        
-                                    </thead>
-                                    <tbody style = {{color: '#000000', fontSize: '1.2rem'}}>
-                                        {this.state.ratings.map(location => (
-                                            <tr>
-                                                <td>{location["userId"]}</td>
-                                                <td>{location["value"]}</td>
-                                                <td>{location["review"]}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-
+                            </table>
                         </div>
 
-                        <div class = "block" style = {{alignContent: 'center', width: '30%', padding: '20px', background: '#FFFFFF', margin: '35px auto'}}>
-                            <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Leave a Review!</span>
-                            <br></br>
-                            <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', padding: '5px 0'}}>
-
-                            <form id = "rating" onSubmit={this.handleRatingSubmit}>
-
-                                <div class={styles.formnput}>
-                                    <input id="ratingValue" name="ratingValue" class={styles.formelementinput} type="text" placeholder="Enter rating value (1-5)" pattern= "[1-5]" title="Must be 1-5" value={this.state.ratingValue} required onChange={this.handleInputChange}/>
-                                    <div class={styles.formelementbar}></div>
-                                    <label class={styles.formelementlabel} for="ratingValue">Rating Value</label>
-                                </div>
-
-                                <div class={styles.formnput}>
-                                    <input id="ratingReview" name="ratingReview" class={styles.formelementinput} placeholder="Enter review" type="text" value={this.state.ratingReview} required onChange={this.handleInputChange}/>
-                                    <div class={styles.formelementbar}></div>
-                                    <label class={styles.formelementlabel} for="revie">Review</label>
-                                </div>
-
-                                <div style = {{display: 'block', margin: '0 auto', alignContent: 'center', textAlign: 'center', padding: '5px 0'}}>
-                                    <button type="submit" style = {{fontSize: '17px', cursor: 'pointer', background: '#708090'}}>Leave Rating</button>
-                                </div>
-                            </form>
-                        </div>
-                        </div>
                     </div>
-                </body>
-            </html>
+
+                    <div class = "block" style = {{alignContent: 'center', width: '30%', padding: '20px', background: '#FFFFFF', margin: '35px auto'}}>
+                        <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>Leave a Review!</span>
+                        <br></br>
+                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', padding: '5px 0'}}>
+
+                        <form id = "rating" onSubmit={this.handleRatingSubmit}>
+
+                            <div class={styles.formnput}>
+                                <input id="ratingValue" name="ratingValue" class={styles.formelementinput} type="text" placeholder="Enter rating value (1-5)" pattern= "[1-5]" title="Must be 1-5" value={this.state.ratingValue} required onChange={this.handleInputChange}/>
+                                <div class={styles.formelementbar}></div>
+                                <label class={styles.formelementlabel} for="ratingValue">Rating Value</label>
+                            </div>
+
+                            <div class={styles.formnput}>
+                                <input id="ratingReview" name="ratingReview" class={styles.formelementinput} placeholder="Enter review" type="text" value={this.state.ratingReview} required onChange={this.handleInputChange}/>
+                                <div class={styles.formelementbar}></div>
+                                <label class={styles.formelementlabel} for="revie">Review</label>
+                            </div>
+
+                            <div style = {{display: 'block', margin: '0 auto', alignContent: 'center', textAlign: 'center', padding: '5px 0'}}>
+                                <button type="submit" style = {{fontSize: '17px', cursor: 'pointer', background: '#708090'}}>Leave Rating</button>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </body>
         );
     }
 }

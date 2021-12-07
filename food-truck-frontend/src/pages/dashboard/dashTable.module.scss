@@ -1,9 +1,13 @@
-//Overall dashboard table wrapper
-.dashTable{
+.wrapper {
     display: inline-block;
-    border: none;
-    margin: 0 auto;
     height: 100%;
+    width: 60%;
+    vertical-align: top;
+    padding: 15px;
+}
+
+//Overall dashboard table wrapper
+.componentDashTable{
     width: 100%;
 }
 //Tab bar settings
@@ -20,10 +24,11 @@
     background-color: #333;
     color:white;
     border: none;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     vertical-align: bottom;
     height: 100%;
     width: 50%;
+    padding: 5px;
 }
 
 //Button hover effects
@@ -59,30 +64,26 @@
     font-size: 1.2rem;
     width: 49%;
     height: 55%;
-}
-
-//Hides table for unselected tab
-.subTab ~ .displayTable .ownTrucks, .ownTab ~ .displayTable .subTrucks{
-    display: none;
-}
-
-.subTab ~ .displayTable .subTrucks, .ownTab ~ .displayTable .ownTrucks {
-    display: block;
+    vertical-align: bottom;
 }
 
 //Parent div for tables
-.displayTable{
+.tablesDiv{
     border: none;
-    display: flex;
     height: 90%;
     background-color: #555555;
     overflow-y: auto;
 }
 
-//For both table <span>s
-.ownTrucks, .subTrucks{
+//For both table <div>s
+.ownTable, .subTable{
+    display: none;
     width: 100%;
     height: 100%;
+}
+
+.ownTab ~ .tablesDiv .ownTable, .subTab ~ .tablesDiv .subTable {
+    display: block;
 }
 
 //Actual tables
@@ -90,6 +91,7 @@
     background-color:#555555;
     color: white;
     width: 100%;
+    border-collapse: collapse;
 }
 
 //Table headings
@@ -99,39 +101,89 @@
     border-bottom-color: black;
 }
 
+.tableHeading tr th{
+    border-bottom: solid 2px black;
+}
+
 //Adds borders between column headings
 .tableHeading + .tableHeading {
-    border-left: 2px black;
+    border-left: solid 2px black;
 }
 
 .tableBody{
     text-align: center;
 }
 
+.msg {
+    display: none;
+    text-align: center;
+    color: white;
+    font-size: 1.8rem;;
+}
+
+.show {
+    display: inherit;
+}
+
 //Table rows
-.tableRow + .tableRow{
-    border-top-color: black;
-}
-
-//No subs message
-.noSub, .noOwn{
-    display: none;
+.tableRow{
     text-align: center;
-    color: white;
-    font-size: 1.8rem;
-}
-//Shows if no subscriptions/owned trucks
-.noSub ~ .noSub, .noOwn ~ .noOwn{
-    display: block;
+    font-size: 1.2rem;
 }
 
-.own {
+.tableRow + .tableRow tr td {
+    border-bottom: solid 2px black;
+}
+
+.buttonColumn {
+    width: 20%;
+}
+
+.tableButton {
+    border: solid 2px black;
+    width: 65%;
+    background-color: inherit;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.tableButton:hover {
+    background-color: #708090;
+    cursor: pointer;
+}
+
+.ratingColumn{
+    width: fit-content;
+}
+
+.starHolder {
+    display: inline-block;
+    max-height: 20px;
+    max-width: 20px;
+}
+
+.star {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.confirmPopup{
     display: none;
-    text-align: center;
-    color: white;
-    font-size: 1.8rem;
+    width: 25%;
+    height: 10%;
 }
 
-.own ~ .own{
+.confShow{
     display: block;
+    position: absolute;
+    z-index: 99;
+    background-color: white;
 }
+
+.confDeleteButton {
+    text-align: center;
+    font-size: 1.4rem;
+}
+

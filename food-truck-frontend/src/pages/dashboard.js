@@ -36,12 +36,8 @@ class Dashboard extends Component {
                 <MenuBar/>
                 <h1 class={styles.dHeading}>Dashboard</h1>
                 <div class={styles.wrapper}>
-                    <div class={styles.userSection}>
-                        <UserSection/>
-                    </div>
-                    <div class={styles.dashTable}>
-                        <DashTable/>
-                    </div>
+                    <UserSection/>
+                    <DashTable/>
                 </div>
             </body>
         );

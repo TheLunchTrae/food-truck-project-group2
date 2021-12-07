@@ -143,143 +143,143 @@ class UserSection extends Component {
 
     render(){
         return (
-            <div class={styles.userSection}>
-                <h1 class={styles.username}>{this.state.username}</h1>
-                <h3 class={styles.usertype}>{this.state.usertype}</h3>
+            <div class={styles.wrapper}>
+                <div class={styles.componentUserSection}>
+                    <h1 class={styles.username}>{this.state.username}</h1>
+                    <h3 class={styles.usertype}>{this.state.usertype}</h3>
 
-                <form action="/editAccount">
-                    <button type="submit" class={styles.savePrefs}>Edit Account</button>
-                </form>
+                    <form action="/editAccount">
+                        <button type="submit" class={styles.savePrefs}>Edit Account</button>
+                    </form>
 
-                <hr class={styles.divider}/>
-                <h2 class={styles.prefHead}>Preferences</h2>
+                    <hr class={styles.divider}/>
+                    <h2 class={styles.prefHead}>Preferences</h2>
 
-                <button type="button" class={styles.prefPopout} id="locButton" onClick={this.pressed} name="prefButton">
-                    <span class={styles.buttonText}>
-                        Location
+                    <button type="button" class={styles.prefPopout} id="locButton" onClick={this.pressed} name="prefButton">
+                        <span class={styles.buttonText}>
+                            Location
+                        </span>
+                        <span class={styles.buttonImage}>
+                            
+                        </span>
+                    </button>
+                    <span class={styles.choice}>
+                        <input id="distance" name="distance" type="text" placeholder="Range (in miles)" class={styles.locTextBox} onChange={this.handleInputChange} value={this.state.distance}/>
+                        <LoadScript id="script-loader" googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={libraries}>
+                            <StandaloneSearchBox>
+                                <input id="address" name="address" type="text" placeholder="Address" onChange={this.handleInputChange} class={styles.locTextBox} value={this.state.address}/>
+                            </StandaloneSearchBox>
+                        </LoadScript>
                     </span>
-                    <span class={styles.buttonImage}>
-                        
-                    </span>
-                </button>
-                <span class={styles.choice}>
-                    <input id="distance" name="distance" type="text" placeholder="Range (in miles)" class={styles.locTextBox} onChange={this.handleInputChange} value={this.state.distance}/>
-                    <LoadScript id="script-loader" googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={libraries}>
-                        <StandaloneSearchBox>
-                            <input id="address" name="address" type="text" placeholder="Address" onChange={this.handleInputChange} class={styles.locTextBox} value={this.state.address}/>
-                        </StandaloneSearchBox>
-                    </LoadScript>
-                </span>
 
-                <button type="button" class={styles.prefPopout} id="typeButton" onClick={this.pressed} name="prefButton">
-                    <span class={styles.buttonText}>
-                    Food Type
+                    <button type="button" class={styles.prefPopout} id="typeButton" onClick={this.pressed} name="prefButton">
+                        <span class={styles.buttonText}>
+                        Food Type
+                        </span>
+                        {/*<img class={styles.buttonImage} src="https://i.imgur.com/qxQk2c1.png"/>*/}
+                    </button>
+                    <span class={styles.choice}>
+                        <label class={styles.choiceLabel}>
+                            American
+                            <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="American"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            Mexican
+                            <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Mexican"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            Indian
+                            <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Indian"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            Japanese
+                            <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Japanese"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            Chinese
+                            <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Chinese"/>
+                            <span class={styles.customBox}/>
+                        </label>
                     </span>
-                    {/*<img class={styles.buttonImage} src="https://i.imgur.com/qxQk2c1.png"/>*/}
-                </button>
-                <span class={styles.choice}>
-                    <label class={styles.choiceLabel}>
-                        American
-                        <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="American"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        Mexican
-                        <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Mexican"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        Indian
-                        <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Indian"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        Japanese
-                        <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Japanese"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        Chinese
-                        <input type="checkbox" name="foodType" class={styles.typeCheckbox} value="Chinese"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                </span>
 
-                
+                    <button type="button" class={styles.prefPopout} id="ratingButton" onClick={this.pressed} name="prefButton">
+                        <span class={styles.buttonText}>
+                            Rating
+                        </span>
+                        <span class={styles.buttonImage}>
+                            
+                        </span>
+                    </button>
+                    <span class={styles.choice} >
+                        <label class={styles.choiceLabel}>
+                            None
+                            <input type="radio" name="rating" class={styles.typeRadio} value="None"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            5 Stars
+                            <input type="radio" name="rating" class={styles.typeRadio} value="5"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            4 Stars
+                            <input type="radio" name="rating" class={styles.typeRadio} value="4"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            3 Stars
+                            <input type="radio" name="rating" class={styles.typeRadio} value="3"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            2 Stars
+                            <input type="radio" name="rating" class={styles.typeRadio} value="2"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            1 Stars
+                            <input type="radio" name="rating" class={styles.typeRadio} value="1"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                    </span>
+                    
+                    <button type="button" class={styles.prefPopout} id="priceButton" onClick={this.pressed} name="prefButton">
+                        <span class={styles.buttonText}>
+                            Price
+                        </span>
+                        <span class={styles.buttonImage}>
+                            
+                        </span>
+                    </button>
+                    <span class={styles.choice} >
+                        <label class={styles.choiceLabel}>
+                            None
+                            <input type="radio" name="price" class={styles.typeRadio} value="None"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            $$$
+                            <input type="radio" name="price" class={styles.typeRadio} value="15"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            $$
+                            <input type="radio" name="price" class={styles.typeRadio} value="10"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                        <label class={styles.choiceLabel}>
+                            $
+                            <input type="radio" name="price" class={styles.typeRadio} value="5"/>
+                            <span class={styles.customBox}/>
+                        </label>
+                    </span>
 
-                <button type="button" class={styles.prefPopout} id="ratingButton" onClick={this.pressed} name="prefButton">
-                    <span class={styles.buttonText}>
-                        Rating
-                    </span>
-                    <span class={styles.buttonImage}>
-                        
-                    </span>
-                </button>
-                <span class={styles.choice} >
-                    <label class={styles.choiceLabel}>
-                        None
-                        <input type="radio" name="rating" class={styles.typeRadio} value="None"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        5 Stars
-                        <input type="radio" name="rating" class={styles.typeRadio} value="5"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        4 Stars
-                        <input type="radio" name="rating" class={styles.typeRadio} value="4"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        3 Stars
-                        <input type="radio" name="rating" class={styles.typeRadio} value="3"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        2 Stars
-                        <input type="radio" name="rating" class={styles.typeRadio} value="2"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        1 Stars
-                        <input type="radio" name="rating" class={styles.typeRadio} value="1"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                </span>
-                
-                <button type="button" class={styles.prefPopout} id="priceButton" onClick={this.pressed} name="prefButton">
-                    <span class={styles.buttonText}>
-                        Price
-                    </span>
-                    <span class={styles.buttonImage}>
-                        
-                    </span>
-                </button>
-                <span class={styles.choice} >
-                    <label class={styles.choiceLabel}>
-                        None
-                        <input type="radio" name="price" class={styles.typeRadio} value="None"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        $$$
-                        <input type="radio" name="price" class={styles.typeRadio} value="15"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        $$
-                        <input type="radio" name="price" class={styles.typeRadio} value="10"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                    <label class={styles.choiceLabel}>
-                        $
-                        <input type="radio" name="price" class={styles.typeRadio} value="5"/>
-                        <span class={styles.customBox}/>
-                    </label>
-                </span>
-
-                <button type="submit" class={styles.savePrefs} onClick={this.savePrefs}>Save Preferences</button>
+                    <button type="submit" class={styles.savePrefs} onClick={this.savePrefs}>Save Preferences</button>
+                </div>
             </div>
         );
     }
