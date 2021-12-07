@@ -123,6 +123,8 @@ class DashTable extends Component {
         axios.get("http://localhost:8090/api/deleteTruck/" + event.target.name).then(res => {
             console.log(res);
         })
+
+        window.location.reload();
     }
 
     createSubTruckRow(truck, index){
