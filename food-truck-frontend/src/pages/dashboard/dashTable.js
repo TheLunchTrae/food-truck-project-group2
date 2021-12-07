@@ -20,7 +20,7 @@ class DashTable extends Component {
     componentDidMount(){
         //Get userinfo to determine type of tabbar
         axios.get("http://localhost:8090/api/userinfo").then(res => {
-            if(res.data.usertype === "Customer"){
+            if(res.data.userType === "Customer"){
                 document.getElementById("typeBar").classList.add(styles.customer);
                 document.getElementById("typeBar").classList.add(styles.subTab);
             } else {
@@ -51,6 +51,8 @@ class DashTable extends Component {
             });
             if(res.data.length == 0){
                 document.getElementById("noSub").classList.add(styles.show);
+            } else {
+                document.getElementById("sub").classList.add(styles.show);
             }
         }).catch(err => {
             console.log(err);
@@ -192,6 +194,11 @@ class DashTable extends Component {
                                 <h5>
                                     You are not subscribed to any food trucks.<br/>
                                     Click <a href="/search">here</a> to find some trucks that interest you!
+                                </h5>
+                            </span>
+                            <span id="sub" class={styles.msg}>
+                                <h5>
+                                    Click <a href="/search">here</a> if you wanna find something new!
                                 </h5>
                             </span>
                         </div>

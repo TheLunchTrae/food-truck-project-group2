@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ReactList from 'react-list';
 import { MenuBar } from './index.js'
 import styles from './signup.module.scss';
+import styles2 from './search.module.scss';
 
 class Search extends Component {
     constructor(props) {
@@ -98,7 +99,7 @@ class Search extends Component {
                         <div class = "block" style = {{alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
 
                             <div style={{marginLeft: '100px', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
-                                <ReactList itemRenderer = {this.renderSearch} length={this.state.foodTrucksSearch.length} type='uniform'/>
+                                <ReactList class={styles2.reactList} itemRenderer = {this.renderSearch} length={this.state.foodTrucksSearch.length} type='uniform'/>
                             </div>
 
                         </div>
@@ -108,8 +109,8 @@ class Search extends Component {
                     <div class="sections">
                         <div class = "block" style = {{height: '200px', alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
 
-                            <div style={{height: '200px', fontSize: '1.0rem', textAlign: 'center', fontWeight: 'bold', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
-                                <ReactList itemRenderer = {this.renderRecommended} length={this.state.foodTrucksRec.length} type='uniform' alignContent='center' />
+                            <div style={{height: '200px', fontSize: '1.0rem', textAlign: 'center', fontWeight: 'bold', maxHeight: '100%', overflow: 'auto', width:'100%' }}>
+                                <ReactList class={styles2.reactList} itemRenderer = {this.renderRecommended} length={this.state.foodTrucksRec.length} type='uniform' alignContent='center' />
                             </div>
                         </div>
                     </div>
