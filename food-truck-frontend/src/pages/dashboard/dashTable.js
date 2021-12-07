@@ -90,12 +90,14 @@ class DashTable extends Component {
         console.log(ratings);
         if(ratings.length == 0) return [];
         var avgRating = 0, count = 0;
-        for(let i in ratings){
-            avgRating+=i;
+        for(let i = 0; i < ratings.length; ++i){
+            avgRating+=ratings[i].value;
             ++count;
         }
-        var stars = count === 0 ? -1 : Math.round(avgRating/count);
+        var stars = (count === 0 ? -1 : Math.round(avgRating/count));
         count = 5-stars;
+
+        console.log(stars, count);
 
         var starArray = []
         if(stars != -1){
@@ -124,7 +126,7 @@ class DashTable extends Component {
     createSubTruckRow(truck, index){
         console.log(truck);
         
-        var starArray = this.avgRating(truck);
+        var starArray = this.avgRating(truck.ratings);
         return(
             <tr key={"s" + index} class={styles.tableRow}>
                 <td>

@@ -132,26 +132,9 @@ class About extends Component {
                         </div>
                     </div>
 
-
                     <div class = "block" style = {{alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
 
                         <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginBottom: '20px'}}><u>Truck Details</u></span>
-
-                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                            <label>
-                                <span class = "ratingPref" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating Preference:</span>
-                            </label>
-                            <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                    <select name="ratingType">
-                                        <option value="" selected disabled hidden>N/A</option>
-                                        <option value="1">***** (5)</option>
-                                        <option value="2">**** (4)</option>
-                                        <option value="3">*** (3)</option>
-                                        <option value="4">** (2)</option>
-                                        <option value="5">* (1)</option>
-                                    </select>
-                            </span>
-                        </div>
 
                         <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                             <label>
@@ -189,7 +172,7 @@ class About extends Component {
                                 <thead style = {{color: '#0F52BA', fontSize: '1.5rem'}}>
                                     <tr>
                                         <th style = {{height: '50px', width: '200px'}}>
-                                            USER ID
+                                            USER Name
                                         </th>
                                         <th style = {{height: '50px', width: '200px'}}>
                                             RATING
