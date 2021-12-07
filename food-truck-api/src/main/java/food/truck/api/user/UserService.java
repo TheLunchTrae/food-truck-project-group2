@@ -93,15 +93,15 @@ public class UserService {
     }
 
     //Fixed
-    public User modifyUser(User userChanges, long id){
+    public User modifyUser(User userChanges, long id) throws NoSuchAlgorithmException {
         User user;
         if ((user = userRepository.findById(id)) != null) {
             //Change username
-            if (userChanges.getPassword() != null)
+            if (userChanges.getUserName() != null)
                 user.setUserName(userChanges.getUserName());
             //Change password
             if (userChanges.getPassword() != null)
-                user.setPassword(userChanges.getPassword());
+                user.setPassword(hashPassword(userChanges.getPassword()));
 
             //Save the modified user
             userRepository.save(user);

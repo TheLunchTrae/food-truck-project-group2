@@ -10,7 +10,7 @@ class CreateTruck extends Component {
     constructor(props) {
         super();
         //this.state = { truckName: '', route: '', schedule: '', menu: '', description: '', details: ''};
-        this.state = { truckName: '', schedule: '', description: '', start: '', route: [] };
+        this.state = { truckName: '', schedule: '', description: '', start: '', route: [], menu: ''};
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -26,7 +26,6 @@ class CreateTruck extends Component {
     handleSubmit(event) {
         //Object that will be passed containing the users information
         const truckDto = {
-            //menu: this.state.menu,
             truckName: this.state.truckName,
             description: this.state.description,
             //details: this.state.details,
@@ -35,10 +34,17 @@ class CreateTruck extends Component {
         };
 
         console.log(truckDto);
+        console.log(this.state.menu);
+
+        const truckAndString = {
+            foodTruck: truckDto,
+            string: this.state.menu
+        }
 
         //Post to URL
         let token = sessionStorage.getItem('token');
-        const val = axios.post("http://localhost:8090/api/addTruck", truckDto, {
+        const val = axios.post("http://localhost:8090/api/addTruck", truckAndString, {
+        }, {
             headers: {
                 'token': token
             }
@@ -88,6 +94,13 @@ class CreateTruck extends Component {
                                     <input id="routeStart" name="routeStart" class={styles.formelementinput} type="input" placeholder="Please enter a default route" required/>
                                     <div class={styles.formelementbar}></div>
                                     <label class={styles.formelementlabel} for="routeStart">Route Start</label>
+                                </div>
+
+                                <div class={styles.formnput}>
+                                    <input id="menu" name="menu" class={styles.formelementinput} type="input" placeholder="Please write the menu for your truck" required value={this.state.menu} onChange={this.handleInputChange}/>
+                                    <div class={styles.formelementbar}></div>
+                                    <p>Type your menu is the form "Name Price Food Type,"</p>
+                                    <label class={styles.formelementlabel} for="menu">Menu</label>
                                 </div>
 
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>

@@ -1,6 +1,7 @@
 package food.truck.api.foodtruck;
 
 import food.truck.api.other.JSONWrapper;
+import food.truck.api.other.TruckAndStringHolder;
 import food.truck.api.user.Rating;
 import food.truck.api.user.User;
 import food.truck.api.user.UserService;
@@ -23,12 +24,13 @@ public class FoodTruckController {
     }
 
     @PostMapping("/api/addTruck")
-    public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, @RequestHeader(name="token")Long token){
+    public ResponseEntity addFoodTruck(@RequestBody TruckAndStringHolder truckAndString, @RequestHeader(name="token")Long token){
         FoodTruck postFoodTruck;
-        foodTruck.setOwnerId(token);
-        System.out.println(foodTruck);
+        truckAndString.getFoodTruck().setOwnerId(token);
+        truckAndString.getFoodTruck().setMenu(FoodTruckService.parseMenu(truckAndString.getString()));
+        System.out.println(truckAndString.getFoodTruck());
         //NOTE - MUST HAVE OWNER ID SET ON THE FRONT END!!!!!!
-        if ((postFoodTruck = foodTruckService.addFoodTruck(foodTruck)) != null){
+        if ((postFoodTruck = foodTruckService.addFoodTruck(truckAndString.getFoodTruck())) != null){
             return ResponseEntity.ok()
                     .body(postFoodTruck);
         } else {
