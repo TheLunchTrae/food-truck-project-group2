@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { MenuBar } from './index.js';
 import styles from './signup.module.scss';
-import ReactList from 'react-list';
+import styles2 from './editTruck.module.scss';
+import { LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
+import Geocode from 'react-geocode';
+
+const libraries = ['places'];
 
 class Signup extends Component {
     constructor(props) {
@@ -13,7 +17,6 @@ class Signup extends Component {
         this.handleMenuItemSubmit = this.handleMenuItemSubmit.bind(this);
         this.handleRouteSubmit = this.handleRouteSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
-        this.renderDeleteMenuItem = this.renderDeleteMenuItem.bind(this);
     }
     handleInputChange(event) {
         const name = event.target.name;
@@ -124,13 +127,6 @@ class Signup extends Component {
         });
     }
 
-    renderDeleteMenuItem(index, key) {
-        return  <div>
-                    <div key={key}>{this.state.menu[index].foodItemName}</div>
-                    <button onClick={() => this.deleteMenuItem(index)}>Delete</button>
-                </div>
-    }
-
     deleteMenuItem(index) {
         if (this.state.ownerId == sessionStorage.getItem('token')) {
             axios.post("http://localhost:8090/api/modifyTruck/menu/remove/" + index, {
@@ -187,24 +183,23 @@ class Signup extends Component {
                         </div>
 
                         <div class = "editRoute" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
-                            
+                            <table class={styles2.routeTable}>
+                                <thead>
+                                    <tr>
+                                        <th>Address</th>
+                                    </tr>
+                                </thead>
+                            </table>
                             <form id= "route" onSubmit={this.handleRouteSubmit}>
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <span class = "newRoute" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '0px', display: 'block'}}>New Route Location:</span>
-                                    <span id = "routeInput" style={{fontSize: '1.4rem', marginLeft: '10px', textAlign: 'left'}}>
-
-                                        <div class={styles.formnput}>
-                                            <input id="newRouteX" name="newRouteX" class={styles.formelementinput} type="text" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the X Coordinate" value={this.state.newRouteX} required onChange={this.handleInputChange}/>
-                                            <div class={styles.formelementbar}></div>
-                                            <label class={styles.formelementlabel} for="newRouteX">New X Coordinate</label>
-                                        </div>
-
-                                        <div class={styles.formnput}>
-                                            <input id="newRouteY" name="newRouteY" class={styles.formelementinput} type="text" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the Y Coordinate" value={this.state.newRouteY} required onChange={this.handleInputChange}/>
-                                            <div class={styles.formelementbar}></div>
-                                            <label class={styles.formelementlabel} for="newRouteY">New Y Coordinate</label>
-                                        </div>
-                                    </span>
+                                    <span class = "newRoute" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '0px', display: 'block'}}>Add Locations:</span>
+                                    <LoadScript id="script-loader" googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={libraries}>
+                                        <StandaloneSearchBox>
+                                            <input id="route" class={styles.formelementinput} name="route" type="text" placeholder="Route"/>
+                                        </StandaloneSearchBox>
+                                    </LoadScript>
+                                    <div class={styles.formelementbar}></div>
+                                    <label class={styles.formelementlabel} for="route">Route</label>
                                 </div>
 
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
@@ -241,16 +236,6 @@ class Signup extends Component {
                                     <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit New Item</button>
                                 </div>
                             </form>
-                        </div>
-
-                        <div class = "deleteMenuItems" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
-
-                            <span class = "deleteMenuItems" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Delete Menu Items</span>
-                            
-                            <div className={styles.hovText} style={{height: '200px', fontSize: '1.0rem', textAlign: 'center', fontWeight: 'bold', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
-                                <ReactList itemRenderer={this.renderDeleteMenuItem} length={this.state.menu.length} type='uniform' alignContent='center' />
-                            </div>
-
                         </div>
                     </div>
                 </div>
