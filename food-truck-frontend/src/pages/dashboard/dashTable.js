@@ -126,7 +126,7 @@ class DashTable extends Component {
     createSubTruckRow(truck, index){
         console.log(truck);
         
-        var starArray = avgRating(truck);
+        var starArray = this.avgRating(truck);
         return(
             <tr key={"s" + index} class={styles.tableRow}>
                 <td>
