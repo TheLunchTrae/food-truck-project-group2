@@ -141,10 +141,20 @@ class Signup extends Component {
                             
                             <form id= "route" onSubmit={this.handleRouteSubmit}>
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <span class = "newRoute" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Route Location:</span>
-                                    <span id = "routeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                        <input name="newRouteX" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the X Coordinate" value={this.state.newRouteX} type="text" onChange={this.handleInputChange}/>
-                                        <input name="newRouteY" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the Y Coordinate" value={this.state.newRouteY} type="text" onChange={this.handleInputChange}/>
+                                    <span class = "newRoute" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '0px', display: 'block'}}>New Route Location:</span>
+                                    <span id = "routeInput" style={{fontSize: '1.4rem', marginLeft: '10px', textAlign: 'left'}}>
+
+                                        <div class={styles.formnput}>
+                                            <input id="newRouteX" name="newRouteX" class={styles.formelementinput} type="text" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the X Coordinate" value={this.state.newRouteX} required onChange={this.handleInputChange}/>
+                                            <div class={styles.formelementbar}></div>
+                                            <label class={styles.formelementlabel} for="newRouteX">New X Coordinate</label>
+                                        </div>
+
+                                        <div class={styles.formnput}>
+                                            <input id="newRouteY" name="newRouteY" class={styles.formelementinput} type="text" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the Y Coordinate" value={this.state.newRouteY} required onChange={this.handleInputChange}/>
+                                            <div class={styles.formelementbar}></div>
+                                            <label class={styles.formelementlabel} for="newRouteY">New Y Coordinate</label>
+                                        </div>
                                     </span>
                                 </div>
 
@@ -157,6 +167,8 @@ class Signup extends Component {
                         <div class = "newMenuItem" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
 
                             <form onSubmit={this.handleMenuItemSubmit}>
+
+                                <span class = "newMenuItem" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Add Menu Item</span>
 
                                 <div class={styles.formnput}>
                                     <input id="itemInput" name="newMenuItemName" class={styles.formelementinput} type="text" placeholder="Enter the food item's name" value={this.state.newMenuItemName} required onChange={this.handleInputChange}/>

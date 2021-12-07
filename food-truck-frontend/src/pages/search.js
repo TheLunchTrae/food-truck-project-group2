@@ -106,9 +106,9 @@ class Search extends Component {
 
                     <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Recommended</span>
                     <div class="sections">
-                        <div class = "block" style = {{alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
+                        <div class = "block" style = {{height: '200px', alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
 
-                            <div style={{marginLeft: '100px', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
+                            <div className={styles.hovText} style={{height: '200px', fontSize: '1.0rem', textAlign: 'center', fontWeight: 'bold', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
                                 <ReactList itemRenderer = {this.renderRecommended} length={this.state.foodTrucksRec.length} type='uniform' alignContent='center' />
                             </div>
                         </div>
