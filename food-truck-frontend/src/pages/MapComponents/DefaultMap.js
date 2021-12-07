@@ -33,7 +33,7 @@ class DefaultMap extends Component {
   render(props) {
     return (
       <LoadScript googleMapsApiKey={APICode} libraries={["places"]}>
-        <GoogleMap mapContainerStyle={containerStyle} center={props.center} zoom={10}></GoogleMap>
+        <GoogleMap mapContainerStyle={containerStyle} center={{ lat: 31.547164416064646, lng: -97.11819049760257 }} zoom={10}></GoogleMap>
       </LoadScript>
     )
   }
