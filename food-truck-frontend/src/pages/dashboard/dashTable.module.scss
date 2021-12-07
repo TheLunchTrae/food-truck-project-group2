@@ -91,6 +91,7 @@
     background-color:#555555;
     color: white;
     width: 100%;
+    border-collapse: collapse;
 }
 
 //Table headings
@@ -100,18 +101,17 @@
     border-bottom-color: black;
 }
 
+.tableHeading tr th{
+    border-bottom: solid 2px black;
+}
+
 //Adds borders between column headings
 .tableHeading + .tableHeading {
-    border-left: 2px black;
+    border-left: solid 2px black;
 }
 
 .tableBody{
     text-align: center;
-}
-
-//Table rows
-.tableRow + .tableRow{
-    border-top-color: black;
 }
 
 .msg {
@@ -124,3 +124,66 @@
 .show {
     display: inherit;
 }
+
+//Table rows
+.tableRow{
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.tableRow + .tableRow tr td {
+    border-bottom: solid 2px black;
+}
+
+.buttonColumn {
+    width: 20%;
+}
+
+.tableButton {
+    border: solid 2px black;
+    width: 65%;
+    background-color: inherit;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.tableButton:hover {
+    background-color: #708090;
+    cursor: pointer;
+}
+
+.ratingColumn{
+    width: fit-content;
+}
+
+.starHolder {
+    display: inline-block;
+    max-height: 20px;
+    max-width: 20px;
+}
+
+.star {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.confirmPopup{
+    display: none;
+    width: 25%;
+    height: 10%;
+}
+
+.confShow{
+    display: block;
+    position: absolute;
+    z-index: 99;
+    background-color: white;
+}
+
+.confDeleteButton {
+    text-align: center;
+    font-size: 1.4rem;
+}
+

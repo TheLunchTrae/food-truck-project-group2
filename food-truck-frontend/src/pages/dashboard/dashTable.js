@@ -9,6 +9,12 @@ class DashTable extends Component {
     constructor(){
         super();
         this.state = { subTrucks: [], ownTrucks: []};
+        this.starHTML = this.starHTML.bind(this);
+        this.createSubTruckRow = this.createSubTruckRow.bind(this);
+        this.createOwnTruckRow = this.createOwnTruckRow.bind(this);
+        this.avgRating = this.avgRating.bind(this);
+        this.editTruck = this.editTruck.bind(this);
+        this.deleteTruck = this.deleteTruck.bind(this);
     }
 
     componentDidMount(){
@@ -20,12 +26,12 @@ class DashTable extends Component {
             } else {
                 document.getElementById("typeBar").classList.add(styles.owner);
                 document.getElementById("typeBar").classList.add(styles.ownTab);
-                axios.get("http://localhost:8090/api/owner/trucks").then(res =>{ 
-                console.log(res); 
+                axios.get("http://localhost:8090/api/owner/trucks").then(resp =>{ 
+                console.log(resp); 
                 this.setState({
-                        ownTrucks: res.data
+                        ownTrucks: resp.data
                     });
-                    if(res.data.length == 0){
+                    if(resp.data.length == 0){
                         document.getElementById("ownTable").classList.add(styles.noOwn);
                         document.getElementById("noOwn").classList.add(styles.show)
                     }
@@ -66,10 +72,63 @@ class DashTable extends Component {
         }
     }
 
-    createTruckRow(truck, index){
+    starHTML(val, index){
+        if(val === 'n'){
+            return(
+                <div class={styles.starHolder}>
+                    <img class={styles.star} src={"https://i.imgur.com/VXxafZN.png"}/>
+                </div>
+            )
+        } else {
+            return (
+                <div class={styles.starHolder}>
+                    <img class={styles.star} src={"https://i.imgur.com/pCUD8Ad.png"} />
+                </div>
+            )
+        }
+    }
+
+    avgRating(ratings){
+        console.log(ratings);
+        if(ratings.length == 0) return [];
+        var avgRating = 0, count = 0;
+        for(let i in ratings){
+            avgRating+=i;
+            ++count;
+        }
+        var stars = count === 0 ? -1 : Math.round(avgRating/count);
+        count = 5-stars;
+
+        var starArray = []
+        if(stars != -1){
+            for (let i = 0; i < stars; ++i){
+                starArray.push('s');
+            }
+    
+            for(let i = 0; i < count; ++i){
+                starArray.push('n');
+            }
+        }
+        return starArray;
+    }
+
+    editTruck(event){
+        window.location.href="/editTruck?id=" + event.target.name;
+    }
+
+    deleteTruck(event){
+        //Will add confirm event of some sort later
+        axios.get("http://localhost:8090/api/deleteTruck/" + event.target.name).then(res => {
+            console.log(res);
+        })
+    }
+
+    createSubTruckRow(truck, index){
         console.log(truck);
+        
+        var starArray = avgRating(truck);
         return(
-            <tr key={index} class={styles.tableRow}>
+            <tr key={"s" + index} class={styles.tableRow}>
                 <td>
                     <a href={"/truckDetails?truckId=" + truck.truckId} class={styles.tableText}>{truck.truckName}</a>
                 </td>
@@ -79,12 +138,31 @@ class DashTable extends Component {
                 <td>
                     Route
                 </td>
-                <td>
-                    {/*Will setup to show stars for rating}*/}
-                    Rating
+                <td class={styles.ratingColumn}>
+                    {starArray.length != 0 ? starArray.map(this.starHTML): "This Truck Has Not Been Rated"}
                 </td>
                 <td>
                     Food Types
+                </td>
+            </tr>
+        );
+    }
+
+    createOwnTruckRow(truck, index){
+        var starArray = this.avgRating(truck.ratings);
+        return(
+            <tr key={"o" + index} class={styles.tableRow}>
+                <td>
+                    <a href={"/truckDetails?truckId=" + truck.truckId} class={styles.tableText}>{truck.truckName}</a>
+                </td>
+                <td class={styles.ratingColumn}>
+                    {starArray.length != 0 ? starArray.map(this.starHTML): "This Truck Has Not Been Rated"}
+                </td>
+                <td class={styles.buttonColumn}>
+                    <button name={truck.truckId} type="button" class={styles.tableButton} onClick={this.editTruck}>Edit</button>
+                </td>
+                <td class={styles.buttonColumn}> 
+                    <button name={truck.truckId} type="button" class={styles.tableButton} onClick={this.deleteTruck}>Delete</button>
                 </td>
             </tr>
         );
@@ -102,7 +180,7 @@ class DashTable extends Component {
                         <div class={styles.subTable}>
                             <table id="subTable" class={styles.table}>
                                 <thead class={styles.tableHeading}>
-                                    <tr>
+                                    <tr key="head">
                                         <th>Name</th>
                                         <th>Description</th>  
                                         <th>Route</th>      
@@ -111,7 +189,7 @@ class DashTable extends Component {
                                     </tr>
                                 </thead>
                                 <tbody class={styles.tableBody}>
-                                    {this.state.subTrucks.length != 0 ? this.state.subTrucks.map(this.createTruckRow) : null} 
+                                    {this.state.subTrucks.length != 0 ? this.state.subTrucks.map(this.createSubTruckRow) : null} 
                                 </tbody>
                             </table>
                             <span id="noSub" class={styles.msg}>
@@ -124,16 +202,15 @@ class DashTable extends Component {
                         <div class={styles.ownTable}>
                             <table id="ownTable" class={styles.table}>
                                 <thead class={styles.tableHeading}>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Description</th>  
-                                        <th>Route</th>      
+                                    <tr key="head">
+                                        <th>Name</th> 
                                         <th>Rating</th>       
-                                        <th>Food Types</th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody class={styles.tableBody}>
-                                    {this.state.ownTrucks.length != 0 ?  this.state.ownTrucks.map(this.createTruckRow) : null} 
+                                    {this.state.ownTrucks.length != 0 ?  this.state.ownTrucks.map(this.createOwnTruckRow) : null} 
                                 </tbody>
                             </table>
                             <span id="own" class={styles.msg}>

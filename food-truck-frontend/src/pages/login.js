@@ -23,6 +23,7 @@ class Login extends Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault();
         loginService.doLogin(this.state.email, this.state.password)
         .then(res => {
             console.log(res);
@@ -36,9 +37,6 @@ class Login extends Component {
         }).catch(e => {
             console.log(e);
         });
-        
-        event.preventDefault()
-       // window.location.href = "/search";
     }
 
     componentDidMount(){

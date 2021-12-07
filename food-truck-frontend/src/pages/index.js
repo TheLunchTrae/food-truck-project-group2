@@ -8,7 +8,7 @@ export { MenuBar, DefaultMap };
 function HomePage() {
     return (
         <html>
-            <body class={styles.body}>
+           <body class={styles.body}>
                 <MenuBar/>
                 <div class="banner-text">
                     <div class="text-area" style = {{textAlign: 'center', width: '75%', margin: '0 auto', fontFamily: 'Playfair Display'}}>
@@ -25,5 +25,7 @@ function HomePage() {
         </html>
     )
 }
+
+
 
 export default HomePage;

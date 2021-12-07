@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = { "http://localhost:3000" , "https://food-truck-finder-group2.herokuapp.com" } )
 public class FoodTruckController {
     private UserService userService;
     private FoodTruckService foodTruckService;

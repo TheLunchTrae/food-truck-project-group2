@@ -2,30 +2,21 @@ import React, { Component } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import Geocode from "react-geocode";
 
-Geocode.setApiKey("AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk");
-Geocode.setLanguage("en");
+const APICode = "AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk"
 
-const containerStyle = {
-  width: '400px',
-  height: '400px'
-};
+Geocode.setApiKey(APICode);
+Geocode.setLanguage("en");
 
 class DefaultMap extends Component {
 
-  constructor (props) {
-    super(props)
-    this.state = { markers: [] };
-    this.addMarker = this.addMarker.bind(this);
-
+  static defaultProps = {
+    containerStyle: { width: '400px', height: '400px'},
+    center: { lat: 31.547164416064646, lng: -97.11819049760257 },
+    markers: []
   }
 
-  addMarker(lat, lng){
-    const marker = { lat, lng };
-    var newMarkers = this.state.markers;
-    newMarkers.push(marker);
-    this.setState({
-      ['markers']: newMarkers
-    });
+  constructor (props) {
+    super(props)
   }
 
   renderMarkers(marker){
@@ -35,14 +26,12 @@ class DefaultMap extends Component {
     );
   }
 
-  render() {
+  render(props) {
     return (
-      <LoadScript googleMapsApiKey="AIzaSyAFiDEFB5H7qlYn-LeipCsfkCYt-nm4AGk" libraries={["places"]}>
-        <GoogleMap mapContainerStyle={containerStyle}
-                    center={{lat: 31.547164416064646, lng: -97.11819049760257}}
-                    zoom={10} >
+      <LoadScript googleMapsApiKey={APICode} libraries={["places"]}>
+        <GoogleMap mapContainerStyle={props.containerStyle} center={props.center} zoom={10}>
+          {props.markers.length != 0 ? props.markers.map(this.renderMarkers) : null }
         </GoogleMap>
-        {this.state.markers.length != 0 ? this.state.markers.map(renderMarkers) : null}
       </LoadScript>
     )
   }
