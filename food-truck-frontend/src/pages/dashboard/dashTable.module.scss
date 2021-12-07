@@ -169,21 +169,4 @@
     object-fit: contain;
 }
 
-.confirmPopup{
-    display: none;
-    width: 25%;
-    height: 10%;
-}
-
-.confShow{
-    display: block;
-    position: absolute;
-    z-index: 99;
-    background-color: white;
-}
-
-.confDeleteButton {
-    text-align: center;
-    font-size: 1.4rem;
-}
 

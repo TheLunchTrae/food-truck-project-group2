@@ -12,18 +12,6 @@ class Dashboard extends Component {
         this.componentDidMount = this.componentDidMount.bind(this);
     }
     
-    handleChangeStatus(event) {
-
-    }
-
-    handleInputChange(event) {
-
-    }
-
-    handleSubmit(event) {
-
-    }
-    
     componentDidMount() {
         if(sessionStorage.getItem('token') === null){
             //window.location.href="/login";
