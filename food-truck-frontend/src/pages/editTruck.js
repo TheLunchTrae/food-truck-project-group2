@@ -133,7 +133,7 @@ class Signup extends Component {
 
     deleteMenuItem(index) {
         if (this.state.ownerId == sessionStorage.getItem('token')) {
-            axios.post("http://localhost:8090/api/modifyTruck/menu/remove/" + index, {
+            axios.post("http://localhost:8090/api/modifyTruck/menu/remove/" + index, null, {
                 headers: {
                     'truckId': this.state.truckId
                 }
