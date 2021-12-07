@@ -31,8 +31,8 @@ class DefaultMap extends Component {
   }
 
   componentDidMount(){
+    console.log(this.props.markers);
     if(this.props.markers.length > 0){
-      console.log("Here");
       const position = { lat: this.props.markers[0].latitude, lng: this.props.markers[0].longitude };
       this.setState({
         center: position
