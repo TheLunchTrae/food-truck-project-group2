@@ -64,9 +64,9 @@ class Search extends Component {
             const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
             this.setState({ foodTrucksRec: foodTrucks });
         });
-        Axios.post("http://localhost:8090/api/map/nearestTrucks", {
+        Axios.post("http://localhost:8090/api/map/nearestTrucks", null, {
             headers: {
-                'userId': parseInt(sessionStorage.getItem('token'))
+                'userId': sessionStorage.getItem('token')
             }
         }).then(res => {
             console.log(res.data);
