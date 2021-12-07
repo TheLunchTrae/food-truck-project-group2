@@ -117,7 +117,7 @@ public class UserController {
 
     //TODO - REMOVE; FUNDAMENTALLY BROKEN
     @PostMapping("/api/dashboard/modify")
-    public ResponseEntity modifyUser(@RequestBody User userChanges, @RequestHeader Long token){
+    public ResponseEntity modifyUser(@RequestBody User userChanges, @RequestHeader Long token) throws NoSuchAlgorithmException {
         User postUser;
         if ((postUser = userService.modifyUser(userChanges, token)) != null) {
             return ResponseEntity.ok()
