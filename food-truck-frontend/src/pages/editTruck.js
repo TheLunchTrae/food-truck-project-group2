@@ -143,8 +143,18 @@ class Signup extends Component {
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                                     <span class = "newRoute" style = {{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>New Route Location:</span>
                                     <span id = "routeInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                        <input name="newRouteX" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the X Coordinate" value={this.state.newRouteX} type="text" onChange={this.handleInputChange}/>
-                                        <input name="newRouteY" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the Y Coordinate" value={this.state.newRouteY} type="text" onChange={this.handleInputChange}/>
+
+                                        <div class={styles.formnput}>
+                                            <input id="newRouteX" name="newRouteX" class={styles.formelementinput} type="text" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the X Coordinate" value={this.state.newRouteX} required onChange={this.handleInputChange}/>
+                                            <div class={styles.formelementbar}></div>
+                                            <label class={styles.formelementlabel} for="newRouteX">New X Coordinate</label>
+                                        </div>
+
+                                        <div class={styles.formnput}>
+                                            <input id="newRouteY" name="newRouteY" class={styles.formelementinput} type="text" pattern= "^[-+]?[0-9]*\.?[0-9]+$" title="Must be valid float (w/period)" placeholder="Enter the Y Coordinate" value={this.state.newRouteY} required onChange={this.handleInputChange}/>
+                                            <div class={styles.formelementbar}></div>
+                                            <label class={styles.formelementlabel} for="newRouteY">New Y Coordinate</label>
+                                        </div>
                                     </span>
                                 </div>
 
