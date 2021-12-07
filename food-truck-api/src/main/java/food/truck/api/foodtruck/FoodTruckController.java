@@ -1,6 +1,7 @@
 package food.truck.api.foodtruck;
 
 import food.truck.api.other.JSONWrapper;
+import food.truck.api.other.TruckAndStringHolder;
 import food.truck.api.user.Rating;
 import food.truck.api.user.User;
 import food.truck.api.user.UserService;
@@ -23,12 +24,13 @@ public class FoodTruckController {
     }
 
     @PostMapping("/api/addTruck")
-    public ResponseEntity addFoodTruck(@RequestBody FoodTruck foodTruck, @RequestHeader(name="token")Long token){
+    public ResponseEntity addFoodTruck(@RequestBody TruckAndStringHolder truckAndString, @RequestHeader(name="token")Long token){
         FoodTruck postFoodTruck;
-        foodTruck.setOwnerId(token);
-        System.out.println(foodTruck);
+        truckAndString.getFoodTruck().setOwnerId(token);
+        truckAndString.getFoodTruck().setMenu(FoodTruckService.parseMenu(truckAndString.getString()));
+        System.out.println(truckAndString.getFoodTruck());
         //NOTE - MUST HAVE OWNER ID SET ON THE FRONT END!!!!!!
-        if ((postFoodTruck = foodTruckService.addFoodTruck(foodTruck)) != null){
+        if ((postFoodTruck = foodTruckService.addFoodTruck(truckAndString.getFoodTruck())) != null){
             return ResponseEntity.ok()
                     .body(postFoodTruck);
         } else {
@@ -67,9 +69,7 @@ public class FoodTruckController {
 
     //Call via editTruck frontend page
     @PostMapping("/api/modifyTruck/menu")
-    public ResponseEntity modifyFoodTruckMenuAddFoodItem(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckId){
-        FoodItem foodItem = jsonWrapper.getFoodItem();
-
+    public ResponseEntity modifyFoodTruckMenuAddFoodItem(@RequestBody FoodItem foodItem, @RequestHeader Long truckId){
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){
             foodTruck = foodTruckService.modifyFoodTruckMenuAddFoodItem(foodTruck, foodItem);
@@ -83,7 +83,7 @@ public class FoodTruckController {
     }
 
     //IMPORTANT NOTE - assumption is that backend sends the index of the item to be removed (having mapped them to the front page)
-    @PostMapping("/api/modifyTruck/menu/remove/{itemIndex}")
+    @GetMapping("/api/modifyTruck/menu/remove/{itemIndex}")
     public ResponseEntity modifyFoodTruckMenuDeleteFoodItem(@PathVariable int itemIndex, @RequestHeader Long truckId){
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){
@@ -100,9 +100,7 @@ public class FoodTruckController {
 
     //Call via editTruck frontend page
     @PostMapping("/api/modifyTruck/route")
-    public ResponseEntity modifyFoodTruckAddRouteLocation(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckId){
-        Location location = jsonWrapper.getLocation();
-
+    public ResponseEntity modifyTruckRoute(@RequestBody Location location, @RequestHeader Long truckId){
         //System.out.println(location + ' '+ truckID);
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){
@@ -117,7 +115,7 @@ public class FoodTruckController {
     }
 
     //IMPORTANT NOTE - assumption is that backend sends the index of the item to be removed (having mapped them to the front page)
-    @PostMapping("/api/modifyTruck/route/remove/{locationIndex}")
+    @GetMapping("/api/modifyTruck/route/remove/{locationIndex}")
     public ResponseEntity modifyFoodTruckDeleteRouteLocation(@PathVariable int locationIndex, @RequestHeader Long truckId){
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){

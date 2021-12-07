@@ -110,6 +110,10 @@
   background: #d9534f;
 }
 
+.hovText:hover{
+    color: pink;
+}
+
 .form-has-error .form-element-input.hasValue ~ .form-element-label,
 .form-has-error .form-element-input:focus ~ .form-element-label {
   transform: translateY(-100%) translateY(-0.5em) translateY(-2px);

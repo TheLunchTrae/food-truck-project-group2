@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class FoodTruckService {
@@ -16,6 +18,29 @@ public class FoodTruckService {
     @Autowired
     public FoodTruckService(FoodTruckRepository truckRepository){
         this.truckRepository = truckRepository;
+    }
+
+    public static List<FoodItem> parseMenu(String menuString) {
+        // food item list
+        List<FoodItem> foodItemList = new ArrayList<FoodItem>();
+
+        String[] items = menuString.split(",");
+
+        for (String s : items) {
+            String[] parts = new String[3];
+            String regex = "[0-9]+";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(s);
+            matcher.find();
+            parts[0] = s.substring(0, matcher.start());
+            parts[1] = s.substring(matcher.end(), s.length());
+            parts[2] = s.substring(matcher.start(), matcher.end());
+            parts[0].trim();
+            parts[1].trim();
+            parts[2].trim();
+            foodItemList.add(new FoodItem(parts[1], parts[0], Integer.valueOf(parts[2])));
+        }
+        return foodItemList;
     }
 
     public FoodTruck addFoodTruck(FoodTruck foodTruck){
@@ -280,6 +305,5 @@ public class FoodTruckService {
 
     public Optional<FoodTruck> findUser(Long userId) {
             return truckRepository.findById(userId);
-        }
-
+    }
 }

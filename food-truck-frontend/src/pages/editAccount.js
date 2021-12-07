@@ -75,7 +75,7 @@ class Signup extends Component {
                             </div>
 
                             <div class={styles.formnput}>
-                                <input id="passwordInput" name="password" class={styles.formelementinput} value={this.state.password} type="text" placeholder="Enter A New Password"  required onChange={this.handleInputChange}/>
+                                <input id="passwordInput" name="password" class={styles.formelementinput} value={this.state.password} type="password" placeholder="Enter A New Password"  required onChange={this.handleInputChange}/>
                                 <div class={styles.formelementbar}></div>
                                 <label class={styles.formelementlabel} for="password">New Password</label>
                             </div>

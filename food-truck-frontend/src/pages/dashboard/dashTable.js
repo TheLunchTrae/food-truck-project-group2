@@ -20,7 +20,7 @@ class DashTable extends Component {
     componentDidMount(){
         //Get userinfo to determine type of tabbar
         axios.get("http://localhost:8090/api/userinfo").then(res => {
-            if(res.data.usertype === "Customer"){
+            if(res.data.userType === "Customer"){
                 document.getElementById("typeBar").classList.add(styles.customer);
                 document.getElementById("typeBar").classList.add(styles.subTab);
             } else {
@@ -51,6 +51,8 @@ class DashTable extends Component {
             });
             if(res.data.length == 0){
                 document.getElementById("noSub").classList.add(styles.show);
+            } else {
+                document.getElementById("sub").classList.add(styles.show);
             }
         }).catch(err => {
             console.log(err);
@@ -61,8 +63,6 @@ class DashTable extends Component {
 
     changeTab(event){
         console.log("Showing " + event.target.id + " tab");
-        const sub = document.getElementById("subButton").classList;
-        const own = document.getElementById("ownButton").classList;
         if(event.target.id === "subButton"){
             document.getElementById("typeBar").classList.add(styles.subTab);
             document.getElementById("typeBar").classList.remove(styles.ownTab);
@@ -92,12 +92,14 @@ class DashTable extends Component {
         console.log(ratings);
         if(ratings.length == 0) return [];
         var avgRating = 0, count = 0;
-        for(let i in ratings){
-            avgRating+=i;
+        for(let i = 0; i < ratings.length; ++i){
+            avgRating+=ratings[i].value;
             ++count;
         }
-        var stars = count === 0 ? -1 : Math.round(avgRating/count);
+        var stars = (count === 0 ? -1 : Math.round(avgRating/count));
         count = 5-stars;
+
+        console.log(stars, count);
 
         var starArray = []
         if(stars != -1){
@@ -126,7 +128,7 @@ class DashTable extends Component {
     createSubTruckRow(truck, index){
         console.log(truck);
         
-        var starArray = this.avgRating(truck);
+        var starArray = this.avgRating(truck.ratings);
         return(
             <tr key={"s" + index} class={styles.tableRow}>
                 <td>
@@ -134,9 +136,6 @@ class DashTable extends Component {
                 </td>
                 <td class={styles.tableText}>
                     {truck.description}
-                </td>
-                <td>
-                    Route
                 </td>
                 <td class={styles.ratingColumn}>
                     {starArray.length != 0 ? starArray.map(this.starHTML): "This Truck Has Not Been Rated"}
@@ -183,7 +182,6 @@ class DashTable extends Component {
                                     <tr key="head">
                                         <th>Name</th>
                                         <th>Description</th>  
-                                        <th>Route</th>      
                                         <th>Rating</th>       
                                         <th>Food Types</th>
                                     </tr>
@@ -196,6 +194,11 @@ class DashTable extends Component {
                                 <h5>
                                     You are not subscribed to any food trucks.<br/>
                                     Click <a href="/search">here</a> to find some trucks that interest you!
+                                </h5>
+                            </span>
+                            <span id="sub" class={styles.msg}>
+                                <h5>
+                                    Click <a href="/search">here</a> if you wanna find something new!
                                 </h5>
                             </span>
                         </div>

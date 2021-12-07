@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { MenuBar } from './index.js';
+import { MenuBar, DefaultMap } from './index.js';
 import styles from './signup.module.scss';
 
 class About extends Component {
@@ -123,7 +123,7 @@ class About extends Component {
         return (
             <body style = {{backgroundColor: '#708090'}}>
                 <MenuBar/>
-                <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Truck</span>
+                <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Truck Page</span>
                 <div class="sections" >
                     <div class = "headerText" style = {{alignContent: 'center', background: '#FFFFFF', width: '40%', padding: '20px', margin: '35px auto', textAllign: 'center', border: '3px solid black'}}>
                         <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}>{this.state.truckName}</span>
@@ -132,53 +132,31 @@ class About extends Component {
                         </div>
                     </div>
 
-
                     <div class = "block" style = {{alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
 
-                        <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold'}}><u>Truck Details</u></span>
-
-                        <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                            <label>
-                                <span class = "ratingPref" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Rating Preference:</span>
-                            </label>
-                            <span id = "foodLocInput" style={{fontSize: '1.4rem', marginLeft: '10px'}}>
-                                    <select name="usertype">
-                                        <option value="" selected disabled hidden>N/A</option>
-                                        <option value="1">***** (5)</option>
-                                        <option value="2">**** (4)</option>
-                                        <option value="3">*** (3)</option>
-                                        <option value="4">** (2)</option>
-                                        <option value="5">* (1)</option>
-                                    </select>
-                            </span>
-                        </div>
+                        <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginBottom: '20px'}}><u>Truck Details</u></span>
 
                         <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                             <label>
                                 <span class = "description" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Description: </span>
                             </label>
-                            <span class = "schedule" style = {{color: '#000000', fontSize: '1.0rem', marginTop: '5px'}}>{this.state.description}</span>
+                            <span class="schedule" style={{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '20px', color: '#0F52BA'}}>{this.state.description}</span>
                         </div>
 
                         <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                             <label>
                                 <span class = "schedule" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Schedule: </span>
                             </label>
-                            <span class = "schedule" style = {{color: '#000000', fontSize: '1.0rem', marginTop: '5px'}}>{this.state.schedule}</span>
+                            <span class="schedule" style={{fontSize: '1.4rem', fontWeight: 'bold', marginTop: '20px', color: '#0F52BA'}}>{this.state.schedule}</span>
                         </div>
 
                         <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                             <label>
                                 <span class = "route" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Route: </span>
                             </label>
-                            <tbody style = {{color: '#000000', fontSize: '1.2rem'}}>
-                                {this.state.route.map(location => (
-                                    <tr>
-                                        <td>{location["xcoordinate"]}</td>
-                                        <td>{location["ycoordinate"]}</td>                            
-                                    </tr>
-                                ))}
-                            </tbody>
+                            <div style={{ margin: '0 auto', width: 'fit-content'}}>
+                                <DefaultMap markers={this.state.route}/>
+                            </div>
                         </div>
 
                         <hr style = {{border: '1px solid black', width: '85%', marginTop: '15px'}}></hr>
@@ -194,7 +172,7 @@ class About extends Component {
                                 <thead style = {{color: '#0F52BA', fontSize: '1.5rem'}}>
                                     <tr>
                                         <th style = {{height: '50px', width: '200px'}}>
-                                            USER ID
+                                            USER Name
                                         </th>
                                         <th style = {{height: '50px', width: '200px'}}>
                                             RATING
