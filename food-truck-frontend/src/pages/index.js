@@ -1,4 +1,3 @@
-require('dotenv').config();
 import styles from './index.module.scss';
 import MenuBar from './universal/menuBar';
 import DefaultMap from './MapComponents/DefaultMap';
