@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { MenuBar } from './index.js';
+import { MenuBar, DefaultMap } from './index.js';
 import styles from './signup.module.scss';
 
 class About extends Component {
@@ -171,14 +171,9 @@ class About extends Component {
                             <label>
                                 <span class = "route" style = {{color: '#000000', fontSize: '1.4rem', fontWeight: 'bold', marginTop: '5px'}}>Route: </span>
                             </label>
-                            <tbody style = {{color: '#0F52BA', fontSize: '1.4rem', fontWeight: 'bold'}}>
-                                {this.state.route.map(location => (
-                                    <tr>
-                                        <td>{location["xcoordinate"]}</td>
-                                        <td>{location["ycoordinate"]}</td>                            
-                                    </tr>
-                                ))}
-                            </tbody>
+                            <div style={{ margin: '0 auto', width: 'fit-content'}}>
+                                <DefaultMap markers={this.state.route}/>
+                            </div>
                         </div>
 
                         <hr style = {{border: '1px solid black', width: '85%', marginTop: '15px'}}></hr>

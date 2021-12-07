@@ -40,7 +40,6 @@ public class FoodTruckService {
             parts[2].trim();
             foodItemList.add(new FoodItem(parts[1], parts[0], Integer.valueOf(parts[2])));
         }
-
         return foodItemList;
     }
 
@@ -306,6 +305,5 @@ public class FoodTruckService {
 
     public Optional<FoodTruck> findUser(Long userId) {
             return truckRepository.findById(userId);
-        }
-
+    }
 }

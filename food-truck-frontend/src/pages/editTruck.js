@@ -43,6 +43,20 @@ class Signup extends Component {
             axios.post("http://localhost:8090/api/modifyTruck", truckDto).then(res => {
                 console.log(res);
             });
+
+            var newRoute = []
+            for(let i = 0; i < this.state.route.length; ++i){
+                newRoute.push({ latitude: this.state.route[i].lat, longitude: this.state.route[i].lng });
+            }
+
+            var post = axios.post("http://localhost:8090/api/modifyTruck/route", newRoute, { headers: {
+                'truckId': this.state.truckId
+            }}).then(res => {
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+            })
+            console.log(post);
             alert("Changes saved");
         }
         else {
@@ -66,6 +80,16 @@ class Signup extends Component {
     handleRouteSubmit(){
         Geocode.fromAddress(document.getElementById('routeInput').value).then(res => {
             var loc = res.results[0].geometry.location
+            axios.post("http://localhost:8090/api/modifyTruck/route", {
+                latitude: loc.lat,
+                longitude: loc.lng
+            }, {
+                headers:{
+                    'truckId': this.state.truckId
+                }
+            }).then(resp => {
+                console.log(resp);
+            })
             var newRoute = this.state.route;
             newRoute.push(loc);
 
@@ -94,6 +118,13 @@ class Signup extends Component {
         var index = event.target.value;
         newRoute.splice(index, 1);
         newLocations.splice(index, 1);
+        axios.get("http://localhost:8090/api/modifyTruck/route/remove/" + index, {
+            headers: {
+                'truckId': this.state.truckId
+            }
+        }).then(res => {
+            console.log(res);
+        })
         this.setState({
             route: newRoute,
             locations: newLocations
@@ -140,6 +171,15 @@ class Signup extends Component {
                 description: res.data.description,
                 details: res.data.details,
             });
+            var locations = [];
+            for(let i = 0; i < this.state.route; ++i){
+                Geocode.fromLatLng(this.state.route[i].lat, this.state.route[i].lng).then(resp => {
+                    locations.push(resp.results[0].formatted_address);
+                    this.setState({
+                        locations: newLocations
+                    });
+                });
+            }
             console.log(this.state.ownerId);
             console.log(this.state.menu);
         });

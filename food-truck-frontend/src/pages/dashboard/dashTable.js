@@ -133,9 +133,6 @@ class DashTable extends Component {
                 <td class={styles.tableText}>
                     {truck.description}
                 </td>
-                <td>
-                    Route
-                </td>
                 <td class={styles.ratingColumn}>
                     {starArray.length != 0 ? starArray.map(this.starHTML): "This Truck Has Not Been Rated"}
                 </td>
@@ -181,7 +178,6 @@ class DashTable extends Component {
                                     <tr key="head">
                                         <th>Name</th>
                                         <th>Description</th>  
-                                        <th>Route</th>      
                                         <th>Rating</th>       
                                         <th>Food Types</th>
                                     </tr>

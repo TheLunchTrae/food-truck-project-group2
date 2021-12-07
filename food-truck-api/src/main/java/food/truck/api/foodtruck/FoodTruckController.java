@@ -102,9 +102,7 @@ public class FoodTruckController {
 
     //Call via editTruck frontend page
     @PostMapping("/api/modifyTruck/route")
-    public ResponseEntity modifyFoodTruckAddRouteLocation(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckId){
-        Location location = jsonWrapper.getLocation();
-
+    public ResponseEntity modifyTruckRoute(@RequestBody Location location, @RequestHeader Long truckId){
         //System.out.println(location + ' '+ truckID);
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){
@@ -119,7 +117,7 @@ public class FoodTruckController {
     }
 
     //IMPORTANT NOTE - assumption is that backend sends the index of the item to be removed (having mapped them to the front page)
-    @PostMapping("/api/modifyTruck/route/remove/{locationIndex}")
+    @GetMapping("/api/modifyTruck/route/remove/{locationIndex}")
     public ResponseEntity modifyFoodTruckDeleteRouteLocation(@PathVariable int locationIndex, @RequestHeader Long truckId){
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){
