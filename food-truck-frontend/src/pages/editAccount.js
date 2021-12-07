@@ -81,7 +81,7 @@ class Signup extends Component {
                             </div>
 
                             <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit</button>
+                                <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Change Password</button>
                             </div>
                         </form>
                     </div>
