@@ -63,7 +63,9 @@ class Search extends Component {
             console.log(res.data);
             const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
             this.setState({ foodTrucksRec: foodTrucks });
-        });
+        }).catch(err => {
+             console.log(err);
+        });;
         Axios.post("http://localhost:8090/api/map/nearestTrucks", null, {
             headers: {
                 'userId': sessionStorage.getItem('token')
@@ -72,6 +74,8 @@ class Search extends Component {
             console.log(res.data);
             const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
             this.setState({ nearbyTrucks: foodTrucks });
+        }).catch(err => {
+            console.log(err);
         });
     }
     renderRecommended(index, key) {

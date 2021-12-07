@@ -207,9 +207,6 @@ class About extends Component {
                                 <thead style = {{color: '#0F52BA', fontSize: '1.5rem'}}>
                                     <tr>
                                         <th style = {{height: '50px', width: '200px'}}>
-                                            USER Name
-                                        </th>
-                                        <th style = {{height: '50px', width: '200px'}}>
                                             RATING
                                         </th>
                                         <th style = {{height: '50px', width: '200px'}}>
@@ -220,7 +217,6 @@ class About extends Component {
                                 <tbody style = {{color: '#000000', fontSize: '1.2rem'}}>
                                     {this.state.ratings.map(location => (
                                         <tr>
-                                            <td>{location["userId"]}</td>
                                             <td>{location["value"]}</td>
                                             <td>{location["review"]}</td>
                                         </tr>
