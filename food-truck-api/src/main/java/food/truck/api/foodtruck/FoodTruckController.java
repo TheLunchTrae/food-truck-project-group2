@@ -69,9 +69,7 @@ public class FoodTruckController {
 
     //Call via editTruck frontend page
     @PostMapping("/api/modifyTruck/menu")
-    public ResponseEntity modifyFoodTruckMenuAddFoodItem(@RequestBody JSONWrapper jsonWrapper, @RequestHeader Long truckId){
-        FoodItem foodItem = jsonWrapper.getFoodItem();
-
+    public ResponseEntity modifyFoodTruckMenuAddFoodItem(@RequestBody FoodItem foodItem, @RequestHeader Long truckId){
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){
             foodTruck = foodTruckService.modifyFoodTruckMenuAddFoodItem(foodTruck, foodItem);
@@ -85,7 +83,7 @@ public class FoodTruckController {
     }
 
     //IMPORTANT NOTE - assumption is that backend sends the index of the item to be removed (having mapped them to the front page)
-    @PostMapping("/api/modifyTruck/menu/remove/{itemIndex}")
+    @GetMapping("/api/modifyTruck/menu/remove/{itemIndex}")
     public ResponseEntity modifyFoodTruckMenuDeleteFoodItem(@PathVariable int itemIndex, @RequestHeader Long truckId){
         FoodTruck foodTruck;
         if ((foodTruck = foodTruckService.getFoodTruckWithId(truckId)) != null){

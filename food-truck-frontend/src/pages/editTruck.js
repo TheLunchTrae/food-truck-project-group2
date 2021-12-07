@@ -11,14 +11,16 @@ const libraries = ['places'];
 class EditTruck extends Component {
     constructor(props) {
         super();
-        this.state = { ownerId: -1, truckId: -1, truckName: '', schedule: '', description: '', route: [], locations: [], menu: [] };
+        this.state = { ownerId: -1, truckId: -1, truckName: '', schedule: '', description: '', route: [], locations: [], menu: [], newMenuItemName: '', newMenuItemType: '', newMenuItemPrice: ''};
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleMenuItemSubmit = this.handleMenuItemSubmit.bind(this);
         this.handleRouteSubmit = this.handleRouteSubmit.bind(this);
+        this.removeLocation = this.removeLocation.bind(this);
+        this.removeMenuItem = this.removeMenuItem.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.renderRoutes = this.renderRoutes.bind(this);
-        this.removeLocation = this.removeLocation.bind(this);
+        this.renderMenuItem = this.renderMenuItem.bind(this);
     }
     handleInputChange(event) {
         const name = event.target.name;
@@ -49,9 +51,7 @@ class EditTruck extends Component {
                 newRoute.push({ latitude: this.state.route[i].lat, longitude: this.state.route[i].lng });
             }
 
-            var post = axios.post("http://localhost:8090/api/modifyTruck/route", newRoute, { headers: {
-                'truckId': this.state.truckId
-            }}).then(res => {
+            var post = axios.post("http://localhost:8090/api/modifyTruck/route", newRoute).then(res => {
                 console.log(res);
             }).catch(err => {
                 console.log(err);
@@ -72,11 +72,11 @@ class EditTruck extends Component {
             var loc = res.results[0].geometry.location
             const latitude = loc.lat;
             const longitude = loc.lng;
-            axios.post("http://localhost:8090/api/modifyTruck/route", {
+            axios.post("http://localhost:8090/api/modifyTruck/route",  {
                 latitude: latitude,
                 longitude: longitude
             }, {
-                headers:{
+                headers: {
                     'truckId': this.state.truckId
                 }
             }).then(resp => {
@@ -136,25 +136,26 @@ class EditTruck extends Component {
 
     handleMenuItemSubmit(event){
         if (this.state.ownerId == sessionStorage.getItem('token')) {
-            const itemDto = {
+            const foodItem = {
                 foodType: this.state.newMenuItemType,
                 foodItemName: this.state.newMenuItemName,
                 foodItemPrice: this.state.newMenuItemPrice
-            }
-
-            const JSONWrapper = {
-                foodItem: {
-                    foodType: this.state.newMenuItemType,
-                    foodItemName: this.state.newMenuItemName,
-                    foodItemPrice: this.state.newMenuItemPrice
-                }
             };
 
+            var newMenu = this.state.menu;
+            newMenu.push(foodItem);
+            this.setState({
+                menu: newMenu
+            })
+
             //Post to URL
-            axios.post("http://localhost:8090/api/modifyTruck/menu", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
+            axios.post("http://localhost:8090/api/modifyTruck/menu", foodItem, {
+                headers: {
+                    'truckId': this.state.truckId
+                }
+            }).then(res => {
                 console.log(res);
             });
-            alert("Changes saved");
         }
         else {
             alert("You are not the owner of this truck");
@@ -164,11 +165,33 @@ class EditTruck extends Component {
     }
 
     removeMenuItem(event){
-
+        var newMenu = this.state.menu;
+        var index = event.target.value;
+        newMenu.splice(index, 1);
+        axios.get("http://localhost:8090/api/modifyTruck/menu/remove/" + index, {
+            headers: {
+                'truckId': this.state.truckId
+            }
+        }).then(res => {
+            console.log(res);
+            this.setState({
+                menu: newMenu
+            });
+        })
+        event.preventDefault();
     }
 
     renderMenuItem(item, index){
-
+        return (
+            <tr key={index}>
+                <td>{item.foodItemName}</td>
+                <td>{item.foodType}</td>
+                <td>{item.foodItemPrice}</td>
+                <td>
+                    <button value={index} class={styles2.deleteButton} onClick={this.removeMenuItem}>Remove Item</button>
+                </td>
+            </tr>
+        )
     }
 
     
@@ -192,6 +215,13 @@ class EditTruck extends Component {
                 description: res.data.description,
                 details: res.data.details,
             });
+            if(this.state.ownerId === sessionStorage.getItem('token')){
+                axios.interceptors.request.use(req => {
+                    req.headers['truckId']=this.state.truckId;
+                    return req;
+                });
+            }
+            
             var newLocations = [];
             for(let i = 0; i < this.state.route.length; ++i){
                 Geocode.fromLatLng(this.state.route[i].latitude, this.state.route[i].longitude).then(resp => {
@@ -250,7 +280,8 @@ class EditTruck extends Component {
                             <table class={styles2.routeTable}>
                                 <thead>
                                     <tr>
-                                        <th>Address</th>
+                                        <th class={styles2.rth}>Address</th>
+                                        <th class={styles2.rth}/>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -274,30 +305,43 @@ class EditTruck extends Component {
                         </div>
 
                         <div class = "newMenuItem" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
-
-                                <span class = "newMenuItem" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Add Menu Item</span>
-
+                            <table class={styles2.menuTable}>
+                                <thead>
+                                    <tr>
+                                        <th class={styles2.mth}>Name</th>
+                                        <th class={styles2.mth}>Type</th>
+                                        <th class={styles2.mth}>Price</th>
+                                        <th class={styles2.mth}/>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.menu.length != 0 ? this.state.menu.map(this.renderMenuItem) : null}
+                                </tbody>
+                            </table>
+                            <span class = "newMenuItem" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Add Menu Item</span>
+                            <form onSubmit={this.handleMenuItemSubmit}>
                                 <div class={styles.formnput}>
                                     <input id="itemInput" name="newMenuItemName" class={styles.formelementinput} type="text" placeholder="Enter the food item's name" value={this.state.newMenuItemName} required onChange={this.handleInputChange}/>
                                     <div class={styles.formelementbar}></div>
-                                    <label class={styles.formelementlabel} for="newMenuItemName">Item Name</label>
+                                    <label class={styles.formelementlabel} for="newMenuItemName">Name</label>
                                 </div>
 
                                 <div class={styles.formnput}>
                                     <input id="itemInput" name="newMenuItemType" class={styles.formelementinput} type="text" placeholder="Enter the food item's type" value={this.state.newMenuItemType} required onChange={this.handleInputChange}/>
                                     <div class={styles.formelementbar}></div>
-                                    <label class={styles.formelementlabel} for="newMenuItemType">Item Type</label>
+                                    <label class={styles.formelementlabel} for="newMenuItemType">Type</label>
                                 </div>
 
                                 <div class={styles.formnput}>
-                                    <input id="itemInput" name="newMenuItemPrice" class={styles.formelementinput} type="text" placeholder="Enter the food item's price" value={this.state.newMenuItemPrice} required onChange={this.handleInputChange}/>
+                                    <input id="itemInput" name="newMenuItemPrice" class={styles.formelementinput} pattern='[1-9]{1}[0-9]{0,1}\.[0-9]{0,2}' type="text" placeholder="Enter the food item's price" value={this.state.newMenuItemPrice} required onChange={this.handleInputChange}/>
                                     <div class={styles.formelementbar}></div>
-                                    <label class={styles.formelementlabel} for="newMenuItemPrice">Item Price</label>
+                                    <label class={styles.formelementlabel} for="newMenuItemPrice">Price</label>
                                 </div>
 
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <button type="button" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Add Item</button>
+                                    <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Add Item</button>
                                 </div>
+                            </form>
                         </div>
                     </div>
                 </div>
