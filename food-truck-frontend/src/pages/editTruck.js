@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { MenuBar } from './index.js';
 import styles from './signup.module.scss';
+import ReactList from 'react-list';
 
 class Signup extends Component {
     constructor(props) {
         super();
-        this.state = { truckId: -1, truckName: '', newRouteX: '', newRouteY: '', schedule: '', newMenuItemType: '', newMenuItemName: '', newMenuItemPrice: 0.0, description: '', newRating: 0.0};
+        this.state = { ownerId: -1, truckId: -1, truckName: '', newRouteX: '', newRouteY: '', schedule: '', newMenuItemType: '', newMenuItemName: '', newMenuItemPrice: 0.0, description: '', newRating: 0.0, menu: [] };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleMenuItemSubmit = this.handleMenuItemSubmit.bind(this);
         this.handleRouteSubmit = this.handleRouteSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.renderDeleteMenuItem = this.renderDeleteMenuItem.bind(this);
     }
     handleInputChange(event) {
         const name = event.target.name;
@@ -24,40 +26,52 @@ class Signup extends Component {
 
     //Exclusively for modifying description, schedule, name
     handleSubmit(event) {
-        const truckDto = {
-            description: this.state.description,
-            schedule: this.state.schedule,
-            truckName: this.state.truckName,
-            truckId: this.state.truckId
-        };
+        if (this.state.ownerId == sessionStorage.getItem('token')) {
+            const truckDto = {
+                description: this.state.description,
+                schedule: this.state.schedule,
+                truckName: this.state.truckName,
+                truckId: this.state.truckId
+            };
 
-        //Post to URL
-        axios.post("http://localhost:8090/api/modifyTruck", truckDto).then(res => {
-            console.log(res);
-        });
+            //Post to URL
+            axios.post("http://localhost:8090/api/modifyTruck", truckDto).then(res => {
+                console.log(res);
+            });
+            alert("Changes saved");
+        }
+        else {
+            alert("You are not the owner of this truck");
+        }
 
         event.preventDefault()
     }
     //For adding new item
     handleMenuItemSubmit(event){
-        const itemDto = {
-            foodType: this.state.newMenuItemType,
-            foodItemName: this.state.newMenuItemName,
-            foodItemPrice: this.state.newMenuItemPrice
-        }
-
-        const JSONWrapper = {
-            foodItem: {
+        if (this.state.ownerId == sessionStorage.getItem('token')) {
+            const itemDto = {
                 foodType: this.state.newMenuItemType,
                 foodItemName: this.state.newMenuItemName,
                 foodItemPrice: this.state.newMenuItemPrice
             }
-        };
 
-        //Post to URL
-        axios.post("http://localhost:8090/api/modifyTruck/menu", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
-            console.log(res);
-        });
+            const JSONWrapper = {
+                foodItem: {
+                    foodType: this.state.newMenuItemType,
+                    foodItemName: this.state.newMenuItemName,
+                    foodItemPrice: this.state.newMenuItemPrice
+                }
+            };
+
+            //Post to URL
+            axios.post("http://localhost:8090/api/modifyTruck/menu", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
+                console.log(res);
+            });
+            alert("Changes saved");
+        }
+        else {
+            alert("You are not the owner of this truck");
+        }
 
         event.preventDefault()
     }
@@ -65,16 +79,22 @@ class Signup extends Component {
     //For new location to add to route
     handleRouteSubmit(event){
         //Modified to be compatible with route being List<Location>
-        const JSONWrapper = {
-            location: {
-                latitude: this.state.newRouteX,
-                longitude: this.state.newRouteY
-            }
-        };
-        
-        axios.post("http://localhost:8090/api/modifyTruck/route", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
-            console.log(res);
-        });
+        if (this.state.ownerId == sessionStorage.getItem('token')) {
+            const JSONWrapper = {
+                location: {
+                    latitude: this.state.newRouteX,
+                    longitude: this.state.newRouteY
+                }
+            };
+            
+            axios.post("http://localhost:8090/api/modifyTruck/route", JSONWrapper, {headers:{'truckId': this.state.truckId}}).then(res => {
+                console.log(res);
+            });
+            alert("Changes saved");
+        }
+        else {
+            alert("You are not the owner of this truck");
+        }
 
         event.preventDefault()
     }
@@ -91,15 +111,44 @@ class Signup extends Component {
         axios.get("http://localhost:8090/api/getTruck/" + this.state.truckId).then(res => {
             console.log(res);
             this.setState({
+                ownerId: res.data.ownerId,
                 truckName: res.data.truckName,
                 route: res.data.route,
                 schedule: res.data.schedule,
                 menu: res.data.menu,
                 description: res.data.description,
-                details: res.data.details
+                details: res.data.details,
             });
+            console.log(this.state.ownerId);
+            console.log(this.state.menu);
         });
     }
+
+    renderDeleteMenuItem(index, key) {
+        return  <div>
+                    <div key={key}>{this.state.menu[index].foodItemName}</div>
+                    <button onClick={() => this.deleteMenuItem(index)}>Delete</button>
+                </div>
+    }
+
+    deleteMenuItem(index) {
+        if (this.state.ownerId == sessionStorage.getItem('token')) {
+            axios.post("http://localhost:8090/api/modifyTruck/menu/remove/" + index, {
+                headers: {
+                    'truckId': this.state.truckId
+                }
+            }).then(res => {
+                console.log(res);
+            });
+            alert("Changes saved");
+        }
+        else { 
+            alert("You are not the owner of this truck");
+        }
+
+        event.preventDefault();
+    }
+
     render() {
         return (
             <body style = {{backgroundColor: '#708090'}}>
@@ -192,6 +241,16 @@ class Signup extends Component {
                                     <button type="submit" style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit New Item</button>
                                 </div>
                             </form>
+                        </div>
+
+                        <div class = "deleteMenuItems" style = {{backgroundColor: '#FFFFFF', alignContent: 'center', width: '26%', padding: '30px', margin: '20px auto', textAllign: 'center'}}>
+
+                            <span class = "deleteMenuItems" style = {{fontSize: '1.4rem', textAlign: 'center', fontWeight: 'bold', marginTop: '5px', marginBottom: '20px', display: 'block'}}>Delete Menu Items</span>
+                            
+                            <div className={styles.hovText} style={{height: '200px', fontSize: '1.0rem', textAlign: 'center', fontWeight: 'bold', maxHeight: 100, overflow: 'auto', width: '70%', justifyContent: 'left', display: 'flex'}}>
+                                <ReactList itemRenderer={this.renderDeleteMenuItem} length={this.state.menu.length} type='uniform' alignContent='center' />
+                            </div>
+
                         </div>
                     </div>
                 </div>
