@@ -8,16 +8,14 @@ import styles2 from './search.module.scss';
 class Search extends Component {
     constructor(props) {
         super(props);
-        this.state = { foodTrucksRec: [], foodTrucksSearch: [], search: '', listColor: 'white', nearbyTrucks: [] };
+        this.state = { foodTrucksRec: [], foodTrucksSearch: [], nearbyTrucks: [], search: '', listColor: 'white' };
         this.componentDidMount = this.componentDidMount.bind(this);
-        this.renderRecommended = this.renderRecommended.bind(this);
+        this.renderTrucks = this.renderTrucks.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.renderSearch = this.renderSearch.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleTruckClick = this.handleTruckClick.bind(this);
-        this.renderNearby = this.renderNearby.bind(this);
-    }
-    handleChangeStatus(event) {
+        this.starHTML = this.starHTML.bind(this);
+        this.avgRating = this.avgRating.bind(this);
+        this.viewTruck = this.viewTruck.bind(this);
     }
     handleInputChange(event) {
         const name = event.target.name;
@@ -36,8 +34,7 @@ class Search extends Component {
                 }
                 }).then(res => {
                     console.log(res.data);
-                    const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
-                    this.setState({ foodTrucksSearch: foodTrucks });
+                    this.setState({ foodTrucksSearch: res.data });
             });
         }
     }
@@ -49,8 +46,7 @@ class Search extends Component {
                 }
                 }).then(res => {
                     console.log(res.data);
-                    const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
-                    this.setState({ foodTrucksSearch: foodTrucks });
+                    this.setState({ foodTrucksSearch: res.data });
             });
         }
     }
@@ -61,36 +57,93 @@ class Search extends Component {
             }
         }).then(res => {
             console.log(res.data);
-            const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
-            this.setState({ foodTrucksRec: foodTrucks });
+            this.setState({ foodTrucksRec: res.data });
         }).catch(err => {
              console.log(err);
-        });;
-        Axios.post("http://localhost:8090/api/map/nearestTrucks", null, {
-            headers: {
-                'userId': sessionStorage.getItem('token')
-            }
-        }).then(res => {
-            console.log(res.data);
-            const foodTrucks = res.data.map(obj => ({truckName: obj.truckName, truckId: obj.truckId}));
-            this.setState({ nearbyTrucks: foodTrucks });
-        }).catch(err => {
-            console.log(err);
         });
+        if(sessionStorage.getItem('token') != null){
+            Axios.post("http://localhost:8090/api/map/nearestTrucks", null, {
+                headers: {
+                    'userId': sessionStorage.getItem('token')
+                }
+            }).then(res => {
+                console.log(res.data);
+                this.setState({ nearbyTrucks: res.data });
+            }).catch(err => {
+                console.log(err);
+            });
+        } else {
+            document.getElementById('nearby').classList.add(styles2.hidden);
+        }
+        
     }
-    renderRecommended(index, key) {
-        return <div key={key} onClick={this.handleTruckClick} id={this.state.foodTrucksRec[index].truckId}>{this.state.foodTrucksRec[index].truckName}</div>;
+
+    starHTML(val, index){
+        if(val === 'n'){
+            return(
+                <div class={styles2.starHolder}>
+                    <img class={styles2.star} src={"https://i.imgur.com/VXxafZN.png"}/>
+                </div>
+            )
+        } else {
+            return (
+                <div class={styles2.starHolder}>
+                    <img class={styles2.star} src={"https://i.imgur.com/pCUD8Ad.png"} />
+                </div>
+            )
+        }
     }
-    renderSearch(index, key) {
-        return <div key={key} onClick={this.handleTruckClick} id={this.state.foodTrucksSearch[index].truckId}>{this.state.foodTrucksSearch[index].truckName}</div>;
+
+    avgRating(ratings){
+        console.log(ratings);
+        if(ratings.length == 0) return [];
+        var avgRating = 0, count = 0;
+        for(let i = 0; i < ratings.length; ++i){
+            avgRating+=ratings[i].value;
+            ++count;
+        }
+        var stars = (count === 0 ? -1 : Math.round(avgRating/count));
+        count = 5-stars;
+
+        console.log(stars, count);
+
+        var starArray = []
+        if(stars != -1){
+            for (let i = 0; i < stars; ++i){
+                starArray.push('s');
+            }
+    
+            for(let i = 0; i < count; ++i){
+                starArray.push('n');
+            }
+        }
+        return starArray;
     }
-    renderNearby(index, key) {
-        return <div key={key} onClick={this.handleTruckClick} id={this.state.nearbyTrucks[index].truckId}>{this.state.nearbyTrucks[index].truckName}</div>;
+
+    viewTruck(event){
+        window.location.href="/truckDetails?truckId=" + event.target.value;
     }
-    handleTruckClick(event) {
-        console.log(event.target.id);
-        window.location.href="/truckDetails?truckId=" + event.target.id;
+
+    renderTrucks(truck, index) {
+        var starArray = this.avgRating(truck.ratings);
+        return(
+            <tr key={"s" + index} class={styles.tableRow}>
+                <td>
+                    {truck.truckName}
+                </td>
+                <td class={styles.tableText}>
+                    {truck.description}
+                </td>
+                <td class={styles.ratingColumn}>
+                    {starArray.length != 0 ? starArray.map(this.starHTML): "This Truck Has Not Been Rated"}
+                </td>
+                <td>
+                    <button type="button" value={truck.truckId} class={styles2.viewButton} onClick={this.viewTruck}>View</button>
+                </td>
+            </tr>
+        ); 
     }
+    
     render() {
         return (
             <html>
@@ -112,35 +165,57 @@ class Search extends Component {
 
                     </div>
 
-                    
-                    <div class="sections">
-                        <div class = "block" style = {{height: '200px', alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
-
-                            <div style={{height: '200px', fontSize: '1.0rem', textAlign: 'center', fontWeight: 'bold', maxHeight: '100%', overflow: 'auto', width:'100%' }}>
-                                <ReactList class={styles2.reactList} itemRenderer = {this.renderSearch} length={this.state.foodTrucksSearch.length} type='uniform'/>
-                            </div>
-                        </div>
+                    <div class={styles2.tableDiv}>
+                            <table class={styles2.table}>
+                                <thead class={styles2.tableHeading}>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Rating</th>
+                                        <th>Food Types</th>
+                                    </tr>
+                                </thead>
+                                <tbody class={styles2.tableBody}>
+                                    {this.state.foodTrucksSearch.length != 0 ? this.state.foodTrucksSearch.map(this.renderTrucks) : null}
+                                </tbody>
+                            </table>
                     </div>
 
                     <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Recommended</span>
-                    <div class="sections">
-                        <div class = "block" style = {{height: '200px', alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
-
-                            <div style={{height: '200px', fontSize: '1.0rem', textAlign: 'center', fontWeight: 'bold', maxHeight: '100%', overflow: 'auto', width:'100%' }}>
-                                <ReactList class={styles2.reactList} itemRenderer = {this.renderRecommended} length={this.state.foodTrucksRec.length} type='uniform' alignContent='center' />
-                            </div>
-                        </div>
+                    <div class={styles2.tableDiv}>
+                        <table class={styles2.table}>
+                            <thead class={styles2.tableHeading}>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Rating</th>
+                                    <th>Food Types</th>
+                                </tr>
+                            </thead>
+                            <tbody class={styles2.tableBody}>
+                                {this.state.foodTrucksRec.length != 0 ? this.state.foodTrucksRec.map(this.renderTrucks) : null}
+                            </tbody>
+                        </table>
                     </div>
 
-                    <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Nearby</span>
-                    <div class="sections">
-                        <div class = "block" style = {{height: '200px', alignContent: 'center', background: '#FFFFFF', width: '50%', padding: '20px', margin: '35px auto', textAllign: 'center'}}>
-
-                            <div style={{height: '200px', fontSize: '1.0rem', textAlign: 'center', fontWeight: 'bold', maxHeight: '100%', overflow: 'auto', width:'100%' }}>
-                                <ReactList class={styles2.reactList} itemRenderer = {this.renderNearby} length={this.state.nearbyTrucks.length} type='uniform' alignContent='center' />
-                            </div>
+                    <span id="nearby">
+                        <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Nearby</span>
+                        <div class={styles2.tableDiv}>
+                            <table class={styles2.table}>
+                                <thead class={styles2.tableHeading}>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Rating</th>
+                                        <th>Food Types</th>
+                                    </tr>
+                                </thead>
+                                <tbody class={styles2.tableBody}>
+                                    {this.state.nearbyTrucks.length != 0 ? this.state.nearbyTrucks.map(this.renderTrucks) : null}
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
+                    </span>
                 </body>
             </html>
         );

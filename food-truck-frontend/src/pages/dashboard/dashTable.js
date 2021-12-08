@@ -15,6 +15,7 @@ class DashTable extends Component {
         this.avgRating = this.avgRating.bind(this);
         this.editTruck = this.editTruck.bind(this);
         this.deleteTruck = this.deleteTruck.bind(this);
+        this.viewTruck = this.viewTruck.bind(this);
     }
 
     componentDidMount(){
@@ -125,6 +126,9 @@ class DashTable extends Component {
             window.location.reload();
         })
     }
+    viewTruck(event){
+        window.location.href="/truckDetails?truckId=" + event.target.value;
+    }
 
     createSubTruckRow(truck, index){
         console.log(truck);
@@ -133,7 +137,7 @@ class DashTable extends Component {
         return(
             <tr key={"s" + index} class={styles.tableRow}>
                 <td>
-                    <a href={"/truckDetails?truckId=" + truck.truckId} class={styles.tableText}>{truck.truckName}</a>
+                {truck.truckName}
                 </td>
                 <td class={styles.tableText}>
                     {truck.description}
@@ -142,7 +146,7 @@ class DashTable extends Component {
                     {starArray.length != 0 ? starArray.map(this.starHTML): "This Truck Has Not Been Rated"}
                 </td>
                 <td>
-                    Food Types
+                    <button type="button" value={truck.truckId} class={styles.tableButton} onClick={this.viewTruck}>View</button>
                 </td>
             </tr>
         );
@@ -153,10 +157,16 @@ class DashTable extends Component {
         return(
             <tr key={"o" + index} class={styles.tableRow}>
                 <td>
-                    <a href={"/truckDetails?truckId=" + truck.truckId} class={styles.tableText}>{truck.truckName}</a>
+                    {truck.truckName}
+                </td>
+                <td class={styles.tableText}>
+                    {truck.description}
                 </td>
                 <td class={styles.ratingColumn}>
                     {starArray.length != 0 ? starArray.map(this.starHTML): "This Truck Has Not Been Rated"}
+                </td>
+                <td>
+                    <button value={truck.truckId} type="button" class={styles.tableButton} onClick={this.viewTruck}>View</button>
                 </td>
                 <td class={styles.buttonColumn}>
                     <button name={truck.truckId} type="button" class={styles.tableButton} onClick={this.editTruck}>Edit</button>
@@ -183,8 +193,8 @@ class DashTable extends Component {
                                     <tr key="head">
                                         <th>Name</th>
                                         <th>Description</th>  
-                                        <th>Rating</th>       
-                                        <th>Food Types</th>
+                                        <th>Rating</th>  
+                                        <th class={styles.buttonColumn}/>
                                     </tr>
                                 </thead>
                                 <tbody class={styles.tableBody}>
@@ -208,9 +218,11 @@ class DashTable extends Component {
                                 <thead class={styles.tableHeading}>
                                     <tr key="head">
                                         <th>Name</th> 
+                                        <th>Description</th>
                                         <th>Rating</th>       
-                                        <th></th>
-                                        <th></th>
+                                        <th class={styles.buttonColumn}/>
+                                        <th class={styles.buttonColumn}/>
+                                        <th class={styles.buttonColumn}/>
                                     </tr>
                                 </thead>
                                 <tbody class={styles.tableBody}>

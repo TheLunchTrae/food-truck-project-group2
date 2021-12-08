@@ -67,6 +67,7 @@
 
 //Parent div for tables
 .tablesDiv{
+    width: 100%;
     border: none;
     height: 90%;
     background-color: #555555;
@@ -127,6 +128,7 @@
 .tableRow{
     text-align: center;
     font-size: 1.2rem;
+    width: 100%;
 }
 
 .tableRow + .tableRow tr td {
@@ -134,12 +136,12 @@
 }
 
 .buttonColumn {
-    width: 20%;
+    width: 8%;
 }
 
 .tableButton {
     border: solid 2px black;
-    width: 65%;
+    width: fit-content;
     background-color: inherit;
     margin: 0 auto;
     font-size: 1.2rem;
@@ -184,4 +186,3 @@
     text-align: center;
     font-size: 1.4rem;
 }
-

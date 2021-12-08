@@ -1,3 +1,79 @@
 .reactList {
     width: 100%;   
 }
+
+.tableDiv{
+    background-color:#555555;
+    color: white;
+    border: solid 4px black;
+    height: 200px;
+    font-size: 1.0rem;
+    text-align: center;
+    font-weight: bold; 
+    max-height: 100%;
+    padding: 5px;
+    overflow: auto; 
+    width: 70%;
+    margin: 0 auto;
+}
+
+.viewButton {
+    font-size: 1.3rem;
+    background-color: inherit;
+    color: inherit;
+    border: solid 2px black;
+}
+
+.viewButton:hover {
+    background-color: #708090;
+    cursor: pointer;
+}
+
+//Actual tables
+.table{
+    background-color:#555555;
+    color: white;
+    width: 100%;
+    border-collapse: collapse;
+    column-count: 4;
+}
+
+//Table headings
+.tableHeading{
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-bottom-color: black;
+}
+
+.tableHeading tr th{
+    border-bottom: solid 2px black;
+}
+
+//Adds borders between column headings
+.tableHeading + .tableHeading {
+    border-left: solid 2px black;
+}
+
+.tableBody{
+    text-align: center;
+}
+
+.tableText {
+    color: white;
+}
+
+.starHolder {
+    display: inline-block;
+    max-height: 20px;
+    max-width: 20px;
+}
+
+.star {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.hidden {
+    display: none;
+}
