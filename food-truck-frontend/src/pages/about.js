@@ -6,20 +6,16 @@ class About extends Component {
     constructor(props) {
         super();
     }
-    handleInputChange(event) {
-    }
-    handleSubmit(event) {
 
-    }
     render() {
         return (
-            <body style = {{}}>
+            <body style = {{ height: '100vh', backgroundColor: '#708090', color: 'black'}}>
                 <MenuBar/>
                 <div class="sections" >
 
                     <div class="idk" style={{backgroundColor: '#708090', width: '100%', padding: '20px', textAlign: 'center'}}>
-                        <span class="heading" style={{color: "#000000", marginTop: '40px', display: 'block', fontSize: '3.7rem', textAlign: 'center', fontWeight: 'bold'}}>About</span>
-                        <span id = "text1" style={{color: "#FFFFFF", fontSize: '1.8rem', marginTop: '10px', marginBottom: '40px', marginLeft: '10px', fontWeight: 'bold', display: 'block'}}>Group 2 - Food Truck Finder Application</span>
+                        <span class="heading" style={{marginTop: '40px', display: 'block', fontSize: '3.7rem', textAlign: 'center', fontWeight: 'bold'}}>About</span>
+                        <span id = "text1" style={{fontSize: '1.8rem', marginTop: '10px', marginBottom: '40px', marginLeft: '10px', fontWeight: 'bold', display: 'block'}}>Group 2 - Food Truck Finder Application</span>
                     </div>
 
 
