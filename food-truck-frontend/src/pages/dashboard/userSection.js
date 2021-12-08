@@ -44,6 +44,20 @@ class UserSection extends Component {
                     node.checked = true;
                 }
             });
+            console.log("Distance: " + res.data.distance);
+            if(res.data.distance != null){
+                this.setState({
+                    distance: res.data.distance
+                });
+            }
+
+            Geocode.fromLatLng(res.data.location.latitude, res.data.location.longitude).then(resp => {
+                this.setState({
+                    address: resp.results[0].formatted_address
+                });
+            }).catch(err => {
+                console.log("Invalid Address");
+            });
             //Distance/location by setting state values
 
             //Rating
@@ -118,7 +132,9 @@ class UserSection extends Component {
         }
         //Rating
         var rating = document.querySelector('input[name="rating"]:checked').value;
-        if(rating == "None") { rating = null; }
+        if(rating != null) {
+            if(rating == "None") { rating = null; }
+        }
         //Price
         var price = document.querySelector('input[name="price"]:checked').value;
         if(price == "None") { price = null; }

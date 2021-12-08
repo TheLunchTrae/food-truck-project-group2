@@ -1,7 +1,7 @@
 .wrapper{
     display: block;
     text-align: center;
-    height: 70%;
+    height: 80%;
 }
 
 .body{
@@ -30,3 +30,26 @@
     vertical-align: top;
     height: 100%;
 }
+
+.mapSection {
+    color: white;
+    display: inline-block;
+    position: relative;
+    height: 80%;
+    width: fit-content;
+    padding: 15px;
+}
+
+.innerDiv{
+    vertical-align: top;
+    display: inline-block;
+    background-color: #333;
+    width: 100%;
+    height: 100%;
+}
+
+.nearbyHeading{
+    font-size: 1.2rem;
+    height: 20%;
+}
+

@@ -82,7 +82,7 @@ public class UserService {
             preferences.setDistance(user.getDistancePreference());
             preferences.setPrice(user.getPricePreference());
             preferences.setFoodTypes(user.getFoodTypePreferences());
-            //Location not here
+            preferences.setLocation(user.getLocationPreference());
             preferences.setRating(user.getRatingPreference());
 
             return preferences;

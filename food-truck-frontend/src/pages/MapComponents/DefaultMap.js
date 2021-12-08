@@ -12,14 +12,16 @@ class DefaultMap extends Component {
   static defaultProps = {
     containerStyle: { width: '400px', height: '400px'},
     center: { lat: 31.547164416064646, lng: -97.11819049760257 },
-    markers: []
+    markers: [],
+    nearbyTrucks: []
 }
 
   constructor (props) {
     super(props)
-    this.state = { center: { lat: 31.547164416064646, lng: -97.11819049760257 } }
+    this.state = { locations: [] }
     this.renderMarkers = this.renderMarkers.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.setNearbyLocations = this.setNearbyLocations.bind(this);
   }
 
   renderMarkers(marker, index){
@@ -28,6 +30,19 @@ class DefaultMap extends Component {
     return(
       <Marker position={position}/>
     );
+  }
+
+  setNearbyLocations(truck, index){
+    var locations = [];
+    console.log("Index: " + index)
+    console.log(truck);
+    for(let i = 0; i < truck.route.length; ++i){
+      const position = { lat: truck.route[i].latitude, lng: truck.route[i].longitude };
+      locations.push(
+        <Marker position={position} label={truck.truckName}/>
+      );
+    }
+    return locations;
   }
 
   componentDidMount(){
@@ -44,8 +59,9 @@ class DefaultMap extends Component {
     return (
       <LoadScript googleMapsApiKey={APICode} libraries={["places"]}>
         <GoogleMap mapContainerStyle={this.props.containerStyle} 
-          center={this.state.center} zoom={10}>
+          center={this.props.center} zoom={10}>
           {this.props.markers.map(this.renderMarkers)}
+          {this.props.nearbyTrucks.map(this.setNearbyLocations)}
         </GoogleMap>
       </LoadScript>
     )

@@ -201,8 +201,8 @@ public class FoodTruckController {
     }
 
     //In progress
-    @PostMapping("/api/map/nearestTrucks")
-    public ResponseEntity getNearestTrucks(@RequestHeader Long userId){
+    @GetMapping("/api/map/nearestTrucks/{userId}")
+    public ResponseEntity getNearestTrucks(@PathVariable Long userId){
         User user = userService.getUserWithId(userId);
         if (user != null) {
             return ResponseEntity.ok()
