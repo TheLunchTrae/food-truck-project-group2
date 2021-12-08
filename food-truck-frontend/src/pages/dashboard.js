@@ -9,7 +9,8 @@ import axios from 'axios';
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: '', nearTrucks: [], containerStyle: { width: '400px', height: '350px', } };
+        this.state = { name: '', nearTrucks: [], containerStyle: { width: '400px', height: '350px' }, 
+                        center: { lat: 31.547164416064646, lng: -97.11819049760257 } };
         this.componentDidMount = this.componentDidMount.bind(this);
     }
     
@@ -19,13 +20,25 @@ class Dashboard extends Component {
         } else {
             var userId = sessionStorage.getItem('token');
             axios.get("http://localhost:8090/api/map/nearestTrucks/" + userId).then(res => {
-                console.log("Near")
-                console.log(res)
                 this.setState({
                     nearTrucks: res.data
                 });
             }).catch(err => {
                 console.log(err);
+            });
+            axios.get("http://localhost:8090/api/getPreferences").then(res => {
+                console.log("Response")
+                if(res.data.location != null){
+                    console.log(res.data.location.latitude);
+                    console.log(res.data.location.longitude);
+                    var newCenter = { lat: res.data.location.latitude, lng: res.data.location.longitude };
+                this.setState({
+                    center: newCenter
+                });
+                }
+                
+            }).catch(err => {
+                    console.log("Invalid Address");
             });
         }
     }
@@ -42,7 +55,7 @@ class Dashboard extends Component {
                     <div class={styles.innerDiv}>
                         <h1 class={styles.nearbyHeading}>Nearby Trucks</h1>
                         <div class={styles.mapdiv}>
-                            <DefaultMap class={styles.map} nearbyTrucks={this.state.nearTrucks} containerStyle={this.state.containerStyle}/>
+                            <DefaultMap class={styles.map} center={this.state.center} nearbyTrucks={this.state.nearTrucks} containerStyle={this.state.containerStyle}/>
                         </div>
                     </div>
                 </div>

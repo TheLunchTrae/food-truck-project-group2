@@ -102,7 +102,6 @@ public class UserController {
                 .body(dashboardData);
     }
 
-    //Note Location is not one of the preferences returned (it'll be left blank)
     @GetMapping("/api/getPreferences")
     public ResponseEntity getUserPreferences(@RequestHeader Long token){
         User user = userService.getUserWithId(token);

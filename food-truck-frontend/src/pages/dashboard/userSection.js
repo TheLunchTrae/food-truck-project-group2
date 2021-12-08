@@ -36,6 +36,7 @@ class UserSection extends Component {
         //Set default preferences
         
         axios.get("http://localhost:8090/api/getPreferences").then(res => {
+            console.log("Preferences");
             console.log(res.data);
             //Food Types by changing CSS
             var types = res.data.foodTypes;
@@ -62,14 +63,16 @@ class UserSection extends Component {
 
             //Rating
             var rate = document.getElementsByName("rating");
-            if(res.data.rating == null){
-                rate[0].checked = true;
-            } else {
+            console.log('rating pref');
+            console.log(res.data.rating);
+            if(res.data.rating != null){
                 rate.forEach(opt => {
                     if(res.data.rating == opt.value){
                         opt.checked = true;
                     }
                 })
+            } else {
+                rate[0].checked = true;
             }
             //Price
             var price = document.getElementsByName("price");
