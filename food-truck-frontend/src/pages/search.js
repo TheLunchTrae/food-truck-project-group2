@@ -7,7 +7,7 @@ import styles from './search.module.scss';
 class Search extends Component {
     constructor(props) {
         super(props);
-        this.state = { foodTrucksRec: [], foodTrucksSearch: [], search: '', listColor: 'white' };
+        this.state = { foodTrucksRec: [], foodTrucksSearch: [], nearbyTrucks: [], search: '', listColor: 'white' };
         this.componentDidMount = this.componentDidMount.bind(this);
         this.renderTrucks = this.renderTrucks.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -60,6 +60,17 @@ class Search extends Component {
         }).catch(err => {
              console.log(err);
         });
+        if(sessionStorage.getItem('token') != null){
+            Axios.get("http://localhost:8090/api/map/nearestTrucks/" + sessionStorage.getItem('token')).then(res => {
+                console.log(res.data);
+                this.setState({ nearbyTrucks: res.data });
+            }).catch(err => {
+                console.log(err);
+            });
+        } else {
+            document.getElementById('nearby').classList.add(styles.hidden);
+        }
+        
     }
 
     starHTML(val, index){
@@ -181,6 +192,25 @@ class Search extends Component {
                             </tbody>
                         </table>
                     </div>
+
+                    <span id="nearby">
+                        <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Nearby</span>
+                        <div class={styles.tableDiv}>
+                            <table class={styles.table}>
+                                <thead class={styles.tableHeading}>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Rating</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody class={styles.tableBody}>
+                                    {this.state.nearbyTrucks.length != 0 ? this.state.nearbyTrucks.map(this.renderTrucks) : null}
+                                </tbody>
+                            </table>
+                        </div>
+                    </span>
                 </body>
             </html>
         );
