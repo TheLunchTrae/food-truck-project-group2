@@ -300,7 +300,7 @@ class EditTruck extends Component {
                                 </div>
 
                                 <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
-                                    <button type="button" onClick={this.handleRouteSubmit} style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Add to Route</button>
+                                    <button type="button" onClick={this.handleRouteSubmit} style = {{background: '#708090', fontSize: '17px', cursor: 'pointer'}}>Submit Changes</button>
                                 </div>
                         </div>
 
