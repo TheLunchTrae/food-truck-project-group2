@@ -27,7 +27,9 @@ public class FoodTruckController {
     public ResponseEntity addFoodTruck(@RequestBody TruckAndStringHolder truckAndString, @RequestHeader(name="token")Long token){
         FoodTruck postFoodTruck;
         truckAndString.getFoodTruck().setOwnerId(token);
-        truckAndString.getFoodTruck().setMenu(FoodTruckService.parseMenu(truckAndString.getString()));
+        if (truckAndString.getString() != null){
+            truckAndString.getFoodTruck().setMenu(FoodTruckService.parseMenu(truckAndString.getString()));
+        }
         System.out.println(truckAndString.getFoodTruck());
         //NOTE - MUST HAVE OWNER ID SET ON THE FRONT END!!!!!!
         if ((postFoodTruck = foodTruckService.addFoodTruck(truckAndString.getFoodTruck())) != null){

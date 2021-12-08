@@ -6,6 +6,7 @@ import food.truck.api.foodtruck.FoodTruckRepository;
 import food.truck.api.foodtruck.Location;
 import food.truck.api.other.JSONWrapper;
 import food.truck.api.other.Preferences;
+import food.truck.api.other.TruckAndStringHolder;
 import food.truck.api.user.*;
 import org.junit.Before;
 import org.junit.jupiter.api.*;
@@ -29,6 +30,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -191,8 +195,23 @@ public class ControllerTest {
 
         User postUser = userRepository.findById(userId);
         assertEquals(USER_UNAME+"_changed",postUser.getUserName());
-        assertEquals(USER_PASSWORD+"_changed",postUser.getPassword());
+        assertEquals(hashPassword(USER_PASSWORD+"_changed"),postUser.getPassword());
     }
+
+    // Hashes the input string and returns the hash
+    private String hashPassword(String password) throws NoSuchAlgorithmException {
+        // hash the password
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[]hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
+
+        //bytes to hex
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashInBytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
+    }
+
     @Test
     @Order(5)
     @Transactional
@@ -233,7 +252,9 @@ public class ControllerTest {
         foodTruck.setDescription(TRUCK_DESC);
         foodTruck.setSchedule(TRUCK_SCHEDULE);
 
-        String foodTruckJson = jsonString(foodTruck);
+        TruckAndStringHolder truckAndString = new TruckAndStringHolder();
+        truckAndString.setFoodTruck(foodTruck);
+        String foodTruckJson = jsonString(truckAndString);
         MvcResult result = mockMvc.perform(post("/api/addTruck")
                         .content(foodTruckJson)
                         .header("token",ownerId)
@@ -287,9 +308,9 @@ public class ControllerTest {
     @Transactional
     public void modifyFoodTruckMenuAddFoodItem() throws Exception {
         FoodItem foodItem = new FoodItem("American","Testy Taco",7.99F);
-        JSONWrapper jsonWrapper = new JSONWrapper();
-        jsonWrapper.setFoodItem(foodItem);
-        String json = jsonString(jsonWrapper);
+        //JSONWrapper jsonWrapper = new JSONWrapper();
+        //jsonWrapper.setFoodItem(foodItem);
+        String json = jsonString(foodItem);
         MvcResult result = mockMvc.perform(post("/api/modifyTruck/menu")
                         .header("truckId",truckId)
                         .content(json)
@@ -307,9 +328,9 @@ public class ControllerTest {
     @Transactional
     public void modifyFoodTruckAddRouteLocation() throws Exception {
         Location location = new Location(80.0000,-80.000);
-        JSONWrapper jsonWrapper = new JSONWrapper();
-        jsonWrapper.setLocation(location);
-        String json = jsonString(jsonWrapper);
+        //JSONWrapper jsonWrapper = new JSONWrapper();
+        //jsonWrapper.setLocation(location);
+        String json = jsonString(location);
         MvcResult result = mockMvc.perform(post("/api/modifyTruck/route")
                         .header("truckId",truckId)
                         .content(json)
@@ -328,7 +349,7 @@ public class ControllerTest {
     public void modifyFoodTruckMenuDeleteFoodItem() throws Exception {
         FoodItem foodItem = new FoodItem("American","Testy Taco",7.99F);
         //Assumption is that previously added food item is index 0 in the menu
-        MvcResult result = mockMvc.perform(post("/api/modifyTruck/menu/remove/"+0)
+        MvcResult result = mockMvc.perform(get("/api/modifyTruck/menu/remove/"+0)
                         .header("truckId",truckId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -345,7 +366,7 @@ public class ControllerTest {
     public void modifyFoodTruckDeleteRouteLocation() throws Exception {
         Location location = new Location(80.0000,-80.000);
         //Assumption is that previously added location is index 0 in the route
-        MvcResult result = mockMvc.perform(post("/api/modifyTruck/route/remove/"+0)
+        MvcResult result = mockMvc.perform(get("/api/modifyTruck/route/remove/"+0)
                         .header("truckId",truckId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -362,7 +383,7 @@ public class ControllerTest {
     public void addRatingToFoodTruck() throws Exception {
         Rating rating = new Rating(userId,4,"This truck's awesome.");
         String json = jsonString(rating);
-        MvcResult result = mockMvc.perform(post("/api/modifyTruck/route/remove/"+0)
+        MvcResult result = mockMvc.perform(post("/api/addRating")
                         .header("truckID",truckId)
                         .content(json)
                         .contentType(MediaType.APPLICATION_JSON))
