@@ -105,13 +105,11 @@ class UserSection extends Component {
         if(address != ""){
             await Geocode.fromAddress(address).then(geo => {
                 loc = geo.results[0].geometry.location;
+                location = {
+                    latitude: loc.lat,
+                    longitude: loc.lng
+                };
             });
-            location = {
-                latitude: loc.lat,
-                longitude: loc.lng
-            };
-        } else {
-            address = null;
         }
         //Distance
         var distance = this.state.distance;

@@ -2,8 +2,7 @@ import Axios from 'axios';
 import React, { Component } from 'react';
 import ReactList from 'react-list';
 import { MenuBar } from './index.js'
-import styles from './signup.module.scss';
-import styles2 from './search.module.scss';
+import styles from './search.module.scss';
 
 class Search extends Component {
     constructor(props) {
@@ -73,7 +72,7 @@ class Search extends Component {
                 console.log(err);
             });
         } else {
-            document.getElementById('nearby').classList.add(styles2.hidden);
+            document.getElementById('nearby').classList.add(styles.hidden);
         }
         
     }
@@ -81,14 +80,14 @@ class Search extends Component {
     starHTML(val, index){
         if(val === 'n'){
             return(
-                <div class={styles2.starHolder}>
-                    <img class={styles2.star} src={"https://i.imgur.com/VXxafZN.png"}/>
+                <div class={styles.starHolder}>
+                    <img class={styles.star} src={"https://i.imgur.com/VXxafZN.png"}/>
                 </div>
             )
         } else {
             return (
-                <div class={styles2.starHolder}>
-                    <img class={styles2.star} src={"https://i.imgur.com/pCUD8Ad.png"} />
+                <div class={styles.starHolder}>
+                    <img class={styles.star} src={"https://i.imgur.com/pCUD8Ad.png"} />
                 </div>
             )
         }
@@ -137,8 +136,8 @@ class Search extends Component {
                 <td class={styles.ratingColumn}>
                     {starArray.length != 0 ? starArray.map(this.starHTML): "This Truck Has Not Been Rated"}
                 </td>
-                <td>
-                    <button type="button" value={truck.truckId} class={styles2.viewButton} onClick={this.viewTruck}>View</button>
+                <td class={styles.buttonColumn}>
+                    <button type="button" value={truck.truckId} class={styles.viewButton} onClick={this.viewTruck}>View</button>
                 </td>
             </tr>
         ); 
@@ -165,34 +164,34 @@ class Search extends Component {
 
                     </div>
 
-                    <div class={styles2.tableDiv}>
-                            <table class={styles2.table}>
-                                <thead class={styles2.tableHeading}>
+                    <div class={styles.tableDiv}>
+                            <table class={styles.table}>
+                                <thead class={styles.tableHeading}>
                                     <tr>
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Rating</th>
-                                        <th>Food Types</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
-                                <tbody class={styles2.tableBody}>
+                                <tbody class={styles.tableBody}>
                                     {this.state.foodTrucksSearch.length != 0 ? this.state.foodTrucksSearch.map(this.renderTrucks) : null}
                                 </tbody>
                             </table>
                     </div>
 
                     <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Recommended</span>
-                    <div class={styles2.tableDiv}>
-                        <table class={styles2.table}>
-                            <thead class={styles2.tableHeading}>
+                    <div class={styles.tableDiv}>
+                        <table class={styles.table}>
+                            <thead class={styles.tableHeading}>
                                 <tr>
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Rating</th>
-                                    <th>Food Types</th>
+                                    <th></th>
                                 </tr>
                             </thead>
-                            <tbody class={styles2.tableBody}>
+                            <tbody class={styles.tableBody}>
                                 {this.state.foodTrucksRec.length != 0 ? this.state.foodTrucksRec.map(this.renderTrucks) : null}
                             </tbody>
                         </table>
@@ -200,17 +199,17 @@ class Search extends Component {
 
                     <span id="nearby">
                         <span class="heading" style={{color: "#000000", display: 'block', fontSize: '2.5rem', textAlign: 'center', fontWeight: 'bold', marginTop: '20px'}}>Nearby</span>
-                        <div class={styles2.tableDiv}>
-                            <table class={styles2.table}>
-                                <thead class={styles2.tableHeading}>
+                        <div class={styles.tableDiv}>
+                            <table class={styles.table}>
+                                <thead class={styles.tableHeading}>
                                     <tr>
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Rating</th>
-                                        <th>Food Types</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
-                                <tbody class={styles2.tableBody}>
+                                <tbody class={styles.tableBody}>
                                     {this.state.nearbyTrucks.length != 0 ? this.state.nearbyTrucks.map(this.renderTrucks) : null}
                                 </tbody>
                             </table>

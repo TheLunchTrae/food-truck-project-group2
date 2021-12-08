@@ -18,10 +18,11 @@
 }
 
 .viewButton {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     background-color: inherit;
     color: inherit;
     border: solid 2px black;
+    padding: 8px;
 }
 
 .viewButton:hover {
@@ -36,11 +37,12 @@
     width: 100%;
     border-collapse: collapse;
     column-count: 4;
+    font-size: 1.0rem;
 }
 
 //Table headings
 .tableHeading{
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: bold;
     border-bottom-color: black;
 }

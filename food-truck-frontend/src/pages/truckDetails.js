@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { MenuBar, DefaultMap } from './index.js';
 import styles from './signup.module.scss';
+import styles2 from './truckDetails.module.scss';
 
 class About extends Component {
     constructor(props) {
@@ -13,6 +14,8 @@ class About extends Component {
         this.handleRatingSubmit = this.handleRatingSubmit.bind(this);
         this.handleUnsubscribeSubmit = this.handleUnsubscribeSubmit.bind(this);
         this.renderSubButton = this.renderSubButton.bind(this);
+        this.starHTML = this.starHTML.bind(this);
+        this.avgRating = this.avgRating.bind(this);
     }
     handleInputChange(event) {
         const name = event.target.name;
@@ -121,6 +124,48 @@ class About extends Component {
         }
     }
 
+    starHTML(val){
+        if(val === 'n'){
+            return(
+                <div class={styles2.starHolder}>
+                    <img class={styles2.star} src={"https://i.imgur.com/VXxafZN.png"}/>
+                </div>
+            )
+        } else {
+            return (
+                <div class={styles2.starHolder}>
+                    <img class={styles2.star} src={"https://i.imgur.com/pCUD8Ad.png"} />
+                </div>
+            )
+        }
+    }
+
+    avgRating(ratings){
+        console.log(ratings);
+        if(ratings.length == 0) return [];
+        var avgRating = 0, count = 0;
+        for(let i = 0; i < ratings.length; ++i){
+            avgRating+=ratings[i].value;
+            ++count;
+        }
+        var stars = (count === 0 ? -1 : Math.round(avgRating/count));
+        count = 5-stars;
+
+        console.log(stars, count);
+
+        var starArray = []
+        if(stars != -1){
+            for (let i = 0; i < stars; ++i){
+                starArray.push('s');
+            }
+    
+            for(let i = 0; i < count; ++i){
+                starArray.push('n');
+            }
+        }
+        return starArray.map(this.starHTML);
+    }
+
     render() {
         return (
             <body style = {{backgroundColor: '#708090'}}>
@@ -200,8 +245,9 @@ class About extends Component {
 
                         <div style = {{display: 'block', alignContent: 'center', margin: '0 auto', textAlign: 'center', padding: '5px 0'}}>
                             <label>
-                                <span class = "ratings" style = {{color: '#000000', fontSize: '1.7rem', fontWeight: 'bold', marginTop: '5px'}}><u>Ratings</u></span>
+                                <span class = "ratings" style = {{color: '#000000', fontSize: '1.7rem', fontWeight: 'bold', marginTop: '5px', display: 'block'}}><u>Ratings</u></span>
                             </label>
+                            {this.state.ratings.length != 0 ? this.avgRating(this.state.ratings) : "This Truck Has Not Been Rated"}
                         </div>
 
                         <div>
