@@ -1,19 +1,26 @@
-HOW TO RUN OUR PROGRAM
+# HOW TO RUN OUR PROGRAM
 
 Frontend:
-	1. Open command line
-	2. Navigate to food-truck-project-group2/food-truck-frontend
-	3. RUN yarn install
-	4. RUN yarn dev
+```
+1. Open command line
+2. Navigate to food-truck-project-group2/food-truck-frontend
+3. RUN yarn install
+4. RUN yarn run build
+5. RUN yarn start
+```
 Backend:
-	1. Open command line
-	2. Navigate to food-truck-prokect-group2/food-truck-api
-	3. mvn clean install
-	4. cd /target
-	5. java -jar food-truck-api.jar
+```
+1. Open command line
+2. Navigate to food-truck-prokect-group2/food-truck-api
+3. RUN mvn clean install
+4. Navigate to /target
+5. RUN java -jar food-truck-api.jar
+```
+** If your first button click is unresponsive, the jar file may have frozen on startup. To resolve, open the command line running the jar file, and hit Ctrl + C. It should log the previously received request and function normally afterwards.
 
 
-USEFUL COMMANDS FOR DEVELOPING (assume Windows):
+
+## USEFUL COMMANDS FOR DEVELOPING (assume Windows):
 
 To show Docker processes running: 
 
