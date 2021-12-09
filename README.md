@@ -1,3 +1,18 @@
+HOW TO RUN OUR PROGRAM
+
+Frontend:
+	1. Open command line
+	2. Navigate to food-truck-project-group2/food-truck-frontend
+	3. RUN yarn install
+	4. RUN yarn dev
+Backend:
+	1. Open command line
+	2. Navigate to food-truck-prokect-group2/food-truck-api
+	3. mvn clean install
+	4. cd /target
+	5. java -jar food-truck-api.jar
+
+
 USEFUL COMMANDS FOR DEVELOPING (assume Windows):
 
 To show Docker processes running: 
